@@ -64,7 +64,7 @@ public abstract class SharedEyeSystem : EntitySystem
 
         eyeComponent.Offset = value;
         eyeComponent.Eye.Offset = value;
-        DirtyField(uid, eyeComponent, nameof(EyeComponent.Offset));
+        Dirty(uid, eyeComponent);
     }
 
     public void SetDrawFov(EntityUid uid, bool value, EyeComponent? eyeComponent = null)
@@ -77,7 +77,7 @@ public abstract class SharedEyeSystem : EntitySystem
 
         eyeComponent.DrawFov = value;
         eyeComponent.Eye.DrawFov = value;
-        DirtyField(uid, eyeComponent, nameof(EyeComponent.DrawFov));
+        Dirty(uid, eyeComponent);
     }
 
     public void SetDrawLight(Entity<EyeComponent?> entity, bool value)
@@ -90,7 +90,7 @@ public abstract class SharedEyeSystem : EntitySystem
 
         entity.Comp.DrawLight = value;
         entity.Comp.Eye.DrawLight = value;
-        DirtyField(entity, nameof(EyeComponent.DrawLight));
+        Dirty(entity);
     }
 
     public void SetRotation(EntityUid uid, Angle rotation, EyeComponent? eyeComponent = null)
@@ -128,7 +128,7 @@ public abstract class SharedEyeSystem : EntitySystem
         }
 
         eyeComponent.Target = value;
-        DirtyField(uid, eyeComponent, nameof(EyeComponent.Target));
+        Dirty(uid, eyeComponent);
     }
 
     public void SetZoom(EntityUid uid, Vector2 value, EyeComponent? eyeComponent = null)
@@ -173,7 +173,7 @@ public abstract class SharedEyeSystem : EntitySystem
             return;
 
         eyeComponent.VisibilityMask = value;
-        DirtyField(uid, eyeComponent, nameof(EyeComponent.VisibilityMask));
+        Dirty(uid, eyeComponent);
     }
 
     /// <summary>
