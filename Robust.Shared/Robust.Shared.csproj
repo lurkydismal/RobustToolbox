@@ -19,7 +19,8 @@
     <PackageReference Include="Robust.Shared.AuthLib" PrivateAssets="none" />
     <PackageReference Include="Serilog" />
     <PackageReference Include="YamlDotNet" />
-    <PackageReference Include="Microsoft.Win32.Registry" PrivateAssets="compile" />
+    <!-- WARN: Check if removal breaks something -->
+    <!-- <PackageReference Include="Microsoft.Win32.Registry" PrivateAssets="compile" /> -->
     <PackageReference Include="Linguini.Bundle" />
     <PackageReference Include="SharpZstd.Interop" PrivateAssets="compile" ExcludeAssets="native" />
     <PackageReference Include="SpaceWizards.Sodium" PrivateAssets="compile" />
@@ -27,10 +28,6 @@
     <PackageReference Include="libsodium" />
     <PackageReference Include="SixLabors.ImageSharp" />
     <PackageReference Include="TerraFX.Interop.Windows" PrivateAssets="compile" />
-
-    <!-- Needed to pin transitive dependency versions. -->
-    <PackageReference Include="System.Reflection.Metadata" />
-
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Lidgren.Network\Lidgren.Network.csproj" />
