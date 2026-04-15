@@ -60,7 +60,7 @@ public sealed class PreferGenericVariantAnalyzer : DiagnosticAnalyzer
 
     private void CheckForGenericVariant(OperationAnalysisContext obj)
     {
-        if(obj.Operation is not IInvocationOperation invocationOperation) return;
+        if (obj.Operation is not IInvocationOperation invocationOperation) return;
 
         var preferGenericAttribute = obj.Compilation.GetTypeByMetadataName(AttributeType);
 
@@ -76,13 +76,13 @@ public sealed class PreferGenericVariantAnalyzer : DiagnosticAnalyzer
             break;
         }
 
-        if(genericVariant == null) return;
+        if (genericVariant == null) return;
 
         var maxTypeParams = 0;
         var typeTypeSymbol = obj.Compilation.GetTypeByMetadataName("System.Type");
         foreach (var parameter in invocationOperation.TargetMethod.Parameters)
         {
-            if(!SymbolEqualityComparer.Default.Equals(parameter.Type, typeTypeSymbol)) break;
+            if (!SymbolEqualityComparer.Default.Equals(parameter.Type, typeTypeSymbol)) break;
 
             maxTypeParams++;
         }
@@ -121,7 +121,7 @@ public sealed class PreferGenericVariantAnalyzer : DiagnosticAnalyzer
                 }
             }
 
-            if(failedParamComparison) continue;
+            if (failedParamComparison) continue;
 
             genericVariantMethod = methodSymbol;
         }
@@ -172,7 +172,7 @@ public class PreferGenericVariantCodeFixProvider : CodeFixProvider
     public override async Task RegisterCodeFixesAsync(CodeFixContext context)
     {
         var root = await context.Document.GetSyntaxRootAsync();
-        if(root == null) return;
+        if (root == null) return;
 
         foreach (var diagnostic in context.Diagnostics)
         {
@@ -183,7 +183,7 @@ public class PreferGenericVariantCodeFixProvider : CodeFixProvider
             if (node is ArgumentSyntax argumentSyntax)
                 node = argumentSyntax.Expression;
 
-            if(node is not InvocationExpressionSyntax invocationExpression)
+            if (node is not InvocationExpressionSyntax invocationExpression)
                 continue;
 
             var typeOperands = typeOperandsRaw.Split(',');
@@ -205,7 +205,7 @@ public class PreferGenericVariantCodeFixProvider : CodeFixProvider
     {
         var memberAccess = (MemberAccessExpressionSyntax)invocationExpression.Expression;
 
-        var root = (CompilationUnitSyntax) await contextDocument.GetSyntaxRootAsync(cancellationToken);
+        var root = (CompilationUnitSyntax)await contextDocument.GetSyntaxRootAsync(cancellationToken);
 
         var arguments = new ArgumentSyntax[invocationExpression.ArgumentList.Arguments.Count - typeOperands.Length];
         var types = new TypeSyntax[typeOperands.Length];

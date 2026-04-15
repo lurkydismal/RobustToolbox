@@ -112,7 +112,8 @@ namespace Robust.Shared.GameObjects
         /// <summary>
         ///     Determines if the light mask should automatically rotate with the entity. (like a flashlight)
         /// </summary>
-        [ViewVariables(VVAccess.ReadWrite)] [DataField("autoRot")]
+        [ViewVariables(VVAccess.ReadWrite)]
+        [DataField("autoRot")]
         public bool MaskAutoRotate;
 
         /// <summary>

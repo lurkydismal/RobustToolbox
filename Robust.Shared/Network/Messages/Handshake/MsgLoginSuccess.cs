@@ -23,8 +23,8 @@ namespace Robust.Shared.Network.Messages.Handshake
             if (patreonTier.Length == 0)
                 patreonTier = null;
 
-            UserData = new NetUserData(new NetUserId(id), name) {PatronTier = patreonTier};
-            Type = (LoginType) buffer.ReadByte();
+            UserData = new NetUserData(new NetUserId(id), name) { PatronTier = patreonTier };
+            Type = (LoginType)buffer.ReadByte();
         }
 
         public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
@@ -32,7 +32,7 @@ namespace Robust.Shared.Network.Messages.Handshake
             buffer.Write(UserData.UserName);
             buffer.Write(UserData.UserId);
             buffer.Write(UserData.PatronTier);
-            buffer.Write((byte) Type);
+            buffer.Write((byte)Type);
             buffer.Write(new byte[100]);
         }
     }

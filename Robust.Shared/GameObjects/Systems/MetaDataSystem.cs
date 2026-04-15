@@ -36,7 +36,7 @@ public abstract class MetaDataSystem : EntitySystem
         component._entityName = state.Name;
         component._entityDescription = state.Description;
 
-        if(state.PrototypeId != null && state.PrototypeId != component._entityPrototype?.ID)
+        if (state.PrototypeId != null && state.PrototypeId != component._entityPrototype?.ID)
             component._entityPrototype = _proto.Index<EntityPrototype>(state.PrototypeId);
 
         component.PauseTime = state.PauseTime;

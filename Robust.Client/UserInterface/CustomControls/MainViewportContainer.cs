@@ -21,7 +21,7 @@ namespace Robust.Client.UserInterface.CustomControls
         {
             base.FrameUpdate(args);
 
-            if(Viewport != null)
+            if (Viewport != null)
                 Viewport.Eye = _eyeManager.CurrentEye;
         }
     }

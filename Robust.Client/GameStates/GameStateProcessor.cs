@@ -481,7 +481,7 @@ Had full state: {LastFullState != null}"
             }
             while (foundState);
 
-            return (int) (nextTick.Value - fromTick.Value.Value);
+            return (int)(nextTick.Value - fromTick.Value.Value);
         }
 
         public int StateCount => _stateBuffer.Count;

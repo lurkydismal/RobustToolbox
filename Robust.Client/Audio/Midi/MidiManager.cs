@@ -198,7 +198,7 @@ internal sealed partial class MidiManager : IMidiManager
             //_settings["synth.verbose"].IntValue = 1; // Useful for debugging.
 
             var midiParallel = _cfgMan.GetCVar(CVars.MidiParallelism);
-            _settings["synth.polyphony"].IntValue = Math.Clamp(1024 + (int) (Math.Log2(midiParallel) * 2048), 1, 65535);
+            _settings["synth.polyphony"].IntValue = Math.Clamp(1024 + (int)(Math.Log2(midiParallel) * 2048), 1, 65535);
             _settings["synth.cpu-cores"].IntValue = Math.Clamp(midiParallel, 1, 256);
 
             _midiSawmill.Debug($"Synth Cores: {_settings["synth.cpu-cores"].IntValue}");
@@ -411,7 +411,7 @@ internal sealed partial class MidiManager : IMidiManager
                     {
                         if (!renderer.Disposed)
                         {
-                            if (renderer.Master is {Disposed: true})
+                            if (renderer.Master is { Disposed: true })
                                 renderer.Master = null;
 
                             renderer.Render();

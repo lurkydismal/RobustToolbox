@@ -19,6 +19,6 @@ public sealed partial class GenericVisualizerComponent : Component
     ///
     ///     In most instances, each of these dictionaries will probably only have a single entry.
     /// </summary>
-    [DataField("visuals", required:true)]
+    [DataField("visuals", required: true)]
     public Dictionary<Enum, Dictionary<string, Dictionary<string, PrototypeLayerData>>> Visuals = default!;
 }

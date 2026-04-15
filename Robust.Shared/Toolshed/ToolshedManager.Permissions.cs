@@ -39,7 +39,7 @@ public sealed partial class ToolshedManager
             if (_net.IsClient)
                 throw new NotImplementedException("Toolshed is not yet ready for client-side use.");
 #endif
-           _defaultEnvironment ??= new();
+            _defaultEnvironment ??= new();
             return _defaultEnvironment;
         }
     }

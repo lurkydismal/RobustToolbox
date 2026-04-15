@@ -132,7 +132,7 @@ namespace Robust.Client.UserInterface.Controls
                         break;
 
                     case MenuSeparator _:
-                        var control = new Control {MinSize = new Vector2(0, 6)};
+                        var control = new Control { MinSize = new Vector2(0, 6) };
                         container.AddChild(control);
                         break;
 
@@ -147,7 +147,8 @@ namespace Robust.Client.UserInterface.Controls
                             }
                         };
 
-                        var subButtonMenu = new Menu(){
+                        var subButtonMenu = new Menu()
+                        {
                             Title = submenuButton.Text
                         };
                         subButtonMenu.Entries.AddRange(submenuButton.Entries);
@@ -259,7 +260,7 @@ namespace Robust.Client.UserInterface.Controls
 
             public MenuBarTopButton(Menu menu) : base(menu)
             {
-               AddChild(Label = new Label {Text = menu.Title});
+                AddChild(Label = new Label { Text = menu.Title });
             }
         }
 
@@ -276,7 +277,7 @@ namespace Robust.Client.UserInterface.Controls
                     MouseFilter = MouseFilterMode.Pass
                 };
 
-                Label arrowLabel =  new Label {Text = ">", HorizontalAlignment = HAlignment.Right};
+                Label arrowLabel = new Label { Text = ">", HorizontalAlignment = HAlignment.Right };
                 Button.AddChild(arrowLabel);
 
 

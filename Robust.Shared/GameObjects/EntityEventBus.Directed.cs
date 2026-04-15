@@ -247,7 +247,7 @@ namespace Robust.Shared.GameObjects
             void EventHandler(EntityUid uid, IComponent comp, ref Unit ev)
             {
                 ref var tev = ref Unsafe.As<Unit, TEvent>(ref ev);
-                handler(uid, (TComp) comp, tev);
+                handler(uid, (TComp)comp, tev);
             }
 
             EntAddSubscription(CompIdx.Index<TComp>(), typeof(TComp), typeof(TEvent), EventHandler);
@@ -264,7 +264,7 @@ namespace Robust.Shared.GameObjects
             void EventHandler(EntityUid uid, IComponent comp, ref Unit ev)
             {
                 ref var tev = ref Unsafe.As<Unit, TEvent>(ref ev);
-                handler(uid, (TComp) comp, tev);
+                handler(uid, (TComp)comp, tev);
             }
 
             EntAddSubscription(CompIdx.Index<TComp>(), typeof(TComp), typeof(TEvent), EventHandler, orderType, before, after);
@@ -276,7 +276,7 @@ namespace Robust.Shared.GameObjects
             void EventHandler(EntityUid uid, IComponent comp, ref Unit ev)
             {
                 ref var tev = ref Unsafe.As<Unit, TEvent>(ref ev);
-                handler(uid, (TComp) comp, ref tev);
+                handler(uid, (TComp)comp, ref tev);
             }
 
             EntAddSubscription(CompIdx.Index<TComp>(), typeof(TComp), typeof(TEvent), EventHandler);
@@ -289,7 +289,7 @@ namespace Robust.Shared.GameObjects
             void EventHandler(EntityUid uid, IComponent comp, ref Unit ev)
             {
                 ref var tev = ref Unsafe.As<Unit, TEvent>(ref ev);
-                handler(uid, (TComp) comp, ref tev);
+                handler(uid, (TComp)comp, ref tev);
             }
 
             EntAddSubscription(CompIdx.Index<TComp>(), typeof(TComp), typeof(TEvent), EventHandler, orderType, before, after);
@@ -302,7 +302,7 @@ namespace Robust.Shared.GameObjects
             void EventHandler(EntityUid uid, IComponent comp, ref Unit ev)
             {
                 ref var tev = ref Unsafe.As<Unit, TEvent>(ref ev);
-                handler(new Entity<TComp>(uid, (TComp) comp), ref tev);
+                handler(new Entity<TComp>(uid, (TComp)comp), ref tev);
             }
 
             EntAddSubscription(CompIdx.Index<TComp>(), typeof(TComp), typeof(TEvent), EventHandler, orderType, before, after);

@@ -15,7 +15,7 @@ public sealed partial class ReplayLoadManager
 {
     public event Action<IReplayFileReader>? LoadOverride;
 
-    public async void  LoadAndStartReplay(IReplayFileReader fileReader)
+    public async void LoadAndStartReplay(IReplayFileReader fileReader)
     {
         if (LoadOverride != null)
             LoadOverride.Invoke(fileReader);
@@ -52,7 +52,7 @@ public sealed partial class ReplayLoadManager
             _confMan.SetCVar(name, value, force: true);
         }
 
-        var tick = new GameTick(data.TickOffset.Value + (uint) data.CurrentIndex);
+        var tick = new GameTick(data.TickOffset.Value + (uint)data.CurrentIndex);
         _timing.CurTick = _timing.LastRealTick = _timing.LastProcessedTick = tick;
 
         _gameState.UpdateFullRep(checkpoint.FullState, cloneDelta: true);
@@ -91,7 +91,7 @@ public sealed partial class ReplayLoadManager
         // TODO add progress bar / loading stage for this?
         await callback(0, total, LoadingState.Initializing, true);
         var nextIndex = checkpoint.Index + 1;
-        var next =  nextIndex < data.States.Count ? data.States[nextIndex] : null;
+        var next = nextIndex < data.States.Count ? data.States[nextIndex] : null;
         _gameState.ClearDetachQueue();
         _gameState.ApplyGameState(checkpoint.State, next);
 

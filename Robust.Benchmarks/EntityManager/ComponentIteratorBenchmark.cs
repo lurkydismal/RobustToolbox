@@ -27,7 +27,7 @@ public partial class ComponentIteratorBenchmark
 
         _entityManager = _simulation.Resolve<IEntityManager>();
 
-        Comps = new A[N+2];
+        Comps = new A[N + 2];
 
         var map = _simulation.CreateMap().MapId;
         var coords = new MapCoordinates(default, map);

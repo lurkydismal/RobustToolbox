@@ -34,7 +34,7 @@ namespace Robust.Shared.Map
                 throw new ArgumentException("Another tile definition or alias with the same name has already been registered.", nameof(tileDef));
             }
 
-            var id = checked((ushort) TileDefs.Count);
+            var id = checked((ushort)TileDefs.Count);
             tileDef.AssignTileId(id);
             TileDefs.Add(tileDef);
             _tileNames[name] = tileDef;

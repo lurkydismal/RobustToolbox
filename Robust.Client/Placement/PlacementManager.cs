@@ -130,8 +130,10 @@ namespace Robust.Client.Placement
         /// A BAD way to explicitly control the icons used!!!
         /// Need to fix Content for this
         /// </summary>
-        public List<IDirectionalTextureProvider>? CurrentTextures {
-            set {
+        public List<IDirectionalTextureProvider>? CurrentTextures
+        {
+            set
+            {
                 PreparePlacementTexList(value, !Hijack?.CanRotate ?? value != null, null);
             }
         }
@@ -530,7 +532,7 @@ namespace Robust.Client.Placement
             }
 
             CurrentPermission = info;
-            CurrentMode = (PlacementMode) Activator.CreateInstance(placeMode, this)!;
+            CurrentMode = (PlacementMode)Activator.CreateInstance(placeMode, this)!;
 
             if (hijack != null)
             {
@@ -693,9 +695,9 @@ namespace Robust.Client.Placement
 
             CurrentMode.Render(args);
 
-            if (CurrentPermission is not {Range: > 0} ||
+            if (CurrentPermission is not { Range: > 0 } ||
                 !CurrentMode.RangeRequired ||
-                PlayerManager.LocalEntity is not {Valid: true} controlled)
+                PlayerManager.LocalEntity is not { Valid: true } controlled)
                 return;
 
             var worldPos = XformSystem.GetWorldPosition(controlled);

@@ -167,7 +167,7 @@ public sealed class TeleportToCommand : LocalizedEntityCommands
             return true;
         }
 
-        shell.WriteError(Loc.GetString("cmd-tpto-parse-error", ("str",str)));
+        shell.WriteError(Loc.GetString("cmd-tpto-parse-error", ("str", str)));
 
         transform = null;
         victimUid = default;

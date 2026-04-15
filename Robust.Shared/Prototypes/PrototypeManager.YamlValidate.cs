@@ -165,7 +165,7 @@ public partial class PrototypeManager
         DataNode node;
         try
         {
-            node = _serializationManager.WriteValue(type, instance, alwaysWrite: true, context:ctx);
+            node = _serializationManager.WriteValue(type, instance, alwaysWrite: true, context: ctx);
         }
         catch (Exception e)
         {
@@ -176,7 +176,7 @@ public partial class PrototypeManager
 
         try
         {
-            return _serializationManager.ValidateNode(type, node, context:ctx)
+            return _serializationManager.ValidateNode(type, node, context: ctx)
                 .GetErrors()
                 .ToHashSet();
         }

@@ -21,7 +21,7 @@ namespace Robust.Client.Graphics.Clyde
             void TerminateWindowLoop();
 
             // Event pump
-            void ProcessEvents(bool single=false);
+            void ProcessEvents(bool single = false);
             void FlushDispose();
 
             // Cursor

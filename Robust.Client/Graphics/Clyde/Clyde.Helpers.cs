@@ -20,7 +20,7 @@ namespace Robust.Client.Graphics.Clyde
 
         private void SetTexture(TextureUnit unit, Texture texture)
         {
-            var ct = (ClydeTexture) texture;
+            var ct = (ClydeTexture)texture;
             SetTexture(unit, ct.TextureId);
             CheckGlError();
         }
@@ -35,11 +35,13 @@ namespace Robust.Client.Graphics.Clyde
             GL.ActiveTexture(TextureUnit.Texture0);
         }
 
-        private void CopyRenderTextureToTexture(RenderTexture source, ClydeTexture target) {
+        private void CopyRenderTextureToTexture(RenderTexture source, ClydeTexture target)
+        {
             LoadedRenderTarget sourceLoaded = RtToLoaded(source);
             bool pause = sourceLoaded != _currentBoundRenderTarget;
             FullStoredRendererState? store = null;
-            if (pause) {
+            if (pause)
+            {
                 store = PushRenderStateFull();
                 BindRenderTargetFull(sourceLoaded);
                 CheckGlError();
@@ -50,7 +52,8 @@ namespace Robust.Client.Graphics.Clyde
             GL.CopyTexSubImage2D(TextureTarget.Texture2D, 0, 0, 0, 0, 0, source.Size.X, source.Size.Y);
             CheckGlError();
 
-            if (pause && store != null) {
+            if (pause && store != null)
+            {
                 PopRenderStateFull((FullStoredRendererState)store);
             }
         }
@@ -115,8 +118,8 @@ namespace Robust.Client.Graphics.Clyde
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void QuadBatchIndexWrite(Span<ushort> indexData, ref int nIdx, ushort tIdx)
         {
-            QuadBatchIndexWrite(indexData, ref nIdx, tIdx, (ushort) (tIdx + 1), (ushort) (tIdx + 2),
-                (ushort) (tIdx + 3));
+            QuadBatchIndexWrite(indexData, ref nIdx, tIdx, (ushort)(tIdx + 1), (ushort)(tIdx + 2),
+                (ushort)(tIdx + 3));
         }
 
         // Writes a quad into the index buffer. Note that the 'middle line' is from tIdx0 to tIdx2.
@@ -185,20 +188,20 @@ namespace Robust.Client.Graphics.Clyde
 
             if (_hasGLMapBufferRange)
             {
-                ptr = (void*) GL.MapBufferRange(buffer, IntPtr.Zero, length, mask);
+                ptr = (void*)GL.MapBufferRange(buffer, IntPtr.Zero, length, mask);
                 CheckGlError();
             }
             else if (_hasGLMapBuffer)
             {
-                ptr = (void*) GL.MapBuffer(buffer, access);
+                ptr = (void*)GL.MapBuffer(buffer, access);
                 CheckGlError();
             }
             else
             {
                 DebugTools.Assert(_hasGLMapBufferOes);
 
-                ptr = (void*) ES20.GL.Oes.MapBuffer((ES20.BufferTargetArb) buffer,
-                    (ES20.BufferAccessArb) BufferAccess.ReadOnly);
+                ptr = (void*)ES20.GL.Oes.MapBuffer((ES20.BufferTargetArb)buffer,
+                    (ES20.BufferAccessArb)BufferAccess.ReadOnly);
                 CheckGlError();
             }
 
@@ -218,7 +221,7 @@ namespace Robust.Client.Graphics.Clyde
             {
                 DebugTools.Assert(_hasGLMapBufferOes);
 
-                ES20.GL.Oes.UnmapBuffer((ES20.BufferTarget) buffer);
+                ES20.GL.Oes.UnmapBuffer((ES20.BufferTarget)buffer);
                 CheckGlError();
             }
         }
@@ -241,7 +244,7 @@ namespace Robust.Client.Graphics.Clyde
                 CheckGlError();
             }
 
-            return (uint) value;
+            return (uint)value;
         }
 
         private void BindVertexArray(uint vao)

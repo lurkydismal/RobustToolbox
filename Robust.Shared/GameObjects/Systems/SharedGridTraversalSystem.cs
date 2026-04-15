@@ -62,7 +62,7 @@ public sealed class SharedGridTraversalSystem : EntitySystem
             || xform.Anchored
             || uid == xform.GridUid
             || uid == xform.MapUid
-            || xform.MapUid is not {} map
+            || xform.MapUid is not { } map
             || !xform.GridTraversal)
         {
             return;

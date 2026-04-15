@@ -17,7 +17,7 @@ public sealed class AssetPassPrefix : AssetPass
         var newPath = Prefix + file.Path;
         var newFile = file switch
         {
-            AssetFileDisk disk => (AssetFile) new AssetFileDisk(newPath, disk.DiskPath),
+            AssetFileDisk disk => (AssetFile)new AssetFileDisk(newPath, disk.DiskPath),
             AssetFileMemory memory => new AssetFileMemory(newPath, memory.Memory),
             _ => throw new ArgumentOutOfRangeException(nameof(file))
         };

@@ -20,7 +20,7 @@ public sealed class ToolshedCommandAttribute : Attribute
 /// </summary>
 [AttributeUsage(AttributeTargets.Method)]
 [MeansImplicitUse]
-public sealed class CommandImplementationAttribute :  Attribute
+public sealed class CommandImplementationAttribute : Attribute
 {
     public readonly string? SubCommand = null;
 

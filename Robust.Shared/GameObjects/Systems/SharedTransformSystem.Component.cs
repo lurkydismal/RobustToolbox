@@ -131,7 +131,7 @@ public abstract partial class SharedTransformSystem
             grid = (entity.Comp.GridUid.Value, gridComp);
         }
 
-        var tileIndices =  _map.TileIndicesFor(grid.Value, grid.Value, entity.Comp.Coordinates);
+        var tileIndices = _map.TileIndicesFor(grid.Value, grid.Value, entity.Comp.Coordinates);
         return AnchorEntity(entity, grid.Value, tileIndices);
     }
 

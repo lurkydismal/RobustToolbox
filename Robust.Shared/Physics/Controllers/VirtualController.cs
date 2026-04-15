@@ -39,23 +39,23 @@ namespace Robust.Shared.Physics.Controllers
 
         private void OnBeforeSolve(ref PhysicsUpdateBeforeSolveEvent ev)
         {
-            if(PhysicsSystem.MetricsEnabled)
+            if (PhysicsSystem.MetricsEnabled)
                 Stopwatch.Restart();
 
             UpdateBeforeSolve(ev.Prediction, ev.DeltaTime);
 
-            if(PhysicsSystem.MetricsEnabled)
+            if (PhysicsSystem.MetricsEnabled)
                 BeforeMonitor.Observe(Stopwatch.Elapsed.TotalSeconds);
         }
 
         private void OnAfterSolve(ref PhysicsUpdateAfterSolveEvent ev)
         {
-            if(PhysicsSystem.MetricsEnabled)
+            if (PhysicsSystem.MetricsEnabled)
                 Stopwatch.Restart();
 
             UpdateAfterSolve(ev.Prediction, ev.DeltaTime);
 
-            if(PhysicsSystem.MetricsEnabled)
+            if (PhysicsSystem.MetricsEnabled)
                 AfterMonitor.Observe(Stopwatch.Elapsed.TotalSeconds);
         }
 
@@ -66,13 +66,13 @@ namespace Robust.Shared.Physics.Controllers
         /// </summary>
         /// <param name="prediction"></param>
         /// <param name="frameTime"></param>
-        public virtual void UpdateBeforeSolve(bool prediction, float frameTime) {}
+        public virtual void UpdateBeforeSolve(bool prediction, float frameTime) { }
 
         /// <summary>
         ///     Run after all map processing has finished.
         /// </summary>
         /// <param name="prediction"></param>
         /// <param name="frameTime"></param>
-        public virtual void UpdateAfterSolve(bool prediction, float frameTime) {}
+        public virtual void UpdateAfterSolve(bool prediction, float frameTime) { }
     }
 }

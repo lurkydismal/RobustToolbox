@@ -28,14 +28,14 @@ namespace Robust.Shared.Physics.Systems
         public static readonly Histogram TickUsageControllerBeforeSolveHistogram = Metrics.CreateHistogram("robust_entity_physics_controller_before_solve",
             "Amount of time spent running a controller's UpdateBeforeSolve", new HistogramConfiguration
             {
-                LabelNames = new[] {"controller"},
+                LabelNames = new[] { "controller" },
                 Buckets = Histogram.ExponentialBuckets(0.000_001, 1.5, 25)
             });
 
         public static readonly Histogram TickUsageControllerAfterSolveHistogram = Metrics.CreateHistogram("robust_entity_physics_controller_after_solve",
             "Amount of time spent running a controller's UpdateAfterSolve", new HistogramConfiguration
             {
-                LabelNames = new[] {"controller"},
+                LabelNames = new[] { "controller" },
                 Buckets = Histogram.ExponentialBuckets(0.000_001, 1.5, 25)
             });
 
@@ -60,11 +60,11 @@ namespace Robust.Shared.Physics.Systems
 
         public bool MetricsEnabled { get; protected set; }
 
-        private   EntityQuery<CollideOnAnchorComponent> _anchorQuery;
-        private   EntityQuery<FixturesComponent> _fixturesQuery;
-        private   EntityQuery<JointComponent> JointQuery;
-        private   EntityQuery<JointRelayTargetComponent> RelayTargetQuery;
-        private   EntityQuery<MapGridComponent> _gridQuery;
+        private EntityQuery<CollideOnAnchorComponent> _anchorQuery;
+        private EntityQuery<FixturesComponent> _fixturesQuery;
+        private EntityQuery<JointComponent> JointQuery;
+        private EntityQuery<JointRelayTargetComponent> RelayTargetQuery;
+        private EntityQuery<MapGridComponent> _gridQuery;
         protected EntityQuery<MapComponent> MapQuery;
         protected EntityQuery<PhysicsComponent> PhysicsQuery;
         protected EntityQuery<TransformComponent> XformQuery;
@@ -156,8 +156,8 @@ namespace Robust.Shared.Physics.Systems
 
         private void UpdateSubsteps(int obj)
         {
-            var targetMinTickrate = (float) _cfg.GetCVar(CVars.TargetMinimumTickrate);
-            var serverTickrate = (float) _cfg.GetCVar(CVars.NetTickrate);
+            var targetMinTickrate = (float)_cfg.GetCVar(CVars.TargetMinimumTickrate);
+            var serverTickrate = (float)_cfg.GetCVar(CVars.NetTickrate);
             _substeps = (int)Math.Ceiling(targetMinTickrate / serverTickrate);
         }
 

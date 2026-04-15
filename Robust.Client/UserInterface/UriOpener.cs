@@ -70,7 +70,7 @@ namespace Robust.Client.UserInterface
     {
         protected override void DoOpen(Uri uri)
         {
-            Process.Start(new ProcessStartInfo(uri.ToString()) {UseShellExecute = true});
+            Process.Start(new ProcessStartInfo(uri.ToString()) { UseShellExecute = true });
         }
     }
 

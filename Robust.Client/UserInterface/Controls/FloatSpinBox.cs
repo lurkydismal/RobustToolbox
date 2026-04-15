@@ -41,7 +41,7 @@ namespace Robust.Client.UserInterface.Controls
             }
         }
 
-        public FloatSpinBox(): this(.1f, 1)
+        public FloatSpinBox() : this(.1f, 1)
         {
         }
 
@@ -115,7 +115,7 @@ namespace Robust.Client.UserInterface.Controls
         private void UpdateTextValue()
         {
             var cursorPos = _lineEdit.CursorPosition;
-            _lineEdit.Text = _value.ToString("F"+_precision, CultureInfo.InvariantCulture);
+            _lineEdit.Text = _value.ToString("F" + _precision, CultureInfo.InvariantCulture);
             _lineEdit.CursorPosition = cursorPos;
         }
 

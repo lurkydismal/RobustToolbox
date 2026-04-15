@@ -12,7 +12,7 @@ namespace Robust.Client.UserInterface.Controls
 
         public int MinValue
         {
-            get => (int) _slider.MinValue;
+            get => (int)_slider.MinValue;
             set => _slider.MinValue = value;
         }
 
@@ -79,7 +79,7 @@ namespace Robust.Client.UserInterface.Controls
 
         private void OnSliderValueChanged(Range slider)
         {
-            Value = (int) slider.Value;
+            Value = (int)slider.Value;
         }
 
         private void OnSpinBoxChanged(ValueChangedEventArgs e)

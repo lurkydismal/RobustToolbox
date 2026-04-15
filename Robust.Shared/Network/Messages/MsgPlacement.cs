@@ -41,7 +41,7 @@ namespace Robust.Shared.Network.Messages
 
         public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
         {
-            PlaceType = (PlacementManagerMessage) buffer.ReadByte();
+            PlaceType = (PlacementManagerMessage)buffer.ReadByte();
             switch (PlaceType)
             {
                 case PlacementManagerMessage.RequestPlacement:
@@ -85,7 +85,7 @@ namespace Robust.Shared.Network.Messages
                     buffer.Write(IsTile);
                     buffer.Write(Replacement);
 
-                    if(IsTile) buffer.Write(TileType);
+                    if (IsTile) buffer.Write(TileType);
                     else buffer.Write(EntityTemplateName);
 
                     buffer.Write(NetCoordinates);

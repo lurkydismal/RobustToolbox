@@ -39,7 +39,7 @@ internal sealed partial class UITestControl
                 Orientation = BoxContainer.LayoutOrientation.Vertical,
                 Margin = new Thickness(10),
             };
-            AddChild(new ScrollContainer() { Children = { _box }});
+            AddChild(new ScrollContainer() { Children = { _box } });
 
             var level = IoCManager.Resolve<IBaseClient>().RunLevel;
             if (level != ClientRunLevel.InGame && level != ClientRunLevel.SinglePlayerGame)
@@ -193,14 +193,14 @@ internal sealed partial class UITestControl
 
             entry = AddEntry("Offset", (e, time) =>
             {
-                e.Sprite.Offset = new Vector2(MathF.Sin((float) Angle.FromDegrees(time * _degreesPerSecond)), 0);
+                e.Sprite.Offset = new Vector2(MathF.Sin((float)Angle.FromDegrees(time * _degreesPerSecond)), 0);
                 e.View.InvalidateMeasure();
             });
             added.Add(entry);
 
             entry = AddEntry("Scaled", (e, time) =>
             {
-                var theta = (float) Angle.FromDegrees(_degreesPerSecond * time).Theta;
+                var theta = (float)Angle.FromDegrees(_degreesPerSecond * time).Theta;
                 e.Sprite.Scale = Vector2.One + new Vector2(0.5f * MathF.Sin(theta), 0.5f * MathF.Cos(theta));
                 e.View.InvalidateMeasure();
             });
@@ -214,9 +214,9 @@ internal sealed partial class UITestControl
 
             entry = AddEntry("Combination", (e, time) =>
             {
-                var theta = (float) Angle.FromDegrees(_degreesPerSecond * time * 2).Theta;
+                var theta = (float)Angle.FromDegrees(_degreesPerSecond * time * 2).Theta;
                 e.Sprite.Scale = Vector2.One + new Vector2(0.5f * MathF.Sin(theta), 0.5f * MathF.Cos(theta));
-                e.Sprite.Offset = new(MathF.Sin((float) Angle.FromDegrees(time * _degreesPerSecond)), 0);
+                e.Sprite.Offset = new(MathF.Sin((float)Angle.FromDegrees(time * _degreesPerSecond)), 0);
                 e.Sprite.Rotation = Angle.FromDegrees(0.5 * time * _degreesPerSecond);
                 e.Transform.LocalRotation = Angle.FromDegrees(0.25 * time * _degreesPerSecond);
                 e.View.InvalidateMeasure();
@@ -229,7 +229,7 @@ internal sealed partial class UITestControl
         protected override void FrameUpdate(FrameEventArgs args)
         {
             base.FrameUpdate(args);
-            var time = (float) _timing.CurTime.TotalSeconds;
+            var time = (float)_timing.CurTime.TotalSeconds;
             foreach (var entry in _entries)
             {
                 entry.Update?.Invoke(entry, time);
@@ -266,7 +266,7 @@ internal sealed partial class UITestControl
                 Orientation = BoxContainer.LayoutOrientation.Horizontal,
                 Margin = new Thickness(10),
                 MinHeight = 150,
-                Children = { label, viewBox},
+                Children = { label, viewBox },
                 Name = text,
             });
 

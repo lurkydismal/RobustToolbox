@@ -368,21 +368,21 @@ namespace Robust.Shared.Configuration
                 switch (_configFile)
                 {
                     case ConfigFileStorageDisk disk:
-                    {
-                        using var file = File.Create(disk.Path);
-                        memoryStream.CopyTo(file);
-                        break;
-                    }
+                        {
+                            using var file = File.Create(disk.Path);
+                            memoryStream.CopyTo(file);
+                            break;
+                        }
                     case ConfigFileStorageVirtual @virtual:
-                    {
-                        @virtual.Stream.SetLength(0);
-                        memoryStream.CopyTo(@virtual.Stream);
-                        break;
-                    }
+                        {
+                            @virtual.Stream.SetLength(0);
+                            memoryStream.CopyTo(@virtual.Stream);
+                            break;
+                        }
                     default:
-                    {
-                        throw new UnreachableException();
-                    }
+                        {
+                            throw new UnreachableException();
+                        }
                 }
 
                 _sawmill.Info($"config saved to '{_configFile}'.");
@@ -894,7 +894,7 @@ namespace Robust.Shared.Configuration
 
                 foreach (var entry in cVar.ValueChanged.Entries)
                 {
-                    list.Add((Delegate) entry.Equality!);
+                    list.Add((Delegate)entry.Equality!);
                 }
 
                 return list;

@@ -44,7 +44,7 @@ namespace Robust.Client.UserInterface.Controls
         }
 
         private bool _leftAlign = true;
-        
+
         public CheckBox()
         {
             ToggleMode = true;

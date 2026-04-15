@@ -32,7 +32,7 @@ public sealed class CommandBuffer
         }
     }
 
-    public bool TryGetCommand([MaybeNullWhen(false)]out string command)
+    public bool TryGetCommand([MaybeNullWhen(false)] out string command)
     {
         var next = _commandBuffer.First;
 

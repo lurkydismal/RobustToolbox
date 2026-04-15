@@ -9,7 +9,7 @@ namespace Robust.Client.NameGenerator
     /// <summary>
     /// Taken from https://github.com/AvaloniaUI/Avalonia.NameGenerator/blob/ecc9677a23de5cbc90af07ccac14e31c0da41d6a/src/Avalonia.NameGenerator/Infrastructure/RoslynTypeSystem.cs
     /// </summary>
-     public class RoslynTypeSystem : IXamlTypeSystem
+    public class RoslynTypeSystem : IXamlTypeSystem
     {
         private readonly List<IXamlAssembly> _assemblies = new List<IXamlAssembly>();
 
@@ -270,7 +270,7 @@ namespace Robust.Client.NameGenerator
 
         public bool IsStatic => false;
 
-        public IXamlType ReturnType => new RoslynType((INamedTypeSymbol) _symbol.ReturnType, _assembly);
+        public IXamlType ReturnType => new RoslynType((INamedTypeSymbol)_symbol.ReturnType, _assembly);
 
         public IReadOnlyList<IXamlType> Parameters =>
             _symbol.Parameters.Select(parameter => parameter.Type)

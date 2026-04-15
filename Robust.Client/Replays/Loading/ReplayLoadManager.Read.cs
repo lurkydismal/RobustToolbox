@@ -43,7 +43,7 @@ public sealed partial class ReplayLoadManager
         var name = new ResPath($"{DataFilePrefix}{i++}.{Ext}");
         while (fileReader.Exists(name))
         {
-            await callback(i+1, totalData, LoadingState.ReadingFiles, false);
+            await callback(i + 1, totalData, LoadingState.ReadingFiles, false);
 
             using var fileStream = fileReader.Open(name);
             using var decompressStream = new ZStdDecompressStream(fileStream, false);
@@ -140,18 +140,18 @@ public sealed partial class ReplayLoadManager
         var finalData = LoadYamlFinalMetadata(fileReader);
         TimeSpan? duration = finalData == null
             ? null
-            : TimeSpan.Parse(((ValueDataNode) finalData[MetaFinalKeyDuration]).Value);
+            : TimeSpan.Parse(((ValueDataNode)finalData[MetaFinalKeyDuration]).Value);
 
         if (finalData == null)
             _sawmill.Warning("Failed to load final yaml metadata. Partial/incomplete replay?");
 
-        var typeHashString = ((ValueDataNode) data[MetaKeyTypeHash]).Value;
+        var typeHashString = ((ValueDataNode)data[MetaKeyTypeHash]).Value;
         var typeHash = Convert.FromHexString(typeHashString);
-        var stringHash = Convert.FromHexString(((ValueDataNode) data[MetaKeyStringHash]).Value);
-        var startTick = ((ValueDataNode) data[MetaKeyStartTick]).Value;
-        var timeBaseTick = ((ValueDataNode) data[MetaKeyBaseTick]).Value;
-        var timeBaseTimespan = ((ValueDataNode) data[MetaKeyBaseTime]).Value;
-        var clientSide = bool.Parse(((ValueDataNode) data[MetaKeyIsClientRecording]).Value);
+        var stringHash = Convert.FromHexString(((ValueDataNode)data[MetaKeyStringHash]).Value);
+        var startTick = ((ValueDataNode)data[MetaKeyStartTick]).Value;
+        var timeBaseTick = ((ValueDataNode)data[MetaKeyBaseTick]).Value;
+        var timeBaseTimespan = ((ValueDataNode)data[MetaKeyBaseTime]).Value;
+        var clientSide = bool.Parse(((ValueDataNode)data[MetaKeyIsClientRecording]).Value);
 
         if (!typeHash.SequenceEqual(_serializer.GetSerializableTypesHash()))
         {

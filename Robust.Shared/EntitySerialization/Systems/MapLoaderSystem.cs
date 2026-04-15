@@ -45,7 +45,7 @@ public sealed partial class MapLoaderSystem : EntitySystem
     private void Write(TextWriter target, MappingDataNode data)
     {
         var document = new YamlDocument(data.ToYaml());
-        var stream = new YamlStream {document};
+        var stream = new YamlStream { document };
         stream.Save(new YamlMappingFix(new Emitter(target)), false);
     }
 
@@ -100,7 +100,7 @@ public sealed partial class MapLoaderSystem : EntitySystem
                 Log.Error("Stream too many YAML documents. Map files store exactly one.");
                 return false;
             default:
-                data = (MappingDataNode) documents[0].Root;
+                data = (MappingDataNode)documents[0].Root;
                 return true;
         }
     }

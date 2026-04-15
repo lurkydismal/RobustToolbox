@@ -52,7 +52,7 @@ namespace Robust.Shared.Utility
         /// <returns></returns>
         public ref T AllocAdd()
         {
-            _ensureCapacity(_size+1);
+            _ensureCapacity(_size + 1);
 
             return ref _array[_size++];
         }
@@ -62,7 +62,7 @@ namespace Robust.Shared.Utility
         /// </summary>
         public void Add(T item)
         {
-            _ensureCapacity(_size+1);
+            _ensureCapacity(_size + 1);
 
             _array[_size++] = item;
         }
@@ -110,11 +110,11 @@ namespace Robust.Shared.Utility
 
         public void Insert(int index, T item)
         {
-            _ensureCapacity(_size+1);
+            _ensureCapacity(_size + 1);
 
             if (index < _size)
             {
-                Array.Copy(_array, index, _array, index+1, _size - index);
+                Array.Copy(_array, index, _array, index + 1, _size - index);
             }
 
             _array[index] = item;

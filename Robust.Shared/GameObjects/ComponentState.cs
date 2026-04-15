@@ -43,7 +43,7 @@ public interface IComponentDeltaState : IComponentState
 ///     separate class from the full component states.
 /// </summary>
 /// <typeparam name="TState">The full-state class associated with this partial state</typeparam>
-public interface IComponentDeltaState<TState> : IComponentDeltaState where TState: IComponentState
+public interface IComponentDeltaState<TState> : IComponentDeltaState where TState : IComponentState
 {
     /// <summary>
     ///     This function will apply the current delta state to the provided full state, modifying it in the process.

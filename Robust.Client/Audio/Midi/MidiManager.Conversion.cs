@@ -7,19 +7,19 @@ internal sealed partial class MidiManager
 {
     public RobustMidiEvent FromFluidEvent(MidiEvent midiEvent, uint tick)
     {
-        var status = RobustMidiEvent.MakeStatus((byte) midiEvent.Channel, (byte) midiEvent.Type);
+        var status = RobustMidiEvent.MakeStatus((byte)midiEvent.Channel, (byte)midiEvent.Type);
 
         // Control is always the first data byte. Value is always the second data byte. Fluidsynth's API ain't great.
-        var data1 = (byte) midiEvent.Control;
-        var data2 = (byte) midiEvent.Value;
+        var data1 = (byte)midiEvent.Control;
+        var data2 = (byte)midiEvent.Value;
 
         // PitchBend is handled specially.
-        if (midiEvent.Type == (int) RobustMidiCommand.PitchBend)
+        if (midiEvent.Type == (int)RobustMidiCommand.PitchBend)
         {
             // We pack pitch into both data values.
-            var pitch = (ushort) midiEvent.Pitch;
-            data1 = (byte) pitch;
-            data2 = (byte) (pitch >> 8);
+            var pitch = (ushort)midiEvent.Pitch;
+            data1 = (byte)pitch;
+            data2 = (byte)(pitch >> 8);
         }
 
         return new RobustMidiEvent(status, data1, data2, tick);
@@ -87,7 +87,7 @@ internal sealed partial class MidiManager
 
     public RobustMidiEvent FromSequencerEvent(SequencerEvent midiEvent, uint tick)
     {
-        byte channel = (byte) midiEvent.Channel;
+        byte channel = (byte)midiEvent.Channel;
         RobustMidiCommand command = 0x0;
         byte data1 = 0;
         byte data2 = 0;
@@ -96,43 +96,43 @@ internal sealed partial class MidiManager
         {
             case FluidSequencerEventType.NoteOn:
                 command = RobustMidiCommand.NoteOn;
-                data1 = (byte) midiEvent.Key;
-                data2 = (byte) midiEvent.Velocity;
+                data1 = (byte)midiEvent.Key;
+                data2 = (byte)midiEvent.Velocity;
                 break;
 
             case FluidSequencerEventType.NoteOff:
                 command = RobustMidiCommand.NoteOff;
-                data1 = (byte) midiEvent.Key;
+                data1 = (byte)midiEvent.Key;
                 break;
 
             case FluidSequencerEventType.PitchBend:
                 command = RobustMidiCommand.PitchBend;
                 // We pack pitch into both data values
-                var pitch = (ushort) midiEvent.Pitch;
-                data1 = (byte) pitch;
-                data2 = (byte) (pitch >> 8);
+                var pitch = (ushort)midiEvent.Pitch;
+                data1 = (byte)pitch;
+                data2 = (byte)(pitch >> 8);
                 break;
 
             case FluidSequencerEventType.ProgramChange:
                 command = RobustMidiCommand.ProgramChange;
-                data1 = (byte) midiEvent.Program;
+                data1 = (byte)midiEvent.Program;
                 break;
 
             case FluidSequencerEventType.KeyPressure:
                 command = RobustMidiCommand.AfterTouch;
-                data1 = (byte) midiEvent.Key;
-                data2 = (byte) midiEvent.Value;
+                data1 = (byte)midiEvent.Key;
+                data2 = (byte)midiEvent.Value;
                 break;
 
             case FluidSequencerEventType.ControlChange:
                 command = RobustMidiCommand.ControlChange;
-                data1 = (byte) midiEvent.Control;
-                data2 = (byte) midiEvent.Value;
+                data1 = (byte)midiEvent.Control;
+                data2 = (byte)midiEvent.Value;
                 break;
 
             case FluidSequencerEventType.ChannelPressure:
                 command = RobustMidiCommand.ChannelPressure;
-                data1 = (byte) midiEvent.Value;
+                data1 = (byte)midiEvent.Value;
                 break;
 
             case FluidSequencerEventType.AllNotesOff:

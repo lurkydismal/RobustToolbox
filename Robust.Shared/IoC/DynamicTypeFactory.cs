@@ -95,7 +95,7 @@ namespace Robust.Shared.IoC
             bool oneOff = false, bool inject = true)
         {
             DebugTools.Assert(typeof(T).IsAssignableFrom(type), "type must be subtype of T");
-            return (T) dynamicTypeFactory.CreateInstance(type, oneOff, inject);
+            return (T)dynamicTypeFactory.CreateInstance(type, oneOff, inject);
         }
 
         /// <summary>
@@ -116,7 +116,7 @@ namespace Robust.Shared.IoC
             bool inject = true)
         {
             DebugTools.Assert(typeof(T).IsAssignableFrom(type), "type must be subtype of T");
-            return (T) dynamicTypeFactory.CreateInstance(type, args, oneOff, inject);
+            return (T)dynamicTypeFactory.CreateInstance(type, args, oneOff, inject);
         }
 
         /// <summary>
@@ -135,7 +135,7 @@ namespace Robust.Shared.IoC
             bool inject = true)
         {
             DebugTools.Assert(typeof(T).IsAssignableFrom(type), "type must be subtype of T");
-            return (T) dynamicTypeFactory.CreateInstanceUnchecked(type, oneOff, inject);
+            return (T)dynamicTypeFactory.CreateInstanceUnchecked(type, oneOff, inject);
         }
 
         /// <summary>
@@ -156,7 +156,7 @@ namespace Robust.Shared.IoC
             bool inject = true)
         {
             DebugTools.Assert(typeof(T).IsAssignableFrom(type), "type must be subtype of T");
-            return (T) dynamicTypeFactory.CreateInstanceUnchecked(type, args, oneOff, inject);
+            return (T)dynamicTypeFactory.CreateInstanceUnchecked(type, args, oneOff, inject);
         }
     }
 

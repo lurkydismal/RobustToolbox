@@ -70,10 +70,10 @@ namespace Robust.Shared.Maths
         // ReSharper disable once InconsistentNaming
         public readonly Vector4 RGBA => Unsafe.BitCast<Color, Vector4>(this);
 
-        public readonly byte RByte => (byte) (R * byte.MaxValue);
-        public readonly byte GByte => (byte) (G * byte.MaxValue);
-        public readonly byte BByte => (byte) (B * byte.MaxValue);
-        public readonly byte AByte => (byte) (A * byte.MaxValue);
+        public readonly byte RByte => (byte)(R * byte.MaxValue);
+        public readonly byte GByte => (byte)(G * byte.MaxValue);
+        public readonly byte BByte => (byte)(B * byte.MaxValue);
+        public readonly byte AByte => (byte)(A * byte.MaxValue);
 
         /// <summary>
         ///     Constructs a new <see cref="Color"/> structure from the specified components.
@@ -107,10 +107,10 @@ namespace Robust.Shared.Maths
         /// <param name="a">The alpha component of the new Color structure.</param>
         public Color(byte r, byte g, byte b, byte a = 255)
         {
-            R = r / (float) byte.MaxValue;
-            G = g / (float) byte.MaxValue;
-            B = b / (float) byte.MaxValue;
-            A = a / (float) byte.MaxValue;
+            R = r / (float)byte.MaxValue;
+            G = g / (float)byte.MaxValue;
+            B = b / (float)byte.MaxValue;
+            A = a / (float)byte.MaxValue;
         }
 
         /// <summary>
@@ -124,12 +124,12 @@ namespace Robust.Shared.Maths
         public readonly int ToArgb()
         {
             var value =
-                ((uint) (A * byte.MaxValue) << 24) |
-                ((uint) (R * byte.MaxValue) << 16) |
-                ((uint) (G * byte.MaxValue) << 8) |
-                (uint) (B * byte.MaxValue);
+                ((uint)(A * byte.MaxValue) << 24) |
+                ((uint)(R * byte.MaxValue) << 16) |
+                ((uint)(G * byte.MaxValue) << 8) |
+                (uint)(B * byte.MaxValue);
 
-            return unchecked((int) value);
+            return unchecked((int)value);
         }
 
         /// <summary>
@@ -197,10 +197,10 @@ namespace Robust.Shared.Maths
         public static explicit operator System.Drawing.Color(Color color)
         {
             return System.Drawing.Color.FromArgb(
-                (int) (color.A * byte.MaxValue),
-                (int) (color.R * byte.MaxValue),
-                (int) (color.G * byte.MaxValue),
-                (int) (color.B * byte.MaxValue));
+                (int)(color.A * byte.MaxValue),
+                (int)(color.R * byte.MaxValue),
+                (int)(color.G * byte.MaxValue),
+                (int)(color.B * byte.MaxValue));
         }
 
         public static Color FromName(string colorname)
@@ -228,7 +228,7 @@ namespace Robust.Shared.Maths
             if (!(obj is Color))
                 return false;
 
-            return Equals((Color) obj);
+            return Equals((Color)obj);
         }
 
         /// <summary>
@@ -288,22 +288,22 @@ namespace Robust.Shared.Maths
 
         public readonly Color WithRed(byte newR)
         {
-            return new((float) newR / byte.MaxValue, G, B, A);
+            return new((float)newR / byte.MaxValue, G, B, A);
         }
 
         public readonly Color WithGreen(byte newG)
         {
-            return new(R, (float) newG / byte.MaxValue, B, A);
+            return new(R, (float)newG / byte.MaxValue, B, A);
         }
 
         public readonly Color WithBlue(byte newB)
         {
-            return new(R, G, (float) newB / byte.MaxValue, A);
+            return new(R, G, (float)newB / byte.MaxValue, A);
         }
 
         public readonly Color WithAlpha(byte newA)
         {
-            return new(R, G, B, (float) newA / byte.MaxValue);
+            return new(R, G, B, (float)newA / byte.MaxValue);
         }
 
         /// <summary>

@@ -103,7 +103,7 @@ public sealed partial class DistanceJoint : Joint, IEquatable<DistanceJoint>
 
     public override JointType JointType => JointType.Distance;
 
-    public DistanceJoint() {}
+    public DistanceJoint() { }
 
     /// <summary>
     /// This requires defining an

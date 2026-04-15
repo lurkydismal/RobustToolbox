@@ -73,7 +73,7 @@ internal partial class Clyde
         {
             var byteCount = Encoding.UTF8.GetByteCount(str);
 
-            var mem = (byte*) NativeMemory.Alloc((nuint)(byteCount + 1));
+            var mem = (byte*)NativeMemory.Alloc((nuint)(byteCount + 1));
             Encoding.UTF8.GetBytes(str, new Span<byte>(mem, byteCount));
             mem[byteCount] = 0; // null-terminate
 
@@ -122,7 +122,7 @@ internal partial class Clyde
             }
 
             // Handles null (cancelled/none selected) transparently.
-            var str = Marshal.PtrToStringUTF8((nint) filelist[0]);
+            var str = Marshal.PtrToStringUTF8((nint)filelist[0]);
             state.Tcs.SetResult(str);
         }
 

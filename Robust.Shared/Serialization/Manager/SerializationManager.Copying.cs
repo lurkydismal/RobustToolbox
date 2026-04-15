@@ -100,7 +100,7 @@ public sealed partial class SerializationManager
                     Expression.Call(
                         instanceParam,
                         nameof(CopyTo),
-                        new []{actualType},
+                        new[] { actualType },
                         copierConstant,
                         sourceVar,
                         targetVar,
@@ -143,7 +143,7 @@ public sealed partial class SerializationManager
                 static (tuple, manager) => ValueFactory(tuple.baseType, tuple.actualType, manager), this);
         }
 
-        return (CopyToGenericDelegate<T>) _copyToGenericDelegates
+        return (CopyToGenericDelegate<T>)_copyToGenericDelegates
             .GetOrAdd(type, static (type, manager) => ValueFactory(type, type, manager), this);
     }
 
@@ -205,7 +205,7 @@ public sealed partial class SerializationManager
                     call = Expression.Call(
                         instanceParam,
                         nameof(CreateCopy),
-                        new []{type},
+                        new[] { type },
                         copierConst,
                         sourceParamAccess,
                         hookCtxParam,
@@ -217,7 +217,7 @@ public sealed partial class SerializationManager
                     call = Expression.Call(
                         instanceParam,
                         nameof(CreateArrayCopy),
-                        new[]{type.GetElementType()!},
+                        new[] { type.GetElementType()! },
                         sourceParamAccess,
                         hookCtxParam,
                         contextParam);
@@ -240,7 +240,7 @@ public sealed partial class SerializationManager
                         call = Expression.Call(
                             instanceParam,
                             nameof(CreateCopyInternal),
-                            new[] {type},
+                            new[] { type },
                             sourceParamAccess,
                             hookCtxParam,
                             contextParam,
@@ -304,7 +304,7 @@ public sealed partial class SerializationManager
             }
             else
             {
-                newArray = (Array) Activator.CreateInstance(sourceArray.GetType(), sourceArray.Length)!;
+                newArray = (Array)Activator.CreateInstance(sourceArray.GetType(), sourceArray.Length)!;
             }
 
             for (var i = 0; i < sourceArray.Length; i++)

@@ -203,7 +203,7 @@ public sealed partial class PrismaticJoint : Joint, IEquatable<PrismaticJoint>
     private float _translation;
     private float _axialMass;
 
-    public PrismaticJoint() {}
+    public PrismaticJoint() { }
 
     internal PrismaticJoint(EntityUid bodyAUid, EntityUid bodyBUid) : base(bodyAUid, bodyBUid)
     {

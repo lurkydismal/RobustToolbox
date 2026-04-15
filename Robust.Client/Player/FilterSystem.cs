@@ -10,7 +10,7 @@ namespace Robust.Client.Player
 
         public override Filter FromEntities(Filter filter, params EntityUid[] entities)
         {
-            if (_playerManager.LocalEntity is not {Valid: true} attachedUid)
+            if (_playerManager.LocalEntity is not { Valid: true } attachedUid)
                 return filter;
 
             foreach (var uid in entities)

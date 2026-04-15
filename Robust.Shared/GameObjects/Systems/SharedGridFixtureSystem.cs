@@ -99,16 +99,17 @@ namespace Robust.Shared.GameObjects
                 }
             }
 
-            EntityManager.EventBus.RaiseLocalEvent(uid,new GridFixtureChangeEvent {NewFixtures = fixtures}, true);
+            EntityManager.EventBus.RaiseLocalEvent(uid, new GridFixtureChangeEvent { NewFixtures = fixtures }, true);
             _fixtures.FixtureUpdate(uid, manager: manager, body: body);
 
             CheckSplit(uid, mapChunks, removedChunks);
         }
 
         internal virtual void CheckSplit(EntityUid gridEuid, Dictionary<MapChunk, List<Box2i>> mapChunks,
-            List<MapChunk> removedChunks) {}
+            List<MapChunk> removedChunks)
+        { }
 
-        internal virtual void CheckSplit(EntityUid gridEuid, MapChunk chunk, List<Box2i> rectangles) {}
+        internal virtual void CheckSplit(EntityUid gridEuid, MapChunk chunk, List<Box2i> rectangles) { }
 
         private bool UpdateFixture(EntityUid uid, MapChunk chunk, List<Box2i> rectangles, PhysicsComponent body, FixturesComponent manager, TransformComponent xform)
         {
@@ -128,7 +129,7 @@ namespace Robust.Shared.GameObjects
 
             foreach (var rectangle in rectangles)
             {
-                var bounds = ((Box2) rectangle.Translated(origin)).Enlarged(_fixtureEnlargement);
+                var bounds = ((Box2)rectangle.Translated(origin)).Enlarged(_fixtureEnlargement);
                 var poly = new PolygonShape();
 
                 vertices[0] = bounds.BottomLeft;
@@ -204,7 +205,7 @@ namespace Robust.Shared.GameObjects
                 // TODO GRIDS
                 // wasn't this already checked?
                 if (existingFixture?.Shape is PolygonShape poly &&
-                    poly.EqualsApprox((PolygonShape) fixture.Shape))
+                    poly.EqualsApprox((PolygonShape)fixture.Shape))
                 {
                     continue;
                 }
@@ -229,7 +230,7 @@ namespace Robust.Shared.GameObjects
     public sealed class ChunkSplitDebugMessage : EntityEventArgs
     {
         public NetEntity Grid;
-        public Dictionary<Vector2i, List<List<Vector2i>>> Nodes = new ();
+        public Dictionary<Vector2i, List<List<Vector2i>>> Nodes = new();
         public List<(Vector2 Start, Vector2 End)> Connections = new();
     }
 
@@ -237,8 +238,8 @@ namespace Robust.Shared.GameObjects
     /// Raised by a client who wants to receive gridsplitnode messages.
     /// </summary>
     [Serializable, NetSerializable]
-    public sealed class RequestGridNodesMessage : EntityEventArgs {}
+    public sealed class RequestGridNodesMessage : EntityEventArgs { }
 
     [Serializable, NetSerializable]
-    public sealed class StopGridNodesMessage : EntityEventArgs {}
+    public sealed class StopGridNodesMessage : EntityEventArgs { }
 }

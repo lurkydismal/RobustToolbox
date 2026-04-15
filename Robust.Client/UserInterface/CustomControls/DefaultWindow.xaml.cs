@@ -163,7 +163,7 @@ namespace Robust.Client.UserInterface.CustomControls
 
             var pos = Vector2.Min(Position, new Vector2(maxX, maxY));
 
-            var minX = (AllowOffScreen & DirectionFlag.East) ==  0 ? 0 : WindowEdgeSeparation - Size.X;
+            var minX = (AllowOffScreen & DirectionFlag.East) == 0 ? 0 : WindowEdgeSeparation - Size.X;
             var minY = (AllowOffScreen & DirectionFlag.North) == 0 ? 0 : WindowEdgeSeparation - Size.Y;
 
             pos = Vector2.Max(pos, new Vector2(minX, minY));

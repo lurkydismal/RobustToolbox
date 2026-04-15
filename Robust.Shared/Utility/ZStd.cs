@@ -27,9 +27,9 @@ public static class ZStd
         fixed (byte* dst = into)
         fixed (byte* src = data)
         {
-            var result = ZSTD_compress(dst, (nuint) into.Length, src, (nuint) data.Length, compressionLevel);
+            var result = ZSTD_compress(dst, (nuint)into.Length, src, (nuint)data.Length, compressionLevel);
             ZStdException.ThrowIfError(result);
-            return (int) result;
+            return (int)result;
         }
     }
 

@@ -80,7 +80,7 @@ internal partial class AudioManager
         // Default orientation: at: (0, 0, -1)  up: (0, 1, 0)
         var at = new OpenTK.Mathematics.Vector3(0f, 0f, -1f);
         var up = new OpenTK.Mathematics.Vector3(vec.Y, vec.X, 0f);
-        AL.Listener(ALListenerfv.Orientation, new []{0, 0, -1, vec.X, vec.Y, 0});
+        AL.Listener(ALListenerfv.Orientation, new[] { 0, 0, -1, vec.X, vec.Y, 0 });
         AL.Listener(ALListenerfv.Orientation, ref at, ref up);
     }
 
@@ -125,8 +125,8 @@ internal partial class AudioManager
         {
             fixed (short* ptr = vorbis.Data.Span)
             {
-                AL.BufferData(buffer, format, (IntPtr) ptr, vorbis.Data.Length * sizeof(short),
-                    (int) vorbis.SampleRate);
+                AL.BufferData(buffer, format, (IntPtr)ptr, vorbis.Data.Length * sizeof(short),
+                    (int)vorbis.SampleRate);
             }
         }
 
@@ -134,8 +134,8 @@ internal partial class AudioManager
 
         var handle = new ClydeHandle(_audioSampleBuffers.Count);
         _audioSampleBuffers.Add(buffer, new LoadedAudioSample(buffer));
-        var length = TimeSpan.FromSeconds(vorbis.TotalSamples / (double) vorbis.SampleRate);
-        return new AudioStream(this, buffer, handle, length, (int) vorbis.Channels, name, vorbis.Title, vorbis.Artist);
+        var length = TimeSpan.FromSeconds(vorbis.TotalSamples / (double)vorbis.SampleRate);
+        return new AudioStream(this, buffer, handle, length, (int)vorbis.Channels, name, vorbis.Title, vorbis.Artist);
     }
 
     /// <inheritdoc/>
@@ -185,7 +185,7 @@ internal partial class AudioManager
         {
             fixed (byte* ptr = wav.Data.Span)
             {
-                AL.BufferData(buffer, format, (IntPtr) ptr, wav.Data.Length, wav.SampleRate);
+                AL.BufferData(buffer, format, (IntPtr)ptr, wav.Data.Length, wav.SampleRate);
             }
         }
 
@@ -193,7 +193,7 @@ internal partial class AudioManager
 
         var handle = new ClydeHandle(_audioSampleBuffers.Count);
         _audioSampleBuffers.Add(buffer, new LoadedAudioSample(buffer));
-        var length = TimeSpan.FromSeconds(wav.Data.Length / (double) wav.BlockAlign / wav.SampleRate);
+        var length = TimeSpan.FromSeconds(wav.Data.Length / (double)wav.BlockAlign / wav.SampleRate);
         return new AudioStream(this, buffer, handle, length, wav.NumChannels, name);
     }
 
@@ -215,14 +215,14 @@ internal partial class AudioManager
         {
             fixed (short* ptr = samples)
             {
-                AL.BufferData(buffer, fmt, (IntPtr) ptr, samples.Length * sizeof(short), sampleRate);
+                AL.BufferData(buffer, fmt, (IntPtr)ptr, samples.Length * sizeof(short), sampleRate);
             }
         }
 
         _checkAlError();
 
         var handle = new ClydeHandle(_audioSampleBuffers.Count);
-        var length = TimeSpan.FromSeconds((double) samples.Length / channels / sampleRate);
+        var length = TimeSpan.FromSeconds((double)samples.Length / channels / sampleRate);
         _audioSampleBuffers.Add(buffer, new LoadedAudioSample(buffer));
         return new AudioStream(this, buffer, handle, length, channels, name);
     }

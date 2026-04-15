@@ -41,7 +41,7 @@ public partial class PrototypeManager
     private void ValidateStaticFieldsInternal(Type type, List<string> errors, Dictionary<Type, HashSet<string>> prototypes)
     {
         var baseType = type;
-        var flags = BindingFlags.Static |  BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly;
+        var flags = BindingFlags.Static | BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.DeclaredOnly;
 
         while (baseType != null)
         {
@@ -125,7 +125,7 @@ public partial class PrototypeManager
 
         if (value is IEnumerable<EntProtoId> protoIdEnum)
         {
-            ids = protoIdEnum.Select(x=> x.Id).ToArray();
+            ids = protoIdEnum.Select(x => x.Id).ToArray();
             return true;
         }
 

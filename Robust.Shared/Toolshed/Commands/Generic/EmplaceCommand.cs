@@ -27,7 +27,7 @@ public sealed class EmplaceCommand : ToolshedCommand
     {
         var emplaceCtx = new EmplaceContext<TIn>(ctx, EntityManager);
         emplaceCtx.Value = value;
-        return (TOut) (block.Invoke(null, emplaceCtx)!);
+        return (TOut)(block.Invoke(null, emplaceCtx)!);
     }
 
     [CommandImplementation, TakesPipedTypeAsGeneric]
@@ -44,7 +44,7 @@ public sealed class EmplaceCommand : ToolshedCommand
                 yield break;
 
             emplaceCtx.Value = v;
-            yield return (TOut) (block.Invoke(null, emplaceCtx)!);
+            yield return (TOut)(block.Invoke(null, emplaceCtx)!);
         }
     }
 

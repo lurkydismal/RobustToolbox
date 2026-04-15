@@ -195,7 +195,7 @@ public abstract class ComponentTreeSystem<TTreeComp, TComp> : EntitySystem
 
     public override void FrameUpdate(float frameTime)
     {
-        if (DoFrameUpdate &&  _initialized)
+        if (DoFrameUpdate && _initialized)
             UpdateTreePositions();
     }
 

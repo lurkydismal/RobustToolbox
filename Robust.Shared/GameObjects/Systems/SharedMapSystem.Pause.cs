@@ -11,7 +11,7 @@ public abstract partial class SharedMapSystem
         if (mapId == MapId.Nullspace)
             return false;
 
-        if(!Maps.TryGetValue(mapId, out var uid))
+        if (!Maps.TryGetValue(mapId, out var uid))
             throw new ArgumentException($"Map {mapId} does not exist.");
 
         return IsPaused(uid);
@@ -27,7 +27,7 @@ public abstract partial class SharedMapSystem
 
     public void SetPaused(MapId mapId, bool paused)
     {
-        if(!Maps.TryGetValue(mapId, out var uid))
+        if (!Maps.TryGetValue(mapId, out var uid))
             throw new ArgumentException($"Map {mapId} does not exist.");
 
         SetPaused(uid, paused);

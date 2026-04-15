@@ -145,7 +145,7 @@ public sealed partial class ReplayLoadManager
 
         TimeSpan GetTime(GameTick tick)
         {
-            var rate = (int) cvars[CVars.NetTickrate.Name];
+            var rate = (int)cvars[CVars.NetTickrate.Name];
             var period = TimeSpan.FromTicks(TimeSpan.TicksPerSecond / rate);
             return timeBase.Item1 + (tick.Value - timeBase.Item2.Value) * period;
         }

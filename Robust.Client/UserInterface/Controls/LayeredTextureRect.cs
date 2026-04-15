@@ -106,34 +106,34 @@ namespace Robust.Client.UserInterface.Controls
                             UIBox2.FromDimensions(Vector2.Zero, texture.Size * _textureScale * UIScale));
                         break;
                     case TextureRect.StretchMode.KeepCentered:
-                    {
-                        var position = (PixelSize - texture.Size * _textureScale * UIScale) / 2;
-                        handle.DrawTextureRect(texture, UIBox2.FromDimensions(position, texture.Size * _textureScale * UIScale));
-                        break;
-                    }
+                        {
+                            var position = (PixelSize - texture.Size * _textureScale * UIScale) / 2;
+                            handle.DrawTextureRect(texture, UIBox2.FromDimensions(position, texture.Size * _textureScale * UIScale));
+                            break;
+                        }
 
                     case TextureRect.StretchMode.KeepAspect:
                     case TextureRect.StretchMode.KeepAspectCentered:
-                    {
-                        var (texWidth, texHeight) = texture.Size * _textureScale;
-                        var width = texWidth * (PixelSize.Y / texHeight);
-                        var height = (float)PixelSize.Y;
-                        if (width > PixelSize.X)
                         {
-                            width = PixelSize.X;
-                            height = texHeight * (PixelSize.X / texWidth);
-                        }
+                            var (texWidth, texHeight) = texture.Size * _textureScale;
+                            var width = texWidth * (PixelSize.Y / texHeight);
+                            var height = (float)PixelSize.Y;
+                            if (width > PixelSize.X)
+                            {
+                                width = PixelSize.X;
+                                height = texHeight * (PixelSize.X / texWidth);
+                            }
 
-                        var size = new Vector2(width, height);
-                        var position = Vector2.Zero;
-                        if (Stretch == TextureRect.StretchMode.KeepAspectCentered)
-                        {
-                            position = (PixelSize - size) / 2;
-                        }
+                            var size = new Vector2(width, height);
+                            var position = Vector2.Zero;
+                            if (Stretch == TextureRect.StretchMode.KeepAspectCentered)
+                            {
+                                position = (PixelSize - size) / 2;
+                            }
 
-                        handle.DrawTextureRectRegion(texture, UIBox2.FromDimensions(position, size));
-                        break;
-                    }
+                            handle.DrawTextureRectRegion(texture, UIBox2.FromDimensions(position, size));
+                            break;
+                        }
 
                     case TextureRect.StretchMode.KeepAspectCovered:
                         var texSize = texture.Size * _textureScale;

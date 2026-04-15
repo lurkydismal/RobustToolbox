@@ -11,7 +11,7 @@ using Robust.Shared.Utility;
 namespace Robust.Shared.Toolshed.TypeParsers.Math;
 
 internal sealed class NumberBaseTypeParser<T> : TypeParser<T>
-    where T: INumberBase<T>
+    where T : INumberBase<T>
 {
     public override bool TryParse(ParserContext ctx, [NotNullWhen(true)] out T? result)
     {

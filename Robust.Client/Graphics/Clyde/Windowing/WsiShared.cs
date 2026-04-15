@@ -42,7 +42,7 @@ internal partial class Clyde
             if (cfg.GetCVar(CVars.DisplayWin11ImmersiveDarkMode) && Environment.OSVersion.Version.Build >= 22000)
             {
                 var b = BOOL.TRUE;
-                Windows.DwmSetWindowAttribute(hWnd, 20, &b, (uint) sizeof(BOOL));
+                Windows.DwmSetWindowAttribute(hWnd, 20, &b, (uint)sizeof(BOOL));
             }
         }
 

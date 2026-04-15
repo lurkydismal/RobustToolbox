@@ -93,7 +93,9 @@ namespace Robust.Client.UserInterface.Controls
             }
         }
 
-        [ViewVariables] public AlignMode Align {
+        [ViewVariables]
+        public AlignMode Align
+        {
             get
             {
                 if (TryGetStyleProperty<AlignMode>(StylePropertyAlignMode, out var alignMode))

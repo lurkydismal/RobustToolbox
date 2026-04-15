@@ -14,7 +14,7 @@ namespace Robust.Shared.Utility
         private readonly IncrementalHash _hash;
         private readonly bool _leaveOpen;
 
-        public HasherStream(Stream wrapping, IncrementalHash hash, bool leaveOpen=false)
+        public HasherStream(Stream wrapping, IncrementalHash hash, bool leaveOpen = false)
         {
             _wrapping = wrapping;
             _hash = hash;
@@ -100,7 +100,7 @@ namespace Robust.Shared.Utility
 
         public override void WriteByte(byte value)
         {
-            Span<byte> span = stackalloc byte[] {value};
+            Span<byte> span = stackalloc byte[] { value };
             Write(span);
         }
 

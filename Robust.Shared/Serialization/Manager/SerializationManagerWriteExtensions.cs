@@ -23,7 +23,7 @@ namespace Robust.Shared.Serialization.Manager
             ISerializationContext? context = null)
             where T : DataNode
         {
-            return (T) manager.WriteValue(type, value, alwaysWrite, context);
+            return (T)manager.WriteValue(type, value, alwaysWrite, context);
         }
     }
 }

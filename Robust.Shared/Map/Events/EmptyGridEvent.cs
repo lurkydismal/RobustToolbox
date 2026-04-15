@@ -7,5 +7,5 @@ namespace Robust.Shared.Map.Events;
 /// </summary>
 public sealed class EmptyGridEvent : EntityEventArgs
 {
-    public EntityUid GridId { get; init;  }
+    public EntityUid GridId { get; init; }
 }

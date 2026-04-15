@@ -112,7 +112,7 @@ public abstract class UIScreen : LayoutContainer
 
     public T? GetWidget<T>() where T : UIWidget, new()
     {
-        return (T?) _widgets.GetValueOrDefault(typeof(T));
+        return (T?)_widgets.GetValueOrDefault(typeof(T));
     }
 
     public T GetOrAddWidget<T>() where T : UIWidget, new()
@@ -123,7 +123,7 @@ public abstract class UIScreen : LayoutContainer
             AddWidget(widget);
         }
 
-        return (T) widget;
+        return (T)widget;
     }
 
     public bool IsWidgetShown<T>() where T : UIWidget

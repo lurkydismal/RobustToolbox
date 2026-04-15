@@ -57,7 +57,7 @@ internal abstract partial class ViewVariablesManager
         var resolved = ResolvePath(path);
 
         // Attempt to get an object from the path...
-        if (resolved?.Get() is not {} obj)
+        if (resolved?.Get() is not { } obj)
         {
             // Okay maybe the last segment of the path is not full? Attempt to resolve the prior path
             segments = segments[..^1];
@@ -65,7 +65,7 @@ internal abstract partial class ViewVariablesManager
             resolved = ResolvePath(path);
 
             // If not even that worked, we probably just have an invalid path here... Return nothing.
-            if(resolved?.Get() is not {} priorObj)
+            if (resolved?.Get() is not { } priorObj)
                 return Enumerable.Empty<string>();
 
             obj = priorObj;
@@ -107,11 +107,11 @@ internal abstract partial class ViewVariablesManager
 
             var memberObj = memberInfo.GetValue(obj);
 
-            if(options.ListIndexers)
+            if (options.ListIndexers)
                 ListIndexers(memberObj, name, paths);
         }
 
-        if(options.ListIndexers)
+        if (options.ListIndexers)
             ListIndexers(obj, string.Empty, paths);
 
         return Full(path, paths);
@@ -123,105 +123,105 @@ internal abstract partial class ViewVariablesManager
         {
             // Handle dictionaries and lists specially, for indexing purposes...
             case IDictionary dict:
-            {
-                var keyType = typeof(void);
-
-                if (dict.GetType().GenericTypeArguments is {Length: 2} generics)
                 {
-                    // Assume the key type is the first entry...
-                    keyType = generics[0];
-                }
+                    var keyType = typeof(void);
 
-                foreach (var key in dict.Keys)
-                {
-                    try
+                    if (dict.GetType().GenericTypeArguments is { Length: 2 } generics)
                     {
-                        var type = key.GetType();
-                        string? tag = null;
-
-                        // Handle cases such as "Dictionary<object, whatever>"
-                        if (type != keyType)
-                            tag = $"!type:{type.Name}";
-
-                        // Forgive me, Paul... We use serv3 to serialize the value into its "text value".
-                        if (SerializeValue(type, key, tag) is not {} value)
-                            continue;
-
-                        // Enclose in parentheses, in case there's a space in the value.
-                        if (value.Contains(' '))
-                            value = $"({value})";
-
-                        paths.Add($"{name}[{value}]");
+                        // Assume the key type is the first entry...
+                        keyType = generics[0];
                     }
-                    catch (Exception)
+
+                    foreach (var key in dict.Keys)
                     {
-                        // Nada.
-                    }
-                }
-
-                break;
-            }
-            case Array array:
-            {
-                var lowerBounds = Enumerable.Range(0, array.Rank)
-                    .Select(i => array.GetLowerBound(i))
-                    .ToArray();
-                var upperBounds = Enumerable.Range(0, array.Rank)
-                    .Select(i => array.GetUpperBound(i))
-                    .ToArray();
-
-                var indices = new int[array.Rank];
-
-                lowerBounds.CopyTo(indices, 0);
-
-                while (true)
-                {
-                    paths.Add($"{name}[{string.Join(',', indices)}]");
-
-                    var finished = false;
-
-                    for (var i = indices.Length - 1; i >= -1; i--)
-                    {
-                        // When at -1, this means that we've successfully iterated all dimensions of the array.
-                        if (i == -1)
+                        try
                         {
-                            finished = true;
+                            var type = key.GetType();
+                            string? tag = null;
+
+                            // Handle cases such as "Dictionary<object, whatever>"
+                            if (type != keyType)
+                                tag = $"!type:{type.Name}";
+
+                            // Forgive me, Paul... We use serv3 to serialize the value into its "text value".
+                            if (SerializeValue(type, key, tag) is not { } value)
+                                continue;
+
+                            // Enclose in parentheses, in case there's a space in the value.
+                            if (value.Contains(' '))
+                                value = $"({value})";
+
+                            paths.Add($"{name}[{value}]");
+                        }
+                        catch (Exception)
+                        {
+                            // Nada.
+                        }
+                    }
+
+                    break;
+                }
+            case Array array:
+                {
+                    var lowerBounds = Enumerable.Range(0, array.Rank)
+                        .Select(i => array.GetLowerBound(i))
+                        .ToArray();
+                    var upperBounds = Enumerable.Range(0, array.Rank)
+                        .Select(i => array.GetUpperBound(i))
+                        .ToArray();
+
+                    var indices = new int[array.Rank];
+
+                    lowerBounds.CopyTo(indices, 0);
+
+                    while (true)
+                    {
+                        paths.Add($"{name}[{string.Join(',', indices)}]");
+
+                        var finished = false;
+
+                        for (var i = indices.Length - 1; i >= -1; i--)
+                        {
+                            // When at -1, this means that we've successfully iterated all dimensions of the array.
+                            if (i == -1)
+                            {
+                                finished = true;
+                                break;
+                            }
+
+                            ref var index = ref indices[i];
+                            index += 1;
+
+                            if (index > upperBounds[i])
+                            {
+                                // We've gone over the upper bound, reset index and increase the next dimension's index.
+                                index = lowerBounds[i];
+                                continue;
+                            }
+
                             break;
                         }
 
-                        ref var index = ref indices[i];
-                        index += 1;
-
-                        if (index > upperBounds[i])
-                        {
-                            // We've gone over the upper bound, reset index and increase the next dimension's index.
-                            index = lowerBounds[i];
-                            continue;
-                        }
-
-                        break;
+                        if (finished)
+                            break;
                     }
 
-                    if (finished)
-                        break;
+                    break;
                 }
-
-                break;
-            }
             // We handle Array specially instead of using IList here because of multi-dimensional arrays and variable-bounds arrays.
             case IList list:
-            {
-                for (var i = 0; i < list.Count; i++)
                 {
-                    paths.Add($"{name}[{i}]");
-                }
+                    for (var i = 0; i < list.Count; i++)
+                    {
+                        paths.Add($"{name}[{i}]");
+                    }
 
-                break;
-            }
+                    break;
+                }
             default:
-            {
-                return;
-            }
+                {
+                    return;
+                }
         }
     }
 }

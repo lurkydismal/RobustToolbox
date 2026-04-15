@@ -524,6 +524,6 @@ namespace Robust.Shared.Utility
     [NotContentImplementable]
     public interface IQuadObject
     {
-       Box2 Bounds { get; }
+        Box2 Bounds { get; }
     }
 }

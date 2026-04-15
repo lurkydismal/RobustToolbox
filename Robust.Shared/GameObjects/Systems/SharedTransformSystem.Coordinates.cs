@@ -156,7 +156,7 @@ public abstract partial class SharedTransformSystem
     [Pure]
     public EntityUid? GetGrid(Entity<TransformComponent?> entity)
     {
-        return !Resolve(entity, ref entity.Comp, logMissing:false) ? null : entity.Comp.GridUid;
+        return !Resolve(entity, ref entity.Comp, logMissing: false) ? null : entity.Comp.GridUid;
     }
 
     /// <summary>
@@ -191,7 +191,7 @@ public abstract partial class SharedTransformSystem
     /// </summary>
     /// <param name="range">maximum distance between the two sets of coordinates.</param>
     /// <returns>True if the two points are within a given range.</returns>
-    public bool InRange(EntityCoordinates coordA, EntityCoordinates coordB,  float range)
+    public bool InRange(EntityCoordinates coordA, EntityCoordinates coordB, float range)
     {
         if (!coordA.EntityId.IsValid() || !coordB.EntityId.IsValid())
             return false;
@@ -199,8 +199,8 @@ public abstract partial class SharedTransformSystem
         if (coordA.EntityId == coordB.EntityId)
             return (coordA.Position - coordB.Position).LengthSquared() < range * range;
 
-        var mapA = ToMapCoordinates(coordA, logError:false);
-        var mapB = ToMapCoordinates(coordB, logError:false);
+        var mapA = ToMapCoordinates(coordA, logError: false);
+        var mapB = ToMapCoordinates(coordB, logError: false);
 
         if (mapA.MapId != mapB.MapId || mapA.MapId == MapId.Nullspace)
             return false;
@@ -211,7 +211,7 @@ public abstract partial class SharedTransformSystem
     /// <summary>
     ///     Compares the positions of two entities to see if they are within some specified distance of each other.
     /// </summary>
-    public bool InRange(Entity<TransformComponent?> entA, Entity<TransformComponent?> entB,  float range)
+    public bool InRange(Entity<TransformComponent?> entA, Entity<TransformComponent?> entB, float range)
     {
         if (!Resolve(entA, ref entA.Comp, logMissing: false))
             return false;

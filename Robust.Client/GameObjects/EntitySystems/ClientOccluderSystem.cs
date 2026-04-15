@@ -173,7 +173,7 @@ internal sealed class ClientOccluderSystem : OccluderSystem
 
         // TODO: Sub to parent changes instead or something.
         // DebugTools.Assert(occluder.LastPosition == null
-            // || occluder.LastPosition.Value.Grid == xform.GridUid && occluder.LastPosition.Value.Tile == tile);
+        // || occluder.LastPosition.Value.Grid == xform.GridUid && occluder.LastPosition.Value.Tile == tile);
         occluder.LastPosition = (xform.GridUid.Value, tile);
 
         // dir starts at the relative effective south direction;

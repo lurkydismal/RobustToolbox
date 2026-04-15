@@ -72,7 +72,7 @@ namespace Robust.Client.ViewVariables.Instances
 
         public override void Initialize(DefaultWindow window, object obj)
         {
-            _netEntity = (NetEntity) obj;
+            _netEntity = (NetEntity)obj;
             _entity = _entityManager.GetEntity(_netEntity);
 
             var scrollContainer = new ScrollContainer();
@@ -97,11 +97,11 @@ namespace Robust.Client.ViewVariables.Instances
                         Orientation = LayoutOrientation.Vertical,
                         SeparationOverride = 0
                     };
-                    headBox.AddChild(new Label {Text = stringified, ClipText = true});
+                    headBox.AddChild(new Label { Text = stringified, ClipText = true });
                     headBox.AddChild(new Label
                     {
                         Text = typeStringified,
-                    //    FontOverride = smallFont,
+                        //    FontOverride = smallFont,
                         FontColorOverride = Color.DarkGray,
                         ClipText = true
                     });
@@ -109,7 +109,7 @@ namespace Robust.Client.ViewVariables.Instances
                 }
                 else
                 {
-                    top = new Label {Text = stringified};
+                    top = new Label { Text = stringified };
                 }
 
                 if (_entityManager.TryGetComponent(_entity, out SpriteComponent? sprite))
@@ -214,7 +214,7 @@ namespace Robust.Client.ViewVariables.Instances
 
             foreach (var component in componentList)
             {
-                var button = new Button {Text = PrettyPrint.PrintUserFacingTypeShort(component.GetType(), 2), TextAlign = Label.AlignMode.Left};
+                var button = new Button { Text = PrettyPrint.PrintUserFacingTypeShort(component.GetType(), 2), TextAlign = Label.AlignMode.Left };
                 var removeButton = new TextureButton()
                 {
                     StyleClasses = { DefaultWindow.StyleClassWindowCloseButton },
@@ -265,7 +265,7 @@ namespace Robust.Client.ViewVariables.Instances
 
             foreach (var componentType in componentTypes)
             {
-                var button = new Button {Text = componentType.Stringified, TextAlign = Label.AlignMode.Left};
+                var button = new Button { Text = componentType.Stringified, TextAlign = Label.AlignMode.Left };
                 var removeButton = new TextureButton()
                 {
                     StyleClasses = { DefaultWindow.StyleClassWindowCloseButton },
@@ -431,7 +431,7 @@ namespace Robust.Client.ViewVariables.Instances
 
             var componentFactory = IoCManager.Resolve<IComponentFactory>();
 
-            if(!componentFactory.TryGetRegistration(eventArgs.Entry, out var registration)) return;
+            if (!componentFactory.TryGetRegistration(eventArgs.Entry, out var registration)) return;
 
             try
             {
@@ -472,7 +472,7 @@ namespace Robust.Client.ViewVariables.Instances
             _entitySession = session;
 
             _membersBlob = await ViewVariablesManager.RequestData<ViewVariablesBlobMembers>(session, new ViewVariablesRequestMembers());
-            var uid = (NetEntity) _membersBlob.MemberGroups.SelectMany(p => p.Item2).First(p => p.Value is NetEntity).Value;
+            var uid = (NetEntity)_membersBlob.MemberGroups.SelectMany(p => p.Item2).First(p => p.Value is NetEntity).Value;
 
             Initialize(window, uid);
         }
@@ -513,8 +513,8 @@ namespace Robust.Client.ViewVariables.Instances
                 catch (SessionDenyException e)
                 {
                     var text = $"Server denied VV request: {e.Reason}";
-                    _serverVariables.AddChild(new Label {Text = text});
-                    _serverComponents.AddChild(new Label {Text = text});
+                    _serverVariables.AddChild(new Label { Text = text });
+                    _serverComponents.AddChild(new Label { Text = text });
                     return;
                 }
             }
@@ -532,7 +532,7 @@ namespace Robust.Client.ViewVariables.Instances
                     var propertyEdit = new ViewVariablesPropertyControl(ViewVariablesManager, _robustSerializer);
                     propertyEdit.SetStyle(otherStyle = !otherStyle);
                     var editor = propertyEdit.SetProperty(propertyData);
-                    var selectorChain = new object[] {new ViewVariablesMemberSelector(propertyData.PropertyIndex)};
+                    var selectorChain = new object[] { new ViewVariablesMemberSelector(propertyData.PropertyIndex) };
                     editor.OnValueChanged += (o, r) => ViewVariablesManager.ModifyRemote(_entitySession, selectorChain, o, r);
                     editor.WireNetworkSelector(_entitySession.SessionId, selectorChain);
 

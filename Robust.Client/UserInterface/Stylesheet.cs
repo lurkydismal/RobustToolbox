@@ -74,7 +74,7 @@ namespace Robust.Client.UserInterface
         /// <seealso cref="SelectorElement"/>
         public static MutableSelectorElement Element<T>() where T : Control
         {
-            return new() {Type = typeof(T)};
+            return new() { Type = typeof(T) };
         }
 
         /// <summary>

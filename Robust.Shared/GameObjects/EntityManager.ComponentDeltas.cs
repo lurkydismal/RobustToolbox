@@ -17,7 +17,7 @@ public abstract partial class EntityManager
             if (lastUpdate < fromTick)
                 continue;
 
-            fields |= (uint) (1 << i);
+            fields |= (uint)(1 << i);
         }
 
         return fields;

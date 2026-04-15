@@ -99,7 +99,7 @@ namespace Robust.Client.GameObjects
                     foreach (var id in chunk.Fixtures)
                     {
                         var fixture = fixtures.Fixtures[id];
-                        var poly = (PolygonShape) fixture.Shape;
+                        var poly = (PolygonShape)fixture.Shape;
 
                         var verts = new Vector2[poly.VertexCount];
 

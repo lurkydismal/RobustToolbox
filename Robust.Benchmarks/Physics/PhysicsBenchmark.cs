@@ -66,12 +66,12 @@ public class PhysicsBenchmark
         PolygonShape shape = new();
         shape.SetAsBox(a, a);
 
-        float groundDeltaY = 2.0f * extent * ( baseCount + 1.0f );
-        float groundWidth = 2.0f * extent * columnCount * ( baseCount + 1.0f );
+        float groundDeltaY = 2.0f * extent * (baseCount + 1.0f);
+        float groundWidth = 2.0f * extent * columnCount * (baseCount + 1.0f);
 
         float groundY = 0.0f;
 
-        for ( int i = 0; i < rowCount; ++i )
+        for (int i = 0; i < rowCount; ++i)
         {
             var groundUid = entManager.SpawnEntity(null, new MapCoordinates(0, 0, mapId));
             var ground = entManager.AddComponent<PhysicsComponent>(groundUid);
@@ -85,11 +85,11 @@ public class PhysicsBenchmark
         float baseWidth = 2.0f * extent * baseCount;
         float baseY = 0.0f;
 
-        for ( int i = 0; i < rowCount; ++i )
+        for (int i = 0; i < rowCount; ++i)
         {
-            for ( int j = 0; j < columnCount; ++j )
+            for (int j = 0; j < columnCount; ++j)
             {
-                float centerX = -0.5f * groundWidth + j * ( baseWidth + 2.0f * extent ) + extent;
+                float centerX = -0.5f * groundWidth + j * (baseWidth + 2.0f * extent) + extent;
                 CreateSmallPyramid(entManager, mapId, baseCount, extent, centerX, baseY);
             }
 
@@ -104,13 +104,13 @@ public class PhysicsBenchmark
         var shape = new PolygonShape();
         shape.SetAsBox(extent, extent);
 
-        for ( int i = 0; i < baseCount; ++i )
+        for (int i = 0; i < baseCount; ++i)
         {
-            float y = ( 2.0f * i + 1.0f ) * extent + baseY;
+            float y = (2.0f * i + 1.0f) * extent + baseY;
 
-            for ( int j = i; j < baseCount; ++j )
+            for (int j = i; j < baseCount; ++j)
             {
-                float x = ( i + 1.0f ) * extent + 2.0f * ( j - i ) * extent + centerX - 0.5f;
+                float x = (i + 1.0f) * extent + 2.0f * (j - i) * extent + centerX - 0.5f;
 
                 var boxUid = entManager.SpawnEntity(null, new MapCoordinates(new Vector2(x, y), mapId));
                 var box = entManager.AddComponent<PhysicsComponent>(boxUid);
@@ -166,11 +166,11 @@ public class PhysicsBenchmark
         int columns = 120; // 20
         int rows = 80; // 10
 
-        for ( int i = 0; i < columns; ++i )
+        for (int i = 0; i < columns; ++i)
         {
-            for ( int j = 0; j < rows; ++j )
+            for (int j = 0; j < rows; ++j)
             {
-                var bodyUid = entManager.SpawnEntity(null, new MapCoordinates(i * d + 30f, ( j - rows / 2.0f ) * d, mapId));
+                var bodyUid = entManager.SpawnEntity(null, new MapCoordinates(i * d + 30f, (j - rows / 2.0f) * d, mapId));
                 var body = entManager.AddComponent<PhysicsComponent>(bodyUid);
 
                 physics.SetBodyType(bodyUid, BodyType.Dynamic, body: body);
@@ -179,7 +179,7 @@ public class PhysicsBenchmark
                 xformSystem.SetLocalPosition(bodyUid, new Vector2(-20f, 0f));
                 physics.SetLinearVelocity(bodyUid, new Vector2(40f, 0f));
 
-                fixtures.TryCreateFixture(bodyUid, box, "fix1",  hard: true);
+                fixtures.TryCreateFixture(bodyUid, box, "fix1", hard: true);
                 physics.WakeBody(bodyUid);
             }
         }

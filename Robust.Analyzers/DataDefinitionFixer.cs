@@ -69,7 +69,7 @@ public sealed class DefinitionFixer : CodeFixProvider
 
     private static async Task<Document> MakeDataDefinitionPartial(Document document, TypeDeclarationSyntax declaration, CancellationToken cancellation)
     {
-        var root = (CompilationUnitSyntax?) await document.GetSyntaxRootAsync(cancellation);
+        var root = (CompilationUnitSyntax?)await document.GetSyntaxRootAsync(cancellation);
         var token = SyntaxFactory.Token(PartialKeyword);
         var newDeclaration = declaration.AddModifiers(token);
 
@@ -115,7 +115,7 @@ public sealed class DefinitionFixer : CodeFixProvider
 
     private static async Task<Document> RemoveRedundantTag(Document document, AttributeSyntax syntax, CancellationToken cancellation)
     {
-        var root = (CompilationUnitSyntax?) await document.GetSyntaxRootAsync(cancellation);
+        var root = (CompilationUnitSyntax?)await document.GetSyntaxRootAsync(cancellation);
 
         if (syntax.ArgumentList == null)
             return document;
@@ -158,7 +158,7 @@ public sealed class DefinitionFixer : CodeFixProvider
 
     private static async Task<Document> RemoveVVAttribute(Document document, MemberDeclarationSyntax syntax, CancellationToken cancellation)
     {
-        var root = (CompilationUnitSyntax?) await document.GetSyntaxRootAsync(cancellation);
+        var root = (CompilationUnitSyntax?)await document.GetSyntaxRootAsync(cancellation);
 
         var newLists = new SyntaxList<AttributeListSyntax>();
         foreach (var attributeList in syntax.AttributeLists)
@@ -216,7 +216,7 @@ public sealed class DefinitionFixer : CodeFixProvider
 
     private static async Task<Document> MakeFieldWritable(Document document, FieldDeclarationSyntax declaration, CancellationToken cancellation)
     {
-        var root = (CompilationUnitSyntax?) await document.GetSyntaxRootAsync(cancellation);
+        var root = (CompilationUnitSyntax?)await document.GetSyntaxRootAsync(cancellation);
         var token = declaration.Modifiers.First(t => t.IsKind(ReadOnlyKeyword));
         var newDeclaration = declaration.WithModifiers(declaration.Modifiers.Remove(token));
 
@@ -227,7 +227,7 @@ public sealed class DefinitionFixer : CodeFixProvider
 
     private static async Task<Document> MakePropertyWritable(Document document, PropertyDeclarationSyntax declaration, CancellationToken cancellation)
     {
-        var root = (CompilationUnitSyntax?) await document.GetSyntaxRootAsync(cancellation);
+        var root = (CompilationUnitSyntax?)await document.GetSyntaxRootAsync(cancellation);
         var newDeclaration = declaration;
         var privateSet = newDeclaration
             .AccessorList?

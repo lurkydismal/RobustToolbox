@@ -14,7 +14,7 @@ namespace Robust.Xaml
     /// </remarks>
     internal partial class XamlAotCompiler
     {
-        private static readonly string[] NameSuffixes = {".xaml", ".paml", ".axaml"};
+        private static readonly string[] NameSuffixes = { ".xaml", ".paml", ".axaml" };
 
         static bool CheckXamlName(IResource r) =>
             NameSuffixes.Any(suffix => r.Name.ToLowerInvariant().EndsWith(suffix));

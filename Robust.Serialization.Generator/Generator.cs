@@ -176,16 +176,16 @@ public class Generator : IIncrementalGenerator
         return new DataDefinition(definition, typeName, fields, hasHooks, invalidFields);
     }
 
-     private static string GetConstructor(DataDefinition definition)
-     {
-         if (definition.Type.TypeKind == TypeKind.Interface)
-             return string.Empty;
+    private static string GetConstructor(DataDefinition definition)
+    {
+        if (definition.Type.TypeKind == TypeKind.Interface)
+            return string.Empty;
 
-         var builder = new StringBuilder();
+        var builder = new StringBuilder();
 
-         if (NeedsEmptyConstructor(definition.Type))
-         {
-             builder.AppendLine($$"""
+        if (NeedsEmptyConstructor(definition.Type))
+        {
+            builder.AppendLine($$"""
                                   // Implicit constructor
                                   #pragma warning disable CS8618
                                   public {{definition.Type.Name}}()
@@ -193,10 +193,10 @@ public class Generator : IIncrementalGenerator
                                   {
                                   }
                                   """);
-         }
+        }
 
-         return builder.ToString();
-     }
+        return builder.ToString();
+    }
 
     private static string GetCopyMethods(DataDefinition definition)
     {
@@ -216,7 +216,7 @@ public class Generator : IIncrementalGenerator
                         target = ({definition.GenericTypeName}) definitionCast;
                         """;
 
-             baseCopy = $$"""
+            baseCopy = $$"""
                           /// <seealso cref="ISerializationManager.CopyTo"/>
                           [Obsolete("Use ISerializationManager.CopyTo instead")]
                           public override void Copy(ref {{baseName}} target, ISerializationManager serialization, SerializationHookContext hookCtx, ISerializationContext? context = null)

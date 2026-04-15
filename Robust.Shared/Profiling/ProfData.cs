@@ -70,7 +70,7 @@ public static class ProfData
             TimeAllocSample = new TimeAndAllocSample
             {
                 Alloc = sampler.ElapsedAlloc,
-                Time = (float) sampler.Elapsed.TotalSeconds
+                Time = (float)sampler.Elapsed.TotalSeconds
             }
         };
     }
@@ -94,8 +94,8 @@ public struct ProfBuffer
     public readonly ProfBuffer Snapshot()
     {
         var ret = this;
-        ret.LogBuffer = (ProfLog[]) ret.LogBuffer.Clone();
-        ret.IndexBuffer = (ProfIndex[]) ret.IndexBuffer.Clone();
+        ret.LogBuffer = (ProfLog[])ret.LogBuffer.Clone();
+        ret.IndexBuffer = (ProfIndex[])ret.IndexBuffer.Clone();
         return ret;
     }
 

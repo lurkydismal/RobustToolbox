@@ -591,7 +591,7 @@ public struct ValueList<T> : IEnumerable<T>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public void AddRange(Span<T> span)
     {
-        AddRange((ReadOnlySpan<T>) span);
+        AddRange((ReadOnlySpan<T>)span);
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

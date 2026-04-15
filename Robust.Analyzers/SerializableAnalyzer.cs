@@ -25,7 +25,8 @@ namespace Robust.Analyzers
         private const string SerializableAttributeMetadataName = "System.SerializableAttribute";
         private const string NetSerializableAttributeMetadataName = "Robust.Shared.Serialization.NetSerializableAttribute";
 
-        [SuppressMessage("ReSharper", "RS2008")] private static readonly DiagnosticDescriptor Rule = new(
+        [SuppressMessage("ReSharper", "RS2008")]
+        private static readonly DiagnosticDescriptor Rule = new(
             Diagnostics.IdSerializable,
             "Class not marked as (Net)Serializable",
             "Class not marked as (Net)Serializable",
@@ -54,7 +55,7 @@ namespace Robust.Analyzers
         private void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
             var attrSymbol = context.Compilation.GetTypeByMetadataName(RequiresSerializableAttributeMetadataName);
-            var classDecl = (ClassDeclarationSyntax) context.Node;
+            var classDecl = (ClassDeclarationSyntax)context.Node;
             var classSymbol = context.SemanticModel.GetDeclaredSymbol(classDecl);
             if (classSymbol == null) return;
 
@@ -71,8 +72,8 @@ namespace Robust.Analyzers
                 if (!hasSerAttr || !hasNetSerAttr)
                 {
                     var requiredAttributes = new List<string>();
-                    if(!hasSerAttr) requiredAttributes.Add(SerializableAttributeMetadataName);
-                    if(!hasNetSerAttr) requiredAttributes.Add(NetSerializableAttributeMetadataName);
+                    if (!hasSerAttr) requiredAttributes.Add(SerializableAttributeMetadataName);
+                    if (!hasNetSerAttr) requiredAttributes.Add(NetSerializableAttributeMetadataName);
 
                     context.ReportDiagnostic(
                         Diagnostic.Create(
@@ -103,7 +104,7 @@ namespace Robust.Analyzers
                 var span = diagnostic.Location.SourceSpan;
                 var classDecl = root.FindToken(span.Start).Parent.AncestorsAndSelf().OfType<ClassDeclarationSyntax>().First();
 
-                if(!diagnostic.Properties.TryGetValue("requiredAttributes", out var requiredAttributes)) return;
+                if (!diagnostic.Properties.TryGetValue("requiredAttributes", out var requiredAttributes)) return;
 
                 context.RegisterCodeFix(
                     CodeAction.Create(
@@ -122,7 +123,7 @@ namespace Robust.Analyzers
             foreach (var attribute in requiredAttributes.Split(','))
             {
                 var tempSplit = attribute.Split('.');
-                namespaces.Add(string.Join(".",tempSplit.Take(tempSplit.Length-1)));
+                namespaces.Add(string.Join(".", tempSplit.Take(tempSplit.Length - 1)));
                 var @class = tempSplit.Last();
                 @class = @class.Substring(0, @class.Length - 9); //cut out "Attribute" at the end
                 attributes.Add(SyntaxFactory.Attribute(SyntaxFactory.ParseName(@class)));
@@ -131,12 +132,12 @@ namespace Robust.Analyzers
             var newClassDecl =
                 classDecl.AddAttributeLists(SyntaxFactory.AttributeList(SyntaxFactory.SeparatedList(attributes)));
 
-            var root = (CompilationUnitSyntax) await document.GetSyntaxRootAsync(cancellationToken);
+            var root = (CompilationUnitSyntax)await document.GetSyntaxRootAsync(cancellationToken);
             root = root.ReplaceNode(classDecl, newClassDecl);
 
             foreach (var ns in namespaces)
             {
-                if(root.Usings.Any(u => u.Name.ToString() == ns)) continue;
+                if (root.Usings.Any(u => u.Name.ToString() == ns)) continue;
                 root = root.AddUsings(SyntaxFactory.UsingDirective(SyntaxFactory.ParseName(ns)));
             }
             return document.WithSyntaxRoot(root);

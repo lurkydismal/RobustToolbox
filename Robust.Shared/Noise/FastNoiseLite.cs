@@ -902,13 +902,13 @@ public sealed partial class FastNoiseLite : ISerializationHooks
         {
             case DomainWarpType.OpenSimplex2:
             case DomainWarpType.OpenSimplex2Reduced:
-            {
-                const FNLfloat SQRT3 = (FNLfloat)1.7320508075688772935274463415059;
-                const FNLfloat F2 = 0.5f * (SQRT3 - 1);
-                FNLfloat t = (x + y) * F2;
-                x += t; y += t;
-            }
-            break;
+                {
+                    const FNLfloat SQRT3 = (FNLfloat)1.7320508075688772935274463415059;
+                    const FNLfloat F2 = 0.5f * (SQRT3 - 1);
+                    FNLfloat t = (x + y) * F2;
+                    x += t; y += t;
+                }
+                break;
             default:
                 break;
         }
@@ -1225,7 +1225,8 @@ public sealed partial class FastNoiseLite : ISerializationHooks
             if (ax0 >= ay0 && ax0 >= az0)
             {
                 float b = a + ax0 + ax0;
-                if (b > 1) {
+                if (b > 1)
+                {
                     b -= 1;
                     value += (b * b) * (b * b) * GradCoord(seed, i - xNSign * PrimeX, j, k, x0 + xNSign, y0, z0);
                 }

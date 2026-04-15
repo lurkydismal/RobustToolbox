@@ -20,7 +20,7 @@ using GL = OpenToolkit.Graphics.OpenGL4.GL;
 
 namespace Robust.Client.Graphics.Clyde
 {
-    internal partial class  Clyde
+    internal partial class Clyde
     {
         private readonly List<WindowReg> _windows = new();
         private readonly List<WindowHandle> _windowHandles = new();
@@ -415,7 +415,7 @@ namespace Robust.Client.Graphics.Clyde
 
         private void WindowModeChanged(int mode)
         {
-            _windowMode = (WindowMode) mode;
+            _windowMode = (WindowMode)mode;
             _windowing?.UpdateMainWindowMode();
         }
 

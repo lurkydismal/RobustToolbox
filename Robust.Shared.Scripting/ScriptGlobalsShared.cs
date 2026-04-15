@@ -57,7 +57,7 @@ namespace Robust.Shared.Scripting
 
         public EntityCoordinates gpos(double x, double y, EntityUid gridId)
         {
-            return new EntityCoordinates(gridId, new Vector2((float) x, (float) y));
+            return new EntityCoordinates(gridId, new Vector2((float)x, (float)y));
         }
 
         public EntityUid eid(int i)
@@ -87,25 +87,25 @@ namespace Robust.Shared.Scripting
 
         public object? prop(object target, string name)
         {
-            var prop = (PropertyInfo?) ReflectionGetInstanceMember(target.GetType(), MemberTypes.Property, name);
+            var prop = (PropertyInfo?)ReflectionGetInstanceMember(target.GetType(), MemberTypes.Property, name);
             return prop!.GetValue(target);
         }
 
         public void setprop(object target, string name, object? value)
         {
-            var prop = (PropertyInfo?) ReflectionGetInstanceMember(target.GetType(), MemberTypes.Property, name);
+            var prop = (PropertyInfo?)ReflectionGetInstanceMember(target.GetType(), MemberTypes.Property, name);
             prop!.SetValue(target, value);
         }
 
         public object? fld(object target, string name)
         {
-            var fld = (FieldInfo?) ReflectionGetInstanceMember(target.GetType(), MemberTypes.Field, name);
+            var fld = (FieldInfo?)ReflectionGetInstanceMember(target.GetType(), MemberTypes.Field, name);
             return fld!.GetValue(target);
         }
 
         public void setfld(object target, string name, object? value)
         {
-            var fld = (FieldInfo?) ReflectionGetInstanceMember(target.GetType(), MemberTypes.Field, name);
+            var fld = (FieldInfo?)ReflectionGetInstanceMember(target.GetType(), MemberTypes.Field, name);
             fld!.SetValue(target, value);
         }
 
@@ -113,7 +113,7 @@ namespace Robust.Shared.Scripting
         {
             var t = target.GetType();
             // TODO: overloads
-            var m = (MethodInfo?) ReflectionGetInstanceMember(t, MemberTypes.Method, name);
+            var m = (MethodInfo?)ReflectionGetInstanceMember(t, MemberTypes.Method, name);
             return m!.Invoke(target, args);
         }
 
@@ -136,7 +136,7 @@ namespace Robust.Shared.Scripting
                 switch (member.MemberType)
                 {
                     case MemberTypes.Method:
-                        var method = (MethodInfo) member;
+                        var method = (MethodInfo)member;
 
                         if (!specialNameMethods && method.IsSpecialName)
                             continue; // Let's not print constructors, property methods, etc.
@@ -150,7 +150,7 @@ namespace Robust.Shared.Scripting
                         break;
 
                     case MemberTypes.Field:
-                        builder.Append(((FieldInfo) member).PrintFieldSignature(modifiers));
+                        builder.Append(((FieldInfo)member).PrintFieldSignature(modifiers));
                         builder.AppendLine(";");
                         break;
 
@@ -194,7 +194,7 @@ namespace Robust.Shared.Scripting
         public bool TryComp<T>(EntityUid uid, out T? comp) where T : IComponent
             => ent.TryGetComponent(uid, out comp);
 
-        public bool HasComp<T>(EntityUid uid)  where T : IComponent
+        public bool HasComp<T>(EntityUid uid) where T : IComponent
             => ent.HasComponent<T>(uid);
 
         public EntityUid Spawn(string? prototype, EntityCoordinates position)

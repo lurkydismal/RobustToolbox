@@ -110,7 +110,7 @@ public abstract partial class ToolshedCommand
             throw new Exception($"Command has no implementations?");
 
         var implementations = new HashSet<(string?, Type?)>();
-        var argNames =  new HashSet<string>();
+        var argNames = new HashSet<string>();
         var hasNonSubCommands = false;
 
         foreach (var impl in impls)
@@ -124,7 +124,7 @@ public abstract partial class ToolshedCommand
             {
                 var hasAnyAttribute = false;
 
-                if (param.GetCustomAttribute<CommandArgumentAttribute>() is {} cmdAttr)
+                if (param.GetCustomAttribute<CommandArgumentAttribute>() is { } cmdAttr)
                 {
                     if (param.Name == null || !argNames.Add(param.Name))
                         throw new InvalidCommandImplementation($"Command arguments must have a unique name");
@@ -205,7 +205,7 @@ public abstract partial class ToolshedCommand
             }
 
             string? subCmd = null;
-            if (impl.GetCustomAttribute<CommandImplementationAttribute>() is {SubCommand: { } x})
+            if (impl.GetCustomAttribute<CommandImplementationAttribute>() is { SubCommand: { } x })
             {
                 subCmd = x;
                 HasSubCommands = true;
@@ -261,7 +261,7 @@ public abstract partial class ToolshedCommand
 
         return _acceptedTypes[subCommand ?? ""] = GetType()
             .GetMethods(MethodFlags)
-            .Where(x => x.GetCustomAttribute<CommandImplementationAttribute>() is {} attr  && attr.SubCommand == subCommand )
+            .Where(x => x.GetCustomAttribute<CommandImplementationAttribute>() is { } attr && attr.SubCommand == subCommand)
             .Select(x => x.ConsoleGetPipedArgument())
             .Where(x => x != null)
             .Select(x => x!.ParameterType)

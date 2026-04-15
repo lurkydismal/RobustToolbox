@@ -43,7 +43,7 @@ namespace Robust.Client.GameStates
         {
             var handle = args.DrawingHandle;
             handle.UseShader(_shader);
-            var worldHandle = (DrawingHandleWorld) handle;
+            var worldHandle = (DrawingHandleWorld)handle;
             var viewport = args.WorldAABB;
 
             var query = _entityManager.AllEntityQueryEnumerator<TransformComponent>();
@@ -57,7 +57,7 @@ namespace Robust.Client.GameStates
                     continue;
 
                 var delta = (_timing.CurTick.Value - transform.LastLerp.Value) * _timing.TickPeriod;
-                if(!transform.ActivelyLerping && delta > Delay)
+                if (!transform.ActivelyLerping && delta > Delay)
                     continue;
 
                 var aabb = _lookup.GetWorldAABB(uid);

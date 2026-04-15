@@ -52,6 +52,6 @@ namespace Robust.Shared.Physics.Dynamics.Joints
         /// <summary>
         /// The previous joint edge in the body's joint list.
         /// </summary>
-       public JointEdge? Prev { get; set; }
+        public JointEdge? Prev { get; set; }
     }
 }

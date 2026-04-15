@@ -124,13 +124,13 @@ namespace Robust.Client.Graphics.Clyde
                     sr = subRegion ?? new UIBox2(0, 0, texture.Width, texture.Height);
                 }
 
-                var clydeTexture = (ClydeTexture) texture;
+                var clydeTexture = (ClydeTexture)texture;
                 return clydeTexture;
             }
 
             public void RenderInRenderTarget(IRenderTarget target, Action a, Color? clearColor)
             {
-                _clyde.RenderInRenderTarget((RenderTargetBase) target, a, clearColor);
+                _clyde.RenderInRenderTarget((RenderTargetBase)target, a, clearColor);
             }
 
             public void SetScissor(UIBox2i? scissorBox)
@@ -192,7 +192,7 @@ namespace Robust.Client.Graphics.Clyde
                     ofsY /= -EyeManager.PixelsPerMeter;
 
                     // Maaaaybe this is meant to have a minus sign.
-                    var rot = -(float) eyeRot.Theta;
+                    var rot = -(float)eyeRot.Theta;
 
                     var view = Matrix3Helpers.CreateTransform(ofsX, ofsY, rot, scale.X, scale.Y);
                     SetProjView(proj, view);
@@ -230,7 +230,7 @@ namespace Robust.Client.Graphics.Clyde
                     throw new ArgumentException("Unable to use disposed shader instance.", nameof(shader));
                 }
 
-                var clydeShader = (ClydeShaderInstance?) shader;
+                var clydeShader = (ClydeShaderInstance?)shader;
 
                 _clyde.DrawUseShader(clydeShader ?? _clyde._defaultShader);
             }
@@ -249,7 +249,7 @@ namespace Robust.Client.Graphics.Clyde
 
             public void UseRenderTarget(IRenderTarget? renderTarget)
             {
-                var target = (RenderTexture?) renderTarget;
+                var target = (RenderTexture?)renderTarget;
 
                 _clyde.DrawRenderTarget(target?.Handle ?? default);
             }
@@ -429,7 +429,7 @@ namespace Robust.Client.Graphics.Clyde
 
                 public override void DrawCircle(Vector2 position, float radius, Color color, bool filled = true)
                 {
-                    int divisions = Math.Max(16,(int)(radius * 16));
+                    int divisions = Math.Max(16, (int)(radius * 16));
                     float arcLength = MathF.PI * 2 / divisions;
 
                     var colorReal = color * Modulate;
@@ -448,9 +448,9 @@ namespace Robust.Client.Graphics.Clyde
                     for (int i = 0; i < divisions; i++)
                     {
                         var startPos = new Vector2(MathF.Cos(arcLength * i) * radius, MathF.Sin(arcLength * i) * radius);
-                        var endPos = new Vector2(MathF.Cos(arcLength * (i+1)) * radius, MathF.Sin(arcLength * (i + 1)) * radius);
+                        var endPos = new Vector2(MathF.Cos(arcLength * (i + 1)) * radius, MathF.Sin(arcLength * (i + 1)) * radius);
 
-                        if(!filled)
+                        if (!filled)
                             _renderHandle.DrawLine(startPos + position, endPos + position, colorReal);
                         else
                         {

@@ -121,13 +121,13 @@ namespace Robust.Client.Graphics.Clyde
                 // @formatter:off
                 var (internalFormat, pixFormat, pixType) = colorFormat switch
                 {
-                    RTCF.Rgba8 =>        (PIF.Rgba8,        PF.Rgba, PT.UnsignedByte),
-                    RTCF.Rgba16F =>      (PIF.Rgba16f,      PF.Rgba, PT.Float),
-                    RTCF.Rgba8Srgb =>    (PIF.Srgb8Alpha8,  PF.Rgba, PT.UnsignedByte),
-                    RTCF.R11FG11FB10F => (PIF.R11fG11fB10f, PF.Rgb,  PT.Float),
-                    RTCF.R32F =>         (PIF.R32f,         PF.Red,  PT.Float),
-                    RTCF.RG32F =>        (PIF.Rg32f,        PF.Rg,   PT.Float),
-                    RTCF.R8 =>           (PIF.R8,           PF.Red,  PT.UnsignedByte),
+                    RTCF.Rgba8 => (PIF.Rgba8, PF.Rgba, PT.UnsignedByte),
+                    RTCF.Rgba16F => (PIF.Rgba16f, PF.Rgba, PT.Float),
+                    RTCF.Rgba8Srgb => (PIF.Srgb8Alpha8, PF.Rgba, PT.UnsignedByte),
+                    RTCF.R11FG11FB10F => (PIF.R11fG11fB10f, PF.Rgb, PT.Float),
+                    RTCF.R32F => (PIF.R32f, PF.Red, PT.Float),
+                    RTCF.RG32F => (PIF.Rg32f, PF.Rg, PT.Float),
+                    RTCF.R8 => (PIF.R8, PF.Red, PT.UnsignedByte),
                     _ => throw new ArgumentOutOfRangeException(nameof(format.ColorFormat), format.ColorFormat, null)
                 };
                 // @formatter:on
@@ -136,8 +136,8 @@ namespace Robust.Client.Graphics.Clyde
                 {
                     (internalFormat, pixFormat, pixType) = colorFormat switch
                     {
-                        RTCF.Rgba8 => (PIF.Rgba,      PF.Rgba,      PT.UnsignedByte),
-                        RTCF.R8 =>    (PIF.Rgba,      PF.Rgba,      PT.UnsignedByte),
+                        RTCF.Rgba8 => (PIF.Rgba, PF.Rgba, PT.UnsignedByte),
+                        RTCF.R8 => (PIF.Rgba, PF.Rgba, PT.UnsignedByte),
                         _ => throw new ArgumentOutOfRangeException(nameof(format.ColorFormat), format.ColorFormat, null)
                     };
                 }

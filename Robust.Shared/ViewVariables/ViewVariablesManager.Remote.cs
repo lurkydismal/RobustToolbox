@@ -132,7 +132,7 @@ internal abstract partial class ViewVariablesManager
             var value = await ReadRemotePath(req.Path, session);
             SendMessage(new MsgViewVariablesReadPathRes(req)
             {
-                Response = new []{value ?? "null"}
+                Response = new[] { value ?? "null" }
             }, req.MsgChannel);
             return;
         }
@@ -150,7 +150,7 @@ internal abstract partial class ViewVariablesManager
 
         SendMessage(new MsgViewVariablesReadPathRes(req)
         {
-            Response = new []{ val }
+            Response = new[] { val }
         }, req.MsgChannel);
     }
 
@@ -207,7 +207,8 @@ internal abstract partial class ViewVariablesManager
         {
             _netMan.ServerSendMessage(new MsgViewVariablesInvokePathRes(req)
             {
-                Path = req.Path, ResponseCode = ViewVariablesResponseCode.NoAccess,
+                Path = req.Path,
+                ResponseCode = ViewVariablesResponseCode.NoAccess,
             }, req.MsgChannel);
             return;
         }
@@ -217,7 +218,7 @@ internal abstract partial class ViewVariablesManager
             var retVal = await InvokeRemotePath(req.Path, req.Value ?? string.Empty, session);
             SendMessage(new MsgViewVariablesInvokePathRes(req)
             {
-                Response = new []{retVal ?? "null"}
+                Response = new[] { retVal ?? "null" }
             }, req.MsgChannel);
             return;
         }
@@ -263,7 +264,7 @@ internal abstract partial class ViewVariablesManager
 
         SendMessage(new MsgViewVariablesInvokePathRes(req)
         {
-            Response = new []{val},
+            Response = new[] { val },
         }, req.MsgChannel);
     }
 

@@ -10,7 +10,7 @@ using System.Collections.Generic;
 namespace Robust.Shared.Serialization.TypeSerializers.Implementations.Generic;
 
 [TypeSerializer]
-public sealed class QueueSerializer<T> : ITypeSerializer<Queue<T>, SequenceDataNode>,  ITypeCopier<Queue<T>>
+public sealed class QueueSerializer<T> : ITypeSerializer<Queue<T>, SequenceDataNode>, ITypeCopier<Queue<T>>
 {
     Queue<T> ITypeReader<Queue<T>, SequenceDataNode>.Read(ISerializationManager serializationManager,
         SequenceDataNode node,

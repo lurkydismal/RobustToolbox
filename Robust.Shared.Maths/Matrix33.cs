@@ -102,8 +102,8 @@ namespace Robust.Shared.Maths
                 det = 1.0f / det;
             }
 
-            matrix.EX.X =  det * d;	matrix.EY.X = -det * b; matrix.EX.Z = 0.0f;
-            matrix.EX.Y = -det * c;	matrix.EY.Y =  det * a; matrix.EY.Z = 0.0f;
+            matrix.EX.X = det * d; matrix.EY.X = -det * b; matrix.EX.Z = 0.0f;
+            matrix.EX.Y = -det * c; matrix.EY.Y = det * a; matrix.EY.Z = 0.0f;
             matrix.EZ.X = 0.0f; matrix.EZ.Y = 0.0f; matrix.EZ.Z = 0.0f;
         }
 

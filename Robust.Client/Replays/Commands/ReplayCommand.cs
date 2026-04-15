@@ -12,9 +12,9 @@ public abstract class BaseReplayCommand : LocalizedCommands
 {
     [Dependency] protected readonly IReplayPlaybackManager PlaybackManager = default!;
 
-    public override string Description => Loc.GetString($"cmd-{Command.Replace('_','-')}-desc");
+    public override string Description => Loc.GetString($"cmd-{Command.Replace('_', '-')}-desc");
 
-    public override string Help => Loc.GetString($"cmd-{Command.Replace('_','-')}-help");
+    public override string Help => Loc.GetString($"cmd-{Command.Replace('_', '-')}-help");
 
     protected bool AssertPlaying(IConsoleShell shell, [NotNullWhen(true)] out ReplayData? replay)
     {

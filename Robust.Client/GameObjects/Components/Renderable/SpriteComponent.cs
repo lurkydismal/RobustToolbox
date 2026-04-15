@@ -1120,7 +1120,8 @@ namespace Robust.Client.GameObjects
             /// </summary>
             [ViewVariables] internal bool UnShaded;
 
-            [ViewVariables] public RSI? RSI
+            [ViewVariables]
+            public RSI? RSI
             {
                 get => _rsi;
                 [Obsolete("Use SpriteSystem.LayerSetRsi() instead.")]
@@ -1137,7 +1138,8 @@ namespace Robust.Client.GameObjects
             }
 
             internal RSI.StateId StateId;
-            [ViewVariables] public RSI.StateId State
+            [ViewVariables]
+            public RSI.StateId State
             {
                 get => StateId;
                 [Obsolete("Use SpriteSystem.LayerSetRsiState() instead.")]
@@ -1637,7 +1639,7 @@ namespace Robust.Client.GameObjects
                 if (dir == RsiDirection.South || noRot)
                     layerDrawMatrix = LocalMatrix;
                 else
-                    layerDrawMatrix = Matrix3x2.Multiply(_rsiDirectionMatrices[(int) dir], LocalMatrix);
+                    layerDrawMatrix = Matrix3x2.Multiply(_rsiDirectionMatrices[(int)dir], LocalMatrix);
             }
 
             private static Matrix3x2[] _rsiDirectionMatrices = new Matrix3x2[]

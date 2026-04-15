@@ -166,7 +166,7 @@ public sealed class DictionarySerializer<TKey, TValue> :
             keyNode.Value = key;
             var k = serializationManager.Read<TKey>(keyNode, hookCtx, context);
             var v = serializationManager.Read<TValue>(value, hookCtx, context);
-            array[i++] = new(k,v);
+            array[i++] = new(k, v);
         }
 
         return array.ToFrozenDictionary();

@@ -26,7 +26,7 @@ public sealed class TimespanSerializer : ITypeSerializer<TimeSpan, ValueDataNode
         if (TimeSpanExt.TryTimeSpan(node, out var time))
             return time;
 
-        throw new FormatException($"The input string '{node.Value }' can't be converted to TimeSpan");
+        throw new FormatException($"The input string '{node.Value}' can't be converted to TimeSpan");
     }
 
     public ValidationNode Validate(

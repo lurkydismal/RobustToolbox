@@ -83,7 +83,7 @@ namespace Robust.Client.UserInterface.CustomControls
 
                 Viewport.Render();
                 handle.DrawingHandleScreen.DrawTextureRect(Viewport.RenderTarget.Texture,
-                    UIBox2.FromDimensions(new Vector2(0, 0), (Vector2i) (Viewport.Size / _viewportResolution)));
+                    UIBox2.FromDimensions(new Vector2(0, 0), (Vector2i)(Viewport.Size / _viewportResolution)));
 
                 Viewport.RenderScreenOverlaysAbove(handle, this, viewportBounds);
             }
@@ -93,7 +93,7 @@ namespace Robust.Client.UserInterface.CustomControls
         {
             Viewport?.Dispose();
             Viewport = _displayManager.CreateViewport(
-                Vector2i.ComponentMax((1, 1), (Vector2i) (PixelSize * _viewportResolution)),
+                Vector2i.ComponentMax((1, 1), (Vector2i)(PixelSize * _viewportResolution)),
                 "ViewportContainerViewport");
         }
 

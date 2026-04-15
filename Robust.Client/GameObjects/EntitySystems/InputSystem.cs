@@ -52,12 +52,12 @@ namespace Robust.Client.GameObjects
         /// old input that was saved or buffered until further processing could be done</param>
         public bool HandleInputCommand(ICommonSession? session, BoundKeyFunction function, IFullInputCmdMessage message, bool replay = false)
         {
-            #if DEBUG
+#if DEBUG
 
             var funcId = _inputManager.NetworkBindMap.KeyFunctionID(function);
             DebugTools.Assert(funcId == message.InputFunctionId, "Function ID in message does not match function.");
 
-            #endif
+#endif
 
             if (!replay)
             {
@@ -223,7 +223,7 @@ namespace Robust.Client.GameObjects
 
         private void SetEntityContextActive(IInputManager inputMan, EntityUid entity)
         {
-            if(entity == default || !Exists(entity))
+            if (entity == default || !Exists(entity))
                 throw new ArgumentNullException(nameof(entity));
 
             if (!TryComp(entity, out InputComponent? inputComp))

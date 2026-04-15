@@ -223,7 +223,7 @@ public readonly struct ResPath : IEquatable<ResPath>
             // if we found nothing (ind == -1)
             var ind = CanonPath.LastIndexOf('/', CanonPath.Length - 2) + 1;
             return CanonPath[^1] == '/'
-                ? CanonPath[ind .. ^1] // Omit last `/`
+                ? CanonPath[ind..^1] // Omit last `/`
                 : CanonPath[ind..];
         }
     }

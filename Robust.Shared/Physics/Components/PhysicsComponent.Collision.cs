@@ -5,7 +5,7 @@ namespace Robust.Shared.Physics.Components;
 
 // TODO: Move to content
 [Serializable, NetSerializable]
-public enum BodyStatus: byte
+public enum BodyStatus : byte
 {
     OnGround,
     InAir

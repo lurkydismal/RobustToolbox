@@ -60,7 +60,7 @@ namespace Robust.Shared.Maths
         {
             var x = Math.Cos(Theta);
             var y = Math.Sin(Theta);
-            return new Vector2((float) x, (float) y);
+            return new Vector2((float)x, (float)y);
         }
 
         public readonly Vector2 ToWorldVec()
@@ -78,7 +78,7 @@ namespace Robust.Shared.Maths
             if (ang < 0) // convert -PI > PI to 0 > 2PI
                 ang += 2 * Math.PI;
 
-            return (Direction) (Math.Floor((ang + Offset) / Segment) % 8);
+            return (Direction)(Math.Floor((ang + Offset) / Segment) % 8);
         }
 
         public Direction RotateDir(Direction dir)
@@ -101,7 +101,7 @@ namespace Robust.Shared.Maths
             if (ang < 0.0f) // convert -PI > PI to 0 > 2PI
                 ang += 2 * Math.PI;
 
-            return (Direction) (Math.Floor((ang + CardinalOffset) / CardinalSegment) * 2 % 8);
+            return (Direction)(Math.Floor((ang + CardinalOffset) / CardinalSegment) * 2 % 8);
         }
 
         /// <summary>
@@ -130,7 +130,7 @@ namespace Robust.Shared.Maths
             var dx = cos * vec.X - sin * vec.Y;
             var dy = sin * vec.X + cos * vec.Y;
 
-            return new Vector2((float) dx, (float) dy);
+            return new Vector2((float)dx, (float)dy);
         }
 
         public bool EqualsApprox(Angle other, double tolerance)
@@ -190,7 +190,7 @@ namespace Robust.Shared.Maths
         private static double Reduce(double theta)
         {
             // int truncates value (round to 0)
-            var aTurns = (int) (theta / (2 * Math.PI));
+            var aTurns = (int)(theta / (2 * Math.PI));
             return theta - aTurns * (2 * Math.PI);
         }
 
@@ -228,7 +228,7 @@ namespace Robust.Shared.Maths
         [Pure]
         public readonly Angle Opposite()
         {
-            return new Angle(FlipPositive(Theta-Math.PI));
+            return new Angle(FlipPositive(Theta - Math.PI));
         }
 
         [Pure]

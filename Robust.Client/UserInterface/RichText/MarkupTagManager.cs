@@ -52,7 +52,7 @@ public sealed class MarkupTagManager
             if (_engineTypes.Contains(type))
                 continue;
 
-            var instance = (IMarkupTagHandler) _sandboxHelper.CreateInstance(type);
+            var instance = (IMarkupTagHandler)_sandboxHelper.CreateInstance(type);
             _markupTagTypes[instance.Name.ToLower()] = instance;
         }
 

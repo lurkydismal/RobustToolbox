@@ -292,12 +292,12 @@ namespace Robust.Client.UserInterface.Controls
 
                 if (_lastMousePosition < contentBox.Left)
                 {
-                    _drawOffset = Math.Max(0, _drawOffset - (int) Math.Ceiling(args.DeltaSeconds / MouseScrollDelay));
+                    _drawOffset = Math.Max(0, _drawOffset - (int)Math.Ceiling(args.DeltaSeconds / MouseScrollDelay));
                 }
                 else if (_lastMousePosition > contentBox.Right)
                 {
                     // Will get clamped inside rendering code.
-                    _drawOffset += (int) Math.Ceiling(args.DeltaSeconds / MouseScrollDelay);
+                    _drawOffset += (int)Math.Ceiling(args.DeltaSeconds / MouseScrollDelay);
                 }
 
                 var index = GetIndexAtPos(MathHelper.Clamp(_lastMousePosition, contentBox.Left, contentBox.Right));
@@ -1154,7 +1154,7 @@ namespace Robust.Client.UserInterface.Controls
                             contentBox.Right,
                             contentBox.Bottom);
 
-                        window.TextInputSetRect((UIBox2i) imeBox.Translated(GlobalPixelPosition), actualCursorPosition);
+                        window.TextInputSetRect((UIBox2i)imeBox.Translated(GlobalPixelPosition), actualCursorPosition);
                     }
                 }
 

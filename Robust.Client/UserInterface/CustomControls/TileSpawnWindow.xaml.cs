@@ -14,7 +14,7 @@ public sealed partial class TileSpawnWindow : DefaultWindow
     protected override void Opened()
     {
         base.Opened();
-        
+
         SearchBar.GrabKeyboardFocus();
     }
 }

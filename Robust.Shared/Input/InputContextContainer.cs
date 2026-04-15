@@ -113,7 +113,8 @@ namespace Robust.Shared.Input
         public bool DeferringEnabled
         {
             get => _deferringEnabled;
-            set {
+            set
+            {
                 // Must be first because _setActiveContextImmediately triggers input events.
                 _deferringEnabled = value;
                 if (!value)
@@ -122,7 +123,7 @@ namespace Robust.Shared.Input
                     {
                         var icc = _deferredContextSwitch;
                         _deferredContextSwitch = null;
-                        _setActiveContextImmediately( icc);
+                        _setActiveContextImmediately(icc);
                     }
                 }
             }

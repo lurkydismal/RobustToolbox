@@ -24,7 +24,7 @@ namespace Robust.Client.Graphics.Clyde
             }
 
             IDXGIFactory1* dxgiFactory;
-            ThrowIfFailed(nameof(CreateDXGIFactory1), CreateDXGIFactory1(__uuidof<IDXGIFactory1>(), (void**) &dxgiFactory));
+            ThrowIfFailed(nameof(CreateDXGIFactory1), CreateDXGIFactory1(__uuidof<IDXGIFactory1>(), (void**)&dxgiFactory));
 
             uint idx = 0;
             IDXGIAdapter* adapter;
@@ -32,7 +32,7 @@ namespace Robust.Client.Graphics.Clyde
             {
                 DXGI_ADAPTER_DESC2 desc;
                 IDXGIAdapter3* adapter3;
-                adapter->QueryInterface(__uuidof<IDXGIAdapter3>(), (void**) &adapter3);
+                adapter->QueryInterface(__uuidof<IDXGIAdapter3>(), (void**)&adapter3);
                 adapter->Release();
                 ThrowIfFailed("GetDesc", adapter3->GetDesc2(&desc));
 
@@ -42,10 +42,10 @@ namespace Robust.Client.Graphics.Clyde
                 DXGI_QUERY_VIDEO_MEMORY_INFO memInfo;
 
                 adapter3->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &memInfo);
-                shell.WriteLine($"Usage (local): {ByteHelpers.FormatBytes((long) memInfo.CurrentUsage)}");
+                shell.WriteLine($"Usage (local): {ByteHelpers.FormatBytes((long)memInfo.CurrentUsage)}");
 
                 adapter3->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL, &memInfo);
-                shell.WriteLine($"Usage (non local): {ByteHelpers.FormatBytes((long) memInfo.CurrentUsage)}");
+                shell.WriteLine($"Usage (non local): {ByteHelpers.FormatBytes((long)memInfo.CurrentUsage)}");
 
                 idx += 1;
 

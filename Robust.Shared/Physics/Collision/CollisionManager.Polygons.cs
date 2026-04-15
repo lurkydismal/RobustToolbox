@@ -115,17 +115,17 @@ internal sealed partial class CollisionManager
         ref var cv0 = ref c[0];
 
         cv0.V = Transform.Mul(xf2, vertices2[i1]);
-        cv0.ID.Features.IndexA = (byte) edge1;
-        cv0.ID.Features.IndexB = (byte) i1;
-        cv0.ID.Features.TypeA = (byte) ContactFeatureType.Face;
-        cv0.ID.Features.TypeB = (byte) ContactFeatureType.Vertex;
+        cv0.ID.Features.IndexA = (byte)edge1;
+        cv0.ID.Features.IndexB = (byte)i1;
+        cv0.ID.Features.TypeA = (byte)ContactFeatureType.Face;
+        cv0.ID.Features.TypeB = (byte)ContactFeatureType.Vertex;
 
         ref var cv1 = ref c[1];
         cv1.V = Transform.Mul(xf2, vertices2[i2]);
-        cv1.ID.Features.IndexA = (byte) edge1;
-        cv1.ID.Features.IndexB = (byte) i2;
-        cv1.ID.Features.TypeA = (byte) ContactFeatureType.Face;
-        cv1.ID.Features.TypeB = (byte) ContactFeatureType.Vertex;
+        cv1.ID.Features.IndexA = (byte)edge1;
+        cv1.ID.Features.IndexB = (byte)i2;
+        cv1.ID.Features.TypeA = (byte)ContactFeatureType.Face;
+        cv1.ID.Features.TypeB = (byte)ContactFeatureType.Vertex;
     }
 
     /// <summary>

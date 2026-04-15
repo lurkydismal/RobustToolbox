@@ -61,7 +61,7 @@ public sealed partial class ReplayLoadManager
         {
             if (comp.NetID == _metaId)
             {
-                var state = (MetaDataComponentState) comp.State!;
+                var state = (MetaDataComponentState)comp.State!;
                 return state.PrototypeId;
             }
         }

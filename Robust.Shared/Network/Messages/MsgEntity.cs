@@ -32,12 +32,12 @@ namespace Robust.Shared.Network.Messages
             switch (Type)
             {
                 case EntityMessageType.SystemMessage:
-                {
-                    var length = buffer.ReadVariableInt32();
-                    using var stream = RobustMemoryManager.GetMemoryStream(length);
-                    buffer.ReadAlignedMemory(stream, length);
-                    SystemMessage = serializer.Deserialize<EntityEventArgs>(stream);
-                }
+                    {
+                        var length = buffer.ReadVariableInt32();
+                        using var stream = RobustMemoryManager.GetMemoryStream(length);
+                        buffer.ReadAlignedMemory(stream, length);
+                        SystemMessage = serializer.Deserialize<EntityEventArgs>(stream);
+                    }
                     break;
             }
         }
@@ -51,14 +51,14 @@ namespace Robust.Shared.Network.Messages
             switch (Type)
             {
                 case EntityMessageType.SystemMessage:
-                {
-                    var stream = new MemoryStream();
+                    {
+                        var stream = new MemoryStream();
 
-                    serializer.Serialize(stream, SystemMessage);
+                        serializer.Serialize(stream, SystemMessage);
 
-                    buffer.WriteVariableInt32((int)stream.Length);
-                    buffer.Write(stream.AsSpan());
-                }
+                        buffer.WriteVariableInt32((int)stream.Length);
+                        buffer.Write(stream.AsSpan());
+                    }
                     break;
             }
         }

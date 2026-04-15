@@ -34,7 +34,8 @@ namespace Robust.Shared.Network.Messages
                 res.WriteToBuffer(buffer);
         }
 
-        public sealed class LiteResult {
+        public sealed class LiteResult
+        {
             public string DisplayText;
             public string DisplayTextPrefix;
             public string DisplayTextSuffix;

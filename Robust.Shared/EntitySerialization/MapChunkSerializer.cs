@@ -34,7 +34,7 @@ internal sealed class MapChunkSerializer : ITypeSerializer<MapChunk, MappingData
         ISerializationContext? context = null,
         ISerializationManager.InstantiationDelegate<MapChunk>? instantiationDelegate = null)
     {
-        var ind = (Vector2i) serializationManager.Read(typeof(Vector2i), node["ind"], hookCtx, context)!;
+        var ind = (Vector2i)serializationManager.Read(typeof(Vector2i), node["ind"], hookCtx, context)!;
         var tileNode = (ValueDataNode)node["tiles"];
         var tileBytes = Convert.FromBase64String(tileNode.Value);
 
@@ -49,7 +49,7 @@ internal sealed class MapChunkSerializer : ITypeSerializer<MapChunk, MappingData
         // TODO: This should be on the context I think?
         if (node.TryGet("size", out ValueDataNode? sizeNode))
         {
-            size = (ushort) serializationManager.Read(typeof(ushort), sizeNode, context)!;
+            size = (ushort)serializationManager.Read(typeof(ushort), sizeNode, context)!;
         }
 
         var chunk = instantiationDelegate != null ? instantiationDelegate() : new MapChunk(ind.X, ind.Y, size);
@@ -70,7 +70,7 @@ internal sealed class MapChunkSerializer : ITypeSerializer<MapChunk, MappingData
         var tileDefinitionManager = dependencies.Resolve<ITileDefinitionManager>();
 
         node.TryGetValue("version", out var versionNode);
-        var version = ((ValueDataNode?) versionNode)?.AsInt() ?? 1;
+        var version = ((ValueDataNode?)versionNode)?.AsInt() ?? 1;
 
         // Old map files will throw an error if they do not have a rotation/mirror byte stored.
         if (version >= 7)
@@ -155,7 +155,7 @@ internal sealed class MapChunkSerializer : ITypeSerializer<MapChunk, MappingData
                     {
                         var tile = chunk.GetTile(x, y);
                         writer.Write(tile.TypeId);
-                        writer.Write((byte) tile.Flags);
+                        writer.Write((byte)tile.Flags);
                         writer.Write(tile.Variant);
                         writer.Write(tile.RotationMirroring);
                     }
@@ -175,7 +175,7 @@ internal sealed class MapChunkSerializer : ITypeSerializer<MapChunk, MappingData
 
                     lastTile = tile.TypeId;
                     writer.Write(yamlId);
-                    writer.Write((byte) tile.Flags);
+                    writer.Write((byte)tile.Flags);
                     writer.Write(tile.Variant);
                     writer.Write(tile.RotationMirroring);
                 }

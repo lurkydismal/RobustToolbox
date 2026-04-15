@@ -24,7 +24,7 @@ internal static class CVarDefaultOverrides
 
 #if TOOLS
         // Set auth to optional in case you're doing any funny development shenanigans.
-        cfg.OverrideDefault(CVars.AuthMode, (int) AuthMode.Optional);
+        cfg.OverrideDefault(CVars.AuthMode, (int)AuthMode.Optional);
 #endif
     }
 

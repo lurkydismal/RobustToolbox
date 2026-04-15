@@ -62,7 +62,7 @@ namespace Robust.Client.Console
         private ISawmill _logger = default!;
         private ISawmill _conLogger = default!;
 
-        public ClientConsoleHost() : base(isServer: false) {}
+        public ClientConsoleHost() : base(isServer: false) { }
 
         /// <inheritdoc />
         public void Initialize()

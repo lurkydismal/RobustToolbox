@@ -12,7 +12,7 @@ public sealed class NotNullableFlagAnalyzer : DiagnosticAnalyzer
 {
     private const string Attribute = "Robust.Shared.Analyzers.NotNullableFlagAttribute";
 
-    private static readonly DiagnosticDescriptor NotNullableNotSetRule = new (
+    private static readonly DiagnosticDescriptor NotNullableNotSetRule = new(
         Diagnostics.IdNotNullableFlagNotSet,
         "Not Nullable Flag not set",
         "Class type parameter {0} is not annotated as nullable and notNullableOverride is not set to true",
@@ -21,7 +21,7 @@ public sealed class NotNullableFlagAnalyzer : DiagnosticAnalyzer
         true,
         "Assign true to notNullableOverride or specify the type parameter as nullable.");
 
-    private static readonly DiagnosticDescriptor InvalidNotNullableValueRule = new (
+    private static readonly DiagnosticDescriptor InvalidNotNullableValueRule = new(
         Diagnostics.IdInvalidNotNullableFlagValue,
         "Not Nullable Flag wrongfully set",
         "Class type parameter {0} is annotated as nullable but notNullableOverride is set to true",
@@ -30,7 +30,7 @@ public sealed class NotNullableFlagAnalyzer : DiagnosticAnalyzer
         true,
         "Remove the true assignment to notNullableOverride or remove the nullable specifier of the type parameter.");
 
-    private static readonly DiagnosticDescriptor InvalidNotNullableImplementationRule = new (
+    private static readonly DiagnosticDescriptor InvalidNotNullableImplementationRule = new(
         Diagnostics.IdInvalidNotNullableFlagImplementation,
         "Invalid NotNullable flag implementation",
         "NotNullable flag is either not typed as bool, or does not have a default value equaling false",
@@ -39,7 +39,7 @@ public sealed class NotNullableFlagAnalyzer : DiagnosticAnalyzer
         true,
         "Ensure that the notNullable flag is typed bool and has false set as a default value.");
 
-    private static readonly DiagnosticDescriptor InvalidNotNullableTypeRule = new (
+    private static readonly DiagnosticDescriptor InvalidNotNullableTypeRule = new(
         Diagnostics.IdInvalidNotNullableFlagType,
         "Failed to resolve type parameter",
         "Failed to resolve type parameter \"{0}\"",
@@ -48,7 +48,7 @@ public sealed class NotNullableFlagAnalyzer : DiagnosticAnalyzer
         true,
         "Use nameof to avoid typos.");
 
-    private static readonly DiagnosticDescriptor NotNullableFlagValueTypeRule = new (
+    private static readonly DiagnosticDescriptor NotNullableFlagValueTypeRule = new(
         Diagnostics.IdNotNullableFlagValueType,
         "NotNullable flag not supported for value types",
         "Value types as generic arguments are not supported for NotNullable flags",
@@ -97,7 +97,7 @@ public sealed class NotNullableFlagAnalyzer : DiagnosticAnalyzer
 
         foreach (var argument in invocationOperation.Arguments)
         {
-            if(argument.Parameter == null) continue;
+            if (argument.Parameter == null) continue;
 
             foreach (var attributeData in argument.Parameter.GetAttributes())
             {
@@ -125,7 +125,7 @@ public sealed class NotNullableFlagAnalyzer : DiagnosticAnalyzer
                 }
 
                 //until i find a way to implement it sanely, generic calls are exempt from this attribute
-                if(typeArgument is ITypeParameterSymbol) break;
+                if (typeArgument is ITypeParameterSymbol) break;
 
                 //dont ask me why, argument.ConstantValue just straight up doesnt work.
                 //i still kept it in here as a fallback, incase it ever starts working again lol -<paul

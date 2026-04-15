@@ -166,7 +166,7 @@ namespace Robust.Shared.Timing
             var ratio = MathHelper.Clamp(TickTimingAdjustment, -0.99f, 0.99f);
 
             // Final period ranges from near 0 (runs very fast to catch up) or 2 * tick period (runs at half speed).
-            return TickPeriod * (1-ratio) * TimeScale;
+            return TickPeriod * (1 - ratio) * TimeScale;
         }
 
         /// <summary>
@@ -270,7 +270,7 @@ namespace Robust.Shared.Timing
         public virtual bool InPrediction => false;
 
         /// <inheritdoc />
-        public bool ApplyingState {get; protected set; }
+        public bool ApplyingState { get; protected set; }
 
         /// <summary>
         ///     Calculates the average FPS of the last 50 real frame times.

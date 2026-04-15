@@ -35,7 +35,7 @@ namespace Robust.Client.Graphics
         event Action<WindowRequestClosedEventArgs> CloseWindow;
         event Action<WindowDestroyedEventArgs> DestroyWindow;
 
-        ClydeHandle LoadShader(ParsedShader shader, string? name = null, Dictionary<string,string>? defines = null);
+        ClydeHandle LoadShader(ParsedShader shader, string? name = null, Dictionary<string, string>? defines = null);
 
         void ReloadShader(ClydeHandle handle, ParsedShader newShader);
 

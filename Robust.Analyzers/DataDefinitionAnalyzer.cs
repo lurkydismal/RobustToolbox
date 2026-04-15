@@ -439,7 +439,7 @@ public sealed class DataDefinitionAnalyzer : DiagnosticAnalyzer
         }
         return false;
     }
-    
+
     private static bool IsNotYamlSerializable(ISymbol field, ITypeSymbol type)
     {
         return HasAttribute(type, NotYamlSerializableName);

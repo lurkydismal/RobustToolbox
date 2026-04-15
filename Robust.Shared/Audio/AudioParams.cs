@@ -117,7 +117,7 @@ namespace Robust.Shared.Audio
         {
         }
 
-        public AudioParams(float volume, float pitch, float maxDistance,float rolloffFactor, float refDistance, bool loop, float playOffsetSeconds, float? variation = null) : this()
+        public AudioParams(float volume, float pitch, float maxDistance, float rolloffFactor, float refDistance, bool loop, float playOffsetSeconds, float? variation = null) : this()
         {
             Volume = volume;
             Pitch = pitch;

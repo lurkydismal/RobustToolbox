@@ -191,7 +191,7 @@ internal sealed class ViewVariablesMethodPath : ViewVariablesPath
             : Array.Empty<Type>();
     public override uint InvokeOptionalParameters
         => _access == VVAccess.ReadWrite
-            ? (uint) _method.GetParameters().Count(info => info.IsOptional)
+            ? (uint)_method.GetParameters().Count(info => info.IsOptional)
             : 0;
 }
 
@@ -233,7 +233,7 @@ internal sealed class ViewVariablesIndexedPath : ViewVariablesPath
 
     public override void Set(object? value)
     {
-        if(_access == VVAccess.ReadWrite && _object != null)
+        if (_access == VVAccess.ReadWrite && _object != null)
             _indexer.SetValue(_object, value, _index);
     }
 

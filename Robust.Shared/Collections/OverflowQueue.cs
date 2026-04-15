@@ -33,7 +33,7 @@ public sealed class OverflowQueue<T>
     public void Enqueue(T item)
     {
         _queue[_currentIdx++] = item;
-        if(_length < Size)
+        if (_length < Size)
             _length++;
 
         if (_currentIdx == Size)

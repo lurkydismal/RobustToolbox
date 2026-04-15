@@ -35,7 +35,7 @@ namespace Robust.Shared.Physics
         /// Won't call Dirty() by default
         /// </remarks>
         /// </summary>
-        [ViewVariables(VVAccess.ReadWrite), DataField("fixtures", customTypeSerializer:typeof(FixtureSerializer))]
+        [ViewVariables(VVAccess.ReadWrite), DataField("fixtures", customTypeSerializer: typeof(FixtureSerializer))]
         [NeverPushInheritance]
         [Access(typeof(FixtureSystem), Other = AccessPermissions.ReadExecute)] // FIXME Friends
         public Dictionary<string, Fixture> Fixtures = new();

@@ -75,7 +75,7 @@ namespace Robust.Client.ViewVariables.Traits
                         propertyEdit.SetStyle(otherStyle = !otherStyle);
                         var editor = propertyEdit.SetProperty(propertyData);
 
-                        var selectorChain = new object[] {new ViewVariablesMemberSelector(propertyData.PropertyIndex)};
+                        var selectorChain = new object[] { new ViewVariablesMemberSelector(propertyData.PropertyIndex) };
                         editor.WireNetworkSelector(Instance.Session!.SessionId, selectorChain);
                         editor.OnValueChanged += (o, r) =>
                         {
@@ -99,11 +99,11 @@ namespace Robust.Client.ViewVariables.Traits
         {
             if (!first)
             {
-                container.Add(new Control {MinSize = new Vector2(0, 16)});
+                container.Add(new Control { MinSize = new Vector2(0, 16) });
             }
 
             first = false;
-            container.Add(new Label {Text = groupName, FontColorOverride = Color.DarkGray});
+            container.Add(new Label { Text = groupName, FontColorOverride = Color.DarkGray });
         }
     }
 }

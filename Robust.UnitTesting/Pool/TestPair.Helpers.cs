@@ -191,7 +191,7 @@ public partial class TestPair<TServer, TClient>
     /// </summary>
     public int SecondsToTicks(float seconds)
     {
-        return (int) Math.Ceiling(seconds / Server.Timing.TickPeriod.TotalSeconds);
+        return (int)Math.Ceiling(seconds / Server.Timing.TickPeriod.TotalSeconds);
     }
 
     /// <summary>

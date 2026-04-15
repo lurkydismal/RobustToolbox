@@ -17,10 +17,10 @@ public sealed class SelectCommand : ToolshedCommand
         var arr = enumerable.ToArray();
         _random.Shuffle(arr);
 
-        if (quantity is {Amount: { } amount})
+        if (quantity is { Amount: { } amount })
         {
 
-            var taken = (int) System.Math.Ceiling(amount);
+            var taken = (int)System.Math.Ceiling(amount);
             if (inverted)
                 taken = System.Math.Max(0, arr.Length - taken);
 
@@ -29,8 +29,8 @@ public sealed class SelectCommand : ToolshedCommand
         else
         {
             var percent = inverted
-                ? (int) System.Math.Floor(arr.Length * System.Math.Clamp(1 - (double) quantity.Percentage!, 0, 1))
-                : (int) System.Math.Floor(arr.Length * System.Math.Clamp((double)  quantity.Percentage!, 0, 1));
+                ? (int)System.Math.Floor(arr.Length * System.Math.Clamp(1 - (double)quantity.Percentage!, 0, 1))
+                : (int)System.Math.Floor(arr.Length * System.Math.Clamp((double)quantity.Percentage!, 0, 1));
 
             return arr.Take(percent);
         }

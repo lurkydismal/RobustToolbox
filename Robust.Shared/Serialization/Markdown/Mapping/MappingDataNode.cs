@@ -15,7 +15,7 @@ namespace Robust.Shared.Serialization.Markdown.Mapping
     public sealed class MappingDataNode : DataNode<MappingDataNode>, IDictionary<string, DataNode>
     {
         private readonly Dictionary<string, DataNode> _children;
-        private readonly List<KeyValuePair<string,DataNode>> _list;
+        private readonly List<KeyValuePair<string, DataNode>> _list;
 
         /// <summary>
         /// ValueDataNodes associated with each key. This is used for yaml validation / error reporting.
@@ -137,7 +137,7 @@ namespace Robust.Shared.Serialization.Markdown.Mapping
 
         public T Get<T>(string key) where T : DataNode
         {
-            return (T) Get(key);
+            return (T)Get(key);
         }
 
         public bool TryGet(string key, [NotNullWhen(true)] out DataNode? node)
@@ -174,7 +174,7 @@ namespace Robust.Shared.Serialization.Markdown.Mapping
 
         public T Cast<T>(string key) where T : DataNode
         {
-            return (T) this[key];
+            return (T)this[key];
         }
 
         public YamlMappingNode ToYaml()
@@ -428,7 +428,7 @@ namespace Robust.Shared.Serialization.Markdown.Mapping
             => _list.CopyTo(array, arrayIndex);
 
         public bool Remove(KeyValuePair<string, DataNode> item)
-            => ((IDictionary<string, DataNode>) this).Remove(item.Key);
+            => ((IDictionary<string, DataNode>)this).Remove(item.Key);
 
         public bool TryAdd(string key, DataNode value)
         {

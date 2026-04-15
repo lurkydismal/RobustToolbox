@@ -9,7 +9,7 @@ public interface IGameController
 {
     InitialLaunchState LaunchState { get; }
 
-    void Shutdown(string? reason=null);
+    void Shutdown(string? reason = null);
 
     /// <summary>
     ///     Try to cause the launcher to either reconnect to the same server or connect to a new server.

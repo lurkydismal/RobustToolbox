@@ -90,7 +90,7 @@ namespace Robust.Shared.Physics.Dynamics
         public void Normalize()
         {
             float twoPi = 2.0f * MathF.PI;
-            float d =  twoPi * MathF.Floor(Angle0 / twoPi);
+            float d = twoPi * MathF.Floor(Angle0 / twoPi);
             Angle0 -= d;
             Angle -= d;
         }

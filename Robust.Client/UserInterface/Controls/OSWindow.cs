@@ -107,10 +107,10 @@ namespace Robust.Client.UserInterface.Controls
             var parameters = new WindowCreateParameters();
 
             if (!float.IsNaN(SetWidth))
-                parameters.Width = (int) SetWidth;
+                parameters.Width = (int)SetWidth;
 
             if (!float.IsNaN(SetHeight))
-                parameters.Height = (int) SetHeight;
+                parameters.Height = (int)SetHeight;
 
             if (SizeToContent != WindowSizeToContent.Manual)
             {

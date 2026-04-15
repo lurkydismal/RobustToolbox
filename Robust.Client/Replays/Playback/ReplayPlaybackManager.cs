@@ -123,7 +123,7 @@ internal sealed partial class ReplayPlaybackManager : IReplayPlaybackManager
         if (Replay.CurrentIndex < 0)
             ResetToNearestCheckpoint(0, true);
 
-        ReplayPlaybackStarted?.Invoke(Replay.YamlData, Replay.InitialMessages?.Messages ?? new ());
+        ReplayPlaybackStarted?.Invoke(Replay.YamlData, Replay.InitialMessages?.Messages ?? new());
     }
 
     public void StopReplay()

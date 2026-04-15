@@ -66,7 +66,7 @@ public sealed class AudioResource : BaseResource
         AudioStream = stream;
     }
 
-    public AudioResource() : base(){}
+    public AudioResource() : base() { }
 
     public static implicit operator AudioStream(AudioResource res)
     {

@@ -22,7 +22,7 @@ namespace Robust.Shared.Network.Messages
         /// <inheritdoc />
         public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
         {
-            if(buffer.LengthBytes > MaxMessageSize)
+            if (buffer.LengthBytes > MaxMessageSize)
                 Logger.WarningS("net", $"{MsgChannel}: received a large {nameof(MsgConVars)}, {buffer.LengthBytes}B > {MaxMessageSize}B");
 
             Tick = new GameTick(buffer.ReadVariableUInt32());
@@ -78,10 +78,10 @@ namespace Robust.Shared.Network.Messages
         /// <inheritdoc />
         public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
         {
-            if(NetworkedVars == null)
+            if (NetworkedVars == null)
                 throw new InvalidOperationException($"{nameof(NetworkedVars)} collection is null.");
 
-            if(NetworkedVars.Count > short.MaxValue)
+            if (NetworkedVars.Count > short.MaxValue)
                 throw new InvalidOperationException($"{nameof(NetworkedVars)} collection count is greater than {short.MaxValue}.");
 
             buffer.WriteVariableUInt32(Tick.Value);

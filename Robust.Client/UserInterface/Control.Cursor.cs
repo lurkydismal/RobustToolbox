@@ -12,7 +12,7 @@ namespace Robust.Client.UserInterface
         ///     Default common cursor shapes available in the UI.
         /// </summary>
         /// <seealso cref="StandardCursorShape"/>
-        public enum CursorShape: byte
+        public enum CursorShape : byte
         {
             /// <summary>
             /// Corresponds to <see cref="StandardCursorShape.Arrow"/>

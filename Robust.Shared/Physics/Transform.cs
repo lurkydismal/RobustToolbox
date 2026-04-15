@@ -213,8 +213,8 @@ namespace Robust.Shared.Physics
         {
             var radians = angle.Theta;
 
-            C = (float) Math.Cos(radians);
-            S = (float) Math.Sin(radians);
+            C = (float)Math.Cos(radians);
+            S = (float)Math.Sin(radians);
         }
 
         public Quaternion2D Set(float angle)
@@ -231,7 +231,7 @@ namespace Robust.Shared.Physics
 
         /// Rotate a vector
         [Pure]
-        public static Vector2 RotateVector(Quaternion2D q, Vector2 v )
+        public static Vector2 RotateVector(Quaternion2D q, Vector2 v)
         {
             return new Vector2(q.C * v.X - q.S * v.Y, q.S * v.X + q.C * v.Y);
         }
@@ -245,7 +245,7 @@ namespace Robust.Shared.Physics
 
         public bool IsValid()
         {
-            if (float.IsNaN(S ) || float.IsNaN(C))
+            if (float.IsNaN(S) || float.IsNaN(C))
             {
                 return false;
             }

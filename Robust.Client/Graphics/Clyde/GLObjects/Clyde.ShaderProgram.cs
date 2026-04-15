@@ -50,7 +50,7 @@ namespace Robust.Client.Graphics.Clyde
             public void Link((string, uint)[] attribLocations)
             {
                 ClearCaches();
-                Handle = (uint) GL.CreateProgram();
+                Handle = (uint)GL.CreateProgram();
                 _clyde.CheckGlError();
                 if (Name != null)
                 {
@@ -86,7 +86,7 @@ namespace Robust.Client.Graphics.Clyde
                 _clyde.CheckGlError();
                 if (compiled != 1)
                 {
-                    throw new ShaderCompilationException(GL.GetProgramInfoLog((int) Handle));
+                    throw new ShaderCompilationException(GL.GetProgramInfoLog((int)Handle));
                 }
             }
 
@@ -206,7 +206,7 @@ namespace Robust.Client.Graphics.Clyde
 
             public void BindBlock(string blockName, uint blockBinding)
             {
-                var index = (uint) GL.GetUniformBlockIndex(Handle, blockName);
+                var index = (uint)GL.GetUniformBlockIndex(Handle, blockName);
                 _clyde.CheckGlError();
                 GL.UniformBlockBinding(Handle, index, blockBinding);
                 _clyde.CheckGlError();
@@ -275,14 +275,14 @@ namespace Robust.Client.Graphics.Clyde
                 _clyde.CheckGlError();
             }
 
-            public void SetUniform(string uniformName, in Matrix4x4 matrix, bool transpose=true)
+            public void SetUniform(string uniformName, in Matrix4x4 matrix, bool transpose = true)
             {
                 var uniformId = GetUniform(uniformName);
                 SetUniformDirect(uniformId, matrix, transpose);
             }
 
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            private unsafe void SetUniformDirect(int uniformId, in Matrix4x4 value, bool transpose=true)
+            private unsafe void SetUniformDirect(int uniformId, in Matrix4x4 value, bool transpose = true)
             {
                 Matrix4x4 tmpTranspose = value;
                 if (transpose)
@@ -290,7 +290,7 @@ namespace Robust.Client.Graphics.Clyde
                     // transposition not supported on GLES2, & no access to _hasGLES
                     tmpTranspose = Matrix4x4.Transpose(value);
                 }
-                GL.UniformMatrix4(uniformId, 1, false, (float*) &tmpTranspose);
+                GL.UniformMatrix4(uniformId, 1, false, (float*)&tmpTranspose);
                 _clyde.CheckGlError();
             }
 
@@ -342,7 +342,7 @@ namespace Robust.Client.Graphics.Clyde
 
                 unsafe
                 {
-                    GL.Uniform4(slot, 1, (float*) &converted);
+                    GL.Uniform4(slot, 1, (float*)&converted);
                     _clyde.CheckGlError();
                 }
             }
@@ -549,7 +549,7 @@ namespace Robust.Client.Graphics.Clyde
                 }
             }
 
-            public void SetUniformMaybe(string uniformName, in Matrix4x4 value, bool transpose=true)
+            public void SetUniformMaybe(string uniformName, in Matrix4x4 value, bool transpose = true)
             {
                 if (TryGetUniform(uniformName, out var slot))
                 {

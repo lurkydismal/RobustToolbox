@@ -34,7 +34,7 @@ namespace Robust.Shared.Audio.Midi
 
         public int Channel => Status & 0x0F; // Low nibble.
         public int Command => Status & 0xF0; // High nibble.
-        public RobustMidiCommand MidiCommand => (RobustMidiCommand) Command;
+        public RobustMidiCommand MidiCommand => (RobustMidiCommand)Command;
         public byte Key => Data1;
         public byte Velocity => Data2;
         public byte Control => Data1;
@@ -74,13 +74,13 @@ namespace Robust.Shared.Audio.Midi
         /// <summary> Returns a status byte given a channel byte and a command type byte. </summary>
         public static byte MakeStatus(byte channel, byte command)
         {
-            return (byte) (command | channel);
+            return (byte)(command | channel);
         }
 
         /// <summary> Returns a status byte given a channel byte and a command type. </summary>
         public static byte MakeStatus(byte channel, RobustMidiCommand command)
         {
-            return MakeStatus(channel, (byte) command);
+            return MakeStatus(channel, (byte)command);
         }
 
         /// <summary> Creates and returns an event to turn off a note on a given channel. </summary>
@@ -122,7 +122,7 @@ namespace Robust.Shared.Audio.Midi
         /// <summary> Creates and returns an event to bend the pitch on a given channel. </summary>
         public static RobustMidiEvent PitchBend(byte channel, ushort pitch, uint tick)
         {
-            return new RobustMidiEvent(MakeStatus(channel, RobustMidiCommand.PitchBend), (byte) pitch, (byte) (pitch >> 8), tick);
+            return new RobustMidiEvent(MakeStatus(channel, RobustMidiCommand.PitchBend), (byte)pitch, (byte)(pitch >> 8), tick);
         }
 
         /// <summary> Creates and returns an event to select the bank on a given channel. </summary>

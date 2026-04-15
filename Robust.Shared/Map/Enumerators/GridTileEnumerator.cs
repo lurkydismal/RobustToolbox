@@ -43,8 +43,8 @@ public struct GridTileEnumerator
 
             var (chunkOrigin, chunk) = _chunkEnumerator.Current;
             DebugTools.Assert(chunk.FilledTiles > 0, $"Encountered empty chunk while enumerating tiles");
-            var x = (ushort) (_index / _chunkSize);
-            var y = (ushort) (_index % _chunkSize);
+            var x = (ushort)(_index / _chunkSize);
+            var y = (ushort)(_index % _chunkSize);
             var tile = chunk.GetTile(x, y);
             _index++;
 

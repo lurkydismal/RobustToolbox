@@ -69,7 +69,7 @@ internal static class SystemInformation
                 name[i * 4 + 3] = edx;
             }
 
-            var bytes = MemoryMarshal.Cast<int, byte>(name).TrimEnd((byte) 0);
+            var bytes = MemoryMarshal.Cast<int, byte>(name).TrimEnd((byte)0);
             var model = Encoding.UTF8.GetString(bytes).TrimEnd();
             return model;
         }

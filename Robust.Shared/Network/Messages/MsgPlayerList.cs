@@ -38,7 +38,7 @@ namespace Robust.Shared.Network.Messages
             {
                 buffer.Write(ply.UserId.UserId);
                 buffer.Write(ply.Name);
-                buffer.Write((byte) ply.Status);
+                buffer.Write((byte)ply.Status);
             }
         }
     }

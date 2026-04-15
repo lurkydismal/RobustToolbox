@@ -14,7 +14,7 @@ public sealed class CheckedToCommand : ToolshedCommand
 
     [CommandImplementation, TakesPipedTypeAsGeneric]
     public TOut Operation<TOut, T>([PipedArgument] T x)
-        where TOut: INumberBase<TOut>
+        where TOut : INumberBase<TOut>
         where T : INumberBase<T>
     {
         return TOut.CreateChecked(x);
@@ -22,7 +22,7 @@ public sealed class CheckedToCommand : ToolshedCommand
 
     [CommandImplementation, TakesPipedTypeAsGeneric]
     public IEnumerable<TOut> Operation<TOut, T>([PipedArgument] IEnumerable<T> x)
-        where TOut: INumberBase<TOut>
+        where TOut : INumberBase<TOut>
         where T : INumberBase<T>
         => x.Select(Operation<TOut, T>);
 }
@@ -35,7 +35,7 @@ public sealed class SaturateToCommand : ToolshedCommand
 
     [CommandImplementation, TakesPipedTypeAsGeneric]
     public TOut Operation<TOut, T>([PipedArgument] T x)
-        where TOut: INumberBase<TOut>
+        where TOut : INumberBase<TOut>
         where T : INumberBase<T>
     {
         return TOut.CreateSaturating(x);
@@ -43,7 +43,7 @@ public sealed class SaturateToCommand : ToolshedCommand
 
     [CommandImplementation, TakesPipedTypeAsGeneric]
     public IEnumerable<TOut> Operation<TOut, T>([PipedArgument] IEnumerable<T> x)
-        where TOut: INumberBase<TOut>
+        where TOut : INumberBase<TOut>
         where T : INumberBase<T>
         => x.Select(Operation<TOut, T>);
 }
@@ -56,7 +56,7 @@ public sealed class TruncToCommand : ToolshedCommand
 
     [CommandImplementation, TakesPipedTypeAsGeneric]
     public TOut Operation<TOut, T>([PipedArgument] T x)
-        where TOut: INumberBase<TOut>
+        where TOut : INumberBase<TOut>
         where T : INumberBase<T>
     {
         return TOut.CreateTruncating(x);
@@ -64,7 +64,7 @@ public sealed class TruncToCommand : ToolshedCommand
 
     [CommandImplementation, TakesPipedTypeAsGeneric]
     public IEnumerable<TOut> Operation<TOut, T>([PipedArgument] IEnumerable<T> x)
-        where TOut: INumberBase<TOut>
+        where TOut : INumberBase<TOut>
         where T : INumberBase<T>
         => x.Select(Operation<TOut, T>);
 }

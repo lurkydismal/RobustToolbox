@@ -62,7 +62,7 @@ internal partial class UserInterfaceManager
 
         if (!_protoManager.TryIndex(themeId, out UITheme? theme))
         {
-            _sawmillUI.Error("Could not find UI theme prototype for ID:"+ themeId);
+            _sawmillUI.Error("Could not find UI theme prototype for ID:" + themeId);
             return;
         }
         DefaultTheme = theme;

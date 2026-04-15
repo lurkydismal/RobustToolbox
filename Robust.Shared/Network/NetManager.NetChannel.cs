@@ -30,7 +30,7 @@ namespace Robust.Shared.Network
 
             /// <inheritdoc />
             [ViewVariables]
-            public short Ping => (short) Math.Round(_connection.AverageRoundtripTime * 1000);
+            public short Ping => (short)Math.Round(_connection.AverageRoundtripTime * 1000);
 
             /// <inheritdoc />
             [ViewVariables]

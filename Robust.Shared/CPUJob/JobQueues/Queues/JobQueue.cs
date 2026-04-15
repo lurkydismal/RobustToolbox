@@ -13,7 +13,7 @@ namespace Robust.Shared.CPUJob.JobQueues.Queues
             MaxTime = maxTime;
         }
 
-        public JobQueue() : this(new Stopwatch()) {}
+        public JobQueue() : this(new Stopwatch()) { }
 
         public JobQueue(IStopwatch stopwatch)
         {

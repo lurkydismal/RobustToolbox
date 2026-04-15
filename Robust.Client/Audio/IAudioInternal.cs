@@ -25,7 +25,7 @@ internal interface IAudioInternal : IAudioManager
     /// Returns a buffered audio source.
     /// </summary>
     /// <returns>null if unable to create the source.</returns>
-    IBufferedAudioSource? CreateBufferedAudioSource(int buffers, bool floatAudio=false);
+    IBufferedAudioSource? CreateBufferedAudioSource(int buffers, bool floatAudio = false);
 
     /// <summary>
     /// Sets the velocity for the audio listener.

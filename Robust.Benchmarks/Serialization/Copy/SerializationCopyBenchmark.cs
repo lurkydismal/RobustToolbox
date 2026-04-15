@@ -20,7 +20,7 @@ namespace Robust.Benchmarks.Serialization.Copy
         {
             InitializeSerialization();
 
-            DataDefinitionWithString = new DataDefinitionWithString {StringField = "ABC"};
+            DataDefinitionWithString = new DataDefinitionWithString { StringField = "ABC" };
 
             var yamlStream = new YamlStream();
             yamlStream.Load(new StringReader(SeedDataDefinition.Prototype));
@@ -121,14 +121,14 @@ namespace Robust.Benchmarks.Serialization.Copy
         [BenchmarkCategory("flag")]
         public object? CopyFlagZero()
         {
-            return SerializationManager.CreateCopy<int, FlagSerializer<BenchmarkFlags>>((int) FlagZero);
+            return SerializationManager.CreateCopy<int, FlagSerializer<BenchmarkFlags>>((int)FlagZero);
         }
 
         [Benchmark]
         [BenchmarkCategory("flag")]
         public object? CopyFlagThirtyOne()
         {
-            return SerializationManager.CreateCopy<int, FlagSerializer<BenchmarkFlags>>((int) FlagThirtyOne);
+            return SerializationManager.CreateCopy<int, FlagSerializer<BenchmarkFlags>>((int)FlagThirtyOne);
         }
 
         [Benchmark]

@@ -180,7 +180,7 @@ Suspendisse hendrerit blandit urna ut laoreet. Suspendisse ac elit at erat males
         while (true)
         {
             var nextIndex = Lipsum.IndexOf(' ', startIndex);
-            var str = nextIndex == -1 ? Lipsum[startIndex..] : Lipsum[startIndex..(nextIndex+1)];
+            var str = nextIndex == -1 ? Lipsum[startIndex..] : Lipsum[startIndex..(nextIndex + 1)];
 
             lipsumRope = new Rope.Branch(lipsumRope, new Rope.Leaf(str));
             if (lipsumRope.Depth > 250)
@@ -199,7 +199,7 @@ Suspendisse hendrerit blandit urna ut laoreet. Suspendisse ac elit at erat males
             rope = new Rope.Branch(rope, lipsumRope);
         }
 
-        rope = (Rope.Branch) Rope.Rebalance(rope);
+        rope = (Rope.Branch)Rope.Rebalance(rope);
 
         textEdit.TextRope = rope;
 

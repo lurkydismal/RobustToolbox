@@ -347,7 +347,7 @@ public sealed partial class RayCastSystem : EntitySystem
             Points = new Vector2[polygon.VertexCount],
         };
 
-        for ( int i = 0; i < polygon.VertexCount; ++i )
+        for (int i = 0; i < polygon.VertexCount; ++i)
         {
             input.Points[i] = Physics.Transform.Mul(originTransform, polygon.Vertices[i]);
         }

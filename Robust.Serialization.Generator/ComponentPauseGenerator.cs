@@ -60,7 +60,7 @@ public sealed class ComponentPauseGenerator : IIncrementalGenerator
             {
                 var symbol = (INamedTypeSymbol)syntaxContext.TargetSymbol;
 
-                var typeDeclarationSyntax = (TypeDeclarationSyntax) syntaxContext.TargetNode;
+                var typeDeclarationSyntax = (TypeDeclarationSyntax)syntaxContext.TargetNode;
                 var partialTypeInfo = PartialTypeInfo.FromSymbol(
                     symbol,
                     typeDeclarationSyntax);
@@ -88,11 +88,11 @@ public sealed class ComponentPauseGenerator : IIncrementalGenerator
                     var dictionary = false;
                     if (namedType.Name != "TimeSpan")
                     {
-                        if (namedType is { Name: "Nullable", TypeArguments: [{Name: "TimeSpan"}] })
+                        if (namedType is { Name: "Nullable", TypeArguments: [{ Name: "TimeSpan" }] })
                         {
                             nullable = true;
                         }
-                        else if (namedType is { Name: "Dictionary", TypeArguments: [{}, {Name: "TimeSpan"}]})
+                        else if (namedType is { Name: "Dictionary", TypeArguments: [{ }, { Name: "TimeSpan" }] })
                         {
                             dictionary = true;
                         }

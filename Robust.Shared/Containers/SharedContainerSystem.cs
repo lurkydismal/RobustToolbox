@@ -685,7 +685,7 @@ namespace Robust.Shared.Containers
 
             // Eject entities from their parent container if the parent change is done via setting the transform.
             if (TryComp(message.OldParent, out ContainerManagerComponent? containerManager))
-                RemoveEntity(message.OldParent.Value, message.Entity, containerManager, message.Transform, meta,  reparent: false, force: true);
+                RemoveEntity(message.OldParent.Value, message.Entity, containerManager, message.Transform, meta, reparent: false, force: true);
         }
 
         [Conditional("DEBUG"), Access(typeof(BaseContainer))]

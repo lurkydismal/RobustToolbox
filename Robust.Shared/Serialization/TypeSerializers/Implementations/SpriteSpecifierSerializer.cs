@@ -86,7 +86,7 @@ namespace Robust.Shared.Serialization.TypeSerializers.Implementations
             if (node.TryGet("entity", out var entityNode) && entityNode is ValueDataNode entityValueNode)
                 return ((ITypeReader<EntityPrototype, ValueDataNode>)this).Read(serializationManager, entityValueNode, dependencies, hookCtx, context, (ISerializationManager.InstantiationDelegate<EntityPrototype>?)instanceProvider);
 
-            return ((ITypeReader<Rsi, MappingDataNode>) this).Read(serializationManager, node, dependencies, hookCtx, context, (ISerializationManager.InstantiationDelegate<Rsi>?)instanceProvider);
+            return ((ITypeReader<Rsi, MappingDataNode>)this).Read(serializationManager, node, dependencies, hookCtx, context, (ISerializationManager.InstantiationDelegate<Rsi>?)instanceProvider);
         }
 
         ValidationNode ITypeValidator<SpriteSpecifier, ValueDataNode>.Validate(ISerializationManager serializationManager,
@@ -94,7 +94,7 @@ namespace Robust.Shared.Serialization.TypeSerializers.Implementations
             IDependencyCollection dependencies,
             ISerializationContext? context)
         {
-            return ((ITypeReader<Texture, ValueDataNode>) this).Validate(serializationManager, node, dependencies, context);
+            return ((ITypeReader<Texture, ValueDataNode>)this).Validate(serializationManager, node, dependencies, context);
         }
 
         ValidationNode ITypeValidator<EntityPrototype, ValueDataNode>.Validate(ISerializationManager serializationManager,
@@ -132,7 +132,7 @@ namespace Robust.Shared.Serialization.TypeSerializers.Implementations
                     return new ErrorNode(node, "Sprite specifier entity node must be a ValueDataNode");
             }
 
-            return ((ITypeReader<Rsi, MappingDataNode>) this).Validate(serializationManager, node, dependencies, context);
+            return ((ITypeReader<Rsi, MappingDataNode>)this).Validate(serializationManager, node, dependencies, context);
         }
 
         ValidationNode ITypeValidator<Rsi, MappingDataNode>.Validate(ISerializationManager serializationManager,

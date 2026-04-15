@@ -371,7 +371,7 @@ namespace Robust.Client.Graphics.Clyde
                         // Calculate viewport so that the entity thinks it's drawing to the same position,
                         // which is necessary for light application,
                         // but it's ACTUALLY drawing into the center of the render target.
-                        roundedPos = (Vector2i) entry.SpriteScreenBB.Center;
+                        roundedPos = (Vector2i)entry.SpriteScreenBB.Center;
                         var flippedPos = new Vector2i(roundedPos.X, screenSize.Y - roundedPos.Y);
                         flippedPos -= entityPostRenderTarget.Size / 2;
                         _renderHandle.Viewport(Box2i.FromDimensions(-flippedPos, screenSize));
@@ -437,7 +437,7 @@ namespace Robust.Client.Graphics.Clyde
             _loadingScreenManager.DrawLoadingScreen(handle, ScreenSize);
         }
 
-        private void RenderInRenderTarget(RenderTargetBase rt, Action a, Color? clearColor=default)
+        private void RenderInRenderTarget(RenderTargetBase rt, Action a, Color? clearColor = default)
         {
             // TODO: for the love of god all this state pushing/popping needs to be cleaned up.
 

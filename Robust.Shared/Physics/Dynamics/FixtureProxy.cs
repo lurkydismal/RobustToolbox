@@ -34,7 +34,7 @@ public sealed class FixtureProxy
 
     public TransformComponent Xform { get; internal set; }
 
-/// <summary>
+    /// <summary>
     ///     Grid-based AABB of this proxy.
     /// </summary>
     [ViewVariables]

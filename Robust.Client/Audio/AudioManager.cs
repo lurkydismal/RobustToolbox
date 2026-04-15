@@ -48,7 +48,7 @@ internal sealed partial class AudioManager : IAudioInternal
     {
         unsafe
         {
-            _openALContext = ALC.CreateContext(_openALDevice, (int*) 0);
+            _openALContext = ALC.CreateContext(_openALDevice, (int*)0);
         }
 
         ALC.MakeContextCurrent(_openALContext);

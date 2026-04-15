@@ -117,8 +117,7 @@ namespace Robust.Shared.Physics
             }
 
             public override string ToString()
-                => $@"Parent: {(Parent == Proxy.Free ? "None" : Parent.ToString())}, {
-                    (IsLeaf
+                => $@"Parent: {(Parent == Proxy.Free ? "None" : Parent.ToString())}, {(IsLeaf
                         ? Height == 0
                             ? $"Leaf: {UserData}"
                             : $"Leaf (invalid height of {Height}): {UserData}"
@@ -258,7 +257,7 @@ namespace Robust.Shared.Physics
             var l = Capacity - 1;
             for (var i = 0; i < l; i++, node = ref Unsafe.Add(ref node, 1))
             {
-                node.Next = (Proxy) (i + 1);
+                node.Next = (Proxy)(i + 1);
                 node.Height = -1;
             }
 
@@ -319,14 +318,14 @@ namespace Robust.Shared.Physics
                 ref var node = ref _nodes[NodeCount];
                 for (var i = NodeCount; i < l; ++i, node = ref Unsafe.Add(ref node, 1))
                 {
-                    node.Next = (Proxy) (i + 1);
+                    node.Next = (Proxy)(i + 1);
                     node.Height = -1;
                 }
 
                 ref var lastNode = ref _nodes[l];
                 lastNode.Next = Proxy.Free;
                 lastNode.Height = -1;
-                _freeList = (Proxy) NodeCount;
+                _freeList = (Proxy)NodeCount;
             }
         }
 
@@ -520,284 +519,284 @@ namespace Robust.Shared.Physics
             Assert(iA != Proxy.Free);
 
             ref var A = ref _nodes[iA];
-	        if (A.Height < 2)
-	        {
-		        return;
-	        }
+            if (A.Height < 2)
+            {
+                return;
+            }
 
-	        var iB = A.Child1;
-	        var iC = A.Child2;
-	        Assert(0 <= iB && iB < Capacity);
+            var iB = A.Child1;
+            var iC = A.Child2;
+            Assert(0 <= iB && iB < Capacity);
             Assert(0 <= iC && iC < Capacity);
 
-	        ref var B = ref _nodes[iB];
+            ref var B = ref _nodes[iB];
             ref var C = ref _nodes[iC];
 
-	        if (B.Height == 0)
-	        {
-		        // B is a leaf and C is internal
-		        Assert(C.Height > 0);
+            if (B.Height == 0)
+            {
+                // B is a leaf and C is internal
+                Assert(C.Height > 0);
 
-		        Proxy iF = C.Child1;
+                Proxy iF = C.Child1;
                 Proxy iG = C.Child2;
-		        ref var F = ref _nodes[iF];
-		        ref var G = ref _nodes[iG];
-		        Assert(0 <= iF && iF < Capacity);
-		        Assert(0 <= iG && iG < Capacity);
+                ref var F = ref _nodes[iF];
+                ref var G = ref _nodes[iG];
+                Assert(0 <= iF && iF < Capacity);
+                Assert(0 <= iG && iG < Capacity);
 
-		        // Base cost
-		        float costBase = Box2.Perimeter(C.Aabb);
+                // Base cost
+                float costBase = Box2.Perimeter(C.Aabb);
 
-		        // Cost of swapping B and F
-		        var aabbBG = B.Aabb.Union(G.Aabb);
-		        float costBF = Box2.Perimeter(aabbBG);
+                // Cost of swapping B and F
+                var aabbBG = B.Aabb.Union(G.Aabb);
+                float costBF = Box2.Perimeter(aabbBG);
 
-		        // Cost of swapping B and G
-		        var aabbBF = B.Aabb.Union(F.Aabb);
-		        float costBG = Box2.Perimeter(aabbBF);
+                // Cost of swapping B and G
+                var aabbBF = B.Aabb.Union(F.Aabb);
+                float costBG = Box2.Perimeter(aabbBF);
 
-		        if (costBase < costBF && costBase < costBG)
-		        {
-			        // Rotation does not improve cost
-			        return;
-		        }
+                if (costBase < costBF && costBase < costBG)
+                {
+                    // Rotation does not improve cost
+                    return;
+                }
 
-		        if (costBF < costBG)
-		        {
-			        // Swap B and F
-			        A.Child1 = iF;
-			        C.Child1 = iB;
+                if (costBF < costBG)
+                {
+                    // Swap B and F
+                    A.Child1 = iF;
+                    C.Child1 = iB;
 
-			        B.Parent = iC;
-			        F.Parent = iA;
+                    B.Parent = iC;
+                    F.Parent = iA;
 
-			        C.Aabb = aabbBG;
+                    C.Aabb = aabbBG;
 
-			        C.Height = (short)(1 + Math.Max(B.Height, G.Height));
-			        A.Height = (short)(1 + Math.Max(C.Height, F.Height));
-			        C.CategoryBits = B.CategoryBits | G.CategoryBits;
-			        A.CategoryBits = C.CategoryBits | F.CategoryBits;
-			        C.Enlarged = B.Enlarged || G.Enlarged;
-			        A.Enlarged = C.Enlarged || F.Enlarged;
-		        }
-		        else
-		        {
-			        // Swap B and G
-			        A.Child1 = iG;
-			        C.Child2 = iB;
+                    C.Height = (short)(1 + Math.Max(B.Height, G.Height));
+                    A.Height = (short)(1 + Math.Max(C.Height, F.Height));
+                    C.CategoryBits = B.CategoryBits | G.CategoryBits;
+                    A.CategoryBits = C.CategoryBits | F.CategoryBits;
+                    C.Enlarged = B.Enlarged || G.Enlarged;
+                    A.Enlarged = C.Enlarged || F.Enlarged;
+                }
+                else
+                {
+                    // Swap B and G
+                    A.Child1 = iG;
+                    C.Child2 = iB;
 
-			        B.Parent = iC;
-			        G.Parent = iA;
+                    B.Parent = iC;
+                    G.Parent = iA;
 
-			        C.Aabb = aabbBF;
+                    C.Aabb = aabbBF;
 
-			        C.Height = (short)(1 + Math.Max(B.Height, F.Height));
-			        A.Height = (short)(1 + Math.Max(C.Height, G.Height));
-			        C.CategoryBits = B.CategoryBits | F.CategoryBits;
-			        A.CategoryBits = C.CategoryBits | G.CategoryBits;
-			        C.Enlarged = B.Enlarged || F.Enlarged;
-			        A.Enlarged = C.Enlarged || G.Enlarged;
-		        }
-	        }
-	        else if (C.Height == 0)
-	        {
-		        // C is a leaf and B is internal
-		        Assert(B.Height > 0);
+                    C.Height = (short)(1 + Math.Max(B.Height, F.Height));
+                    A.Height = (short)(1 + Math.Max(C.Height, G.Height));
+                    C.CategoryBits = B.CategoryBits | F.CategoryBits;
+                    A.CategoryBits = C.CategoryBits | G.CategoryBits;
+                    C.Enlarged = B.Enlarged || F.Enlarged;
+                    A.Enlarged = C.Enlarged || G.Enlarged;
+                }
+            }
+            else if (C.Height == 0)
+            {
+                // C is a leaf and B is internal
+                Assert(B.Height > 0);
 
-		        var iD = B.Child1;
-		        var iE = B.Child2;
-		        ref var D = ref _nodes[iD];
+                var iD = B.Child1;
+                var iE = B.Child2;
+                ref var D = ref _nodes[iD];
                 ref var E = ref _nodes[iE];
-		        Assert(0 <= iD && iD < Capacity);
+                Assert(0 <= iD && iD < Capacity);
                 Assert(0 <= iE && iE < Capacity);
 
-		        // Base cost
-		        float costBase = Box2.Perimeter(B.Aabb);
+                // Base cost
+                float costBase = Box2.Perimeter(B.Aabb);
 
-		        // Cost of swapping C and D
-		        var aabbCE = C.Aabb.Union(E.Aabb);
-		        float costCD = Box2.Perimeter(aabbCE);
+                // Cost of swapping C and D
+                var aabbCE = C.Aabb.Union(E.Aabb);
+                float costCD = Box2.Perimeter(aabbCE);
 
-		        // Cost of swapping C and E
-		        var aabbCD = C.Aabb.Union(D.Aabb);
-		        float costCE = Box2.Perimeter(aabbCD);
+                // Cost of swapping C and E
+                var aabbCD = C.Aabb.Union(D.Aabb);
+                float costCE = Box2.Perimeter(aabbCD);
 
-		        if (costBase < costCD && costBase < costCE)
-		        {
-			        // Rotation does not improve cost
-			        return;
-		        }
+                if (costBase < costCD && costBase < costCE)
+                {
+                    // Rotation does not improve cost
+                    return;
+                }
 
-		        if (costCD < costCE)
-		        {
-			        // Swap C and D
-			        A.Child2 = iD;
-			        B.Child1 = iC;
+                if (costCD < costCE)
+                {
+                    // Swap C and D
+                    A.Child2 = iD;
+                    B.Child1 = iC;
 
-			        C.Parent = iB;
-			        D.Parent = iA;
+                    C.Parent = iB;
+                    D.Parent = iA;
 
-			        B.Aabb = aabbCE;
+                    B.Aabb = aabbCE;
 
-			        B.Height = (short)(1 + Math.Max(C.Height, E.Height));
-			        A.Height = (short)(1 + Math.Max(B.Height, D.Height));
-			        B.CategoryBits = C.CategoryBits | E.CategoryBits;
-			        A.CategoryBits = B.CategoryBits | D.CategoryBits;
-			        B.Enlarged = C.Enlarged || E.Enlarged;
-			        A.Enlarged = B.Enlarged || D.Enlarged;
-		        }
-		        else
-		        {
-			        // Swap C and E
-			        A.Child2 = iE;
-			        B.Child2 = iC;
+                    B.Height = (short)(1 + Math.Max(C.Height, E.Height));
+                    A.Height = (short)(1 + Math.Max(B.Height, D.Height));
+                    B.CategoryBits = C.CategoryBits | E.CategoryBits;
+                    A.CategoryBits = B.CategoryBits | D.CategoryBits;
+                    B.Enlarged = C.Enlarged || E.Enlarged;
+                    A.Enlarged = B.Enlarged || D.Enlarged;
+                }
+                else
+                {
+                    // Swap C and E
+                    A.Child2 = iE;
+                    B.Child2 = iC;
 
-			        C.Parent = iB;
-			        E.Parent = iA;
+                    C.Parent = iB;
+                    E.Parent = iA;
 
-			        B.Aabb = aabbCD;
-			        B.Height = (short)(1 + Math.Max(C.Height, D.Height));
-			        A.Height = (short)(1 + Math.Max(B.Height, E.Height));
-			        B.CategoryBits = C.CategoryBits | D.CategoryBits;
-			        A.CategoryBits = B.CategoryBits | E.CategoryBits;
-			        B.Enlarged = C.Enlarged || D.Enlarged;
-			        A.Enlarged = B.Enlarged || E.Enlarged;
-		        }
-	        }
-	        else
-	        {
-		        var iD = B.Child1;
-		        var iE = B.Child2;
-		        var iF = C.Child1;
-		        var iG = C.Child2;
+                    B.Aabb = aabbCD;
+                    B.Height = (short)(1 + Math.Max(C.Height, D.Height));
+                    A.Height = (short)(1 + Math.Max(B.Height, E.Height));
+                    B.CategoryBits = C.CategoryBits | D.CategoryBits;
+                    A.CategoryBits = B.CategoryBits | E.CategoryBits;
+                    B.Enlarged = C.Enlarged || D.Enlarged;
+                    A.Enlarged = B.Enlarged || E.Enlarged;
+                }
+            }
+            else
+            {
+                var iD = B.Child1;
+                var iE = B.Child2;
+                var iF = C.Child1;
+                var iG = C.Child2;
 
                 ref var D = ref _nodes[iD];
                 ref var E = ref _nodes[iE];
                 ref var F = ref _nodes[iF];
                 ref var G = ref _nodes[iG];
 
-		        Assert(0 <= iD && iD < Capacity);
-		        Assert(0 <= iE && iE < Capacity);
-		        Assert(0 <= iF && iF < Capacity);
-		        Assert(0 <= iG && iG < Capacity);
+                Assert(0 <= iD && iD < Capacity);
+                Assert(0 <= iE && iE < Capacity);
+                Assert(0 <= iF && iF < Capacity);
+                Assert(0 <= iG && iG < Capacity);
 
-		        // Base cost
-		        float areaB = Box2.Perimeter(B.Aabb);
-		        float areaC = Box2.Perimeter(C.Aabb);
-		        float costBase = areaB + areaC;
-		        var bestRotation = RotateType.None;
-		        float bestCost = costBase;
+                // Base cost
+                float areaB = Box2.Perimeter(B.Aabb);
+                float areaC = Box2.Perimeter(C.Aabb);
+                float costBase = areaB + areaC;
+                var bestRotation = RotateType.None;
+                float bestCost = costBase;
 
-		        // Cost of swapping B and F
-		        var aabbBG = B.Aabb.Union(G.Aabb);
-		        float costBF = areaB + Box2.Perimeter(aabbBG);
-		        if (costBF < bestCost)
-		        {
-			        bestRotation = RotateType.BF;
-			        bestCost = costBF;
-		        }
+                // Cost of swapping B and F
+                var aabbBG = B.Aabb.Union(G.Aabb);
+                float costBF = areaB + Box2.Perimeter(aabbBG);
+                if (costBF < bestCost)
+                {
+                    bestRotation = RotateType.BF;
+                    bestCost = costBF;
+                }
 
-		        // Cost of swapping B and G
-		        var aabbBF = B.Aabb.Union(F.Aabb);
-		        float costBG = areaB + Box2.Perimeter(aabbBF);
-		        if (costBG < bestCost)
-		        {
-			        bestRotation = RotateType.BG;
-			        bestCost = costBG;
-		        }
+                // Cost of swapping B and G
+                var aabbBF = B.Aabb.Union(F.Aabb);
+                float costBG = areaB + Box2.Perimeter(aabbBF);
+                if (costBG < bestCost)
+                {
+                    bestRotation = RotateType.BG;
+                    bestCost = costBG;
+                }
 
-		        // Cost of swapping C and D
-		        var aabbCE = C.Aabb.Union(E.Aabb);
-		        float costCD = areaC + Box2.Perimeter(aabbCE);
-		        if (costCD < bestCost)
-		        {
-			        bestRotation = RotateType.CD;
-			        bestCost = costCD;
-		        }
+                // Cost of swapping C and D
+                var aabbCE = C.Aabb.Union(E.Aabb);
+                float costCD = areaC + Box2.Perimeter(aabbCE);
+                if (costCD < bestCost)
+                {
+                    bestRotation = RotateType.CD;
+                    bestCost = costCD;
+                }
 
-		        // Cost of swapping C and E
-		        var aabbCD = C.Aabb.Union(D.Aabb);
-		        float costCE = areaC + Box2.Perimeter(aabbCD);
-		        if (costCE < bestCost)
-		        {
-			        bestRotation = RotateType.CE;
-			        // bestCost = costCE;
-		        }
+                // Cost of swapping C and E
+                var aabbCD = C.Aabb.Union(D.Aabb);
+                float costCE = areaC + Box2.Perimeter(aabbCD);
+                if (costCE < bestCost)
+                {
+                    bestRotation = RotateType.CE;
+                    // bestCost = costCE;
+                }
 
-		        switch (bestRotation)
-		        {
-			        case RotateType.None:
-				        break;
+                switch (bestRotation)
+                {
+                    case RotateType.None:
+                        break;
 
-			        case RotateType.BF:
-				        A.Child1 = iF;
-				        C.Child1 = iB;
+                    case RotateType.BF:
+                        A.Child1 = iF;
+                        C.Child1 = iB;
 
-				        B.Parent = iC;
-				        F.Parent = iA;
+                        B.Parent = iC;
+                        F.Parent = iA;
 
-				        C.Aabb = aabbBG;
-				        C.Height = (short)(1 + Math.Max(B.Height, G.Height));
-				        A.Height = (short)(1 + Math.Max(C.Height, F.Height));
-				        C.CategoryBits = B.CategoryBits | G.CategoryBits;
-				        A.CategoryBits = C.CategoryBits | F.CategoryBits;
-				        C.Enlarged = B.Enlarged || G.Enlarged;
-				        A.Enlarged = C.Enlarged || F.Enlarged;
-				        break;
+                        C.Aabb = aabbBG;
+                        C.Height = (short)(1 + Math.Max(B.Height, G.Height));
+                        A.Height = (short)(1 + Math.Max(C.Height, F.Height));
+                        C.CategoryBits = B.CategoryBits | G.CategoryBits;
+                        A.CategoryBits = C.CategoryBits | F.CategoryBits;
+                        C.Enlarged = B.Enlarged || G.Enlarged;
+                        A.Enlarged = C.Enlarged || F.Enlarged;
+                        break;
 
-			        case RotateType.BG:
-				        A.Child1 = iG;
-				        C.Child2 = iB;
+                    case RotateType.BG:
+                        A.Child1 = iG;
+                        C.Child2 = iB;
 
-				        B.Parent = iC;
-				        G.Parent = iA;
+                        B.Parent = iC;
+                        G.Parent = iA;
 
-				        C.Aabb = aabbBF;
-				        C.Height = (short)(1 + Math.Max(B.Height, F.Height));
-				        A.Height = (short)(1 + Math.Max(C.Height, G.Height));
-				        C.CategoryBits = B.CategoryBits | F.CategoryBits;
-				        A.CategoryBits = C.CategoryBits | G.CategoryBits;
-				        C.Enlarged = B.Enlarged || F.Enlarged;
-				        A.Enlarged = C.Enlarged || G.Enlarged;
-				        break;
+                        C.Aabb = aabbBF;
+                        C.Height = (short)(1 + Math.Max(B.Height, F.Height));
+                        A.Height = (short)(1 + Math.Max(C.Height, G.Height));
+                        C.CategoryBits = B.CategoryBits | F.CategoryBits;
+                        A.CategoryBits = C.CategoryBits | G.CategoryBits;
+                        C.Enlarged = B.Enlarged || F.Enlarged;
+                        A.Enlarged = C.Enlarged || G.Enlarged;
+                        break;
 
-			        case RotateType.CD:
-				        A.Child2 = iD;
-				        B.Child1 = iC;
+                    case RotateType.CD:
+                        A.Child2 = iD;
+                        B.Child1 = iC;
 
-				        C.Parent = iB;
-				        D.Parent = iA;
+                        C.Parent = iB;
+                        D.Parent = iA;
 
-				        B.Aabb = aabbCE;
-				        B.Height = (short)(1 + Math.Max(C.Height, E.Height));
-				        A.Height = (short)(1 + Math.Max(B.Height, D.Height));
-				        B.CategoryBits = C.CategoryBits | E.CategoryBits;
-				        A.CategoryBits = B.CategoryBits | D.CategoryBits;
-				        B.Enlarged = C.Enlarged || E.Enlarged;
-				        A.Enlarged = B.Enlarged || D.Enlarged;
-				        break;
+                        B.Aabb = aabbCE;
+                        B.Height = (short)(1 + Math.Max(C.Height, E.Height));
+                        A.Height = (short)(1 + Math.Max(B.Height, D.Height));
+                        B.CategoryBits = C.CategoryBits | E.CategoryBits;
+                        A.CategoryBits = B.CategoryBits | D.CategoryBits;
+                        B.Enlarged = C.Enlarged || E.Enlarged;
+                        A.Enlarged = B.Enlarged || D.Enlarged;
+                        break;
 
-			        case RotateType.CE:
-				        A.Child2 = iE;
-				        B.Child2 = iC;
+                    case RotateType.CE:
+                        A.Child2 = iE;
+                        B.Child2 = iC;
 
-				        C.Parent = iB;
-				        E.Parent = iA;
+                        C.Parent = iB;
+                        E.Parent = iA;
 
-				        B.Aabb = aabbCD;
-				        B.Height = (short)(1 + Math.Max(C.Height, D.Height));
-				        A.Height = (short)(1 + Math.Max(B.Height, E.Height));
-				        B.CategoryBits = C.CategoryBits | D.CategoryBits;
-				        A.CategoryBits = B.CategoryBits | E.CategoryBits;
-				        B.Enlarged = C.Enlarged || D.Enlarged;
-				        A.Enlarged = B.Enlarged || E.Enlarged;
-				        break;
+                        B.Aabb = aabbCD;
+                        B.Height = (short)(1 + Math.Max(C.Height, D.Height));
+                        A.Height = (short)(1 + Math.Max(B.Height, E.Height));
+                        B.CategoryBits = C.CategoryBits | D.CategoryBits;
+                        A.CategoryBits = B.CategoryBits | E.CategoryBits;
+                        B.Enlarged = C.Enlarged || D.Enlarged;
+                        A.Enlarged = B.Enlarged || E.Enlarged;
+                        break;
 
-			        default:
-				        Assert(false);
-				        break;
-		        }
-	        }
+                    default:
+                        Assert(false);
+                        break;
+                }
+            }
         }
 
         /// <summary>
@@ -977,82 +976,82 @@ namespace Robust.Shared.Physics
         private void InsertLeaf(Proxy leaf, bool shouldRotate)
         {
             if (_root == Proxy.Free)
-	        {
-		        _root = leaf;
-		        _nodes[_root].Parent = Proxy.Free;
-		        return;
-	        }
+            {
+                _root = leaf;
+                _nodes[_root].Parent = Proxy.Free;
+                return;
+            }
 
-	        // Stage 1: find the best sibling for this node
-	        ref var leafAABB = ref _nodes[leaf].Aabb;
-	        var sibling = FindBestSibling(leafAABB);
+            // Stage 1: find the best sibling for this node
+            ref var leafAABB = ref _nodes[leaf].Aabb;
+            var sibling = FindBestSibling(leafAABB);
 
-	        // Stage 2: create a new parent for the leaf and sibling
-	        ref var oldParent = ref _nodes[sibling].Parent;
-	        ref var node = ref AllocateNode(out var newParent);
+            // Stage 2: create a new parent for the leaf and sibling
+            ref var oldParent = ref _nodes[sibling].Parent;
+            ref var node = ref AllocateNode(out var newParent);
 
-	        // warning: node pointer can change after allocation
-	        var nodes = _nodes;
-	        node.Parent = oldParent;
+            // warning: node pointer can change after allocation
+            var nodes = _nodes;
+            node.Parent = oldParent;
             node.UserData = default!;
             node.Aabb = leafAABB.Union(nodes[sibling].Aabb);
             node.CategoryBits = nodes[leaf].CategoryBits | nodes[sibling].CategoryBits;
             node.Height = (short)(nodes[sibling].Height + 1);
 
-	        if (oldParent != Proxy.Free)
-	        {
-		        // The sibling was not the root.
-		        if (nodes[oldParent].Child1 == sibling)
-		        {
-			        nodes[oldParent].Child1 = newParent;
-		        }
-		        else
-		        {
-			        nodes[oldParent].Child2 = newParent;
-		        }
+            if (oldParent != Proxy.Free)
+            {
+                // The sibling was not the root.
+                if (nodes[oldParent].Child1 == sibling)
+                {
+                    nodes[oldParent].Child1 = newParent;
+                }
+                else
+                {
+                    nodes[oldParent].Child2 = newParent;
+                }
 
-		        node.Child1 = sibling;
-                node.Child2 = leaf;
-		        nodes[sibling].Parent = newParent;
-		        nodes[leaf].Parent = newParent;
-	        }
-	        else
-	        {
-		        // The sibling was the root.
                 node.Child1 = sibling;
                 node.Child2 = leaf;
-		        nodes[sibling].Parent = newParent;
-		        nodes[leaf].Parent = newParent;
-		        _root = newParent;
-	        }
+                nodes[sibling].Parent = newParent;
+                nodes[leaf].Parent = newParent;
+            }
+            else
+            {
+                // The sibling was the root.
+                node.Child1 = sibling;
+                node.Child2 = leaf;
+                nodes[sibling].Parent = newParent;
+                nodes[leaf].Parent = newParent;
+                _root = newParent;
+            }
 
-	        // Stage 3: walk back up the tree fixing heights and AABBs
-	        var index = nodes[leaf].Parent;
-	        while (index != Proxy.Free)
+            // Stage 3: walk back up the tree fixing heights and AABBs
+            var index = nodes[leaf].Parent;
+            while (index != Proxy.Free)
             {
                 ref var indexNode = ref nodes[index];
 
-		        var child1 = indexNode.Child1;
-		        var child2 = indexNode.Child2;
+                var child1 = indexNode.Child1;
+                var child2 = indexNode.Child2;
 
                 ref var childNode1 = ref nodes[child1];
                 ref var childNode2 = ref nodes[child2];
 
-		        Assert(child1 != Proxy.Free);
-		        Assert(child2 != Proxy.Free);
+                Assert(child1 != Proxy.Free);
+                Assert(child2 != Proxy.Free);
 
                 indexNode.Aabb = childNode1.Aabb.Union(childNode2.Aabb);
                 indexNode.CategoryBits = childNode1.CategoryBits | childNode2.CategoryBits;
                 indexNode.Height = (short)(1 + Math.Max(childNode1.Height, childNode2.Height));
                 indexNode.Enlarged = childNode1.Enlarged || childNode2.Enlarged;
 
-		        if (shouldRotate)
-		        {
-			        RotateNodes(index);
-		        }
+                if (shouldRotate)
+                {
+                    RotateNodes(index);
+                }
 
-		        index = indexNode.Parent;
-	        }
+                index = indexNode.Parent;
+            }
         }
 
 
@@ -1173,8 +1172,8 @@ namespace Robust.Shared.Physics
                     a.Aabb = b.Aabb.Union(g.Aabb);
                     c.Aabb = a.Aabb.Union(f.Aabb);
 
-                    a.Height = (short) (Math.Max(b.Height, g.Height) + 1);
-                    c.Height = (short) (Math.Max(a.Height, f.Height) + 1);
+                    a.Height = (short)(Math.Max(b.Height, g.Height) + 1);
+                    c.Height = (short)(Math.Max(a.Height, f.Height) + 1);
                 }
                 else
                 {
@@ -1706,13 +1705,13 @@ namespace Robust.Shared.Physics
         public Proxy BuildTree(int leafCount)
         {
             var nodes = _nodes;
-	        var leafIndices = LeafIndices;
+            var leafIndices = LeafIndices;
 
-	        if (leafCount == 1)
-	        {
-		        nodes[leafIndices[0]].Parent = Proxy.Free;
-		        return leafIndices[0];
-	        }
+            if (leafCount == 1)
+            {
+                nodes[leafIndices[0]].Parent = Proxy.Free;
+                return leafIndices[0];
+            }
 
 #if !B2_TREE_HEURISTIC
             var leafCenters = LeafCenters;
@@ -1721,8 +1720,8 @@ namespace Robust.Shared.Physics
             var binIndices = BinIndices;
 #endif
 
-	        var stack = new GrowableStack<RebuildItem>(stackalloc RebuildItem[TreeStackSize]);
-	        var top = 0;
+            var stack = new GrowableStack<RebuildItem>(stackalloc RebuildItem[TreeStackSize]);
+            var top = 0;
             AllocateNode(out var topProxy);
 
             stack.Push(new RebuildItem()
@@ -1738,147 +1737,147 @@ namespace Robust.Shared.Physics
 #endif
             });
 
-	        while (true)
-	        {
-		        ref var item = ref stack[top];
+            while (true)
+            {
+                ref var item = ref stack[top];
 
-		        item.ChildCount += 1;
+                item.ChildCount += 1;
 
-		        if (item.ChildCount == 2)
-		        {
-			        // This internal node has both children established
+                if (item.ChildCount == 2)
+                {
+                    // This internal node has both children established
 
-			        if (top == 0)
-			        {
-				        // all done
-				        break;
-			        }
+                    if (top == 0)
+                    {
+                        // all done
+                        break;
+                    }
 
-			        ref var parentItem = ref stack[top - 1];
-			        ref var parentNode = ref nodes[parentItem.NodeIndex];
+                    ref var parentItem = ref stack[top - 1];
+                    ref var parentNode = ref nodes[parentItem.NodeIndex];
 
-			        if (parentItem.ChildCount == 0)
-			        {
-				        Assert(parentNode.Child1 == Proxy.Free);
-				        parentNode.Child1 = item.NodeIndex;
-			        }
-			        else
-			        {
-				        Assert(parentItem.ChildCount == 1);
-				        Assert(parentNode.Child2 == Proxy.Free);
-				        parentNode.Child2 = item.NodeIndex;
-			        }
+                    if (parentItem.ChildCount == 0)
+                    {
+                        Assert(parentNode.Child1 == Proxy.Free);
+                        parentNode.Child1 = item.NodeIndex;
+                    }
+                    else
+                    {
+                        Assert(parentItem.ChildCount == 1);
+                        Assert(parentNode.Child2 == Proxy.Free);
+                        parentNode.Child2 = item.NodeIndex;
+                    }
 
-			        ref var node = ref nodes[item.NodeIndex];
+                    ref var node = ref nodes[item.NodeIndex];
 
-			        Assert(node.Parent == Proxy.Free);
-			        node.Parent = parentItem.NodeIndex;
+                    Assert(node.Parent == Proxy.Free);
+                    node.Parent = parentItem.NodeIndex;
 
-			        Assert(node.Child1 != Proxy.Free);
-			        Assert(node.Child2 != Proxy.Free);
+                    Assert(node.Child1 != Proxy.Free);
+                    Assert(node.Child2 != Proxy.Free);
                     {
                         ref var child1 = ref nodes[node.Child1];
                         ref var child2 = ref nodes[node.Child2];
 
                         node.Aabb = Box2.Union(child1.Aabb, child2.Aabb);
-                        node.Height = (short) (1 + Math.Max(child1.Height, child2.Height));
+                        node.Height = (short)(1 + Math.Max(child1.Height, child2.Height));
                         node.CategoryBits = child1.CategoryBits | child2.CategoryBits;
                     }
 
-			        // Pop stack
-			        top -= 1;
-		        }
-		        else
-		        {
-			        int startIndex, endIndex;
-			        if (item.ChildCount == 0)
-			        {
-				        startIndex = item.StartIndex;
-				        endIndex = item.SplitIndex;
-			        }
-			        else
-			        {
-				        Assert(item.ChildCount == 1);
-				        startIndex = item.SplitIndex;
-				        endIndex = item.EndIndex;
-			        }
+                    // Pop stack
+                    top -= 1;
+                }
+                else
+                {
+                    int startIndex, endIndex;
+                    if (item.ChildCount == 0)
+                    {
+                        startIndex = item.StartIndex;
+                        endIndex = item.SplitIndex;
+                    }
+                    else
+                    {
+                        Assert(item.ChildCount == 1);
+                        startIndex = item.SplitIndex;
+                        endIndex = item.EndIndex;
+                    }
 
-			        int count = endIndex - startIndex;
+                    int count = endIndex - startIndex;
 
-			        if (count == 1)
-			        {
-				        var childIndex = leafIndices[startIndex];
-				        ref var node = ref nodes[item.NodeIndex];
+                    if (count == 1)
+                    {
+                        var childIndex = leafIndices[startIndex];
+                        ref var node = ref nodes[item.NodeIndex];
 
-				        if (item.ChildCount == 0)
-				        {
-					        Assert(node.Child1 == Proxy.Free);
-					        node.Child1 = childIndex;
-				        }
-				        else
-				        {
-					        Assert(item.ChildCount == 1);
-					        Assert(node.Child2 == Proxy.Free);
-					        node.Child2 = childIndex;
-				        }
+                        if (item.ChildCount == 0)
+                        {
+                            Assert(node.Child1 == Proxy.Free);
+                            node.Child1 = childIndex;
+                        }
+                        else
+                        {
+                            Assert(item.ChildCount == 1);
+                            Assert(node.Child2 == Proxy.Free);
+                            node.Child2 = childIndex;
+                        }
 
-				        ref var childNode = ref nodes[childIndex];
-				        Assert(childNode.Parent == Proxy.Free);
-				        childNode.Parent = item.NodeIndex;
-			        }
-			        else
-			        {
-				        Assert(count > 0);
-				        Assert(top < TreeStackSize);
+                        ref var childNode = ref nodes[childIndex];
+                        Assert(childNode.Parent == Proxy.Free);
+                        childNode.Parent = item.NodeIndex;
+                    }
+                    else
+                    {
+                        Assert(count > 0);
+                        Assert(top < TreeStackSize);
 
-				        top += 1;
-				        ref var newItem = ref stack[top];
+                        top += 1;
+                        ref var newItem = ref stack[top];
                         AllocateNode(out var nodeIndex);
-				        newItem.NodeIndex = nodeIndex;
-				        newItem.ChildCount = -1;
-				        newItem.StartIndex = startIndex;
-				        newItem.EndIndex = endIndex;
-        #if !B2_TREE_HEURISTIC
-				        newItem.SplitIndex = PartitionMid(leafIndices[startIndex..], leafCenters[startIndex..], count);
-        #else
+                        newItem.NodeIndex = nodeIndex;
+                        newItem.ChildCount = -1;
+                        newItem.StartIndex = startIndex;
+                        newItem.EndIndex = endIndex;
+#if !B2_TREE_HEURISTIC
+                        newItem.SplitIndex = PartitionMid(leafIndices[startIndex..], leafCenters[startIndex..], count);
+#else
 				        newItem.SplitIndex =
 					        PartitionSAH(leafIndices[startIndex..], binIndices[startIndex..], leafBoxes[startIndex..], count);
-        #endif
-				        newItem.SplitIndex += startIndex;
-			        }
-		        }
-	        }
+#endif
+                        newItem.SplitIndex += startIndex;
+                    }
+                }
+            }
 
-	        ref var rootNode = ref nodes[stack[0].NodeIndex];
-	        Assert(rootNode.Parent == Proxy.Free);
-	        Assert(rootNode.Child1 != Proxy.Free);
-	        Assert(rootNode.Child2 != Proxy.Free);
+            ref var rootNode = ref nodes[stack[0].NodeIndex];
+            Assert(rootNode.Parent == Proxy.Free);
+            Assert(rootNode.Child1 != Proxy.Free);
+            Assert(rootNode.Child2 != Proxy.Free);
 
             {
                 ref var child1 = ref nodes[rootNode.Child1];
                 ref var child2 = ref nodes[rootNode.Child2];
 
                 rootNode.Aabb = Box2.Union(child1.Aabb, child2.Aabb);
-                rootNode.Height = (short) (1 + Math.Max(child1.Height, child2.Height));
+                rootNode.Height = (short)(1 + Math.Max(child1.Height, child2.Height));
                 rootNode.CategoryBits = child1.CategoryBits | child2.CategoryBits;
             }
 
-	        return stack[0].NodeIndex;
+            return stack[0].NodeIndex;
         }
 
         // Not safe to access tree during this operation because it may grow
         public int Rebuild(bool fullBuild)
         {
-	        var proxyCount = ProxyCount;
-	        if (proxyCount == 0)
-	        {
-		        return 0;
-	        }
+            var proxyCount = ProxyCount;
+            if (proxyCount == 0)
+            {
+                return 0;
+            }
 
-	        // Ensure capacity for rebuild space
-	        if (proxyCount > RebuildCapacity)
-	        {
-		        var newCapacity = proxyCount + proxyCount / 2;
+            // Ensure capacity for rebuild space
+            if (proxyCount > RebuildCapacity)
+            {
+                var newCapacity = proxyCount + proxyCount / 2;
 
                 Array.Resize(ref LeafIndices, newCapacity);
 
@@ -1889,19 +1888,19 @@ namespace Robust.Shared.Physics
                 Array.Resize(ref BinIndices, newCapacity);
 #endif
 
-		        RebuildCapacity = newCapacity;
-	        }
+                RebuildCapacity = newCapacity;
+            }
 
-	        var leafCount = 0;
-	        var stack = new GrowableStack<Proxy>(stackalloc Proxy[TreeStackSize]);
+            var leafCount = 0;
+            var stack = new GrowableStack<Proxy>(stackalloc Proxy[TreeStackSize]);
 
-	        var nodeIndex = _root;
+            var nodeIndex = _root;
             ref var baseRef = ref _nodes[0];
-	        var node = baseRef;
+            var node = baseRef;
 
-	        // These are the nodes that get sorted to rebuild the tree.
-	        // I'm using indices because the node pool may grow during the build.
-	        var leafIndices = LeafIndices;
+            // These are the nodes that get sorted to rebuild the tree.
+            // I'm using indices because the node pool may grow during the build.
+            var leafIndices = LeafIndices;
 
 #if !B2_TREE_HEURISTIC
             var leafCenters = LeafCenters;
@@ -1909,57 +1908,57 @@ namespace Robust.Shared.Physics
             var leafBoxes = LeafBoxes;
 #endif
 
-	        // Gather all proxy nodes that have grown and all internal nodes that haven't grown. Both are
-	        // considered leaves in the tree rebuild.
-	        // Free all internal nodes that have grown.
-	        // todo use a node growth metric instead of simply enlarged to reduce rebuild size and frequency
-	        // this should be weighed against b2_aabbMargin
-	        while (true)
-	        {
-		        if (node.Height == 0 || (!node.Enlarged && !fullBuild))
-		        {
-			        leafIndices[leafCount] = nodeIndex;
-        #if !B2_TREE_HEURISTIC
-			        leafCenters[leafCount] = node.Aabb.Center;
-        #else
+            // Gather all proxy nodes that have grown and all internal nodes that haven't grown. Both are
+            // considered leaves in the tree rebuild.
+            // Free all internal nodes that have grown.
+            // todo use a node growth metric instead of simply enlarged to reduce rebuild size and frequency
+            // this should be weighed against b2_aabbMargin
+            while (true)
+            {
+                if (node.Height == 0 || (!node.Enlarged && !fullBuild))
+                {
+                    leafIndices[leafCount] = nodeIndex;
+#if !B2_TREE_HEURISTIC
+                    leafCenters[leafCount] = node.Aabb.Center;
+#else
 			        leafBoxes[leafCount] = node.Aabb;
-        #endif
-			        leafCount += 1;
+#endif
+                    leafCount += 1;
 
-			        // Detach
-			        node.Parent = Proxy.Free;
-		        }
-		        else
-		        {
-			        var doomedNodeIndex = nodeIndex;
+                    // Detach
+                    node.Parent = Proxy.Free;
+                }
+                else
+                {
+                    var doomedNodeIndex = nodeIndex;
 
-			        // Handle children
-			        nodeIndex = node.Child1;
+                    // Handle children
+                    nodeIndex = node.Child1;
 
-			        Assert(stack.GetCount() < TreeStackSize);
-			        if (stack.GetCount() < TreeStackSize)
-			        {
+                    Assert(stack.GetCount() < TreeStackSize);
+                    if (stack.GetCount() < TreeStackSize)
+                    {
                         stack.Push(node.Child2);
-			        }
+                    }
 
                     node = Unsafe.Add(ref baseRef, nodeIndex);
 
-			        // Remove doomed node
-			        FreeNode(doomedNodeIndex);
+                    // Remove doomed node
+                    FreeNode(doomedNodeIndex);
 
-			        continue;
-		        }
+                    continue;
+                }
 
-		        if (stack.GetCount() == 0)
-		        {
-			        break;
-		        }
+                if (stack.GetCount() == 0)
+                {
+                    break;
+                }
 
                 nodeIndex = stack.Pop();
-		        node = Unsafe.Add(ref baseRef, nodeIndex);
-	        }
+                node = Unsafe.Add(ref baseRef, nodeIndex);
+            }
 
-        #if B2_VALIDATE
+#if B2_VALIDATE
             int capacity = Capacity;
 	        for (int32_t i = 0; i < capacity; ++i)
 	        {
@@ -1968,15 +1967,15 @@ namespace Robust.Shared.Physics
 			        Assert(!nodes[i].Enlarged);
 		        }
 	        }
-        #endif
+#endif
 
-	        Assert(leafCount <= proxyCount);
+            Assert(leafCount <= proxyCount);
 
-	        _root = BuildTree(leafCount);
+            _root = BuildTree(leafCount);
 
-	        Validate();
+            Validate();
 
-	        return leafCount;
+            return leafCount;
         }
 
         #endregion
@@ -2070,88 +2069,88 @@ namespace Robust.Shared.Physics
 
             var r = d.Normalized();
 
-	        // v is perpendicular to the segment.
-	        var v = Vector2Helpers.Cross(1.0f, r);
+            // v is perpendicular to the segment.
+            var v = Vector2Helpers.Cross(1.0f, r);
             var abs_v = Vector2.Abs(v);
 
-	        // Separating axis for segment (Gino, p80).
-	        // |dot(v, p1 - c)| > dot(|v|, h)
+            // Separating axis for segment (Gino, p80).
+            // |dot(v, p1 - c)| > dot(|v|, h)
 
-	        float maxFraction = input.MaxFraction;
+            float maxFraction = input.MaxFraction;
 
-	        var p2 = Vector2.Add(p1, maxFraction * d);
+            var p2 = Vector2.Add(p1, maxFraction * d);
 
-	        // Build a bounding box for the segment.
-	        var segmentAABB = new Box2(Vector2.Min(p1, p2), Vector2.Max(p1, p2));
+            // Build a bounding box for the segment.
+            var segmentAABB = new Box2(Vector2.Min(p1, p2), Vector2.Max(p1, p2));
 
-	        var stack = new GrowableStack<Proxy>(stackalloc Proxy[256]);
+            var stack = new GrowableStack<Proxy>(stackalloc Proxy[256]);
             ref var baseRef = ref _nodes[0];
-	        stack.Push(_root);
+            stack.Push(_root);
 
-	        var subInput = input;
+            var subInput = input;
 
-	        while (stack.GetCount() > 0)
+            while (stack.GetCount() > 0)
             {
                 var nodeId = stack.Pop();
 
-		        if (nodeId == Proxy.Free)
-		        {
-			        continue;
-		        }
+                if (nodeId == Proxy.Free)
+                {
+                    continue;
+                }
 
-		        var node = Unsafe.Add(ref baseRef, nodeId);
+                var node = Unsafe.Add(ref baseRef, nodeId);
 
-		        if (!node.Aabb.Intersects(segmentAABB))// || ( node->categoryBits & maskBits ) == 0 )
-		        {
-			        continue;
-		        }
+                if (!node.Aabb.Intersects(segmentAABB))// || ( node->categoryBits & maskBits ) == 0 )
+                {
+                    continue;
+                }
 
-		        // Separating axis for segment (Gino, p80).
-		        // |dot(v, p1 - c)| > dot(|v|, h)
-		        // radius extension is added to the node in this case
-		        var c = node.Aabb.Center;
-		        var h = node.Aabb.Extents;
-		        float term1 = MathF.Abs(Vector2.Dot(v, Vector2.Subtract(p1, c)));
-		        float term2 = Vector2.Dot(abs_v, h);
-		        if ( term2 < term1 )
-		        {
-			        continue;
-		        }
+                // Separating axis for segment (Gino, p80).
+                // |dot(v, p1 - c)| > dot(|v|, h)
+                // radius extension is added to the node in this case
+                var c = node.Aabb.Center;
+                var h = node.Aabb.Extents;
+                float term1 = MathF.Abs(Vector2.Dot(v, Vector2.Subtract(p1, c)));
+                float term2 = Vector2.Dot(abs_v, h);
+                if (term2 < term1)
+                {
+                    continue;
+                }
 
-		        if (node.IsLeaf)
-		        {
-			        subInput.MaxFraction = maxFraction;
+                if (node.IsLeaf)
+                {
+                    subInput.MaxFraction = maxFraction;
 
-			        float value = callback(subInput, node.UserData, ref state);
+                    float value = callback(subInput, node.UserData, ref state);
 
-			        if (value == 0.0f)
-			        {
-				        // The client has terminated the ray cast.
-				        return;
-			        }
+                    if (value == 0.0f)
+                    {
+                        // The client has terminated the ray cast.
+                        return;
+                    }
 
-			        if (0.0f < value && value < maxFraction)
-			        {
-				        // Update segment bounding box.
-				        maxFraction = value;
-				        p2 = Vector2.Add(p1, maxFraction * d);
-				        segmentAABB.BottomLeft = Vector2.Min( p1, p2 );
-				        segmentAABB.TopRight = Vector2.Max( p1, p2 );
-			        }
-		        }
-		        else
+                    if (0.0f < value && value < maxFraction)
+                    {
+                        // Update segment bounding box.
+                        maxFraction = value;
+                        p2 = Vector2.Add(p1, maxFraction * d);
+                        segmentAABB.BottomLeft = Vector2.Min(p1, p2);
+                        segmentAABB.TopRight = Vector2.Max(p1, p2);
+                    }
+                }
+                else
                 {
                     var stackCount = stack.GetCount();
-			        Assert( stackCount < 256 - 1 );
-			        if (stackCount < 256 - 1 )
-			        {
-				        // TODO_ERIN just put one node on the stack, continue on a child node
-				        // TODO_ERIN test ordering children by nearest to ray origin
-				        stack.Push(node.Child1);
-				        stack.Push(node.Child2);
-			        }
-		        }
-	        }
+                    Assert(stackCount < 256 - 1);
+                    if (stackCount < 256 - 1)
+                    {
+                        // TODO_ERIN just put one node on the stack, continue on a child node
+                        // TODO_ERIN test ordering children by nearest to ray origin
+                        stack.Push(node.Child1);
+                        stack.Push(node.Child2);
+                    }
+                }
+            }
         }
 
         /// This function receives clipped ray-cast input for a proxy. The function
@@ -2163,113 +2162,113 @@ namespace Robust.Shared.Physics
 
         internal void ShapeCast(ShapeCastInput input, long maskBits, TreeShapeCastCallback callback, ref WorldRayCastContext state)
         {
-	        if (input.Count == 0)
-	        {
-		        return;
-	        }
+            if (input.Count == 0)
+            {
+                return;
+            }
 
             var originAABB = new Box2(input.Points[0], input.Points[0]);
 
-	        for (var i = 1; i < input.Count; ++i)
-	        {
-		        originAABB.BottomLeft = Vector2.Min(originAABB.BottomLeft, input.Points[i]);
-		        originAABB.TopRight = Vector2.Max(originAABB.TopRight, input.Points[i]);
-	        }
+            for (var i = 1; i < input.Count; ++i)
+            {
+                originAABB.BottomLeft = Vector2.Min(originAABB.BottomLeft, input.Points[i]);
+                originAABB.TopRight = Vector2.Max(originAABB.TopRight, input.Points[i]);
+            }
 
-	        var radius = new Vector2(input.Radius, input.Radius);
+            var radius = new Vector2(input.Radius, input.Radius);
 
-	        originAABB.BottomLeft = Vector2.Subtract(originAABB.BottomLeft, radius);
-	        originAABB.TopRight = Vector2.Add(originAABB.TopRight, radius );
+            originAABB.BottomLeft = Vector2.Subtract(originAABB.BottomLeft, radius);
+            originAABB.TopRight = Vector2.Add(originAABB.TopRight, radius);
 
-	        var p1 = originAABB.Center;
-	        var extension = originAABB.Extents;
+            var p1 = originAABB.Center;
+            var extension = originAABB.Extents;
 
-	        // v is perpendicular to the segment.
-	        var r = input.Translation;
-	        var v = Vector2Helpers.Cross(1.0f, r);
-	        var abs_v = Vector2.Abs(v);
+            // v is perpendicular to the segment.
+            var r = input.Translation;
+            var v = Vector2Helpers.Cross(1.0f, r);
+            var abs_v = Vector2.Abs(v);
 
-	        // Separating axis for segment (Gino, p80).
-	        // |dot(v, p1 - c)| > dot(|v|, h)
+            // Separating axis for segment (Gino, p80).
+            // |dot(v, p1 - c)| > dot(|v|, h)
 
-	        float maxFraction = input.MaxFraction;
+            float maxFraction = input.MaxFraction;
 
-	        // Build total box for the shape cast
-	        var t = Vector2.Multiply(maxFraction, input.Translation);
+            // Build total box for the shape cast
+            var t = Vector2.Multiply(maxFraction, input.Translation);
 
             var totalAABB = new Box2(
-		        Vector2.Min(originAABB.BottomLeft, Vector2.Add(originAABB.BottomLeft, t)),
-		        Vector2.Max(originAABB.TopRight, Vector2.Add( originAABB.TopRight, t))
-	        );
+                Vector2.Min(originAABB.BottomLeft, Vector2.Add(originAABB.BottomLeft, t)),
+                Vector2.Max(originAABB.TopRight, Vector2.Add(originAABB.TopRight, t))
+            );
 
-	        var subInput = input;
+            var subInput = input;
 
             ref var baseRef = ref _nodes[0];
             var stack = new GrowableStack<Proxy>(stackalloc Proxy[256]);
-	        stack.Push(_root);
+            stack.Push(_root);
 
-	        while (stack.GetCount() > 0)
+            while (stack.GetCount() > 0)
             {
-		        var nodeId = stack.Pop();
+                var nodeId = stack.Pop();
 
-		        if (nodeId == Proxy.Free)
-		        {
-			        continue;
-		        }
+                if (nodeId == Proxy.Free)
+                {
+                    continue;
+                }
 
                 var node = Unsafe.Add(ref baseRef, nodeId);
-		        if (!node.Aabb.Intersects(totalAABB))// || ( node->categoryBits & maskBits ) == 0 )
-		        {
-			        continue;
-		        }
+                if (!node.Aabb.Intersects(totalAABB))// || ( node->categoryBits & maskBits ) == 0 )
+                {
+                    continue;
+                }
 
-		        // Separating axis for segment (Gino, p80).
-		        // |dot(v, p1 - c)| > dot(|v|, h)
-		        // radius extension is added to the node in this case
-		        var c = node.Aabb.Center;
-		        var h = Vector2.Add(node.Aabb.Extents, extension);
-		        float term1 = MathF.Abs(Vector2.Dot(v, Vector2.Subtract(p1, c)));
-		        float term2 = Vector2.Dot(abs_v, h);
-		        if (term2 < term1)
-		        {
-			        continue;
-		        }
+                // Separating axis for segment (Gino, p80).
+                // |dot(v, p1 - c)| > dot(|v|, h)
+                // radius extension is added to the node in this case
+                var c = node.Aabb.Center;
+                var h = Vector2.Add(node.Aabb.Extents, extension);
+                float term1 = MathF.Abs(Vector2.Dot(v, Vector2.Subtract(p1, c)));
+                float term2 = Vector2.Dot(abs_v, h);
+                if (term2 < term1)
+                {
+                    continue;
+                }
 
-		        if (node.IsLeaf)
-		        {
-			        subInput.MaxFraction = maxFraction;
+                if (node.IsLeaf)
+                {
+                    subInput.MaxFraction = maxFraction;
 
-			        float value = callback(subInput, node.UserData, ref state);
+                    float value = callback(subInput, node.UserData, ref state);
 
-			        if ( value == 0.0f )
-			        {
-				        // The client has terminated the ray cast.
-				        return;
-			        }
+                    if (value == 0.0f)
+                    {
+                        // The client has terminated the ray cast.
+                        return;
+                    }
 
-			        if (0.0f < value && value < maxFraction)
-			        {
-				        // Update segment bounding box.
-				        maxFraction = value;
-				        t = Vector2.Multiply(maxFraction, input.Translation);
-				        totalAABB.BottomLeft = Vector2.Min( originAABB.BottomLeft, Vector2.Add(originAABB.BottomLeft, t));
-				        totalAABB.TopRight = Vector2.Max( originAABB.TopRight, Vector2.Add( originAABB.TopRight, t));
-			        }
-		        }
-		        else
-		        {
+                    if (0.0f < value && value < maxFraction)
+                    {
+                        // Update segment bounding box.
+                        maxFraction = value;
+                        t = Vector2.Multiply(maxFraction, input.Translation);
+                        totalAABB.BottomLeft = Vector2.Min(originAABB.BottomLeft, Vector2.Add(originAABB.BottomLeft, t));
+                        totalAABB.TopRight = Vector2.Max(originAABB.TopRight, Vector2.Add(originAABB.TopRight, t));
+                    }
+                }
+                else
+                {
                     var stackCount = stack.GetCount();
-			        Assert(stackCount < 256 - 1);
+                    Assert(stackCount < 256 - 1);
 
-			        if (stackCount < 255)
-			        {
-				        // TODO_ERIN just put one node on the stack, continue on a child node
-				        // TODO_ERIN test ordering children by nearest to ray origin
-				        stack.Push(node.Child1);
-				        stack.Push(node.Child2);
-			        }
-		        }
-	        }
+                    if (stackCount < 255)
+                    {
+                        // TODO_ERIN just put one node on the stack, continue on a child node
+                        // TODO_ERIN test ordering children by nearest to ray origin
+                        stack.Push(node.Child1);
+                        stack.Push(node.Child2);
+                    }
+                }
+            }
         }
 
         public void RayCast(RayQueryCallback callback, in Ray input)
@@ -2467,7 +2466,7 @@ namespace Robust.Shared.Physics
                     var node = _nodes[i];
                     if (!node.IsFree)
                     {
-                        yield return ((Proxy) i, node);
+                        yield return ((Proxy)i, node);
                     }
                 }
             }

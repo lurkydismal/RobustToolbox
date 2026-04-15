@@ -53,7 +53,7 @@ namespace Robust.Shared.GameObjects
         private static readonly Histogram _tickUsageHistogram = Metrics.CreateHistogram("robust_entity_systems_update_usage",
             "Amount of time spent processing each entity system", new HistogramConfiguration
             {
-                LabelNames = new[] {"system"},
+                LabelNames = new[] { "system" },
                 Buckets = Histogram.ExponentialBuckets(0.000_001, 1.5, 25)
             });
 
@@ -242,7 +242,7 @@ namespace Robust.Shared.GameObjects
 
             foreach (var systemType in systemTypes)
             {
-                var node = new TopologicalSort.GraphNode<IEntitySystem>((IEntitySystem) dependencyCollection.ResolveType(systemType));
+                var node = new TopologicalSort.GraphNode<IEntitySystem>((IEntitySystem)dependencyCollection.ResolveType(systemType));
 
                 typeToNode.Add(systemType, node);
                 allNodes.Add(node);
@@ -278,8 +278,9 @@ namespace Robust.Shared.GameObjects
             return (frameUpdate, update);
         }
 
-        private static IEnumerable<Type> GetBaseTypes(Type type) {
-            if(type.BaseType == null) return type.GetInterfaces();
+        private static IEnumerable<Type> GetBaseTypes(Type type)
+        {
+            if (type.BaseType == null) return type.GetInterfaces();
 
             return Enumerable.Repeat(type.BaseType, 1)
                 .Concat(type.GetInterfaces())
@@ -293,7 +294,7 @@ namespace Robust.Shared.GameObjects
             // System.Values is modified by RemoveSystem
             foreach (var systemType in _systemTypes)
             {
-                if(SystemDependencyCollection == null) continue;
+                if (SystemDependencyCollection == null) continue;
                 var system = (IEntitySystem)SystemDependencyCollection.ResolveType(systemType);
                 SystemUnloaded?.Invoke(this, new SystemChangedArgs(system));
                 system.Shutdown();
@@ -329,10 +330,10 @@ namespace Robust.Shared.GameObjects
                 try
                 {
 #endif
-                    using (_profManager.Value(updReg.System.GetType().Name))
-                    {
-                        updReg.System.Update(frameTime);
-                    }
+                using (_profManager.Value(updReg.System.GetType().Name))
+                {
+                    updReg.System.Update(frameTime);
+                }
 #if EXCEPTION_TOLERANCE
                 }
                 catch (Exception e)
@@ -357,10 +358,10 @@ namespace Robust.Shared.GameObjects
                 try
                 {
 #endif
-                    using (_profManager.Value(system.GetType().Name))
-                    {
-                        system.FrameUpdate(frameTime);
-                    }
+                using (_profManager.Value(system.GetType().Name))
+                {
+                    system.FrameUpdate(frameTime);
+                }
 #if EXCEPTION_TOLERANCE
                 }
                 catch (Exception e)
@@ -406,7 +407,7 @@ namespace Robust.Shared.GameObjects
                 return true;
             }
 
-            var mUpdate = type.GetMethod(nameof(EntitySystem.Update), new[] {typeof(float)});
+            var mUpdate = type.GetMethod(nameof(EntitySystem.Update), new[] { typeof(float) });
 
             DebugTools.AssertNotNull(mUpdate);
 
@@ -420,7 +421,7 @@ namespace Robust.Shared.GameObjects
                 return true;
             }
 
-            var mFrameUpdate = type.GetMethod(nameof(EntitySystem.FrameUpdate), new[] {typeof(float)});
+            var mFrameUpdate = type.GetMethod(nameof(EntitySystem.FrameUpdate), new[] { typeof(float) });
 
             DebugTools.AssertNotNull(mFrameUpdate);
 

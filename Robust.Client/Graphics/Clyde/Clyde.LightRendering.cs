@@ -101,7 +101,7 @@ namespace Robust.Client.Graphics.Clyde
 
         private unsafe void InitLighting()
         {
-            _cfg.OnValueChanged(CVars.MaxLightRadius, val => { _maxLightRadius = val;}, true);
+            _cfg.OnValueChanged(CVars.MaxLightRadius, val => { _maxLightRadius = val; }, true);
 
             // Other...
             LoadLightingShaders();
@@ -1183,7 +1183,7 @@ namespace Robust.Client.Graphics.Clyde
             viewport.WallMaskRenderTarget = CreateRenderTarget(viewport.Size, RenderTargetColorFormat.R8,
                 name: $"{viewport.Name}-{nameof(viewport.WallMaskRenderTarget)}");
 
-            viewport.LightRenderTarget = (RenderTexture) CreateLightRenderTarget(lightMapSize,
+            viewport.LightRenderTarget = (RenderTexture)CreateLightRenderTarget(lightMapSize,
                 $"{viewport.Name}-{nameof(viewport.LightRenderTarget)}");
 
             viewport.LightBlurTarget = CreateRenderTarget(lightMapSize,
@@ -1268,7 +1268,7 @@ namespace Robust.Client.Graphics.Clyde
         private void MaxLightsChanged(int value)
         {
             _maxLights = value;
-            _lightsToRenderList = new (PointLightComponent, Vector2, float , Angle)[value];
+            _lightsToRenderList = new (PointLightComponent, Vector2, float, Angle)[value];
             DebugTools.Assert(_maxLights >= _maxShadowcastingLights);
         }
     }

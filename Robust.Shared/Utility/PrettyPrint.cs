@@ -28,7 +28,7 @@ namespace Robust.Shared.Utility
         /// <returns>A readable representation of the object.</returns>
         public static string? PrintUserFacing(object? value)
         {
-           return PrintUserFacingWithType(value, out _);
+            return PrintUserFacingWithType(value, out _);
         }
 
         /// <summary>
@@ -49,7 +49,8 @@ namespace Robust.Shared.Utility
         /// <returns>A readable representation of the object.</returns>
         public static string PrintUserFacingWithType(object? value, out string typeRep)
         {
-            if (value == null) {
+            if (value == null)
+            {
                 typeRep = string.Empty;
                 return "null";
             }
@@ -60,14 +61,18 @@ namespace Robust.Shared.Utility
             // `Object` `ToString`, then it will just print a type - so we instead
             // print the abbreviated version. Otherwise let the type print whatever
             // it wants
-            if (value.GetType().GetMethod("ToString", new Type[0], new ParameterModifier[0])!.DeclaringType == typeof(Object)) {
+            if (value.GetType().GetMethod("ToString", new Type[0], new ParameterModifier[0])!.DeclaringType == typeof(Object))
+            {
                 stringRep = TypeAbbreviation.Abbreviate(value.GetType());
                 typeRep = string.Empty;
-            } else if (value is EntityUid uid)
+            }
+            else if (value is EntityUid uid)
             {
                 stringRep = IoCManager.Resolve<IEntityManager>().ToPrettyString(uid);
                 typeRep = TypeAbbreviation.Abbreviate(value.GetType());
-            }else {
+            }
+            else
+            {
                 stringRep = value.ToString();
                 typeRep = TypeAbbreviation.Abbreviate(value.GetType());
             }
@@ -178,12 +183,12 @@ namespace Robust.Shared.Utility
                 if (method.IsAssembly)
                     builder.Append("internal ");
 
-                if(method.IsStatic)
+                if (method.IsStatic)
                     builder.Append("static ");
 
-                if (method.IsAbstract && method.DeclaringType is {IsAbstract:true, IsInterface:false})
+                if (method.IsAbstract && method.DeclaringType is { IsAbstract: true, IsInterface: false })
                     builder.Append("abstract ");
-                else if(method.DeclaringType is {IsInterface:false})
+                else if (method.DeclaringType is { IsInterface: false })
                 {
                     if (method.IsFinal)
                         builder.Append("sealed override ");
@@ -195,7 +200,7 @@ namespace Robust.Shared.Utility
             if (returnType && !method.IsConstructor)
                 builder.Append($"{method.ReturnType.PrintTypeSignature()} ");
 
-            if(name)
+            if (name)
                 builder.Append(method.Name);
 
             if (!arguments)
@@ -257,7 +262,7 @@ namespace Robust.Shared.Utility
                 if (field.IsAssembly)
                     builder.Append("internal ");
 
-                if(field.IsStatic)
+                if (field.IsStatic)
                     builder.Append("static ");
             }
 

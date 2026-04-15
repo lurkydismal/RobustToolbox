@@ -90,7 +90,7 @@ public sealed partial class SerializationManager
                 call = Expression.Call(
                     instanceParam,
                     nameof(WriteValue),
-                    new []{actualType},
+                    new[] { actualType },
                     serializerConst,
                     objAccess,
                     alwaysWriteParam,
@@ -119,7 +119,7 @@ public sealed partial class SerializationManager
                     call = Expression.Call(
                         instanceParam,
                         nameof(WriteValue),
-                        new []{typeof(Enum)},
+                        new[] { typeof(Enum) },
                         serializerConst,
                         Expression.Convert(objParam, typeof(Enum)),
                         alwaysWriteParam,
@@ -133,7 +133,7 @@ public sealed partial class SerializationManager
                 call = Expression.Call(
                     instanceParam,
                     nameof(WriteArray),
-                    new []{ actualType.GetElementType()! },
+                    new[] { actualType.GetElementType()! },
                     Expression.Convert(objParam, actualType),
                     alwaysWriteParam,
                     contextParam);
@@ -185,7 +185,7 @@ public sealed partial class SerializationManager
                     Expression.Call(
                         instanceParam,
                         nameof(WriteValue),
-                        new []{actualType},
+                        new[] { actualType },
                         serializerVar,
                         objAccess,
                         alwaysWriteParam,
@@ -207,7 +207,7 @@ public sealed partial class SerializationManager
                 static (tuple, manager) => ValueFactory(tuple.baseType, tuple.actualType, tuple.Item3, manager), this);
         }
 
-        return (WriteGenericDelegate<T>) _writeGenericDelegates
+        return (WriteGenericDelegate<T>)_writeGenericDelegates
             .GetOrAdd((type, notNullableOverride), static (tuple, manager) => ValueFactory(tuple.Item1, tuple.Item1, tuple.Item2, manager), this);
     }
 
@@ -242,7 +242,7 @@ public sealed partial class SerializationManager
         where T : notnull
     {
         //this check is in here on purpose. we cannot check this during expression tree generation due to the value maybe being handled by a custom typeserializer
-        if(definition == null)
+        if (definition == null)
             throw new InvalidOperationException($"No data definition found for type {typeof(T)} when writing");
 
         var mapping = definition.Serialize(value, context, alwaysWrite);
@@ -254,7 +254,7 @@ public sealed partial class SerializationManager
 
     public DataNode WriteValue<T>(T value, bool alwaysWrite = false, ISerializationContext? context = null, bool notNullableOverride = false)
     {
-        if(value == null)
+        if (value == null)
         {
             CanWriteNullCheck(typeof(T), notNullableOverride);
             return ValueDataNode.Null();

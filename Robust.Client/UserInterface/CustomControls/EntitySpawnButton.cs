@@ -12,7 +12,7 @@ public sealed class EntitySpawnButton : Control
     public EntityPrototype Prototype { get; set; } = default!;
     public Button ActualButton { get; private set; }
     public Label EntityLabel { get; private set; }
-    public EntityPrototypeView EntityTextureRects {get; private set; }
+    public EntityPrototypeView EntityTextureRects { get; private set; }
     public int Index { get; set; }
 
     public EntitySpawnButton()

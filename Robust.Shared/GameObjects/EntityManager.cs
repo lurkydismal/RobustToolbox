@@ -82,9 +82,9 @@ namespace Robust.Shared.GameObjects
 
         internal EntityEventBus EventBusInternal = null!;
 
-        protected int NextEntityUid = (int) EntityUid.FirstUid;
+        protected int NextEntityUid = (int)EntityUid.FirstUid;
 
-        protected int NextNetworkId = (int) NetEntity.First;
+        protected int NextNetworkId = (int)NetEntity.First;
 
         /// <inheritdoc />
         public IEventBus EventBus => EventBusInternal;
@@ -225,7 +225,7 @@ namespace Robust.Shared.GameObjects
 
         public virtual void Startup()
         {
-            if(!Initialized)
+            if (!Initialized)
                 throw new InvalidOperationException("Startup() called without Initialized");
             if (Started)
                 throw new InvalidOperationException("Startup() called multiple times");
@@ -652,7 +652,7 @@ namespace Robust.Shared.GameObjects
                     DebugTools.AssertEqual(childXform.ParentUid, uid);
                     RecursiveDeleteEntity(child, childMeta, childXform, transform);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     _sawmill.Error($"Caught exception while trying to recursively delete child entity '{ToPrettyString(child)}' of '{ToPrettyString(uid, metadata)}'\n{e}");
 #if !EXCEPTION_TOLERANCE
@@ -869,7 +869,7 @@ namespace Robust.Shared.GameObjects
             DebugTools.Assert(ents.Length == Entities.Count);
             foreach (var (uid, comp) in ents)
             {
-                var meta = (MetaDataComponent) comp;
+                var meta = (MetaDataComponent)comp;
                 if (meta.EntityLifeStage >= EntityLifeStage.Terminating)
                     continue;
 
@@ -1062,7 +1062,7 @@ namespace Robust.Shared.GameObjects
 
         /// <inheritdoc />
         public EntityStringRepresentation ToPrettyString(EntityUid uid, MetaDataComponent? metadata)
-            =>  ToPrettyString((uid, metadata));
+            => ToPrettyString((uid, metadata));
 
         /// <inheritdoc />
         public EntityStringRepresentation ToPrettyString(Entity<MetaDataComponent?> entity)

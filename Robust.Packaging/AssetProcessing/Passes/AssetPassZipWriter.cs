@@ -21,34 +21,34 @@ public sealed class AssetPassZipWriter : AssetPass
         switch (file)
         {
             case AssetFileDisk:
-            {
-                // Copy disk files out to a temporary buffer, so at least the read itself is parallel.
-                // Avoid contention on the archive lock.
-                using var fs = file.Open();
-                using var ms = new MemoryStream((int)fs.Length);
-                fs.CopyTo(ms);
-                ms.Position = 0;
-
-                lock (Archive)
                 {
-                    var entry = Archive.CreateEntry(file.Path, Compression);
-                    using var entryStream = entry.Open();
-                    ms.CopyTo(entryStream);
-                }
+                    // Copy disk files out to a temporary buffer, so at least the read itself is parallel.
+                    // Avoid contention on the archive lock.
+                    using var fs = file.Open();
+                    using var ms = new MemoryStream((int)fs.Length);
+                    fs.CopyTo(ms);
+                    ms.Position = 0;
 
-                break;
-            }
+                    lock (Archive)
+                    {
+                        var entry = Archive.CreateEntry(file.Path, Compression);
+                        using var entryStream = entry.Open();
+                        ms.CopyTo(entryStream);
+                    }
+
+                    break;
+                }
 
             default:
-            {
-                lock (Archive)
                 {
-                    var entry = Archive.CreateEntry(file.Path, Compression);
-                    using var entryStream = entry.Open();
-                    file.Open().CopyTo(entryStream);
+                    lock (Archive)
+                    {
+                        var entry = Archive.CreateEntry(file.Path, Compression);
+                        using var entryStream = entry.Open();
+                        file.Open().CopyTo(entryStream);
+                    }
+                    break;
                 }
-                break;
-            }
         }
 
         return AssetFileAcceptResult.Consumed;

@@ -9,7 +9,7 @@ public class AddBenchmark
     [Params(32, 128)]
     public int N { get; set; }
 
-    [Params(1,2)]
+    [Params(1, 2)]
     public int T { get; set; }
 
     private float[] _inputA = default!;

@@ -24,7 +24,7 @@ public sealed class CommandSpecTypeParser : TypeParser<CommandSpec>
             }
 
             ctx.Error = new NotValidCommandError();
-            ctx.Error.Contextualize(ctx.Input, (start, ctx.Index+1));
+            ctx.Error.Contextualize(ctx.Input, (start, ctx.Index + 1));
             result = default;
             return false;
         }

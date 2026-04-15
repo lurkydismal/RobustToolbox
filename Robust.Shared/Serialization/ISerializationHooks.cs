@@ -9,5 +9,5 @@ public interface ISerializationHooks
     /// <summary>
     ///     Gets executed after deserialization is complete
     /// </summary>
-    void AfterDeserialization() {}
+    void AfterDeserialization() { }
 }

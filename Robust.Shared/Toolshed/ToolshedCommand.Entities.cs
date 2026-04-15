@@ -96,7 +96,7 @@ public abstract partial class ToolshedCommand
     /// </summary>
     [PublicAPI, MethodImpl(MethodImplOptions.AggressiveInlining)]
     protected T Comp<T>(EntityUid entity)
-        where T: IComponent
+        where T : IComponent
         => EntityManager.GetComponent<T>(entity);
 
     /// <summary>
@@ -104,7 +104,7 @@ public abstract partial class ToolshedCommand
     /// </summary>
     [PublicAPI, MethodImpl(MethodImplOptions.AggressiveInlining)]
     protected bool HasComp<T>(EntityUid entityUid)
-        where T: IComponent
+        where T : IComponent
         => EntityManager.HasComponent<T>(entityUid);
 
     /// <summary>
@@ -112,13 +112,13 @@ public abstract partial class ToolshedCommand
     /// </summary>
     [PublicAPI, MethodImpl(MethodImplOptions.AggressiveInlining)]
     protected bool TryComp<T>([NotNullWhen(true)] EntityUid? entity, [NotNullWhen(true)] out T? component)
-        where T: IComponent
+        where T : IComponent
         => EntityManager.TryGetComponent(entity, out component);
 
     /// <inheritdoc cref="TryComp{T}(System.Nullable{Robust.Shared.GameObjects.EntityUid},out T?)"/>
     [PublicAPI, MethodImpl(MethodImplOptions.AggressiveInlining)]
     protected bool TryComp<T>(EntityUid entity, [NotNullWhen(true)] out T? component)
-        where T: IComponent
+        where T : IComponent
         => EntityManager.TryGetComponent(entity, out component);
 
     /// <summary>
@@ -142,7 +142,7 @@ public abstract partial class ToolshedCommand
     /// </summary>
     [PublicAPI, MethodImpl(MethodImplOptions.AggressiveInlining)]
     protected T EnsureComp<T>(EntityUid entity)
-        where T: IComponent, new()
+        where T : IComponent, new()
         => EntityManager.EnsureComponent<T>(entity);
 
     /// <summary>
@@ -151,12 +151,12 @@ public abstract partial class ToolshedCommand
     /// <remarks>This may be replaced with some form of dependency attribute in the future.</remarks>
     [PublicAPI, MethodImpl(MethodImplOptions.AggressiveInlining)]
     protected T GetSys<T>()
-        where T: EntitySystem
+        where T : EntitySystem
         => EntitySystemManager.GetEntitySystem<T>();
 
     // GetSys is just too many letters to type
     [PublicAPI, MethodImpl(MethodImplOptions.AggressiveInlining)]
-    protected T Sys<T>() where T: EntitySystem => EntitySystemManager.GetEntitySystem<T>();
+    protected T Sys<T>() where T : EntitySystem => EntitySystemManager.GetEntitySystem<T>();
 
     /// <summary>
     ///     A shorthand for retrieving an entity query.

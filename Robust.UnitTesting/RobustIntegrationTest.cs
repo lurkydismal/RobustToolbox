@@ -189,7 +189,7 @@ namespace Robust.UnitTesting
                 return true;
 
             // If custom options are provided without explicitly setting pool=true, we assume we shouldn't pool.
-            if (options is not {Pool: true})
+            if (options is not { Pool: true })
                 return false;
 
             if (!options.Asynchronous)
@@ -465,7 +465,7 @@ namespace Robust.UnitTesting
                     {
                         msg = await _fromInstanceReader.ReadAsync(cancellationToken);
                     }
-                    catch(OperationCanceledException ex)
+                    catch (OperationCanceledException ex)
                     {
                         _unhandledException = ex;
                         _isAlive = false;
@@ -474,31 +474,31 @@ namespace Robust.UnitTesting
                     switch (msg)
                     {
                         case ShutDownMessage shutDownMessage:
-                        {
-                            _isAlive = false;
-                            _isSurelyIdle = true;
-                            _unhandledException = shutDownMessage.UnhandledException;
-                            if (throwOnUnhandled && _unhandledException != null)
                             {
-                                ExceptionDispatchInfo.Capture(_unhandledException).Throw();
-                                return;
+                                _isAlive = false;
+                                _isSurelyIdle = true;
+                                _unhandledException = shutDownMessage.UnhandledException;
+                                if (throwOnUnhandled && _unhandledException != null)
+                                {
+                                    ExceptionDispatchInfo.Capture(_unhandledException).Throw();
+                                    return;
+                                }
+
+                                break;
                             }
 
-                            break;
-                        }
-
                         case AckTicksMessage ack:
-                        {
-                            _ackTicksId = ack.MessageId;
-                            break;
-                        }
+                            {
+                                _ackTicksId = ack.MessageId;
+                                break;
+                            }
 
                         case AssertFailMessage assertFailMessage:
-                        {
-                            // Rethrow exception without losing stack trace.
-                            ExceptionDispatchInfo.Capture(assertFailMessage.Exception).Throw();
-                            break; // Unreachable.
-                        }
+                            {
+                                // Rethrow exception without losing stack trace.
+                                ExceptionDispatchInfo.Capture(assertFailMessage.Exception).Throw();
+                                break; // Unreachable.
+                            }
                     }
                 }
 
@@ -525,24 +525,24 @@ namespace Robust.UnitTesting
                         switch (msg)
                         {
                             case ShutDownMessage shutDownMessage:
-                            {
-                                _isAlive = false;
-                                _unhandledException = shutDownMessage.UnhandledException;
-                                if (throwOnUnhandled && _unhandledException != null)
                                 {
-                                    ExceptionDispatchInfo.Capture(_unhandledException).Throw();
-                                    return;
+                                    _isAlive = false;
+                                    _unhandledException = shutDownMessage.UnhandledException;
+                                    if (throwOnUnhandled && _unhandledException != null)
+                                    {
+                                        ExceptionDispatchInfo.Capture(_unhandledException).Throw();
+                                        return;
+                                    }
+
+                                    break;
                                 }
 
-                                break;
-                            }
-
                             case AssertFailMessage assertFailMessage:
-                            {
-                                // Rethrow exception without losing stack trace.
-                                ExceptionDispatchInfo.Capture(assertFailMessage.Exception).Throw();
-                                break; // Unreachable.
-                            }
+                                {
+                                    // Rethrow exception without losing stack trace.
+                                    ExceptionDispatchInfo.Capture(assertFailMessage.Exception).Throw();
+                                    break; // Unreachable.
+                                }
                         }
                     }
 
@@ -612,7 +612,7 @@ namespace Robust.UnitTesting
 
             internal void MarkNonIdle()
             {
-                Post(() => {});
+                Post(() => { });
             }
 
             public virtual Task Cleanup() => Task.CompletedTask;
@@ -630,7 +630,7 @@ namespace Robust.UnitTesting
                     resMan.MountString("/Prototypes/__integration_extra.yml", options.ExtraPrototypes);
                 }
 
-                if (options.ExtraPrototypeList is {} list)
+                if (options.ExtraPrototypeList is { } list)
                 {
                     for (var i = 0; i < list.Count; i++)
                     {
@@ -676,7 +676,7 @@ namespace Robust.UnitTesting
             public override IntegrationOptions? Options
             {
                 get => ServerOptions;
-                internal set => ServerOptions = (ServerIntegrationOptions?) value;
+                internal set => ServerOptions = (ServerIntegrationOptions?)value;
             }
 
             public ServerIntegrationOptions? ServerOptions { get; internal set; }
@@ -827,7 +827,7 @@ namespace Robust.UnitTesting
                 if (!_dummyUsers.TryGetValue(userName, out var userId))
                     _dummyUsers[userName] = userId = new(Guid.NewGuid());
 
-                var man = (Robust.Server.Player.PlayerManager) PlayerMan;
+                var man = (Robust.Server.Player.PlayerManager)PlayerMan;
                 var session = man.AddDummySession(userId, userName);
                 _dummySessions.Add(userId, session);
 
@@ -844,7 +844,7 @@ namespace Robust.UnitTesting
             {
                 Log.Info($"Removing dummy session {session.Name}");
                 _dummySessions.Remove(session.UserId);
-                var man = (Robust.Server.Player.PlayerManager) PlayerMan;
+                var man = (Robust.Server.Player.PlayerManager)PlayerMan;
                 await WaitPost(() => man.EndSession(session.UserId));
                 if (removeUser)
                     _dummyUsers.Remove(session.Name);
@@ -898,7 +898,7 @@ namespace Robust.UnitTesting
             public override IntegrationOptions? Options
             {
                 get => ClientOptions;
-                internal set => ClientOptions = (ClientIntegrationOptions?) value;
+                internal set => ClientOptions = (ClientIntegrationOptions?)value;
             }
 
             public ClientIntegrationOptions? ClientOptions { get; internal set; }
@@ -926,7 +926,7 @@ namespace Robust.UnitTesting
                 await WaitIdleAsync();
                 await target.WaitIdleAsync();
                 SetConnectTarget(target);
-                await WaitPost(() => ((IClientNetManager) NetMan).ClientConnect(null!, 0, null!));
+                await WaitPost(() => ((IClientNetManager)NetMan).ClientConnect(null!, 0, null!));
             }
 
             public async Task CheckSandboxed(Assembly assembly)
@@ -936,7 +936,7 @@ namespace Robust.UnitTesting
                 {
                     var modLoader = new ModLoader();
                     IoCManager.InjectDependencies(modLoader);
-                    var cast = (IPostInjectInit) modLoader;
+                    var cast = (IPostInjectInit)modLoader;
                     cast.PostInject();
                     modLoader.SetEnableSandboxing(true);
                     modLoader.LoadGameAssembly(assembly.Location);
@@ -1156,7 +1156,7 @@ namespace Robust.UnitTesting
                     {
                         case RunTicksMessage msg:
                             _gameTiming.InSimulation = true;
-                            var simFrameEvent = new FrameEventArgs((float) _gameTiming.TickPeriod.TotalSeconds);
+                            var simFrameEvent = new FrameEventArgs((float)_gameTiming.TickPeriod.TotalSeconds);
                             for (var i = 0; i < msg.Ticks && Running; i++)
                             {
                                 Input?.Invoke(this, simFrameEvent);

@@ -120,7 +120,7 @@ namespace Robust.Client.GameObjects
         {
             base.FrameUpdate(frameTime);
 
-            var step = (float) (_gameTiming.TickRemainder.TotalSeconds / _gameTiming.TickPeriod.TotalSeconds);
+            var step = (float)(_gameTiming.TickRemainder.TotalSeconds / _gameTiming.TickPeriod.TotalSeconds);
 
             for (var i = 0; i < _lerpingTransforms.Count; i++)
             {

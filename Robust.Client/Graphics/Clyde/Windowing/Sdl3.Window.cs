@@ -265,14 +265,14 @@ internal partial class Clyde
                 switch (_videoDriver)
                 {
                     case SdlVideoDriver.Windows:
-                    {
-                        var hWnd = SDL.SDL_GetPointerProperty(
-                            props,
-                            SDL.SDL_PROP_WINDOW_WIN32_HWND_POINTER,
-                            0);
-                        WsiShared.SetWindowStyleNoTitleOptionsWindows((HWND)hWnd);
-                        break;
-                    }
+                        {
+                            var hWnd = SDL.SDL_GetPointerProperty(
+                                props,
+                                SDL.SDL_PROP_WINDOW_WIN32_HWND_POINTER,
+                                0);
+                            WsiShared.SetWindowStyleNoTitleOptionsWindows((HWND)hWnd);
+                            break;
+                        }
                     case SdlVideoDriver.X11:
                         unsafe
                         {

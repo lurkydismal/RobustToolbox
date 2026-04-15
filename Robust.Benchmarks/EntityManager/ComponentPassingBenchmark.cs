@@ -8,7 +8,7 @@ namespace Robust.Benchmarks.EntityManager;
 [Virtual]
 public class ArrayAccessBenchmark
 {
-    [Params(new[] {0, 1, 2, 3, 4, 5, 6, 7, 8, 9})]
+    [Params(new[] { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 })]
     public int[] Array = default!;
 
     [Params(5)]

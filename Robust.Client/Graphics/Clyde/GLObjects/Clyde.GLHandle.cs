@@ -15,7 +15,7 @@ namespace Robust.Client.Graphics.Clyde
         {
             public readonly uint Handle;
 
-            public GLHandle(int handle) : this((uint) handle)
+            public GLHandle(int handle) : this((uint)handle)
             {
             }
 

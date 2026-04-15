@@ -108,7 +108,7 @@ public interface IIntegrationInstance : IDisposable
 
 public interface IClientIntegrationInstance : IIntegrationInstance
 {
-    IClientNetManager CNetMan => (IClientNetManager) NetMan;
+    IClientNetManager CNetMan => (IClientNetManager)NetMan;
     ICommonSession? Session { get; }
     NetUserId? User { get; }
     EntityUid? AttachedEntity { get; }

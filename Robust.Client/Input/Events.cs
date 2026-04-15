@@ -113,7 +113,7 @@ namespace Robust.Client.Input
             bool repeat,
             bool alt, bool control, bool shift, bool system,
             int scanCode,
-            ushort rawCode=0)
+            ushort rawCode = 0)
             : base(alt, control, shift, system)
         {
             Key = key;
@@ -136,7 +136,7 @@ namespace Robust.Client.Input
         }
     }
 
-    public sealed  class MouseButtonEventArgs : MouseEventArgs
+    public sealed class MouseButtonEventArgs : MouseEventArgs
     {
         /// <summary>
         ///     The mouse button that has been pressed or released.

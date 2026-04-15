@@ -224,7 +224,7 @@ namespace Robust.Shared.Prototypes
                     var compReg = factory.GetRegistration(name);
                     EnsureCompExistsAndDeserialize(entity, compReg, factory, entityManager, serManager, name, fullData, ctx);
 
-                    if (!entry.Component.NetSyncEnabled && compReg.NetID is {} netId)
+                    if (!entry.Component.NetSyncEnabled && compReg.NetID is { } netId)
                         meta.NetComponents.Remove(netId);
                 }
             }

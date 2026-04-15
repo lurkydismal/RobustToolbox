@@ -133,7 +133,7 @@ namespace Robust.Shared.Serialization
         public byte[] GetSerializableTypesHash() => Convert.FromHexString(_serializer.GetSHA256());
         public string GetSerializableTypesHashString() => _serializer.GetSHA256();
 
-        internal void GetHashManifest(Stream stream, bool writeNewline=false)
+        internal void GetHashManifest(Stream stream, bool writeNewline = false)
         {
             _serializer.GetHashManifest(stream, writeNewline);
         }
@@ -160,7 +160,7 @@ namespace Robust.Shared.Serialization
         }
 
         public T Deserialize<T>(Stream stream)
-            => (T) Deserialize(stream);
+            => (T)Deserialize(stream);
 
         public void DeserializeDirect<T>(Stream stream, out T value)
         {
@@ -198,7 +198,7 @@ namespace Robust.Shared.Serialization
             {
                 var serializedAttribute = type.GetCustomAttribute<SerializedTypeAttribute>();
 
-                if(serializedAttribute is null)
+                if (serializedAttribute is null)
                     continue;
 
                 if (serializedAttribute.SerializeName == serializedTypeName)

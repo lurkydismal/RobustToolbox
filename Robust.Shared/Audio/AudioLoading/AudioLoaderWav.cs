@@ -18,7 +18,7 @@ internal static class AudioLoaderWav
     {
         // TODO: Don't load entire WAV file just to extract metadata.
         var data = LoadAudioData(stream);
-        var length = TimeSpan.FromSeconds(data.Data.Length / (double) data.BlockAlign / data.SampleRate);
+        var length = TimeSpan.FromSeconds(data.Data.Length / (double)data.BlockAlign / data.SampleRate);
         return new AudioMetadata(length, data.NumChannels);
     }
 

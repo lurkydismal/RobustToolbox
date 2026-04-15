@@ -30,7 +30,7 @@ namespace Robust.Shared.Utility
         [Pure]
         public static string AsString(this YamlNode node)
         {
-            return ((YamlScalarNode) node).Value ?? "";
+            return ((YamlScalarNode)node).Value ?? "";
         }
 
         [Pure]
@@ -111,11 +111,12 @@ namespace Robust.Shared.Utility
             string[] args = raw.Split(',');
             if (args.Length != 6)
             {
-               throw new ArgumentException(string.Format("Could not parse {0}: '{1}'", nameof(Matrix3x2), raw));
+                throw new ArgumentException(string.Format("Could not parse {0}: '{1}'", nameof(Matrix3x2), raw));
             }
             float[] parsedArgs = new float[6];
-            for(var i = 0; i < 6; i += 1) {
-                parsedArgs[i] = float.Parse(args[i],CultureInfo.InvariantCulture);
+            for (var i = 0; i < 6; i += 1)
+            {
+                parsedArgs[i] = float.Parse(args[i], CultureInfo.InvariantCulture);
             }
             return new Matrix3x2(parsedArgs[0], parsedArgs[1], parsedArgs[2], parsedArgs[3], parsedArgs[4], parsedArgs[5]);
         }
@@ -127,7 +128,7 @@ namespace Robust.Shared.Utility
             string[] args = raw.Split(',');
             if (args.Length != 16)
             {
-               throw new ArgumentException(string.Format("Could not parse {0}: '{1}'", nameof(Matrix4x4), raw));
+                throw new ArgumentException(string.Format("Could not parse {0}: '{1}'", nameof(Matrix4x4), raw));
             }
 
             // What, you know a better way to do this?
@@ -155,7 +156,7 @@ namespace Robust.Shared.Utility
         [Pure]
         public static T AsEnum<T>(this YamlNode node)
         {
-            return (T) Enum.Parse(typeof(T), node.AsString(), true);
+            return (T)Enum.Parse(typeof(T), node.AsString(), true);
         }
 
         [Pure]
@@ -201,7 +202,7 @@ namespace Robust.Shared.Utility
         [Pure]
         public static T GetNode<T>(this YamlMappingNode mapping, string key) where T : YamlNode
         {
-            return (T) mapping[_getFetchNode(key)];
+            return (T)mapping[_getFetchNode(key)];
         }
 
         /// <summary>
@@ -237,7 +238,7 @@ namespace Robust.Shared.Utility
         {
             if (mapping.Children.TryGetValue(_getFetchNode(key), out var node))
             {
-                returnNode = (T) node;
+                returnNode = (T)node;
                 return true;
             }
 

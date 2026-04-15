@@ -98,7 +98,7 @@ public sealed partial class FrictionJoint : Joint, IEquatable<FrictionJoint>
     [DataField("maxTorque")]
     public float MaxTorque { get; set; }
 
-    public FrictionJoint() {}
+    public FrictionJoint() { }
 
     public FrictionJoint(EntityUid uidA, EntityUid uidB, Vector2 anchorA, Vector2 anchorB)
         : base(uidA, uidB)

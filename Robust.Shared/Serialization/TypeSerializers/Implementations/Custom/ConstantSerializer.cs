@@ -38,7 +38,7 @@ namespace Robust.Shared.Serialization.TypeSerializers.Implementations.Custom
             ISerializationManager.InstantiationDelegate<int>? instanceProvider = null)
         {
             var constType = serializationManager.GetConstantTypeFromTag(typeof(TTag));
-            return (int) Enum.Parse(constType, node.Value);
+            return (int)Enum.Parse(constType, node.Value);
         }
 
         public DataNode Write(ISerializationManager serializationManager, int value, IDependencyCollection dependencies,

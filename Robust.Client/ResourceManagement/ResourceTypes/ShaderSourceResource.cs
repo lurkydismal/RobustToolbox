@@ -38,7 +38,7 @@ namespace Robust.Client.ResourceManagement
             var manager = dependencies.Resolve<IResourceManager>();
             ct = ct != default ? ct : new CancellationTokenSource(30000).Token;
 
-            for (;;)
+            for (; ; )
             {
                 try
                 {

@@ -158,26 +158,26 @@ internal sealed class ParallelManager : IParallelManagerInternal
     }
 
     public void ProcessNow(IParallelRobustJob jobs, int amount) =>
-        ProcessNow((IParallelRangeRobustJob) jobs, amount);
+        ProcessNow((IParallelRangeRobustJob)jobs, amount);
 
     public void ProcessNow(IParallelBulkRobustJob jobs, int amount) =>
-        ProcessNow((IParallelRangeRobustJob) jobs, amount);
+        ProcessNow((IParallelRangeRobustJob)jobs, amount);
 
     public void ProcessSerialNow(IParallelRobustJob jobs, int amount) =>
-        ProcessSerialNow((IParallelRangeRobustJob) jobs, amount);
+        ProcessSerialNow((IParallelRangeRobustJob)jobs, amount);
 
     public void ProcessSerialNow(IParallelBulkRobustJob jobs, int amount) =>
-        ProcessSerialNow((IParallelRangeRobustJob) jobs, amount);
+        ProcessSerialNow((IParallelRangeRobustJob)jobs, amount);
 
     public WaitHandle Process(IParallelRobustJob jobs, int amount) =>
-        Process((IParallelRangeRobustJob) jobs, amount);
+        Process((IParallelRangeRobustJob)jobs, amount);
 
     public WaitHandle Process(IParallelBulkRobustJob jobs, int amount) =>
-        Process((IParallelRangeRobustJob) jobs, amount);
+        Process((IParallelRangeRobustJob)jobs, amount);
 
     public void ProcessNow(IParallelRangeRobustJob job, int amount)
     {
-        var batches = amount / (float) job.BatchSize;
+        var batches = amount / (float)job.BatchSize;
 
         // Below the threshold so just do it now.
         if (batches <= job.MinimumBatchParallel)
@@ -211,7 +211,7 @@ internal sealed class ParallelManager : IParallelManagerInternal
     /// </summary>
     private ParallelTracker InternalProcess(IParallelRangeRobustJob job, int amount)
     {
-        var batches = (int) MathF.Ceiling(amount / (float) job.BatchSize);
+        var batches = (int)MathF.Ceiling(amount / (float)job.BatchSize);
         var batchSize = job.BatchSize;
         var tracker = _trackerPool.Get();
 

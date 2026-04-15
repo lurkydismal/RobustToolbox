@@ -22,7 +22,7 @@ internal abstract class MsgViewVariablesPath : NetMessage
         Path = buffer.ReadString();
     }
 
-    public override void WriteToBuffer(NetOutgoingMessage buffer , IRobustSerializer serializer)
+    public override void WriteToBuffer(NetOutgoingMessage buffer, IRobustSerializer serializer)
     {
         buffer.Write(RequestId);
         buffer.Write(Path);
@@ -81,7 +81,7 @@ internal abstract class MsgViewVariablesPathRes : MsgViewVariablesPath
     public override void ReadFromBuffer(NetIncomingMessage buffer, IRobustSerializer serializer)
     {
         base.ReadFromBuffer(buffer, serializer);
-        ResponseCode = (ViewVariablesResponseCode) buffer.ReadUInt16();
+        ResponseCode = (ViewVariablesResponseCode)buffer.ReadUInt16();
         var length = buffer.ReadInt32();
         Response = new string[length];
 

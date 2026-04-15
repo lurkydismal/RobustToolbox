@@ -185,7 +185,7 @@ namespace Robust.Client.UserInterface.Controls
             MouseFilter = MouseFilterMode.Stop;
             AddChild(_splitDragArea);
             _splitDragArea.Visible = _resizeMode != SplitResizeMode.NotResizable;
-            _splitDragArea.DefaultCursorShape =  Vertical ? CursorShape.VResize : CursorShape.HResize;
+            _splitDragArea.DefaultCursorShape = Vertical ? CursorShape.VResize : CursorShape.HResize;
             _splitDragArea.OnMouseUp += StopDragging;
             _splitDragArea.OnMouseDown += StartDragging;
             _splitDragArea.OnMouseMove += OnMove;
@@ -307,32 +307,32 @@ namespace Robust.Client.UserInterface.Controls
                     ClampSplitCenter(finalSize, firstDesiredSize, secondDesiredSize);
                     break;
                 case SplitState.Auto:
-                {
-                    if (firstExpand && secondExpand)
                     {
-                        _splitStart = size * ratio - _splitWidth / 2;
-                    }
-                    else if (firstExpand)
-                    {
-                        _splitStart = size - secondDesiredSize - _splitWidth;
-                    }
-                    else if (secondExpand)
-                    {
-                        _splitStart = firstDesiredSize;
-                    }
-                    else
-                    {
-                        ratio = firstDesiredSize + secondDesiredSize <= 0
-                            ? 0.5f
-                            : firstDesiredSize / (firstDesiredSize + secondDesiredSize);
+                        if (firstExpand && secondExpand)
+                        {
+                            _splitStart = size * ratio - _splitWidth / 2;
+                        }
+                        else if (firstExpand)
+                        {
+                            _splitStart = size - secondDesiredSize - _splitWidth;
+                        }
+                        else if (secondExpand)
+                        {
+                            _splitStart = firstDesiredSize;
+                        }
+                        else
+                        {
+                            ratio = firstDesiredSize + secondDesiredSize <= 0
+                                ? 0.5f
+                                : firstDesiredSize / (firstDesiredSize + secondDesiredSize);
 
-                        _splitStart = size * ratio - _splitWidth / 2;
-                    }
+                            _splitStart = size * ratio - _splitWidth / 2;
+                        }
 
-                    _splitStart += MathHelper.Clamp(0f, firstDesiredSize - _splitStart,
-                        size - secondDesiredSize - _splitWidth - _splitStart);
-                    break;
-                }
+                        _splitStart += MathHelper.Clamp(0f, firstDesiredSize - _splitStart,
+                            size - secondDesiredSize - _splitWidth - _splitStart);
+                        break;
+                    }
             }
 
             // location & size of the draggable area may be larger than the split area.

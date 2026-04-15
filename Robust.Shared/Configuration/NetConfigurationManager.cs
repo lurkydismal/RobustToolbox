@@ -126,7 +126,7 @@ namespace Robust.Shared.Configuration
             {
                 ApplyNetVarChange(msg.MsgChannel, msg.NetworkedVars, msg.Tick);
 
-                if(msg.Tick != default && msg.Tick < Timing.CurTick)
+                if (msg.Tick != default && msg.Tick < Timing.CurTick)
                     Sawmill.Warning($"{msg.MsgChannel}: Received late nwVar message ({msg.Tick} < {Timing.CurTick} ).");
             }
         }

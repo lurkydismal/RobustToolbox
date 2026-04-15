@@ -79,7 +79,7 @@ namespace Robust.Client.UserInterface.CustomControls
             }
 
             float ratio = maxHeight > PixelHeight ? PixelHeight / maxHeight : 1;
-            for(int i = 0; i < _frameTimes.Length; i++)
+            for (int i = 0; i < _frameTimes.Length; i++)
             {
                 var currentFrameIndex = MathHelper.Mod(_frameIndex - 1 - i, TrackedFrames);
                 var frameTime = _frameTimes[currentFrameIndex];

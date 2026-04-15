@@ -226,7 +226,7 @@ internal sealed class LoadingScreenManager : ILoadingScreenManager
         var drawSize = textureResource.Texture.Size * scale;
 
         handle.DrawingHandleScreen.DrawTextureRect(textureResource.Texture, UIBox2.FromDimensions(startLocation - drawSize / 2, drawSize));
-        startLocation += Vector2i.Up * (int) drawSize.Y / 2;
+        startLocation += Vector2i.Up * (int)drawSize.Y / 2;
     }
 
     private void DrawLoadingBar(IRenderHandle handle, ref Vector2i location, float scale)
@@ -237,7 +237,7 @@ internal sealed class LoadingScreenManager : ILoadingScreenManager
 
         // Always do the offsets, it looks a lot better!
         location.X -= barWidth / 2;
-        location += (Vector2i) (LogoLoadingBarOffset * scale);
+        location += (Vector2i)(LogoLoadingBarOffset * scale);
 
         if (!_showLoadingBar)
             return;

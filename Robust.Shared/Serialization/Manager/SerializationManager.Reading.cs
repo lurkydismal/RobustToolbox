@@ -214,7 +214,7 @@ namespace Robust.Shared.Serialization.Manager
                     ? nonNullableInstantiator
                     : Expression.Call(managerConst,
                         nameof(WrapBaseInstantiationDelegate),
-                        new []{actualType, baseType.EnsureNotNullableType()},
+                        new[] { actualType, baseType.EnsureNotNullableType() },
                         instantiatorParam);
             }
 
@@ -305,7 +305,7 @@ namespace Robust.Shared.Serialization.Manager
                 }
 
                 call = Expression.Block(
-                    new [] {instantiatorVariable},
+                    new[] { instantiatorVariable },
                     instantiatorCoalesce,
                     Expression.Call(
                         managerConst,
@@ -347,7 +347,7 @@ namespace Robust.Shared.Serialization.Manager
                 }
 
                 call = Expression.Block(
-                    new[]{instantiatorVariable},
+                    new[] { instantiatorVariable },
                     instantiatorCoalesce,
                     call);
             }
@@ -365,7 +365,7 @@ namespace Robust.Shared.Serialization.Manager
                     Expression.Call(
                             managerConst,
                             nameof(Read),
-                            new []{actualType, nodeType},
+                            new[] { actualType, nodeType },
                             serializerVar,
                             Expression.Convert(nodeParam, nodeType),
                             hookCtxParam,

@@ -52,7 +52,7 @@ public sealed partial class SpriteSystem
         var cardinal = Angle.Zero;
 
         // If we have a 1-directional sprite then snap it to try and always face it south if applicable.
-        if (sprite.Comp is {NoRotation: false, SnapCardinals: true})
+        if (sprite.Comp is { NoRotation: false, SnapCardinals: true })
             cardinal = angle.RoundToCardinalAngle();
 
         // worldRotation + eyeRotation should be the angle of the entity on-screen. If no-rot is enabled this is just set to zero.
@@ -144,13 +144,13 @@ public sealed partial class SpriteSystem
             drawingHandle.UseShader(layer.Shader);
 
         var layerColor = layer.Owner.Comp.color * layer.Color;
-        var textureSize = texture.Size / (float) EyeManager.PixelsPerMeter;
+        var textureSize = texture.Size / (float)EyeManager.PixelsPerMeter;
         var quad = Box2.FromDimensions(textureSize / -2, textureSize);
 
         if (layer.UnShaded)
         {
             DebugTools.AssertNull(layer.Shader);
-            DebugTools.Assert(layerColor is {R: >= 0, G: >= 0, B: >= 0, A: >= 0}, "Default shader should not be used with negative color modulation.");
+            DebugTools.Assert(layerColor is { R: >= 0, G: >= 0, B: >= 0, A: >= 0 }, "Default shader should not be used with negative color modulation.");
 
             // Negative color modulation values are by the default shader to disable light shading.
             // Specifically we set colour = - 1 - colour

@@ -72,42 +72,42 @@ namespace Robust.Shared.CompNetworkGenerator
                         fields.Add((field.Type, field.Name));
                         break;
                     case IPropertySymbol prop:
-                    {
-                        if (prop.SetMethod == null || prop.SetMethod.DeclaredAccessibility != Accessibility.Public)
                         {
-                            var msg = "Property is marked with [AutoNetworkedField], but has no accessible setter method.";
-                            context.ReportDiagnostic(
-                                Diagnostic.Create(
-                                    new DiagnosticDescriptor(
-                                        "RXN0008",
-                                        msg,
-                                        msg,
-                                        "Usage",
-                                        DiagnosticSeverity.Error,
-                                        true),
-                                    classSymbol.Locations[0]));
-                            continue;
-                        }
+                            if (prop.SetMethod == null || prop.SetMethod.DeclaredAccessibility != Accessibility.Public)
+                            {
+                                var msg = "Property is marked with [AutoNetworkedField], but has no accessible setter method.";
+                                context.ReportDiagnostic(
+                                    Diagnostic.Create(
+                                        new DiagnosticDescriptor(
+                                            "RXN0008",
+                                            msg,
+                                            msg,
+                                            "Usage",
+                                            DiagnosticSeverity.Error,
+                                            true),
+                                        classSymbol.Locations[0]));
+                                continue;
+                            }
 
-                        if (prop.GetMethod == null || prop.GetMethod.DeclaredAccessibility != Accessibility.Public)
-                        {
-                            var msg = "Property is marked with [AutoNetworkedField], but has no accessible getter method.";
-                            context.ReportDiagnostic(
-                                Diagnostic.Create(
-                                    new DiagnosticDescriptor(
-                                        "RXN0008",
-                                        msg,
-                                        msg,
-                                        "Usage",
-                                        DiagnosticSeverity.Error,
-                                        true),
-                                    classSymbol.Locations[0]));
-                            continue;
-                        }
+                            if (prop.GetMethod == null || prop.GetMethod.DeclaredAccessibility != Accessibility.Public)
+                            {
+                                var msg = "Property is marked with [AutoNetworkedField], but has no accessible getter method.";
+                                context.ReportDiagnostic(
+                                    Diagnostic.Create(
+                                        new DiagnosticDescriptor(
+                                            "RXN0008",
+                                            msg,
+                                            msg,
+                                            "Usage",
+                                            DiagnosticSeverity.Error,
+                                            true),
+                                        classSymbol.Locations[0]));
+                                continue;
+                            }
 
-                        fields.Add((prop.Type, prop.Name));
-                        break;
-                    }
+                            fields.Add((prop.Type, prop.Name));
+                            break;
+                        }
                 }
             }
 
@@ -650,7 +650,7 @@ public partial class {componentName}{deltaInterface}
 
         public void Execute(GeneratorExecutionContext context)
         {
-            var comp = (CSharpCompilation) context.Compilation;
+            var comp = (CSharpCompilation)context.Compilation;
 
             if (!(context.SyntaxReceiver is NameReferenceSyntaxReceiver receiver))
             {
@@ -667,7 +667,7 @@ public partial class {componentName}{deltaInterface}
                     var attr = type.Attribute;
                     var raiseEv = false;
                     var fieldDeltas = false;
-                    if (attr.ConstructorArguments is [{Value: bool raise}, {Value: bool fields}])
+                    if (attr.ConstructorArguments is [{ Value: bool raise }, { Value: bool fields }])
                     {
                         // Get the afterautohandle bool, which is first constructor arg
                         raiseEv = raise;

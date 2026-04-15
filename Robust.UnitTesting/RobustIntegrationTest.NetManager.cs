@@ -115,118 +115,118 @@ namespace Robust.UnitTesting
                     switch (item)
                     {
                         case ConnectMessage connect:
-                        {
-                            DebugTools.Assert(IsServer);
-
-                            async Task DoConnect()
                             {
-                                var writer = connect.ChannelWriter;
-                                var uid = _genConnectionUid();
-                                var userName = connect.Username ?? $"integration_{uid}";
-                                if (!_userGuids.TryGetValue(userName, out var userId))
-                                {
-                                    userId = Guid.NewGuid();
-                                    _userGuids.Add(userName, userId);
-                                }
-                                var sessionId = new NetUserId(userId);
-                                var userData = new NetUserData(sessionId, userName)
-                                {
-                                    HWId = ImmutableArray<byte>.Empty,
-                                    ModernHWIds = []
-                                };
+                                DebugTools.Assert(IsServer);
 
-                                var args = await OnConnecting(
-                                    new IPEndPoint(IPAddress.IPv6Loopback, 0),
-                                    userData,
-                                    LoginType.GuestAssigned);
-                                if (args.IsDenied)
+                                async Task DoConnect()
                                 {
-                                    writer.TryWrite(new DeniedConnectMessage());
-                                    return;
+                                    var writer = connect.ChannelWriter;
+                                    var uid = _genConnectionUid();
+                                    var userName = connect.Username ?? $"integration_{uid}";
+                                    if (!_userGuids.TryGetValue(userName, out var userId))
+                                    {
+                                        userId = Guid.NewGuid();
+                                        _userGuids.Add(userName, userId);
+                                    }
+                                    var sessionId = new NetUserId(userId);
+                                    var userData = new NetUserData(sessionId, userName)
+                                    {
+                                        HWId = ImmutableArray<byte>.Empty,
+                                        ModernHWIds = []
+                                    };
+
+                                    var args = await OnConnecting(
+                                        new IPEndPoint(IPAddress.IPv6Loopback, 0),
+                                        userData,
+                                        LoginType.GuestAssigned);
+                                    if (args.IsDenied)
+                                    {
+                                        writer.TryWrite(new DeniedConnectMessage());
+                                        return;
+                                    }
+
+                                    writer.TryWrite(new ConfirmConnectMessage(uid, userData));
+                                    var channel = new IntegrationNetChannel(
+                                        this,
+                                        connect.ChannelWriter,
+                                        uid,
+                                        userData,
+                                        connect.Uid);
+                                    _channels.Add(uid, channel);
+                                    Connected?.Invoke(this, new NetChannelArgs(channel));
                                 }
 
-                                writer.TryWrite(new ConfirmConnectMessage(uid, userData));
-                                var channel = new IntegrationNetChannel(
-                                    this,
-                                    connect.ChannelWriter,
-                                    uid,
-                                    userData,
-                                    connect.Uid);
-                                _channels.Add(uid, channel);
-                                Connected?.Invoke(this, new NetChannelArgs(channel));
+                                _taskManager.BlockWaitOnTask(DoConnect());
+
+                                break;
                             }
-
-                            _taskManager.BlockWaitOnTask(DoConnect());
-
-                            break;
-                        }
 
                         case DataMessage data:
-                        {
-                            IntegrationNetChannel? channel;
-                            if (IsServer)
                             {
-                                if (!_channels.TryGetValue(data.Connection, out channel))
+                                IntegrationNetChannel? channel;
+                                if (IsServer)
                                 {
-                                    continue;
+                                    if (!_channels.TryGetValue(data.Connection, out channel))
+                                    {
+                                        continue;
+                                    }
                                 }
-                            }
-                            else
-                            {
-                                if (ServerChannel == null || data.Connection != ServerChannel.ConnectionUid)
+                                else
                                 {
-                                    continue;
+                                    if (ServerChannel == null || data.Connection != ServerChannel.ConnectionUid)
+                                    {
+                                        continue;
+                                    }
+
+                                    channel = ServerChannel;
                                 }
 
-                                channel = ServerChannel;
-                            }
+                                var message = DeserializeNetMessage(data);
+                                message.MsgChannel = channel;
+                                if (_callbacks.TryGetValue(message.GetType(), out var callback))
+                                {
+                                    callback(message);
+                                }
 
-                            var message = DeserializeNetMessage(data);
-                            message.MsgChannel = channel;
-                            if (_callbacks.TryGetValue(message.GetType(), out var callback))
-                            {
-                                callback(message);
+                                break;
                             }
-
-                            break;
-                        }
 
                         case DisconnectMessage disconnect:
-                        {
-                            if (_channels.TryGetValue(disconnect.Connection, out var channel))
                             {
-                                Disconnect?.Invoke(this, new NetDisconnectedArgs(channel, disconnect.Reason));
-                                _channels.Remove(disconnect.Connection);
-                                channel.IsConnected = false;
+                                if (_channels.TryGetValue(disconnect.Connection, out var channel))
+                                {
+                                    Disconnect?.Invoke(this, new NetDisconnectedArgs(channel, disconnect.Reason));
+                                    _channels.Remove(disconnect.Connection);
+                                    channel.IsConnected = false;
+                                }
+
+                                break;
                             }
 
-                            break;
-                        }
-
                         case DeniedConnectMessage _:
-                        {
-                            DebugTools.Assert(IsClient);
+                            {
+                                DebugTools.Assert(IsClient);
 
-                            ConnectFailed?.Invoke(this, new NetConnectFailArgs("I didn't implement a deny reason!"));
-                            break;
-                        }
+                                ConnectFailed?.Invoke(this, new NetConnectFailArgs("I didn't implement a deny reason!"));
+                                break;
+                            }
 
                         case ConfirmConnectMessage confirm:
-                        {
-                            DebugTools.Assert(IsClient);
+                            {
+                                DebugTools.Assert(IsClient);
 
-                            var channel = new IntegrationNetChannel(
-                                this,
-                                NextConnectChannel!,
-                                _clientConnectingUid,
-                                confirm.UserData,
-                                confirm.AssignedUid);
+                                var channel = new IntegrationNetChannel(
+                                    this,
+                                    NextConnectChannel!,
+                                    _clientConnectingUid,
+                                    confirm.UserData,
+                                    confirm.AssignedUid);
 
-                            _channels.Add(channel.ConnectionUid, channel);
+                                _channels.Add(channel.ConnectionUid, channel);
 
-                            Connected?.Invoke(this, new NetChannelArgs(channel));
-                            break;
-                        }
+                                Connected?.Invoke(this, new NetChannelArgs(channel));
+                                break;
+                            }
 
                         default:
                             throw new ArgumentOutOfRangeException();
@@ -262,7 +262,7 @@ namespace Robust.UnitTesting
                 if (recipient is DummyChannel)
                     return;
 
-                var channel = (IntegrationNetChannel) recipient;
+                var channel = (IntegrationNetChannel)recipient;
 
                 if (!channel.IsConnected)
                     throw new InvalidOperationException("Channel is not connected!");
@@ -300,7 +300,7 @@ namespace Robust.UnitTesting
 
                 _registeredMessages.Add(typeof(T));
                 if (rxCallback != null && (accept & thisSide) != 0)
-                    _callbacks.Add(typeof(T), msg => rxCallback((T) msg));
+                    _callbacks.Add(typeof(T), msg => rxCallback((T)msg));
             }
 
             public T CreateNetMessage<T>() where T : NetMessage, new()
@@ -313,9 +313,9 @@ namespace Robust.UnitTesting
                 }
 
                 // Obsolete path for content
-                if (type.GetConstructor(new[] {typeof(INetChannel)}) != null)
+                if (type.GetConstructor(new[] { typeof(INetChannel) }) != null)
                 {
-                    return (T) Activator.CreateInstance(typeof(T), (INetChannel?) null)!;
+                    return (T)Activator.CreateInstance(typeof(T), (INetChannel?)null)!;
                 }
                 else
                 {
@@ -415,7 +415,7 @@ namespace Robust.UnitTesting
             private NetMessage DeserializeNetMessage(DataMessage message)
             {
                 var buffer = message.PooledNetBuffer;
-                var netMessage = (NetMessage) Activator.CreateInstance(message.MessageType)!;
+                var netMessage = (NetMessage)Activator.CreateInstance(message.MessageType)!;
                 lock (_deserializationMessage)
                 {
                     _deserializationMessage.m_data = buffer;

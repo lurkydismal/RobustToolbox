@@ -34,7 +34,7 @@ public sealed class MarkupNode : IComparable<MarkupNode>, IEquatable<MarkupNode>
 
     public override string ToString()
     {
-        if(Name == null)
+        if (Name == null)
             return FormattedMessage.EscapeText(Value.StringValue ?? "");
 
         var attributesString = "";

@@ -33,7 +33,7 @@ public sealed class TaskResultAnalyzer : DiagnosticAnalyzer
     {
         var taskType = context.Compilation.GetTypeByMetadataName("System.Threading.Tasks.Task`1");
 
-        var operation = (IPropertyReferenceOperation) context.Operation;
+        var operation = (IPropertyReferenceOperation)context.Operation;
         var member = operation.Member;
 
         if (member.Name == "Result" && taskType.Equals(member.ContainingType.ConstructedFrom, SymbolEqualityComparer.Default))

@@ -289,7 +289,7 @@ namespace Robust.Shared.Physics.Systems
                             return true;
                         }
 
-                        var (_, _, otherGridMatrix, otherGridInvMatrix) =  tuple.xformSystem.GetWorldPositionRotationMatrixWithInv(collidingXform);
+                        var (_, _, otherGridMatrix, otherGridInvMatrix) = tuple.xformSystem.GetWorldPositionRotationMatrixWithInv(collidingXform);
                         var otherGridBounds = otherGridMatrix.TransformBox(component.LocalAABB);
                         var otherTransform = tuple._physicsSystem.GetPhysicsTransform(uid);
 
@@ -471,7 +471,7 @@ namespace Robust.Shared.Physics.Systems
 
             _physicsSystem.DestroyContacts(entity.Comp1);
 
-            if (!Resolve(entity.Owner, ref entity.Comp2 , ref entity.Comp3))
+            if (!Resolve(entity.Owner, ref entity.Comp2, ref entity.Comp3))
                 return;
 
             if (entity.Comp3.MapUid == null)

@@ -141,9 +141,9 @@ namespace Robust.Shared.Serialization.Manager
             {
                 var invalidTypes = new List<string>();
                 foreach (var includedField in definition.BaseFieldDefinitions.Where(x => x.Attribute is IncludeDataFieldAttribute
-                         {
-                             CustomTypeSerializer: null
-                         }))
+                {
+                    CustomTypeSerializer: null
+                }))
                 {
                     if (!dataDefs.Contains(includedField.FieldType))
                     {
@@ -280,7 +280,7 @@ namespace Robust.Shared.Serialization.Manager
             return (DataDefinition)typeof(DataDefinition<>).MakeGenericType(t)
                 .GetConstructor(BindingFlags.Instance | BindingFlags.NonPublic, new[]
                     { typeof(SerializationManager), typeof(bool) })!
-                .Invoke(new object[]{this, isRecord});
+                .Invoke(new object[] { this, isRecord });
         }
 
         public void Shutdown()
@@ -330,8 +330,8 @@ namespace Robust.Shared.Serialization.Manager
                 variableType = null;
                 return false;
             }
-            var foundFieldDef = definition.BaseFieldDefinitions.FirstOrDefault(fieldDef => fieldDef?.Attribute is DataFieldAttribute attr && attr.Tag==variableName, null);
-            if(foundFieldDef != null)
+            var foundFieldDef = definition.BaseFieldDefinitions.FirstOrDefault(fieldDef => fieldDef?.Attribute is DataFieldAttribute attr && attr.Tag == variableName, null);
+            if (foundFieldDef != null)
             {
                 variableType = foundFieldDef.BackingField.FieldType;
                 return true;

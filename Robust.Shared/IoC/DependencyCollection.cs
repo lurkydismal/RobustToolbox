@@ -130,7 +130,7 @@ namespace Robust.Shared.IoC
             FrozenDictionary<Type, object> services,
             [MaybeNullWhen(false)] out object instance)
         {
-            return TryResolveType(objectType, (IReadOnlyDictionary<Type, object>) services, out instance);
+            return TryResolveType(objectType, (IReadOnlyDictionary<Type, object>)services, out instance);
         }
 
         private bool TryResolveType(

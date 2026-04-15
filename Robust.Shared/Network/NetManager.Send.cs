@@ -101,7 +101,8 @@ public sealed partial class NetManager
                     static state => CoreEncryptSendMessage(state.channel, state.item),
                     new
                     {
-                        channel, item
+                        channel,
+                        item
                     },
                     preferLocal: true);
             }

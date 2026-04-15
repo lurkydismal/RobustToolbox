@@ -42,7 +42,9 @@ public sealed partial class AppearanceComponent : Component
     /// <remarks>
     /// Should only be filled in via prototype .yaml; subsequent data must be set via SharedAppearanceSystem.SetData().
     /// </remarks>
-    [DataField(readOnly: true)] public Dictionary<Enum, object>? AppearanceDataInit {
+    [DataField(readOnly: true)]
+    public Dictionary<Enum, object>? AppearanceDataInit
+    {
         get { return _appearanceDataInit; }
         set { AppearanceData = value ?? AppearanceData; _appearanceDataInit = value; }
     }

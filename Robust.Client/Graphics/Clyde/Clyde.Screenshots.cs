@@ -106,7 +106,7 @@ namespace Robust.Client.Graphics.Clyde
                         size.X, size.Y,
                         pf, pt,
                         bufSize,
-                        (nint) ptr);
+                        (nint)ptr);
 
                     CheckGlError();
                 }
@@ -161,7 +161,7 @@ namespace Robust.Client.Graphics.Clyde
                 GL.GetSync(transferring.Sync, SyncParameterName.SyncStatus, sizeof(int), null, &status);
                 CheckGlError();
 
-                if (status != (int) All.Signaled)
+                if (status != (int)All.Signaled)
                     continue;
 
                 transferring.TransferContinue(transferring);
@@ -203,7 +203,7 @@ namespace Robust.Client.Graphics.Clyde
             GL.DeleteSync(fence);
             CheckGlError();
 
-            var castCallback = (CopyPixelsDelegate<T>) callback;
+            var castCallback = (CopyPixelsDelegate<T>)callback;
             castCallback(image);
         }
 

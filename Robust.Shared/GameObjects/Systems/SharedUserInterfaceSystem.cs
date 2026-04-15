@@ -20,14 +20,14 @@ namespace Robust.Shared.GameObjects;
 
 public abstract class SharedUserInterfaceSystem : EntitySystem
 {
-    [Dependency] private   readonly IDynamicTypeFactory _factory = default!;
-    [Dependency] private   readonly IGameTiming _timing = default!;
-    [Dependency] private   readonly INetManager _netManager = default!;
-    [Dependency] private   readonly IParallelManager _parallel = default!;
+    [Dependency] private readonly IDynamicTypeFactory _factory = default!;
+    [Dependency] private readonly IGameTiming _timing = default!;
+    [Dependency] private readonly INetManager _netManager = default!;
+    [Dependency] private readonly IParallelManager _parallel = default!;
     [Dependency] protected readonly IPrototypeManager ProtoManager = default!;
-    [Dependency] private   readonly IReflectionManager _reflection = default!;
+    [Dependency] private readonly IReflectionManager _reflection = default!;
     [Dependency] protected readonly ISharedPlayerManager Player = default!;
-    [Dependency] private   readonly SharedTransformSystem _transforms = default!;
+    [Dependency] private readonly SharedTransformSystem _transforms = default!;
 
     private EntityQuery<IgnoreUIRangeComponent> _ignoreUIRangeQuery;
     private EntityQuery<TransformComponent> _xformQuery;
@@ -312,25 +312,25 @@ public abstract class SharedUserInterfaceSystem : EntitySystem
             switch (fields)
             {
                 case 1 << 0:
-                {
-                    var state = new UserInterfaceActorsDeltaState();
-                    AddActors(ent, state.Actors, ref args);
+                    {
+                        var state = new UserInterfaceActorsDeltaState();
+                        AddActors(ent, state.Actors, ref args);
 
-                    args.State = state;
-                    return;
-                }
+                        args.State = state;
+                        return;
+                    }
                 case 1 << 2:
-                {
-                    var states = ent.Comp.States;
+                    {
+                        var states = ent.Comp.States;
 
-                    // TODO Game State
-                    // Force the client to serialize & de-serialize implicitly generated component states.
-                    if (_netManager.IsClient)
-                        states = new(states);
+                        // TODO Game State
+                        // Force the client to serialize & de-serialize implicitly generated component states.
+                        if (_netManager.IsClient)
+                            states = new(states);
 
-                    args.State = new UserInterfaceStatesDeltaState {States = states};
-                    return;
-                }
+                        args.State = new UserInterfaceStatesDeltaState { States = states };
+                        return;
+                    }
             }
         }
 
@@ -435,7 +435,7 @@ public abstract class SharedUserInterfaceSystem : EntitySystem
                 foreach (var actor in newSet)
                 {
                     if (!actors.Contains(actor))
-                        OpenUiInternal(ent!, key,  actor);
+                        OpenUiInternal(ent!, key, actor);
                 }
 
                 foreach (var actor in actors)
@@ -537,7 +537,7 @@ public abstract class SharedUserInterfaceSystem : EntitySystem
         // entities.
         var type = _reflection.LooseGetType(data.ClientType);
         // No dependency injection because the BUI constructor will handle it.
-        var boundUserInterface = (BoundUserInterface) _factory.CreateInstance(type, [entity.Owner, key], inject: false);
+        var boundUserInterface = (BoundUserInterface)_factory.CreateInstance(type, [entity.Owner, key], inject: false);
         entity.Comp.ClientOpenInterfaces[key] = boundUserInterface;
 
         // This is just so we don't open while applying UI states.
@@ -924,7 +924,7 @@ public abstract class SharedUserInterfaceSystem : EntitySystem
     /// <summary>
     /// Closes the user's UIs that match the specified key.
     /// </summary>
-    public void CloseUserUis<T>(Entity<UserInterfaceUserComponent?> actor) where T: Enum
+    public void CloseUserUis<T>(Entity<UserInterfaceUserComponent?> actor) where T : Enum
     {
         if (!UserQuery.Resolve(actor.Owner, ref actor.Comp, false))
             return;

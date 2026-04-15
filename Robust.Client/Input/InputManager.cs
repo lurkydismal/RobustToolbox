@@ -181,7 +181,7 @@ namespace Robust.Client.Input
 
             var path = new ResPath(KeybindsPath);
             using var writer = _resourceMan.UserData.OpenWriteText(path);
-            var stream = new YamlStream {new(mapping.ToYaml())};
+            var stream = new YamlStream { new(mapping.ToYaml()) };
             stream.Save(new YamlMappingFix(new Emitter(writer)), false);
         }
 
@@ -229,7 +229,7 @@ namespace Robust.Client.Input
                 return;
             }
 
-            _keysPressed[(int) args.Key] = true;
+            _keysPressed[(int)args.Key] = true;
 
             PackedKeyCombo matchedCombo = default;
 
@@ -306,7 +306,7 @@ namespace Robust.Client.Input
                 args.Key,
                 args.ScanCode,
                 action,
-                (Vector2i) (mousePos ?? Vector2.Zero),
+                (Vector2i)(mousePos ?? Vector2.Zero),
                 args.RawCode);
 
             var block = rawInput.RawKeyEvent(keyEvent);
@@ -338,7 +338,7 @@ namespace Robust.Client.Input
                 }
             }
 
-            _keysPressed[(int) args.Key] = false;
+            _keysPressed[(int)args.Key] = false;
 
             if (hasCanFocus)
             {
@@ -486,10 +486,10 @@ namespace Robust.Client.Input
         {
             var (baseKey, mod1, mod2, mod3) = packed;
 
-            if (!_keysPressed[(int) baseKey]) return false;
-            if (mod1 != Key.Unknown && !_keysPressed[(int) mod1]) return false;
-            if (mod2 != Key.Unknown && !_keysPressed[(int) mod2]) return false;
-            if (mod3 != Key.Unknown && !_keysPressed[(int) mod3]) return false;
+            if (!_keysPressed[(int)baseKey]) return false;
+            if (mod1 != Key.Unknown && !_keysPressed[(int)mod1]) return false;
+            if (mod2 != Key.Unknown && !_keysPressed[(int)mod2]) return false;
+            if (mod3 != Key.Unknown && !_keysPressed[(int)mod3]) return false;
 
             return true;
         }
@@ -510,7 +510,7 @@ namespace Robust.Client.Input
         {
             for (var i = 0; i < 32; i += 8)
             {
-                var key = (Key) ((subPackedCombo.Packed >> i) & 0b_1111_1111);
+                var key = (Key)((subPackedCombo.Packed >> i) & 0b_1111_1111);
                 if (key != Key.Unknown && !PackedContainsKey(packedCombo, key))
                 {
                     return false;
@@ -541,7 +541,7 @@ namespace Robust.Client.Input
             using var _ = reader;
 
             var documents = DataNodeParser.ParseYamlStream(reader).First();
-            var mapping = (MappingDataNode) documents.Root;
+            var mapping = (MappingDataNode)documents.Root;
 
             if (mapping.TryGet("binds", out var BaseKeyRegsNode))
             {
@@ -628,7 +628,7 @@ namespace Robust.Client.Input
         public void RemoveBinding(IKeyBinding binding, bool markModified = true)
         {
             var bindings = _bindingsByFunction[binding.Function];
-            var cast = (KeyBinding) binding;
+            var cast = (KeyBinding)binding;
             if (!bindings.Remove(cast))
             {
                 // Keybind does not exist.
@@ -714,7 +714,7 @@ namespace Robust.Client.Input
 
         public bool IsKeyDown(Key key)
         {
-            return _keysPressed[(int) key];
+            return _keysPressed[(int)key];
         }
 
         /// <inheritdoc />
@@ -1018,7 +1018,7 @@ namespace Robust.Client.Input
 
             if (args.Length == 2)
             {
-                var options = Enum.GetNames<KeyBindingType>().Except(new []{nameof(KeyBindingType.Unknown)});
+                var options = Enum.GetNames<KeyBindingType>().Except(new[] { nameof(KeyBindingType.Unknown) });
                 return CompletionResult.FromHintOptions(options, Loc.GetString("cmd-bind-arg-mode"));
             }
 

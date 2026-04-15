@@ -224,7 +224,7 @@ public partial class SharedPhysicsSystem
             return;
         }
 
-        SetLinearVelocity(uid,body.LinearVelocity + impulse * body._invMass, body: body);
+        SetLinearVelocity(uid, body.LinearVelocity + impulse * body._invMass, body: body);
     }
 
     public void ApplyLinearImpulse(EntityUid uid, Vector2 impulse, Vector2 point, FixturesComponent? manager = null, PhysicsComponent? body = null)
@@ -342,7 +342,7 @@ public partial class SharedPhysicsSystem
         var oldCenter = body._localCenter;
         body._localCenter = localCenter;
 
-        if (((int) body.BodyType & (int) (BodyType.Kinematic | BodyType.Static)) == 0)
+        if (((int)body.BodyType & (int)(BodyType.Kinematic | BodyType.Static)) == 0)
         {
             // Update center of mass velocity.
             var comVelocityDiff = Vector2Helpers.Cross(body.AngularVelocity, localCenter - oldCenter);
@@ -770,7 +770,7 @@ public partial class SharedPhysicsSystem
 
         var (worldPos, worldRot) = _transform.GetWorldPositionRotation(xform);
 
-        var transform = new Transform(worldPos, (float) worldRot.Theta);
+        var transform = new Transform(worldPos, (float)worldRot.Theta);
 
         var bounds = new Box2(transform.Position, transform.Position);
 
@@ -797,7 +797,7 @@ public partial class SharedPhysicsSystem
 
         var (worldPos, worldRot) = _transform.GetWorldPositionRotation(xform);
 
-        var transform = new Transform(worldPos, (float) worldRot.Theta);
+        var transform = new Transform(worldPos, (float)worldRot.Theta);
 
         var bounds = new Box2(transform.Position, transform.Position);
 

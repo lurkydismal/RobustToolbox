@@ -61,7 +61,7 @@ namespace Robust.Client.ViewVariables
 
             foreach (var component in _entries)
             {
-                if(!string.IsNullOrEmpty(search) && !component.Contains(search, StringComparison.InvariantCultureIgnoreCase))
+                if (!string.IsNullOrEmpty(search) && !component.Contains(search, StringComparison.InvariantCultureIgnoreCase))
                     continue;
 
                 items.Add(component);

@@ -173,10 +173,10 @@ internal abstract partial class SharedPlayerManager
 
     private void Detach(ICommonSession session)
     {
-        if (session.AttachedEntity is not {} uid)
+        if (session.AttachedEntity is not { } uid)
             return;
 
-        ((ICommonSessionInternal) session).SetAttachedEntity(null);
+        ((ICommonSessionInternal)session).SetAttachedEntity(null);
         UpdateState(session);
 
         if (EntManager.TryGetComponent(uid, out ActorComponent? actor) && actor.LifeStage <= ComponentLifeStage.Running)
@@ -215,7 +215,7 @@ internal abstract partial class SharedPlayerManager
         if (session.AttachedEntity != null)
             Detach(session);
 
-        ((ICommonSessionInternal) session).SetAttachedEntity(uid);
+        ((ICommonSessionInternal)session).SetAttachedEntity(uid);
         actor.PlayerSession = session;
         UpdateState(session);
         EntManager.EventBus.RaiseLocalEvent(uid, new PlayerAttachedEvent(uid, session), true);
@@ -228,7 +228,7 @@ internal abstract partial class SharedPlayerManager
             return;
 
         var old = session.Status;
-        ((ICommonSessionInternal) session).SetStatus(status);
+        ((ICommonSessionInternal)session).SetStatus(status);
 
         UpdateState(session);
         PlayerStatusChanged?.Invoke(this, new SessionStatusEventArgs(session, old, status));
@@ -236,13 +236,13 @@ internal abstract partial class SharedPlayerManager
 
     public void SetPing(ICommonSession session, short ping)
     {
-        ((ICommonSessionInternal) session).SetPing(ping);
+        ((ICommonSessionInternal)session).SetPing(ping);
         UpdateState(session);
     }
 
     public void SetName(ICommonSession session, string name)
     {
-        ((ICommonSessionInternal) session).SetName(name);
+        ((ICommonSessionInternal)session).SetName(name);
         UpdateState(session);
     }
 

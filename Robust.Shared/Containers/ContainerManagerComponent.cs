@@ -116,7 +116,7 @@ public sealed partial class ContainerManagerComponent : Component, ISerializatio
 
         void IEnumerator.Reset()
         {
-            ((IEnumerator<BaseContainer>) _enumerator).Reset();
+            ((IEnumerator<BaseContainer>)_enumerator).Reset();
         }
 
         [AllowNull]

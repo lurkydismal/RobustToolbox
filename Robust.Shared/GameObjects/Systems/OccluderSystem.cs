@@ -8,6 +8,7 @@ using Robust.Shared.Physics;
 using Robust.Shared.Utility;
 
 namespace Robust.Shared.GameObjects;
+
 public abstract class OccluderSystem : ComponentTreeSystem<OccluderTreeComponent, OccluderComponent>
 {
     public const float MaxRaycastRange = 100f;

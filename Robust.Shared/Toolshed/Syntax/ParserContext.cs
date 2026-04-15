@@ -279,7 +279,7 @@ public sealed partial class ParserContext
         Index = point.Index;
         _blockStack = point.TerminatorStack;
         Bundle = point.Bundle;
-        VariableParser =point.VariableParser;
+        VariableParser = point.VariableParser;
     }
 
     public int ConsumeWhitespace()

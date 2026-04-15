@@ -128,7 +128,7 @@ namespace Robust.Shared.Maths
 
         public static explicit operator UIBox2i(UIBox2 box)
         {
-            return new((int) box.Left, (int) box.Top, (int) box.Right, (int) box.Bottom);
+            return new((int)box.Left, (int)box.Top, (int)box.Right, (int)box.Bottom);
         }
 
         public static implicit operator UIBox2(UIBox2i box)

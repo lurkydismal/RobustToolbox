@@ -212,32 +212,32 @@ namespace Robust.Client.UserInterface.Controls
                 case StretchMode.Keep:
                     return UIBox2.FromDimensions(Vector2.Zero, TextureSizeTarget * UIScale);
                 case StretchMode.KeepCentered:
-                {
-                    var position = (Size - TextureSizeTarget) / 2;
-                    return UIBox2.FromDimensions(position, TextureSizeTarget * UIScale);
-                }
+                    {
+                        var position = (Size - TextureSizeTarget) / 2;
+                        return UIBox2.FromDimensions(position, TextureSizeTarget * UIScale);
+                    }
 
                 case StretchMode.KeepAspect:
                 case StretchMode.KeepAspectCentered:
-                {
-                    var (texWidth, texHeight) = TextureSizeTarget;
-                    var width = texWidth * (PixelSize.Y / texHeight);
-                    var height = (float)PixelSize.Y;
-                    if (width > PixelSize.X)
                     {
-                        width = PixelSize.X;
-                        height = texHeight * (PixelSize.X / texWidth);
-                    }
+                        var (texWidth, texHeight) = TextureSizeTarget;
+                        var width = texWidth * (PixelSize.Y / texHeight);
+                        var height = (float)PixelSize.Y;
+                        if (width > PixelSize.X)
+                        {
+                            width = PixelSize.X;
+                            height = texHeight * (PixelSize.X / texWidth);
+                        }
 
-                    var size = new Vector2(width, height);
-                    var position = Vector2.Zero;
-                    if (Stretch == StretchMode.KeepAspectCentered)
-                    {
-                        position = (PixelSize - size) / 2;
-                    }
+                        var size = new Vector2(width, height);
+                        var position = Vector2.Zero;
+                        if (Stretch == StretchMode.KeepAspectCentered)
+                        {
+                            position = (PixelSize - size) / 2;
+                        }
 
-                    return UIBox2.FromDimensions(position, size);
-                }
+                        return UIBox2.FromDimensions(position, size);
+                    }
 
                 case StretchMode.KeepAspectCovered:
                     var texSize = TextureSizeTarget;

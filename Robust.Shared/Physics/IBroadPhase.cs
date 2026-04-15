@@ -63,7 +63,8 @@ public interface IBroadPhase
 }
 
 [NotContentImplementable]
-public interface IBroadPhase<T> : ICollection<T> where T : notnull {
+public interface IBroadPhase<T> : ICollection<T> where T : notnull
+{
 
     int Capacity { get; }
 

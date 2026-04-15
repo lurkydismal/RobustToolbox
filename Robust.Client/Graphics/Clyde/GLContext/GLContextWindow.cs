@@ -32,7 +32,7 @@ namespace Robust.Client.Graphics.Clyde
                         };
                     }
 
-                    var requestedVersion = (RendererOpenGLVersion) Clyde._cfg.GetCVar(CVars.DisplayOpenGLVersion);
+                    var requestedVersion = (RendererOpenGLVersion)Clyde._cfg.GetCVar(CVars.DisplayOpenGLVersion);
                     if (requestedVersion != RendererOpenGLVersion.Auto)
                     {
                         return new[]
@@ -203,7 +203,7 @@ namespace Robust.Client.Graphics.Clyde
                     // 0xFFFFFFFFFFFFFFFFUL is GL_TIMEOUT_IGNORED
                     var rt = window.Reg.RenderTarget;
                     var sync = rt.LastGLSync;
-                    GL.WaitSync(sync, WaitSyncFlags.None, unchecked((long) 0xFFFFFFFFFFFFFFFFUL));
+                    GL.WaitSync(sync, WaitSyncFlags.None, unchecked((long)0xFFFFFFFFFFFFFFFFUL));
                     Clyde.CheckGlError();
                 }
 

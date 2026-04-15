@@ -103,7 +103,7 @@ namespace Robust.Shared.ContentPack
                 text = ReadAllText(provider, path);
                 return true;
             }
-            catch(FileNotFoundException)
+            catch (FileNotFoundException)
             {
                 text = null;
                 return false;
@@ -119,7 +119,7 @@ namespace Robust.Shared.ContentPack
         public static byte[] ReadAllBytes(this IWritableDirProvider provider, ResPath path)
         {
             using var stream = provider.OpenRead(path);
-            using var memoryStream = new MemoryStream((int) stream.Length);
+            using var memoryStream = new MemoryStream((int)stream.Length);
             stream.CopyTo(memoryStream);
             return memoryStream.ToArray();
         }

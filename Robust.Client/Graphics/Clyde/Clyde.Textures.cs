@@ -63,13 +63,13 @@ namespace Robust.Client.Graphics.Clyde
                 {
                     // Disable sRGB so stuff doesn't get interpreter wrong.
                     actualParams.Srgb = false;
-                    using var img = ApplyA8Swizzle((Image<A8>) (object) image);
+                    using var img = ApplyA8Swizzle((Image<A8>)(object)image);
                     return LoadTextureFromImage(img, name, loadParams);
                 }
 
                 if (pixelType == typeof(L8) && !actualParams.Srgb)
                 {
-                    using var img = ApplyL8Swizzle((Image<L8>) (object) image);
+                    using var img = ApplyL8Swizzle((Image<L8>)(object)image);
                     return LoadTextureFromImage(img, name, loadParams);
                 }
             }
@@ -129,7 +129,7 @@ namespace Robust.Client.Graphics.Clyde
             }
 
             var (pif, pf, pt) = PixelEnums<T>(srgb);
-            GL.TexImage2D(TextureTarget.Texture2D, 0, pif, width, height, 0, pf, pt, (IntPtr) ptr);
+            GL.TexImage2D(TextureTarget.Texture2D, 0, pif, width, height, 0, pf, pt, (IntPtr)ptr);
             CheckGlError();
 
             if (sizeof(T) < 4)
@@ -145,7 +145,7 @@ namespace Robust.Client.Graphics.Clyde
             string? name = null)
             where T : unmanaged, IPixel<T>
         {
-            var texture = new GLHandle((uint) GL.GenTexture());
+            var texture = new GLHandle((uint)GL.GenTexture());
             CheckGlError();
             GL.BindTexture(TextureTarget.Texture2D, texture.Handle);
             CheckGlError();
@@ -166,13 +166,13 @@ namespace Robust.Client.Graphics.Clyde
 
                 // TODO: Does it make sense to default to 1 for RGB parameters?
                 // It might make more sense to pass some options to change swizzling.
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleR, (int) All.One);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleR, (int)All.One);
                 CheckGlError();
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleG, (int) All.One);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleG, (int)All.One);
                 CheckGlError();
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleB, (int) All.One);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleB, (int)All.One);
                 CheckGlError();
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleA, (int) All.Red);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleA, (int)All.Red);
                 CheckGlError();
             }
             else if (pixelType == typeof(L8) && !loadParams.Srgb)
@@ -183,13 +183,13 @@ namespace Robust.Client.Graphics.Clyde
                 // Because OpenGL doesn't provide sRGB single/dual channel image formats.
                 // Vulkan when?
 
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleR, (int) All.Red);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleR, (int)All.Red);
                 CheckGlError();
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleG, (int) All.Red);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleG, (int)All.Red);
                 CheckGlError();
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleB, (int) All.Red);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleB, (int)All.Red);
                 CheckGlError();
-                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleA, (int) All.One);
+                GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureSwizzleA, (int)All.One);
                 CheckGlError();
             }
             else
@@ -208,19 +208,19 @@ namespace Robust.Client.Graphics.Clyde
             if (actualParams.Filter)
             {
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter,
-                    (int) TextureMinFilter.Linear);
+                    (int)TextureMinFilter.Linear);
                 CheckGlError();
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter,
-                    (int) TextureMagFilter.Linear);
+                    (int)TextureMagFilter.Linear);
                 CheckGlError();
             }
             else
             {
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter,
-                    (int) TextureMinFilter.Nearest);
+                    (int)TextureMinFilter.Nearest);
                 CheckGlError();
                 GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter,
-                    (int) TextureMagFilter.Nearest);
+                    (int)TextureMagFilter.Nearest);
                 CheckGlError();
             }
 
@@ -228,26 +228,26 @@ namespace Robust.Client.Graphics.Clyde
             {
                 case TextureWrapMode.None:
                     GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS,
-                        (int) OGLTextureWrapMode.ClampToEdge);
+                        (int)OGLTextureWrapMode.ClampToEdge);
                     CheckGlError();
                     GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT,
-                        (int) OGLTextureWrapMode.ClampToEdge);
+                        (int)OGLTextureWrapMode.ClampToEdge);
                     CheckGlError();
                     break;
                 case TextureWrapMode.Repeat:
                     GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS,
-                        (int) OGLTextureWrapMode.Repeat);
+                        (int)OGLTextureWrapMode.Repeat);
                     CheckGlError();
                     GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT,
-                        (int) OGLTextureWrapMode.Repeat);
+                        (int)OGLTextureWrapMode.Repeat);
                     CheckGlError();
                     break;
                 case TextureWrapMode.MirroredRepeat:
                     GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS,
-                        (int) OGLTextureWrapMode.MirroredRepeat);
+                        (int)OGLTextureWrapMode.MirroredRepeat);
                     CheckGlError();
                     GL.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT,
-                        (int) OGLTextureWrapMode.MirroredRepeat);
+                        (int)OGLTextureWrapMode.MirroredRepeat);
                     CheckGlError();
                     break;
                 default:
@@ -440,7 +440,7 @@ namespace Robust.Client.Graphics.Clyde
                     dstTl.X, dstY,
                     size.X, size.Y,
                     pf, pt,
-                    (IntPtr) aPtr);
+                    (IntPtr)aPtr);
                 CheckGlError();
             }
 
@@ -466,15 +466,15 @@ namespace Robust.Client.Graphics.Clyde
         {
             var white = new Image<Rgba32>(1, 1);
             white[0, 0] = new Rgba32(255, 255, 255, 255);
-            _stockTextureWhite = (ClydeTexture) Texture.LoadFromImage(white, name: "StockTextureWhite");
+            _stockTextureWhite = (ClydeTexture)Texture.LoadFromImage(white, name: "StockTextureWhite");
 
             var black = new Image<Rgba32>(1, 1);
             black[0, 0] = new Rgba32(0, 0, 0, 255);
-            _stockTextureBlack = (ClydeTexture) Texture.LoadFromImage(black, name: "StockTextureBlack");
+            _stockTextureBlack = (ClydeTexture)Texture.LoadFromImage(black, name: "StockTextureBlack");
 
             var blank = new Image<Rgba32>(1, 1);
             blank[0, 0] = new Rgba32(0, 0, 0, 0);
-            _stockTextureTransparent = (ClydeTexture) Texture.LoadFromImage(blank, name: "StockTextureTransparent");
+            _stockTextureTransparent = (ClydeTexture)Texture.LoadFromImage(blank, name: "StockTextureTransparent");
         }
 
         /// <summary>
@@ -664,13 +664,13 @@ namespace Robust.Client.Graphics.Clyde
 
                 fixed (byte* p = buffer)
                 {
-                    GL.GetTexImage(TextureTarget.Texture2D, 0, PF.Rgba, PT.UnsignedByte, (IntPtr) p);
+                    GL.GetTexImage(TextureTarget.Texture2D, 0, PF.Rgba, PT.UnsignedByte, (IntPtr)p);
                 }
 
                 GL.BindTexture(TextureTarget.Texture2D, curTexture2D);
 
                 var pixelPos = (loaded.Size.X * (loaded.Size.Y - y - 1) + x) * 4;
-                var color = new Color(buffer[pixelPos+0], buffer[pixelPos+1], buffer[pixelPos+2], buffer[pixelPos+3]);
+                var color = new Color(buffer[pixelPos + 0], buffer[pixelPos + 1], buffer[pixelPos + 2], buffer[pixelPos + 3]);
                 ArrayPool<byte>.Shared.Return(buffer);
                 return color;
             }

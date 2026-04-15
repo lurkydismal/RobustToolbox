@@ -80,8 +80,8 @@ namespace Robust.Client.Graphics
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (_stencil is {} data)
-                instance.Stencil = data with { Enabled = true};
+            if (_stencil is { } data)
+                instance.Stencil = data with { Enabled = true };
 
             instance.MakeImmutable();
             _cachedInstance = instance;

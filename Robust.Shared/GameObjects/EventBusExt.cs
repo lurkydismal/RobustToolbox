@@ -20,8 +20,8 @@ namespace Robust.Shared.GameObjects
             IEntityEventSubscriber subscriber,
             EntitySessionEventHandler<T> handler,
             Type orderType,
-            Type[]? before=null,
-            Type[]? after=null)
+            Type[]? before = null,
+            Type[]? after = null)
         {
             var wrapper = new HandlerWrapper<T>(handler);
             eventBus.SubscribeEvent<EntitySessionMessage<T>>(

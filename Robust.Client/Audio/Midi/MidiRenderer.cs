@@ -169,7 +169,7 @@ internal sealed partial class MidiRenderer : IMidiRenderer
         {
             lock (_playerStateLock)
             {
-                _player?.Seek(Math.Max(Math.Min(value, PlayerTotalTick-1), 0));
+                _player?.Seek(Math.Max(Math.Min(value, PlayerTotalTick - 1), 0));
             }
         }
     }
@@ -451,7 +451,7 @@ internal sealed partial class MidiRenderer : IMidiRenderer
 
         var buffersProcessed = Source.GetNumberOfBuffersProcessed();
 
-        if(buffersProcessed == Buffers)
+        if (buffersProcessed == Buffers)
             _midiSawmill.Warning("MIDI buffer overflow!");
 
         if (buffersProcessed == 0)
@@ -565,7 +565,7 @@ internal sealed partial class MidiRenderer : IMidiRenderer
 
         try
         {
-            lock(_playerStateLock)
+            lock (_playerStateLock)
             {
                 // Use MidiCommand as it's more readable with switch statements.
                 switch (midiEvent.MidiCommand)
@@ -609,7 +609,7 @@ internal sealed partial class MidiRenderer : IMidiRenderer
                             break;
 
                         _rendererState.Controllers.AsSpan[midiEvent.Channel].AsSpan[midiEvent.Control] = midiEvent.Value;
-                        if(midiEvent.Control != 0x0)
+                        if (midiEvent.Control != 0x0)
                             _synth.CC(midiEvent.Channel, midiEvent.Control, midiEvent.Value);
                         else // Fluidsynth doesn't seem to respect CC0 as bank selection, so we have to do it manually.
                             _synth.BankSelect(midiEvent.Channel, midiEvent.Value);
@@ -634,10 +634,10 @@ internal sealed partial class MidiRenderer : IMidiRenderer
                         break;
 
                     // Sometimes MIDI files spam these for no good reason and I can't find any info on what they are.
-                    case (RobustMidiCommand) 0x00:
-                    case (RobustMidiCommand) 0x01:
-                    case (RobustMidiCommand) 0x05:
-                    case (RobustMidiCommand) 0x50: // MetaEvent -- SetTempo, handled by the player.
+                    case (RobustMidiCommand)0x00:
+                    case (RobustMidiCommand)0x01:
+                    case (RobustMidiCommand)0x05:
+                    case (RobustMidiCommand)0x50: // MetaEvent -- SetTempo, handled by the player.
                         return;
 
                     case RobustMidiCommand.SystemMessage:
@@ -694,7 +694,7 @@ internal sealed partial class MidiRenderer : IMidiRenderer
         seqEv.Dest = _debugEvents ? _debugRegister : _robustRegister;
 
         // If this is an old event, send it right now.
-        if(absolute && time <= SequencerTick || !absolute && time <= 0)
+        if (absolute && time <= SequencerTick || !absolute && time <= 0)
             _sequencer.SendNow(seqEv);
         else
             _sequencer.SendAt(seqEv, time, absolute);

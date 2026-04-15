@@ -11,7 +11,7 @@ public sealed class DependencyAssignAnalyzer : DiagnosticAnalyzer
 {
     private const string DependencyAttributeType = "Robust.Shared.IoC.DependencyAttribute";
 
-    private static readonly DiagnosticDescriptor Rule = new (
+    private static readonly DiagnosticDescriptor Rule = new(
         Diagnostics.IdDependencyFieldAssigned,
         "Assignment to dependency field",
         "Tried to assign to [Dependency] field '{0}'. Remove [Dependency] or inject it via field injection instead.",

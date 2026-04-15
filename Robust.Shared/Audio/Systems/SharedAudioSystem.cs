@@ -31,7 +31,7 @@ public abstract partial class SharedAudioSystem : EntitySystem
 {
     [Dependency] protected readonly IConfigurationManager CfgManager = default!;
     [Dependency] protected readonly IGameTiming Timing = default!;
-    [Dependency] private   readonly INetManager _netManager = default!;
+    [Dependency] private readonly INetManager _netManager = default!;
     [Dependency] protected readonly IPrototypeManager ProtoMan = default!;
     [Dependency] protected readonly IRobustRandom RandMan = default!;
     [Dependency] protected readonly MetaDataSystem MetadataSys = default!;
@@ -115,7 +115,7 @@ public abstract partial class SharedAudioSystem : EntitySystem
             // need to ensure it doesn't despawn too early.
             if (TryComp(entity.Owner, out TimedDespawnComponent? despawn))
             {
-                despawn.Lifetime -= (float) timeOffset.TotalSeconds;
+                despawn.Lifetime -= (float)timeOffset.TotalSeconds;
             }
         }
 
@@ -129,7 +129,7 @@ public abstract partial class SharedAudioSystem : EntitySystem
     /// <returns></returns>
     private float GetPlaybackPosition(AudioComponent component)
     {
-        return (float) (Timing.CurTime - (component.PauseTime ?? TimeSpan.Zero) - component.AudioStart).TotalSeconds;
+        return (float)(Timing.CurTime - (component.PauseTime ?? TimeSpan.Zero) - component.AudioStart).TotalSeconds;
     }
 
     /// <summary>
@@ -187,7 +187,7 @@ public abstract partial class SharedAudioSystem : EntitySystem
         {
             var pauseOffset = Timing.CurTime - component.PauseTime;
             component.AudioStart += pauseOffset ?? TimeSpan.Zero;
-            component.PlaybackPosition = (float) (Timing.CurTime - component.AudioStart).TotalSeconds;
+            component.PlaybackPosition = (float)(Timing.CurTime - component.AudioStart).TotalSeconds;
 
             Dirty(entity.Value, component);
         }
@@ -228,7 +228,7 @@ public abstract partial class SharedAudioSystem : EntitySystem
                 {
                     var timed = EnsureComp<TimedDespawnComponent>(entity.Value);
                     var audioLength = GetAudioLength(component.FileName);
-                    timed.Lifetime = (float) audioLength.TotalSeconds + AudioDespawnBuffer;
+                    timed.Lifetime = (float)audioLength.TotalSeconds + AudioDespawnBuffer;
                 }
                 break;
         }
@@ -285,14 +285,14 @@ public abstract partial class SharedAudioSystem : EntitySystem
                 return new ResolvedPathSpecifier(path.Path == default ? string.Empty : path.Path.ToString());
 
             case SoundCollectionSpecifier collection:
-            {
-                if (collection.Collection == null)
-                    return new ResolvedPathSpecifier(string.Empty);
+                {
+                    if (collection.Collection == null)
+                        return new ResolvedPathSpecifier(string.Empty);
 
-                var soundCollection = ProtoMan.Index<SoundCollectionPrototype>(collection.Collection);
-                var index = RandMan.Next(soundCollection.PickFiles.Count);
-                return new ResolvedCollectionSpecifier(collection.Collection, index);
-            }
+                    var soundCollection = ProtoMan.Index<SoundCollectionPrototype>(collection.Collection);
+                    var index = RandMan.Next(soundCollection.PickFiles.Count);
+                    return new ResolvedCollectionSpecifier(collection.Collection, index);
+                }
         }
 
         return new ResolvedPathSpecifier(string.Empty);
@@ -324,15 +324,15 @@ public abstract partial class SharedAudioSystem : EntitySystem
     /// <returns>The playback position as a float.</returns>
     protected float CalculateAudioPosition(Entity<AudioComponent> ent, float? length = null, float? position = null)
     {
-        position ??= (float) ((ent.Comp.PauseTime ?? Timing.CurTime) - ent.Comp.AudioStart).TotalSeconds;
-        length ??= (float) GetAudioLength(ent.Comp.FileName).TotalSeconds;
+        position ??= (float)((ent.Comp.PauseTime ?? Timing.CurTime) - ent.Comp.AudioStart).TotalSeconds;
+        length ??= (float)GetAudioLength(ent.Comp.FileName).TotalSeconds;
 
         // Looped audio has no conceptual start or end.
         if (ent.Comp.Params.Loop)
             position %= length;
 
         // TODO clamp the offset inside of AudioSource.SetPlaybackPosition() itself.
-        var maxOffset = Math.Max((float) length - 0.01f, 0f);
+        var maxOffset = Math.Max((float)length - 0.01f, 0f);
         position = Math.Clamp(position.Value, 0f, maxOffset);
 
         return position.Value;
@@ -343,7 +343,8 @@ public abstract partial class SharedAudioSystem : EntitySystem
     [return: NotNullIfNotNull(nameof(specifier))]
     public string? GetAudioPath(ResolvedSoundSpecifier? specifier)
     {
-        return specifier switch {
+        return specifier switch
+        {
             ResolvedPathSpecifier path =>
                 path.Path.ToString(),
             ResolvedCollectionSpecifier collection =>
@@ -373,12 +374,12 @@ public abstract partial class SharedAudioSystem : EntitySystem
 
             var despawn = AddComp<TimedDespawnComponent>(uid);
             // Don't want to clip audio too short due to imprecision.
-            despawn.Lifetime = (float) length.Value.TotalSeconds + AudioDespawnBuffer;
+            despawn.Lifetime = (float)length.Value.TotalSeconds + AudioDespawnBuffer;
         }
 
         if (comp.Params.Variation != null && comp.Params.Variation.Value != 0f)
         {
-            comp.Params.Pitch *= (float) RandMan.NextGaussian(1, comp.Params.Variation.Value);
+            comp.Params.Pitch *= (float)RandMan.NextGaussian(1, comp.Params.Variation.Value);
         }
 
         if (initialize)

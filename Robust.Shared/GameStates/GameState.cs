@@ -15,7 +15,7 @@ namespace Robust.Shared.GameStates
         /// <summary>
         ///     The serialized size in bytes of this game state.
         /// </summary>
-        [field:NonSerialized]
+        [field: NonSerialized]
         public int PayloadSize { get; set; }
 
         public bool ForceSendReliably;
@@ -60,7 +60,7 @@ namespace Robust.Shared.GameStates
                 ToSequence,
                 LastProcessedInput,
                 EntityStates.Value.ToArray(),
-                PlayerStates.Value.Select(x=> x.Clone()).ToArray(),
+                PlayerStates.Value.Select(x => x.Clone()).ToArray(),
                 EntityDeletions.Value.ToArray());
 
         }

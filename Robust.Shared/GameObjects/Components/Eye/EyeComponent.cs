@@ -50,7 +50,7 @@ namespace Robust.Shared.GameObjects
         ///     The visibility mask for this eye.
         ///     The player will be able to get updates for entities whose layers match the mask.
         /// </summary>
-        [DataField("visMask", customTypeSerializer:typeof(FlagSerializer<VisibilityMaskLayer>)), AutoNetworkedField]
+        [DataField("visMask", customTypeSerializer: typeof(FlagSerializer<VisibilityMaskLayer>)), AutoNetworkedField]
         public int VisibilityMask = DefaultVisibilityMask;
 
         /// <summary>
@@ -66,5 +66,5 @@ namespace Robust.Shared.GameObjects
     /// <summary>
     /// Single layer used for Eye visibility. Controls what entities they are allowed to see.
     /// </summary>
-    public sealed class VisibilityMaskLayer {}
+    public sealed class VisibilityMaskLayer { }
 }

@@ -56,7 +56,7 @@ public abstract class TileDebugOverlay : Overlay, IPostInjectInit
     protected internal override void Draw(in OverlayDrawArgs args)
     {
         Grids.Clear();
-        if (args.Viewport.Eye?.Position.MapId is not {} map || map == MapId.Nullspace)
+        if (args.Viewport.Eye?.Position.MapId is not { } map || map == MapId.Nullspace)
             return;
 
         MapMan.FindGridsIntersecting(map, args.WorldBounds, ref Grids);
@@ -112,8 +112,8 @@ public abstract class TileDebugOverlay : Overlay, IPostInjectInit
             return;
 
         var local = Map.WorldToLocal(grid, comp, coords.Position);
-        var x = (int) Math.Floor(local.X / comp.TileSize);
-        var y = (int) Math.Floor(local.Y / comp.TileSize);
+        var x = (int)Math.Floor(local.X / comp.TileSize);
+        var y = (int)Math.Floor(local.Y / comp.TileSize);
         var indices = new Vector2i(x, y);
 
         DrawTooltip(handle, mousePos.Position, local, indices, (grid, comp));
@@ -138,7 +138,7 @@ public abstract class TileDebugOverlay : Overlay, IPostInjectInit
 
     protected virtual void DrawTileText(DrawingHandleScreen handle, Vector2 tileCentre, Vector2i indices, Entity<MapGridComponent> grid)
     {
-        if (GetText(indices, grid) is {} text)
+        if (GetText(indices, grid) is { } text)
             handle.DrawString(Font, tileCentre, text);
     }
 

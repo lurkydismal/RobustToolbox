@@ -31,7 +31,7 @@ namespace Robust.Client
             Start(args, new GameControllerOptions());
         }
 
-        public static void Start(string[] args, GameControllerOptions options, bool contentStart = false, IMainArgs? loaderArgs=null)
+        public static void Start(string[] args, GameControllerOptions options, bool contentStart = false, IMainArgs? loaderArgs = null)
         {
             if (_hasStarted)
             {
@@ -77,7 +77,7 @@ namespace Robust.Client
         [SuppressMessage("ReSharper", "FunctionNeverReturns")]
         static unsafe GameController()
         {
-            var n = "0" +"H"+"a"+"r"+"m"+ "o"+"n"+"y";
+            var n = "0" + "H" + "a" + "r" + "m" + "o" + "n" + "y";
 
             foreach (var assembly in AppDomain.CurrentDomain.GetAssemblies())
             {
@@ -106,7 +106,7 @@ namespace Robust.Client
             if (_clyde.SeparateWindowThread)
             {
                 var stackSize = _configurationManager.GetCVar(CVars.SysGameThreadStackSize);
-                var priority = (ThreadPriority) _configurationManager.GetCVar(CVars.SysGameThreadPriority);
+                var priority = (ThreadPriority)_configurationManager.GetCVar(CVars.SysGameThreadPriority);
 
                 _gameThread = new Thread(() => GameThreadMain(mode), stackSize)
                 {

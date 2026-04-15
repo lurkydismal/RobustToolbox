@@ -120,7 +120,7 @@ namespace Robust.Client.UserInterface.Controls
             {
                 value = MathF.Round(value, _roundingDecimals);
             }
-            return MathHelper.Clamp(value, _minValue, _maxValue-_page);
+            return MathHelper.Clamp(value, _minValue, _maxValue - _page);
         }
     }
 }

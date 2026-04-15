@@ -376,7 +376,7 @@ public abstract class BaseAudioSource : IAudioSource
         if (FilterHandle == 0)
         {
             FilterHandle = ALC.EFX.GenFilter();
-            ALC.EFX.Filter(FilterHandle, FilterInteger.FilterType, (int) FilterType.Lowpass);
+            ALC.EFX.Filter(FilterHandle, FilterInteger.FilterType, (int)FilterType.Lowpass);
         }
 
         ALC.EFX.Filter(FilterHandle, FilterFloat.LowpassGain, gain);

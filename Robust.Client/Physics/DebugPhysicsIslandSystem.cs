@@ -117,7 +117,7 @@ namespace Robust.Client.Physics
 
         protected internal override void Draw(in OverlayDrawArgs args)
         {
-            var worldHandle = (DrawingHandleWorld) args.DrawingHandle;
+            var worldHandle = (DrawingHandleWorld)args.DrawingHandle;
 
             DrawIslandSolve(worldHandle);
         }
@@ -130,7 +130,7 @@ namespace Robust.Client.Physics
 
             foreach (var solve in _islandSystem.IslandSolve)
             {
-                var ratio = (float) Math.Max(
+                var ratio = (float)Math.Max(
                     (solve.Time.TotalSeconds + DebugPhysicsIslandSystem.SolveDuration -
                      _gameTiming.CurTime.TotalSeconds) / DebugPhysicsIslandSystem.SolveDuration, 0.0f);
 

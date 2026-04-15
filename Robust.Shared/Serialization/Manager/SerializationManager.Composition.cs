@@ -97,7 +97,7 @@ public partial class SerializationManager
                 expression = Expression.Call(
                     instanceConst,
                     nameof(PushInheritance),
-                    new []{value, nodeType},
+                    new[] { value, nodeType },
                     readerConst,
                     Expression.Convert(parentParam, nodeType),
                     Expression.Convert(childParam, nodeType),
@@ -189,7 +189,7 @@ public partial class SerializationManager
             if (field.Attribute is DataFieldAttribute dfa)
             {
                 // tag is set on data definition creation
-                if(!processedTags.Add(dfa.Tag!)) continue; //tag was already processed, probably because we are using the same tag in an include
+                if (!processedTags.Add(dfa.Tag!)) continue; //tag was already processed, probably because we are using the same tag in an include
 
                 var key = dfa.Tag!;
                 if (parent.TryGetValue(key, out var parentValue))

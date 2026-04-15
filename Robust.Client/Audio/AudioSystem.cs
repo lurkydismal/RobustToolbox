@@ -181,7 +181,7 @@ public sealed partial class AudioSystem : SharedAudioSystem
 
         // If playback position changed then update it.
         var totalLen = GetAudioLengthImpl(entity.Comp.FileName).TotalSeconds;
-        var position = CalculateAudioPosition(entity, (float) totalLen);
+        var position = CalculateAudioPosition(entity, (float)totalLen);
 
         var currentPosition = entity.Comp.Source.PlaybackPosition;
         var diff = Math.Abs(position - currentPosition);
@@ -251,7 +251,7 @@ public sealed partial class AudioSystem : SharedAudioSystem
         length ??= GetAudioLength(component.FileName);
 
         // If audio came into range then start playback at the correct position.
-        var offset = CalculateAudioPosition(entity, (float) length.Value.TotalSeconds);
+        var offset = CalculateAudioPosition(entity, (float)length.Value.TotalSeconds);
 
         if (TryAudioLimit(component.FileName))
         {
@@ -303,7 +303,7 @@ public sealed partial class AudioSystem : SharedAudioSystem
 
     private void OnAudioAttenuation(int obj)
     {
-        _audio.SetAttenuation((Attenuation) obj);
+        _audio.SetAttenuation((Attenuation)obj);
     }
 
     private void OnRaycastLengthChanged(float value)

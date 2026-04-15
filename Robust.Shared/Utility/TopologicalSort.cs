@@ -65,7 +65,7 @@ namespace Robust.Shared.Utility
             Func<TDatum, TValue> valueSelector,
             Func<TDatum, IEnumerable<TKey>> beforeSelector,
             Func<TDatum, IEnumerable<TKey>> afterSelector,
-            bool allowMissing=false)
+            bool allowMissing = false)
             where TKey : notnull
         {
             var dict = new Dictionary<TKey, (TDatum datum, GraphNode<TValue> node)>();

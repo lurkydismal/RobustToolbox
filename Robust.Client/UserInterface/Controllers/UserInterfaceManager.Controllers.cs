@@ -73,7 +73,7 @@ internal partial class UserInterfaceManager
         var method = new DynamicMethod(
             "StateChangedCaller",
             typeof(void),
-            new[] {typeof(object), typeof(State.State)},
+            new[] { typeof(object), typeof(State.State) },
             true
         );
 
@@ -85,14 +85,14 @@ internal partial class UserInterfaceManager
         {
             onStateChangedType = typeof(IOnStateEntered<>).MakeGenericType(state);
             onStateChangedMethod =
-                controller.GetMethod(nameof(IOnStateEntered<State.State>.OnStateEntered), new[] {state})
+                controller.GetMethod(nameof(IOnStateEntered<State.State>.OnStateEntered), new[] { state })
                 ?? throw new NullReferenceException();
         }
         else
         {
             onStateChangedType = typeof(IOnStateExited<>).MakeGenericType(state);
             onStateChangedMethod =
-                controller.GetMethod(nameof(IOnStateExited<State.State>.OnStateExited), new[] {state})
+                controller.GetMethod(nameof(IOnStateExited<State.State>.OnStateExited), new[] { state })
                 ?? throw new NullReferenceException();
         }
 
@@ -123,7 +123,7 @@ internal partial class UserInterfaceManager
         var method = new DynamicMethod(
             "SystemChangedCaller",
             typeof(void),
-            new[] {typeof(object), typeof(IEntitySystem)},
+            new[] { typeof(object), typeof(IEntitySystem) },
             true
         );
 
@@ -135,14 +135,14 @@ internal partial class UserInterfaceManager
         {
             onSystemChangedType = typeof(IOnSystemLoaded<>).MakeGenericType(system);
             onSystemChangedMethod =
-                controller.GetMethod(nameof(IOnSystemLoaded<IEntitySystem>.OnSystemLoaded), new[] {system})
+                controller.GetMethod(nameof(IOnSystemLoaded<IEntitySystem>.OnSystemLoaded), new[] { system })
                 ?? throw new NullReferenceException();
         }
         else
         {
             onSystemChangedType = typeof(IOnSystemUnloaded<>).MakeGenericType(system);
             onSystemChangedMethod =
-                controller.GetMethod(nameof(IOnSystemUnloaded<IEntitySystem>.OnSystemUnloaded), new[] {system})
+                controller.GetMethod(nameof(IOnSystemUnloaded<IEntitySystem>.OnSystemUnloaded), new[] { system })
                 ?? throw new NullReferenceException();
         }
 
@@ -170,7 +170,7 @@ internal partial class UserInterfaceManager
 
     public T GetUIController<T>() where T : UIController, new()
     {
-        return (T) GetUIController(typeof(T));
+        return (T)GetUIController(typeof(T));
     }
 
     private void SetupControllers()
@@ -187,7 +187,7 @@ internal partial class UserInterfaceManager
 
         foreach (var controllerType in _reflectionManager.GetAllChildren<UIController>())
         {
-            var controller = (UIController) _dependencies.ResolveType(controllerType);
+            var controller = (UIController)_dependencies.ResolveType(controllerType);
             _uiControllers[controllerType] = controller;
 
             foreach (var fieldInfo in controllerType.GetAllPropertiesAndFields())

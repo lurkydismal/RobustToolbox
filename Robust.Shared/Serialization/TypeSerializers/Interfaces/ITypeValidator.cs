@@ -6,7 +6,7 @@ using Robust.Shared.Serialization.Markdown.Validation;
 
 namespace Robust.Shared.Serialization.TypeSerializers.Interfaces
 {
-    public interface ITypeValidator<[UsedImplicitly]TType, TNode> : BaseSerializerInterfaces.ITypeNodeInterface<TType, TNode> where TNode : DataNode
+    public interface ITypeValidator<[UsedImplicitly] TType, TNode> : BaseSerializerInterfaces.ITypeNodeInterface<TType, TNode> where TNode : DataNode
     {
         /// <summary>
         /// Preform computationally expensive validation of the value. Only called from the Yaml linter.

@@ -26,7 +26,7 @@ namespace Robust.Client.Credits
 
             foreach (var entry in (YamlSequenceNode)yamlStream.Documents[0].RootNode)
             {
-                var mapNode = (YamlMappingNode) entry;
+                var mapNode = (YamlMappingNode)entry;
                 var name = mapNode.GetNode("name").AsString();
                 var license = mapNode.GetNode("license").AsString();
 

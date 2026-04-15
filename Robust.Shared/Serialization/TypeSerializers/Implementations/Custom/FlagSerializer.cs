@@ -114,7 +114,7 @@ namespace Robust.Shared.Serialization.TypeSerializers.Implementations.Custom
             foreach (var elem in node.Sequence)
             {
                 if (elem is not ValueDataNode valueDataNode) throw new InvalidNodeTypeException();
-                flags |= (int) Enum.Parse(flagType, valueDataNode.Value);
+                flags |= (int)Enum.Parse(flagType, valueDataNode.Value);
             }
 
             return flags;

@@ -34,6 +34,6 @@ namespace Robust.Client.Player
         /// <summary>
         ///     Session of the local client.
         /// </summary>
-        public  ICommonSession Session;
+        public ICommonSession Session;
     }
 }

@@ -9,7 +9,7 @@ public sealed class AverageCommand : ToolshedCommand
 {
     [CommandImplementation, TakesPipedTypeAsGeneric]
     public T Average<T>([PipedArgument] IEnumerable<T> input)
-        where T: INumberBase<T>
+        where T : INumberBase<T>
     {
         var a = input.ToArray();
         var sum = T.Zero;

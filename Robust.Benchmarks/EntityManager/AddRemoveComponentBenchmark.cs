@@ -38,7 +38,7 @@ public partial class AddRemoveComponentBenchmark
     [Benchmark]
     public void AddRemoveComponent()
     {
-        for (var i = 2; i <= N+1; i++)
+        for (var i = 2; i <= N + 1; i++)
         {
             var uid = new EntityUid(i);
             _entityManager.AddComponent<A>(uid);

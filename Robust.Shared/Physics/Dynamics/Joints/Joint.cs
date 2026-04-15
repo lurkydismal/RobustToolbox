@@ -212,7 +212,7 @@ public abstract partial class Joint : IEquatable<Joint>
             entMan.Dirty(BodyBUid, physics);
     }
 
-    protected Joint() {}
+    protected Joint() { }
 
     protected Joint(EntityUid bodyAUid, EntityUid bodyBUid)
     {
@@ -354,4 +354,4 @@ public abstract partial class Joint : IEquatable<Joint>
 }
 
 [ByRefEvent]
-public readonly record struct JointBreakEvent(Joint Joint, float JointError) {}
+public readonly record struct JointBreakEvent(Joint Joint, float JointError) { }

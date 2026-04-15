@@ -42,7 +42,7 @@ internal abstract partial class ViewVariablesManager
             i++;
         }
 
-        if(builder.Length != 0)
+        if (builder.Length != 0)
             args.Add(builder.ToString());
 
         return args.ToArray();
@@ -61,7 +61,7 @@ internal abstract partial class ViewVariablesManager
             var argument = arguments[i];
             var type = argumentTypes[i];
 
-            var value =  DeserializeValue(type, argument);
+            var value = DeserializeValue(type, argument);
 
             parameters.Add(value);
         }
@@ -77,7 +77,7 @@ internal abstract partial class ViewVariablesManager
     private object? DeserializeValue(Type type, string value)
     {
         // Check if the argument is a VV path, and if not, deserialize the value with serv3.
-        if (ResolvePath(value)?.Get() is {} resolved && resolved.GetType().IsAssignableTo(type))
+        if (ResolvePath(value)?.Get() is { } resolved && resolved.GetType().IsAssignableTo(type))
             return resolved;
 
         try
@@ -104,11 +104,11 @@ internal abstract partial class ViewVariablesManager
         var node = _serMan.WriteValue(type, value, true);
 
         // Don't replace an existing tag if it's null.
-        if(!string.IsNullOrEmpty(nodeTag))
+        if (!string.IsNullOrEmpty(nodeTag))
             node.Tag = nodeTag;
 
         var document = new YamlDocument(node.ToYamlNode());
-        var stream = new YamlStream {document};
+        var stream = new YamlStream { document };
 
         using var writer = new StringWriter(new StringBuilder());
 

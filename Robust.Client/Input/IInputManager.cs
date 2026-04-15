@@ -41,9 +41,9 @@ namespace Robust.Client.Input
         void KeyDown(KeyEventArgs e);
         void KeyUp(KeyEventArgs e);
 
-        IKeyBinding RegisterBinding(in KeyBindingRegistration reg, bool markModified=true, bool invalid=false);
+        IKeyBinding RegisterBinding(in KeyBindingRegistration reg, bool markModified = true, bool invalid = false);
 
-        void RemoveBinding(IKeyBinding binding, bool markModified=true);
+        void RemoveBinding(IKeyBinding binding, bool markModified = true);
 
         /// <summary>
         ///     Gets a key binding according to the function it is bound to.

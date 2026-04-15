@@ -20,7 +20,7 @@ namespace Robust.Shared.Network
         public string? PatronTier { get; init; }
 
         [ViewVariables]
-        public DateTime? CreatedTime {  get; init; }
+        public DateTime? CreatedTime { get; init; }
 
         public ImmutableArray<byte> HWId { get; init; }
 

@@ -379,7 +379,7 @@ namespace Robust.Shared.Physics.Systems
 #if DEBUG
             if (results.Count == 0)
             {
-                    _sharedDebugRaySystem.ReceiveLocalRayFromAnyThread(new(ray, maxLength, null, _netMan.IsServer, mapId));
+                _sharedDebugRaySystem.ReceiveLocalRayFromAnyThread(new(ray, maxLength, null, _netMan.IsServer, mapId));
             }
 #endif
 
@@ -531,7 +531,7 @@ namespace Robust.Shared.Physics.Systems
             pointB = Vector2.Zero;
 
             if (!Resolve(uidA, ref managerA, ref bodyA) ||
-                !Resolve(uidB, ref managerB,  ref bodyB) ||
+                !Resolve(uidB, ref managerB, ref bodyB) ||
                 managerA.FixtureCount == 0 ||
                 managerB.FixtureCount == 0)
             {

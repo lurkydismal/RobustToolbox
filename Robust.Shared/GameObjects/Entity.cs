@@ -196,7 +196,7 @@ public record struct Entity<T1, T2, T3> : IFluentEntityUid, IAsType<EntityUid>
         comp3 = Comp3;
     }
 
-#region Partial Tuple Casts
+    #region Partial Tuple Casts
 
     public static implicit operator Entity<T1, T2?, T3?>((EntityUid Owner, T1 Comp1) tuple)
     {
@@ -208,9 +208,9 @@ public record struct Entity<T1, T2, T3> : IFluentEntityUid, IAsType<EntityUid>
         return new Entity<T1, T2, T3?>(tuple.Owner, tuple.Comp1, tuple.Comp2, default);
     }
 
-#endregion
+    #endregion
 
-#region Partial Entity Casts
+    #region Partial Entity Casts
 
     public static implicit operator Entity<T1, T2?, T3?>(Entity<T1> ent)
     {
@@ -222,9 +222,9 @@ public record struct Entity<T1, T2, T3> : IFluentEntityUid, IAsType<EntityUid>
         return new Entity<T1, T2, T3?>(ent.Owner, ent.Comp1, ent.Comp2, default);
     }
 
-#endregion
+    #endregion
 
-#region Entity Sub casts
+    #region Entity Sub casts
 
     public static implicit operator Entity<T1>(Entity<T1, T2, T3> ent)
     {
@@ -236,7 +236,7 @@ public record struct Entity<T1, T2, T3> : IFluentEntityUid, IAsType<EntityUid>
         return new Entity<T1, T2>(ent.Owner, ent.Comp1, ent.Comp2);
     }
 
-#endregion
+    #endregion
 
     public override readonly int GetHashCode() => Owner.GetHashCode();
     public readonly Entity<T1?, T2?, T3?> AsNullable() => new(Owner, Comp1, Comp2, Comp3);
@@ -313,7 +313,7 @@ public record struct Entity<T1, T2, T3, T4> : IFluentEntityUid, IAsType<EntityUi
         comp4 = Comp4;
     }
 
-#region Partial Tuple Casts
+    #region Partial Tuple Casts
 
     public static implicit operator Entity<T1, T2?, T3?, T4?>((EntityUid Owner, T1 Comp1) tuple)
     {
@@ -330,9 +330,9 @@ public record struct Entity<T1, T2, T3, T4> : IFluentEntityUid, IAsType<EntityUi
         return new Entity<T1, T2, T3, T4?>(tuple.Owner, tuple.Comp1, tuple.Comp2, tuple.Comp3, default);
     }
 
-#endregion
+    #endregion
 
-#region Partial Entity Casts
+    #region Partial Entity Casts
 
     public static implicit operator Entity<T1, T2?, T3?, T4?>(Entity<T1> ent)
     {
@@ -349,9 +349,9 @@ public record struct Entity<T1, T2, T3, T4> : IFluentEntityUid, IAsType<EntityUi
         return new Entity<T1, T2, T3, T4?>(ent.Owner, ent.Comp1, ent.Comp2, ent.Comp3, default);
     }
 
-#endregion
+    #endregion
 
-#region Entity Sub casts
+    #region Entity Sub casts
 
     public static implicit operator Entity<T1>(Entity<T1, T2, T3, T4> ent)
     {
@@ -368,7 +368,7 @@ public record struct Entity<T1, T2, T3, T4> : IFluentEntityUid, IAsType<EntityUi
         return new Entity<T1, T2, T3>(ent.Owner, ent.Comp1, ent.Comp2, ent.Comp3);
     }
 
-#endregion
+    #endregion
 
     public override readonly int GetHashCode() => Owner.GetHashCode();
     public readonly Entity<T1?, T2?, T3?, T4?> AsNullable() => new(Owner, Comp1, Comp2, Comp3, Comp4);
@@ -454,7 +454,7 @@ public record struct Entity<T1, T2, T3, T4, T5> : IFluentEntityUid, IAsType<Enti
         comp5 = Comp5;
     }
 
-#region Partial Tuple Casts
+    #region Partial Tuple Casts
 
     public static implicit operator Entity<T1, T2?, T3?, T4?, T5?>((EntityUid Owner, T1 Comp1) tuple)
     {
@@ -476,9 +476,9 @@ public record struct Entity<T1, T2, T3, T4, T5> : IFluentEntityUid, IAsType<Enti
         return new Entity<T1, T2, T3, T4, T5?>(tuple.Owner, tuple.Comp1, tuple.Comp2, tuple.Comp3, tuple.Comp4, default);
     }
 
-#endregion
+    #endregion
 
-#region Partial Entity Casts
+    #region Partial Entity Casts
 
     public static implicit operator Entity<T1, T2?, T3?, T4?, T5?>(Entity<T1> ent)
     {
@@ -500,9 +500,9 @@ public record struct Entity<T1, T2, T3, T4, T5> : IFluentEntityUid, IAsType<Enti
         return new Entity<T1, T2, T3, T4, T5?>(ent.Owner, ent.Comp1, ent.Comp2, ent.Comp3, ent.Comp4, default);
     }
 
-#endregion
+    #endregion
 
-#region Entity Sub casts
+    #region Entity Sub casts
 
     public static implicit operator Entity<T1>(Entity<T1, T2, T3, T4, T5> ent)
     {
@@ -524,7 +524,7 @@ public record struct Entity<T1, T2, T3, T4, T5> : IFluentEntityUid, IAsType<Enti
         return new Entity<T1, T2, T3, T4>(ent.Owner, ent.Comp1, ent.Comp2, ent.Comp3, ent.Comp4);
     }
 
-#endregion
+    #endregion
 
     public override readonly int GetHashCode() => Owner.GetHashCode();
     public readonly Entity<T1?, T2?, T3?, T4?, T5?> AsNullable() => new(Owner, Comp1, Comp2, Comp3, Comp4, Comp5);
@@ -619,7 +619,7 @@ public record struct Entity<T1, T2, T3, T4, T5, T6> : IFluentEntityUid, IAsType<
         comp6 = Comp6;
     }
 
-#region Partial Tuple Casts
+    #region Partial Tuple Casts
 
     public static implicit operator Entity<T1, T2?, T3?, T4?, T5?, T6?>((EntityUid Owner, T1 Comp1) tuple)
     {
@@ -646,9 +646,9 @@ public record struct Entity<T1, T2, T3, T4, T5, T6> : IFluentEntityUid, IAsType<
         return new Entity<T1, T2, T3, T4, T5, T6?>(tuple.Owner, tuple.Comp1, tuple.Comp2, tuple.Comp3, tuple.Comp4, tuple.Comp5, default);
     }
 
-#endregion
+    #endregion
 
-#region Partial Entity Casts
+    #region Partial Entity Casts
 
     public static implicit operator Entity<T1, T2?, T3?, T4?, T5?, T6?>(Entity<T1> ent)
     {
@@ -675,9 +675,9 @@ public record struct Entity<T1, T2, T3, T4, T5, T6> : IFluentEntityUid, IAsType<
         return new Entity<T1, T2, T3, T4, T5, T6?>(ent.Owner, ent.Comp1, ent.Comp2, ent.Comp3, ent.Comp4, ent.Comp5, default);
     }
 
-#endregion
+    #endregion
 
-#region Entity Sub casts
+    #region Entity Sub casts
 
     public static implicit operator Entity<T1>(Entity<T1, T2, T3, T4, T5, T6> ent)
     {
@@ -704,7 +704,7 @@ public record struct Entity<T1, T2, T3, T4, T5, T6> : IFluentEntityUid, IAsType<
         return new Entity<T1, T2, T3, T4, T5>(ent.Owner, ent.Comp1, ent.Comp2, ent.Comp3, ent.Comp4, ent.Comp5);
     }
 
-#endregion
+    #endregion
 
     public override readonly int GetHashCode() => Owner.GetHashCode();
     public readonly Entity<T1?, T2?, T3?, T4?, T5?, T6?> AsNullable() => new(Owner, Comp1, Comp2, Comp3, Comp4, Comp5, Comp6);
@@ -808,7 +808,7 @@ public record struct Entity<T1, T2, T3, T4, T5, T6, T7> : IFluentEntityUid, IAsT
         comp7 = Comp7;
     }
 
-#region Partial Tuple Casts
+    #region Partial Tuple Casts
 
     public static implicit operator Entity<T1, T2?, T3?, T4?, T5?, T6?, T7?>((EntityUid Owner, T1 Comp1) tuple)
     {
@@ -840,9 +840,9 @@ public record struct Entity<T1, T2, T3, T4, T5, T6, T7> : IFluentEntityUid, IAsT
         return new Entity<T1, T2, T3, T4, T5, T6, T7?>(tuple.Owner, tuple.Comp1, tuple.Comp2, tuple.Comp3, tuple.Comp4, tuple.Comp5, tuple.Comp6, default);
     }
 
-#endregion
+    #endregion
 
-#region Partial Entity Casts
+    #region Partial Entity Casts
 
     public static implicit operator Entity<T1, T2?, T3?, T4?, T5?, T6?, T7?>(Entity<T1> ent)
     {
@@ -874,9 +874,9 @@ public record struct Entity<T1, T2, T3, T4, T5, T6, T7> : IFluentEntityUid, IAsT
         return new Entity<T1, T2, T3, T4, T5, T6, T7?>(ent.Owner, ent.Comp1, ent.Comp2, ent.Comp3, ent.Comp4, ent.Comp5, ent.Comp6, default);
     }
 
-#endregion
+    #endregion
 
-#region Entity Sub casts
+    #region Entity Sub casts
 
     public static implicit operator Entity<T1>(Entity<T1, T2, T3, T4, T5, T6, T7> ent)
     {
@@ -908,7 +908,7 @@ public record struct Entity<T1, T2, T3, T4, T5, T6, T7> : IFluentEntityUid, IAsT
         return new Entity<T1, T2, T3, T4, T5, T6>(ent.Owner, ent.Comp1, ent.Comp2, ent.Comp3, ent.Comp4, ent.Comp5, ent.Comp6);
     }
 
-#endregion
+    #endregion
 
     public override readonly int GetHashCode() => Owner.GetHashCode();
     public readonly Entity<T1?, T2?, T3?, T4?, T5?, T6?, T7?> AsNullable() => new(Owner, Comp1, Comp2, Comp3, Comp4, Comp5, Comp6, Comp7);
@@ -1021,7 +1021,7 @@ public record struct Entity<T1, T2, T3, T4, T5, T6, T7, T8> : IFluentEntityUid, 
         comp8 = Comp8;
     }
 
-#region Partial Tuple Casts
+    #region Partial Tuple Casts
 
     public static implicit operator Entity<T1, T2?, T3?, T4?, T5?, T6?, T7?, T8?>((EntityUid Owner, T1 Comp1) tuple)
     {
@@ -1058,9 +1058,9 @@ public record struct Entity<T1, T2, T3, T4, T5, T6, T7, T8> : IFluentEntityUid, 
         return new Entity<T1, T2, T3, T4, T5, T6, T7, T8?>(tuple.Owner, tuple.Comp1, tuple.Comp2, tuple.Comp3, tuple.Comp4, tuple.Comp5, tuple.Comp6, tuple.Comp7, default);
     }
 
-#endregion
+    #endregion
 
-#region Partial Entity Casts
+    #region Partial Entity Casts
 
     public static implicit operator Entity<T1, T2?, T3?, T4?, T5?, T6?, T7?, T8?>(Entity<T1> ent)
     {
@@ -1097,9 +1097,9 @@ public record struct Entity<T1, T2, T3, T4, T5, T6, T7, T8> : IFluentEntityUid, 
         return new Entity<T1, T2, T3, T4, T5, T6, T7, T8?>(ent.Owner, ent.Comp1, ent.Comp2, ent.Comp3, ent.Comp4, ent.Comp5, ent.Comp6, ent.Comp7, default);
     }
 
-#endregion
+    #endregion
 
-#region Entity Sub casts
+    #region Entity Sub casts
 
     public static implicit operator Entity<T1>(Entity<T1, T2, T3, T4, T5, T6, T7, T8> ent)
     {
@@ -1136,7 +1136,7 @@ public record struct Entity<T1, T2, T3, T4, T5, T6, T7, T8> : IFluentEntityUid, 
         return new Entity<T1, T2, T3, T4, T5, T6, T7>(ent.Owner, ent.Comp1, ent.Comp2, ent.Comp3, ent.Comp4, ent.Comp5, ent.Comp6, ent.Comp7);
     }
 
-#endregion
+    #endregion
 
     public override readonly int GetHashCode() => Owner.GetHashCode();
     public readonly Entity<T1?, T2?, T3?, T4?, T5?, T6?, T7?, T8?> AsNullable() => new(Owner, Comp1, Comp2, Comp3, Comp4, Comp5, Comp6, Comp7, Comp8);

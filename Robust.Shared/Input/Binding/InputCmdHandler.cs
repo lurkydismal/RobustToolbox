@@ -28,7 +28,7 @@ namespace Robust.Shared.Input.Binding
         /// <param name="disabled">The delegate to be ran when this command is disabled.</param>
         /// <returns>The new input command.</returns>
         public static InputCmdHandler FromDelegate(StateInputCmdDelegate? enabled = null,
-            StateInputCmdDelegate? disabled = null, bool handle=true, bool outsidePrediction=true)
+            StateInputCmdDelegate? disabled = null, bool handle = true, bool outsidePrediction = true)
         {
             return new StateInputCmdHandler
             {
@@ -94,7 +94,8 @@ namespace Robust.Shared.Input.Binding
         /// mouse button)</param>
         public PointerInputCmdHandler(PointerInputCmdDelegate callback, bool ignoreUp = true, bool outsidePrediction = false)
             : this((in PointerInputCmdArgs args) =>
-            callback(args.Session, args.Coordinates, args.EntityUid), ignoreUp, outsidePrediction) { }
+            callback(args.Session, args.Coordinates, args.EntityUid), ignoreUp, outsidePrediction)
+        { }
 
         /// <summary>
         /// Handler which will handle the command using the indicated callback
@@ -117,17 +118,17 @@ namespace Robust.Shared.Input.Binding
             switch (message)
             {
                 case ClientFullInputCmdMessage clientInput:
-                {
-                    var handled = _callback?.Invoke(new PointerInputCmdArgs(session, clientInput.Coordinates,
-                        clientInput.ScreenCoordinates, clientInput.Uid, message.State, message));
-                    return handled.HasValue && handled.Value;
-                }
+                    {
+                        var handled = _callback?.Invoke(new PointerInputCmdArgs(session, clientInput.Coordinates,
+                            clientInput.ScreenCoordinates, clientInput.Uid, message.State, message));
+                        return handled.HasValue && handled.Value;
+                    }
                 case FullInputCmdMessage fullInput:
-                {
-                    var handled = _callback?.Invoke(new PointerInputCmdArgs(session, entManager.GetCoordinates(fullInput.Coordinates),
-                        fullInput.ScreenCoordinates, entManager.GetEntity(fullInput.Uid), fullInput.State, message));
-                    return handled.HasValue && handled.Value;
-                }
+                    {
+                        var handled = _callback?.Invoke(new PointerInputCmdArgs(session, entManager.GetCoordinates(fullInput.Coordinates),
+                            fullInput.ScreenCoordinates, entManager.GetEntity(fullInput.Uid), fullInput.State, message));
+                        return handled.HasValue && handled.Value;
+                    }
                 default:
                     throw new ArgumentOutOfRangeException();
             }

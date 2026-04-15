@@ -30,7 +30,7 @@ public sealed class ReduceCommand : ToolshedCommand
         while (enumerator.MoveNext())
         {
             localCtx.SetLocal("value", enumerator.Current);
-            result = (T) reducer.Invoke(result, localCtx)!;
+            result = (T)reducer.Invoke(result, localCtx)!;
             if (ctx.HasErrors)
                 break;
         }
@@ -46,7 +46,7 @@ public sealed class ReduceCommand : ToolshedCommand
         public override bool TryParse(ParserContext ctx, [NotNullWhen(true)] out Block? result)
         {
             result = null;
-            if (ctx.Bundle.PipedType is not {IsGenericType: true})
+            if (ctx.Bundle.PipedType is not { IsGenericType: true })
                 return false;
 
             var localParser = new LocalVarParser(ctx.VariableParser);
@@ -68,7 +68,7 @@ public sealed class ReduceCommand : ToolshedCommand
 
         public override CompletionResult? TryAutocomplete(ParserContext ctx, CommandArgument? arg)
         {
-            if (ctx.Bundle.PipedType is not {IsGenericType: true})
+            if (ctx.Bundle.PipedType is not { IsGenericType: true })
                 return null;
 
             var localParser = new LocalVarParser(ctx.VariableParser);

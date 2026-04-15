@@ -117,7 +117,7 @@ namespace Robust.Shared.Maths
             if (!float.IsFinite(n))
                 throw new ArgumentOutOfRangeException(nameof(n), "Must be a number.");
             if (n <= 0) throw new ArgumentOutOfRangeException(nameof(n), "Must be positive.");
-            return (float) NextPowerOfTwo((double) n);
+            return (float)NextPowerOfTwo((double)n);
         }
 
         /// <summary>
@@ -700,7 +700,7 @@ namespace Robust.Shared.Maths
 
             // Solve quadratic equation.
             var r = end - start;
-            float c =  Vector2.Dot(start, r);
+            float c = Vector2.Dot(start, r);
             float rr = Vector2.Dot(r, r);
             float sigma = c * c - rr * b;
 

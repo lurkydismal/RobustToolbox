@@ -176,7 +176,7 @@ namespace Robust.Client.GameStates
         private sealed class NetEntData
         {
             public GameTick LastUpdate = GameTick.Zero;
-            public readonly OverflowDictionary<GameTick, EntState> Traffic = new((int) TrafficHistorySize);
+            public readonly OverflowDictionary<GameTick, EntState> Traffic = new((int)TrafficHistorySize);
             public bool Exists = true;
             public bool InPVS = true;
 

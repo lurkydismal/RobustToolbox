@@ -51,7 +51,7 @@ internal partial class Clyde
             _selfGCHandle = GCHandle.Alloc(this, GCHandleType.Normal);
 
             SDL.SDL_SetLogPriorities(SDL.SDL_LogPriority.SDL_LOG_PRIORITY_VERBOSE);
-            SDL.SDL_SetLogOutputFunction(&LogOutputFunction, (void*) GCHandle.ToIntPtr(_selfGCHandle));
+            SDL.SDL_SetLogOutputFunction(&LogOutputFunction, (void*)GCHandle.ToIntPtr(_selfGCHandle));
 
             SDL.SDL_SetHint(SDL.SDL_HINT_MOUSE_FOCUS_CLICKTHROUGH, "1");
             SDL.SDL_SetHint(SDL.SDL_HINT_IME_IMPLEMENTED_UI, "composition");
@@ -92,7 +92,7 @@ internal partial class Clyde
             InitMonitors();
             ReloadKeyMap();
 
-            SDL.SDL_AddEventWatch(&EventWatch, (void*) GCHandle.ToIntPtr(_selfGCHandle));
+            SDL.SDL_AddEventWatch(&EventWatch, (void*)GCHandle.ToIntPtr(_selfGCHandle));
 
             return true;
         }
@@ -120,7 +120,7 @@ internal partial class Clyde
         {
             if (_selfGCHandle != default)
             {
-                SDL.SDL_RemoveEventWatch(&EventWatch, (void*) GCHandle.ToIntPtr(_selfGCHandle));
+                SDL.SDL_RemoveEventWatch(&EventWatch, (void*)GCHandle.ToIntPtr(_selfGCHandle));
                 _selfGCHandle.Free();
                 _selfGCHandle = default;
             }
@@ -159,7 +159,7 @@ internal partial class Clyde
 
         public unsafe void* GLGetProcAddress(string procName)
         {
-            return (void*) SDL.SDL_GL_GetProcAddress(procName);
+            return (void*)SDL.SDL_GL_GetProcAddress(procName);
         }
 
         public string GetDescription()
@@ -183,7 +183,7 @@ internal partial class Clyde
             SDL.SDL_LogPriority priority,
             byte* message)
         {
-            var obj = (Sdl3WindowingImpl) GCHandle.FromIntPtr((IntPtr)userdata).Target!;
+            var obj = (Sdl3WindowingImpl)GCHandle.FromIntPtr((IntPtr)userdata).Target!;
 
             var level = priority switch
             {
@@ -196,25 +196,26 @@ internal partial class Clyde
                 _ => LogLevel.Error
             };
 
-            var msg = Marshal.PtrToStringUTF8((IntPtr) message) ?? "";
+            var msg = Marshal.PtrToStringUTF8((IntPtr)message) ?? "";
             var categoryName = SdlLogCategoryName(category);
             obj._sawmillSdl3.Log(level, $"[{categoryName}] {msg}");
         }
 
         private static string SdlLogCategoryName(int category)
         {
-            return (SDL.SDL_LogCategory) category switch {
+            return (SDL.SDL_LogCategory)category switch
+            {
                 // @formatter:off
                 SDL.SDL_LogCategory.SDL_LOG_CATEGORY_APPLICATION => "application",
-                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_ERROR       => "error",
-                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_ASSERT      => "assert",
-                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_SYSTEM      => "system",
-                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_AUDIO       => "audio",
-                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_VIDEO       => "video",
-                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_RENDER      => "render",
-                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_INPUT       => "input",
-                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_TEST        => "test",
-                _                            => "unknown"
+                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_ERROR => "error",
+                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_ASSERT => "assert",
+                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_SYSTEM => "system",
+                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_AUDIO => "audio",
+                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_VIDEO => "video",
+                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_RENDER => "render",
+                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_INPUT => "input",
+                SDL.SDL_LogCategory.SDL_LOG_CATEGORY_TEST => "test",
+                _ => "unknown"
                 // @formatter:on
             };
         }

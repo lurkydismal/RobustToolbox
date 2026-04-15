@@ -26,7 +26,7 @@ namespace Robust.Shared.Utility
 
             var document = yamlStream.Documents[0];
 
-            _abbreviations = ParseAbbreviations((YamlSequenceNode) document.RootNode);
+            _abbreviations = ParseAbbreviations((YamlSequenceNode)document.RootNode);
         }
 
         /// <summary>
@@ -51,10 +51,12 @@ namespace Robust.Shared.Utility
 
             // Never null - this is just empty if the type is non-generic
             var genericArgs = type.GetGenericArguments();
-            if (genericArgs.Length > 0) {
+            if (genericArgs.Length > 0)
+            {
                 // Match Type's `ToString()` - start with the number of arguments
                 sb.Append("`").Append(genericArgs.Length).Append("[");
-                foreach (var genericArg in genericArgs) {
+                foreach (var genericArg in genericArgs)
+                {
                     AbbreviateName(genericArg.FullName, _abbreviations, sb);
                 }
                 sb.Append("]");

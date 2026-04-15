@@ -83,7 +83,7 @@ namespace Robust.Client.ViewVariables.Instances
                 name.HorizontalExpand = true;
                 headBox.AddChild(name);
 
-                _refreshButton = new Button {Text = "Refresh", ToolTip = "RMB to toggle auto-refresh."};
+                _refreshButton = new Button { Text = "Refresh", ToolTip = "RMB to toggle auto-refresh." };
                 _refreshButton.OnPressed += _ => _refresh();
                 _refreshButton.OnKeyBindDown += OnButtonKeybindDown;
                 headBox.AddChild(_refreshButton);
@@ -108,7 +108,8 @@ namespace Robust.Client.ViewVariables.Instances
                 _refreshCancelToken = new CancellationTokenSource();
                 Timer.SpawnRepeating(500, _refresh, _refreshCancelToken.Token);
 
-            } else if (eventArgs.Function == EngineKeyFunctions.UIClick)
+            }
+            else if (eventArgs.Function == EngineKeyFunctions.UIClick)
             {
                 _refreshButton.ToggleMode = false;
             }

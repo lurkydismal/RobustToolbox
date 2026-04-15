@@ -42,7 +42,8 @@ namespace Robust.Client.Graphics.Clyde
                 if (_clyde._hasGLUniformBuffers)
                 {
                     _implUBO = new GLBuffer(_clyde, BufferTarget.UniformBuffer, BufferUsageHint.StreamDraw, name);
-                    unsafe {
+                    unsafe
+                    {
                         _implUBO.Reallocate(sizeof(T));
                     }
 
@@ -54,7 +55,7 @@ namespace Robust.Client.Graphics.Clyde
             {
                 if (_implUBO != null)
                 {
-                    GL.BindBufferBase(BufferRangeTarget.UniformBuffer, _index, (int) _implUBO!.ObjectHandle);
+                    GL.BindBufferBase(BufferRangeTarget.UniformBuffer, _index, (int)_implUBO!.ObjectHandle);
                 }
             }
 

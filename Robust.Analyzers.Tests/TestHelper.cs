@@ -8,7 +8,7 @@ public static class TestHelper
 {
     public static void AddEmbeddedSources(SolutionState state, params string[] embeddedFiles)
     {
-        AddEmbeddedSources(state, (IEnumerable<string>) embeddedFiles);
+        AddEmbeddedSources(state, (IEnumerable<string>)embeddedFiles);
     }
 
     public static void AddEmbeddedSources(SolutionState state, IEnumerable<string> embeddedFiles)

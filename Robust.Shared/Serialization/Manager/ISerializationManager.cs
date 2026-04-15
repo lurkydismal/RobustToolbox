@@ -264,7 +264,7 @@ namespace Robust.Shared.Serialization.Manager
         /// <param name="skipHook">Whether or not to skip running <see cref="ISerializationHooks"/></param>
         /// <param name="notNullableOverride">Set true if a reference Type should not allow null. Not necessary for value types.</param>
         /// <typeparam name="T">The type of the objects to copy from and into.</typeparam>
-        void CopyTo<T>(T source, ref T target, ISerializationContext? context = null, bool skipHook = false, [NotNullableFlag(nameof(T))]  bool notNullableOverride = false);
+        void CopyTo<T>(T source, ref T target, ISerializationContext? context = null, bool skipHook = false, [NotNullableFlag(nameof(T))] bool notNullableOverride = false);
         void CopyTo<T>(
             T source,
             ref T target,
@@ -284,7 +284,7 @@ namespace Robust.Shared.Serialization.Manager
         /// <param name="skipHook">Whether or not to skip running <see cref="ISerializationHooks"/></param>
         /// <param name="notNullableOverride">Set true if a reference Type should not allow null. Not necessary for value types.</param>
         /// <typeparam name="T">The type of the objects to copy from and into.</typeparam>
-        void CopyTo<T>(ITypeCopier<T> copier, T source, ref T target, ISerializationContext? context = null, bool skipHook = false, [NotNullableFlag(nameof(T))]  bool notNullableOverride = false);
+        void CopyTo<T>(ITypeCopier<T> copier, T source, ref T target, ISerializationContext? context = null, bool skipHook = false, [NotNullableFlag(nameof(T))] bool notNullableOverride = false);
         void CopyTo<T>(
             ITypeCopier<T> copier,
             T source,
@@ -305,7 +305,7 @@ namespace Robust.Shared.Serialization.Manager
         /// <param name="notNullableOverride">Set true if a reference Type should not allow null. Not necessary for value types.</param>
         /// <typeparam name="T">The type of the objects to copy from and into.</typeparam>
         /// <typeparam name="TCopier">The type of the <see cref="ITypeCopier{TType}"/>.</typeparam>
-        void CopyTo<T, TCopier>(T source, ref T target, ISerializationContext? context = null, bool skipHook = false, [NotNullableFlag(nameof(T))]  bool notNullableOverride = false) where TCopier : ITypeCopier<T>;
+        void CopyTo<T, TCopier>(T source, ref T target, ISerializationContext? context = null, bool skipHook = false, [NotNullableFlag(nameof(T))] bool notNullableOverride = false) where TCopier : ITypeCopier<T>;
         void CopyTo<T, TCopier>(
             T source,
             ref T target,
@@ -433,7 +433,7 @@ namespace Robust.Shared.Serialization.Manager
         public TNode PushComposition<TType, TNode>(TNode parent, TNode child, ISerializationContext? context = null)
             where TNode : DataNode
         {
-            return (TNode) PushComposition(typeof(TType), parent, child, context);
+            return (TNode)PushComposition(typeof(TType), parent, child, context);
         }
 
         TNode PushInheritance<TType, TNode>(ITypeInheritanceHandler<TType, TNode> inheritanceHandler, TNode parent, TNode child,
@@ -446,13 +446,13 @@ namespace Robust.Shared.Serialization.Manager
         public TNode PushCompositionWithGenericNode<TNode>(Type type, TNode[] parents, TNode child, ISerializationContext? context = null) where TNode : DataNode
         {
             // ReSharper disable once CoVariantArrayConversion
-            return (TNode) PushComposition(type, parents, child, context);
+            return (TNode)PushComposition(type, parents, child, context);
         }
 
         public TNode PushCompositionWithGenericNode<TNode>(Type type, TNode parent, TNode child, ISerializationContext? context = null)
             where TNode : DataNode
         {
-            return (TNode) PushComposition(type, parent, child, context);
+            return (TNode)PushComposition(type, parent, child, context);
         }
 
         /// <summary>

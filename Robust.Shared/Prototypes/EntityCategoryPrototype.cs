@@ -39,7 +39,7 @@ public sealed partial class EntityCategoryPrototype : IPrototype
     /// <summary>
     /// List of components that will cause an entity prototype to be automatically included in this category.
     /// </summary>
-    [DataField(customTypeSerializer:typeof(CustomHashSetSerializer<string, ComponentNameSerializer>))]
+    [DataField(customTypeSerializer: typeof(CustomHashSetSerializer<string, ComponentNameSerializer>))]
     public HashSet<string>? Components;
 
     /// <summary>

@@ -37,7 +37,7 @@ namespace Robust.Client.Placement.Modes
                 .Select(o => tileCoordinates.Offset(o))
                 .MinBy(node => node.TryDistance(pManager.EntityManager, MouseCoords, out var distance) ?
                     distance :
-                    (float?) null);
+                    (float?)null);
 
             MouseCoords = closestNode;
         }

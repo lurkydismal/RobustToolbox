@@ -79,7 +79,7 @@ namespace Robust.Shared.IoC
         /// and replaceExisting is set to false.</exception>
         /// <param name="collection">Collection to set as the instance for this thread.</param>
         /// <param name="replaceExisting">If this is true, replaces the existing collection, if one is set for this thread.</param>
-        public static void InitThread(IDependencyCollection collection, bool replaceExisting=false)
+        public static void InitThread(IDependencyCollection collection, bool replaceExisting = false)
         {
             if (_container.IsValueCreated && !replaceExisting)
             {

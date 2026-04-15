@@ -64,7 +64,7 @@ public sealed partial class ToolshedManager
             }
             else
             {
-                var parser = (ITypeParser) _typeFactory.CreateInstanceUnchecked(parserType, oneOff: true);
+                var parser = (ITypeParser)_typeFactory.CreateInstanceUnchecked(parserType, oneOff: true);
                 if (parser is IPostInjectInit inj)
                     inj.PostInject();
 
@@ -147,7 +147,7 @@ public sealed partial class ToolshedManager
         if (!parser.IsCustomParser())
             throw new ArgumentException($"{parser.PrettyName()} does not inherit from {typeof(CustomTypeParser<>).PrettyName()}");
 
-        result = (ITypeParser) _typeFactory.CreateInstanceUnchecked(parser, true);
+        result = (ITypeParser)_typeFactory.CreateInstanceUnchecked(parser, true);
         if (result is IPostInjectInit inj)
             inj.PostInject();
 
@@ -167,7 +167,7 @@ public sealed partial class ToolshedManager
                 try
                 {
                     var concreteParser = genParser.MakeGenericType(t.GenericTypeArguments);
-                    var builtParser = (ITypeParser) _typeFactory.CreateInstanceUnchecked(concreteParser, true);
+                    var builtParser = (ITypeParser)_typeFactory.CreateInstanceUnchecked(concreteParser, true);
 
                     if (builtParser is IPostInjectInit inj)
                         inj.PostInject();
@@ -190,7 +190,7 @@ public sealed partial class ToolshedManager
             {
                 var concreteParser = genParser.MakeGenericType(t);
 
-                var builtParser = (ITypeParser) _typeFactory.CreateInstanceUnchecked(concreteParser, true);
+                var builtParser = (ITypeParser)_typeFactory.CreateInstanceUnchecked(concreteParser, true);
                 if (builtParser is IPostInjectInit inj)
                     inj.PostInject();
 
@@ -209,7 +209,7 @@ public sealed partial class ToolshedManager
         // ough, slower path!
         var baseTy = t.BaseType;
 
-        if (baseTy is not null && baseTy != typeof(object) && baseTy != typeof(ValueType) && GetParserForType(baseTy) is {} retTy)
+        if (baseTy is not null && baseTy != typeof(object) && baseTy != typeof(ValueType) && GetParserForType(baseTy) is { } retTy)
             return retTy;
 
         foreach (var i in t.GetInterfaces())
@@ -236,7 +236,7 @@ public sealed partial class ToolshedManager
         var res = TryParse(parserContext, t, out var p);
 
         if (p is not null)
-            parsed = (T?) p;
+            parsed = (T?)p;
         else
             parsed = default;
         return res;
@@ -265,7 +265,7 @@ public sealed partial class ToolshedManager
     {
         parsed = null;
 
-        if (GetParserForType(t) is not {} impl)
+        if (GetParserForType(t) is not { } impl)
         {
             if (!parserContext.GenerateCompletions)
                 parserContext.Error = new UnparseableValueError(t);

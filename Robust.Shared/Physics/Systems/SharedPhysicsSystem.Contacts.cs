@@ -592,48 +592,48 @@ public abstract partial class SharedPhysicsSystem
         switch (status)
         {
             case ContactStatus.StartTouching:
-            {
-                if (!contact.IsTouching) return;
+                {
+                    if (!contact.IsTouching) return;
 
-                var fixtureA = contact.FixtureA!;
-                var fixtureB = contact.FixtureB!;
-                var bodyA = contact.BodyA!;
-                var bodyB = contact.BodyB!;
-                var uidA = contact.EntityA;
-                var uidB = contact.EntityB;
-                var points = new FixedArray2<Vector2>(worldPoint._00, worldPoint._01);
-                var worldNormal = worldPoint._02;
+                    var fixtureA = contact.FixtureA!;
+                    var fixtureB = contact.FixtureB!;
+                    var bodyA = contact.BodyA!;
+                    var bodyB = contact.BodyB!;
+                    var uidA = contact.EntityA;
+                    var uidB = contact.EntityB;
+                    var points = new FixedArray2<Vector2>(worldPoint._00, worldPoint._01);
+                    var worldNormal = worldPoint._02;
 
-                var ev1 = new StartCollideEvent(uidA, uidB, contact.FixtureAId, contact.FixtureBId, fixtureA, fixtureB, bodyA, bodyB, points, contact.Manifold.PointCount, worldNormal);
-                var ev2 = new StartCollideEvent(uidB, uidA, contact.FixtureBId, contact.FixtureAId, fixtureB, fixtureA, bodyB, bodyA, points, contact.Manifold.PointCount, worldNormal);
+                    var ev1 = new StartCollideEvent(uidA, uidB, contact.FixtureAId, contact.FixtureBId, fixtureA, fixtureB, bodyA, bodyB, points, contact.Manifold.PointCount, worldNormal);
+                    var ev2 = new StartCollideEvent(uidB, uidA, contact.FixtureBId, contact.FixtureAId, fixtureB, fixtureA, bodyB, bodyA, points, contact.Manifold.PointCount, worldNormal);
 
-                RaiseLocalEvent(uidA, ref ev1, true);
-                RaiseLocalEvent(uidB, ref ev2, true);
-                break;
-            }
+                    RaiseLocalEvent(uidA, ref ev1, true);
+                    RaiseLocalEvent(uidB, ref ev2, true);
+                    break;
+                }
             case ContactStatus.Touching:
                 break;
             case ContactStatus.EndTouching:
-            {
-                var fixtureA = contact.FixtureA;
-                var fixtureB = contact.FixtureB;
+                {
+                    var fixtureA = contact.FixtureA;
+                    var fixtureB = contact.FixtureB;
 
-                // If something under StartCollideEvent potentially nukes other contacts (e.g. if the entity is deleted)
-                // then we'll just skip the EndCollide.
-                if (fixtureA == null || fixtureB == null) return;
+                    // If something under StartCollideEvent potentially nukes other contacts (e.g. if the entity is deleted)
+                    // then we'll just skip the EndCollide.
+                    if (fixtureA == null || fixtureB == null) return;
 
-                var bodyA = contact.BodyA!;
-                var bodyB = contact.BodyB!;
-                var uidA = contact.EntityA;
-                var uidB = contact.EntityB;
+                    var bodyA = contact.BodyA!;
+                    var bodyB = contact.BodyB!;
+                    var uidA = contact.EntityA;
+                    var uidB = contact.EntityB;
 
-                var ev1 = new EndCollideEvent(uidA, uidB, contact.FixtureAId, contact.FixtureBId, fixtureA, fixtureB, bodyA, bodyB);
-                var ev2 = new EndCollideEvent(uidB, uidA, contact.FixtureBId, contact.FixtureAId, fixtureB, fixtureA, bodyB, bodyA);
+                    var ev1 = new EndCollideEvent(uidA, uidB, contact.FixtureAId, contact.FixtureBId, fixtureA, fixtureB, bodyA, bodyB);
+                    var ev2 = new EndCollideEvent(uidB, uidA, contact.FixtureBId, contact.FixtureAId, fixtureB, fixtureA, bodyB, bodyA);
 
-                RaiseLocalEvent(uidA, ref ev1);
-                RaiseLocalEvent(uidB, ref ev2);
-                break;
-            }
+                    RaiseLocalEvent(uidA, ref ev1);
+                    RaiseLocalEvent(uidB, ref ev2);
+                    break;
+                }
             case ContactStatus.NoContact:
                 break;
             default:

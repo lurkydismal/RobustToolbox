@@ -48,7 +48,7 @@ namespace Robust.Build.Tasks
             if (!res.writtentofile)
             {
                 File.Copy(input, OutputPath, true);
-                if(File.Exists(inputPdb))
+                if (File.Exists(inputPdb))
                     File.Copy(inputPdb, outputPdb, true);
             }
 

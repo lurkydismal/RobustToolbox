@@ -161,7 +161,7 @@ public partial class PrototypeManager
                     var seq = (SequenceDataNode)document.Root;
                     foreach (var mapping in seq.Sequence)
                     {
-                        var extracted = ExtractMapping((MappingDataNode) mapping);
+                        var extracted = ExtractMapping((MappingDataNode)mapping);
                         if (extracted == null)
                             continue;
 

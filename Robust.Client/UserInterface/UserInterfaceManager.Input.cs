@@ -53,7 +53,7 @@ internal partial class UserInterfaceManager
         for (var i = control.ChildCount - 1; i >= 0; i--)
         {
             var child = control.GetChild(i);
-            if (!child.Visible || child.RectClipContent && !child.PixelRect.Contains((Vector2i) position))
+            if (!child.Visible || child.RectClipContent && !child.PixelRect.Contains((Vector2i)position))
             {
                 continue;
             }
@@ -82,7 +82,7 @@ internal partial class UserInterfaceManager
             {
                 var top = _modalStack[i];
 
-                if (top is not Popup {CloseOnEscape: false})
+                if (top is not Popup { CloseOnEscape: false })
                 {
                     RemoveModal(top);
                     closedAny = true;
@@ -373,7 +373,7 @@ internal partial class UserInterfaceManager
             {
                 if (top.MouseFilter != Control.MouseFilterMode.Stop)
                 {
-                    if (top is not Popup {CloseOnClick: false})
+                    if (top is not Popup { CloseOnClick: false })
                     {
                         RemoveModal(top);
                     }
@@ -413,7 +413,7 @@ internal partial class UserInterfaceManager
             ControlFocused.GrabKeyboardFocus();
         }
 
-        hitData = (control, (Vector2i) rel);
+        hitData = (control, (Vector2i)rel);
         return true;
     }
 

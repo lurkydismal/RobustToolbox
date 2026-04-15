@@ -86,7 +86,7 @@ namespace Robust.Client.Graphics
 
         public IFontInstanceHandle MakeInstance(IFontFaceHandle handle, int size)
         {
-            var fontFaceHandle = (FontFaceHandle) handle;
+            var fontFaceHandle = (FontFaceHandle)handle;
             if (_loadedInstances.TryGetValue((fontFaceHandle, size), out var instance))
             {
                 return instance;
@@ -109,7 +109,7 @@ namespace Robust.Client.Graphics
         private ScaledFontData _generateScaledDatum(FontInstanceHandle instance, float scale)
         {
             var ftFace = instance.FaceHandle.Face;
-            ftFace.SetCharSize(0, instance.Size, 0, (uint) (_baseFontDpi * scale));
+            ftFace.SetCharSize(0, instance.Size, 0, (uint)(_baseFontDpi * scale));
 
             var ascent = ftFace.Size.Metrics.Ascender.ToInt32();
             var descent = -ftFace.Size.Metrics.Descender.ToInt32();
@@ -130,7 +130,7 @@ namespace Robust.Client.Graphics
             info = new GlyphInfo();
 
             var face = instance.FaceHandle.Face;
-            face.SetCharSize(0, instance.Size, 0, (uint) (_baseFontDpi * scale));
+            face.SetCharSize(0, instance.Size, 0, (uint)(_baseFontDpi * scale));
             face.LoadGlyph(glyph, LoadFlags.Default, LoadTarget.Normal);
             face.Glyph.RenderGlyph(RenderMode.Normal);
 
@@ -153,29 +153,29 @@ namespace Robust.Client.Graphics
                 switch (bitmap.PixelMode)
                 {
                     case PixelMode.Mono:
-                    {
-                        img = MonoBitMapToImage(bitmap);
-                        break;
-                    }
-
-                    case PixelMode.Gray:
-                    {
-                        ReadOnlySpan<A8> span;
-                        unsafe
                         {
-                            span = new ReadOnlySpan<A8>((void*) bitmap.Buffer, bitmap.Pitch * bitmap.Rows);
+                            img = MonoBitMapToImage(bitmap);
+                            break;
                         }
 
-                        img = new Image<A8>(bitmap.Width, bitmap.Rows);
+                    case PixelMode.Gray:
+                        {
+                            ReadOnlySpan<A8> span;
+                            unsafe
+                            {
+                                span = new ReadOnlySpan<A8>((void*)bitmap.Buffer, bitmap.Pitch * bitmap.Rows);
+                            }
 
-                        span.Blit(
-                            bitmap.Pitch,
-                            UIBox2i.FromDimensions(0, 0, bitmap.Pitch, bitmap.Rows),
-                            img,
-                            (0, 0));
+                            img = new Image<A8>(bitmap.Width, bitmap.Rows);
 
-                        break;
-                    }
+                            span.Blit(
+                                bitmap.Pitch,
+                                UIBox2i.FromDimensions(0, 0, bitmap.Pitch, bitmap.Rows),
+                                img,
+                                (0, 0));
+
+                            break;
+                        }
 
                     case PixelMode.Gray2:
                     case PixelMode.Gray4:
@@ -235,7 +235,7 @@ namespace Robust.Client.Graphics
             OwnedTexture GenSheet()
             {
                 var sheet = _clyde.CreateBlankTexture<A8>((SheetWidth, SheetHeight),
-                    $"font-{face.FamilyName}-{instance.Size}-{(uint) (_baseFontDpi * scale)}-sheet{scaled.AtlasTextures.Count}");
+                    $"font-{face.FamilyName}-{instance.Size}-{(uint)(_baseFontDpi * scale)}-sheet{scaled.AtlasTextures.Count}");
                 scaled.AtlasTextures.Add(sheet);
                 return sheet;
             }
@@ -249,7 +249,7 @@ namespace Robust.Client.Graphics
             ReadOnlySpan<byte> span;
             unsafe
             {
-                span = new ReadOnlySpan<byte>((void*) bitmap.Buffer, bitmap.Rows * bitmap.Pitch);
+                span = new ReadOnlySpan<byte>((void*)bitmap.Buffer, bitmap.Rows * bitmap.Pitch);
             }
 
             var bitmapImage = new Image<A8>(bitmap.Width, bitmap.Rows);
@@ -368,7 +368,7 @@ namespace Robust.Client.Graphics
                 }
 
                 // Check FreeType to see if it exists.
-                var index = FaceHandle.Face.GetCharIndex((uint) chr.Value);
+                var index = FaceHandle.Face.GetCharIndex((uint)chr.Value);
 
                 GlyphMap.Add(chr, index);
 
@@ -422,7 +422,7 @@ namespace Robust.Client.Graphics
 
             public unsafe byte* GetData()
             {
-                return (byte*) _gcHandle.AddrOfPinnedObject();
+                return (byte*)_gcHandle.AddrOfPinnedObject();
             }
 
             public IntPtr GetDataSize()

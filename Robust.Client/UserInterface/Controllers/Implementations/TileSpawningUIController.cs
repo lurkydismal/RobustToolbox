@@ -106,7 +106,7 @@ public sealed class TileSpawningUIController : UIController
         if (_window is { Disposed: false })
             return;
         _window = UIManager.CreateWindow<TileSpawnWindow>();
-        LayoutContainer.SetAnchorPreset(_window,LayoutContainer.LayoutPreset.CenterLeft);
+        LayoutContainer.SetAnchorPreset(_window, LayoutContainer.LayoutPreset.CenterLeft);
         _window.ClearButton.OnPressed += OnTileClearPressed;
         _window.SearchBar.OnTextChanged += OnTileSearchChanged;
         _window.TileList.OnItemSelected += OnTileItemSelected;

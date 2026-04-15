@@ -26,7 +26,7 @@ public sealed class MsgConCompletionResp : NetMessage
             options[i] = new CompletionOption(
                 optValue,
                 optHint == "" ? null : optHint,
-                (CompletionOptionFlags) optFlags);
+                (CompletionOptionFlags)optFlags);
         }
 
         var hint = buffer.ReadString();
@@ -43,7 +43,7 @@ public sealed class MsgConCompletionResp : NetMessage
         {
             buffer.Write(option.Value);
             buffer.Write(option.Hint);
-            buffer.Write((int) option.Flags);
+            buffer.Write((int)option.Flags);
         }
 
         buffer.Write(Result.Hint);

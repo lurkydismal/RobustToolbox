@@ -180,7 +180,7 @@ namespace Robust.Client.UserInterface.Controls
                 {
                     return 1;
                 }
-                var divisor = CalculateLimitedCount();;
+                var divisor = CalculateLimitedCount(); ;
                 var div = ChildCount / divisor;
                 if (ChildCount % divisor != 0)
                 {
@@ -237,7 +237,7 @@ namespace Robust.Client.UserInterface.Controls
             // we convert all elements to "cells" of the same size so they will align,
             // also converting to our pretend scenario of limited columns/width
             var (cellWidthActual, cellHeightActual) = CellSize();
-            var (wSepActual, hSepActual) = (Vector2i) (Separations * UIScale);
+            var (wSepActual, hSepActual) = (Vector2i)(Separations * UIScale);
             var cellWidth = _limitDimension == Dimension.Column ? cellWidthActual : cellHeightActual;
             var wSep = _limitDimension == Dimension.Column ? wSepActual : hSepActual;
 
@@ -250,7 +250,7 @@ namespace Robust.Client.UserInterface.Controls
                 return 1;
             }
 
-            return Math.Min(ChildCount, (int) ((GetLimitPixelSize() + wSep) / (cellWidth + wSep)));
+            return Math.Min(ChildCount, (int)((GetLimitPixelSize() + wSep) / (cellWidth + wSep)));
         }
 
         /// <summary>
@@ -320,7 +320,7 @@ namespace Robust.Client.UserInterface.Controls
             }
 
             // converting here to our "pretend" scenario where columns have a limit defined
-            var (wSepActual, hSepActual) = (Vector2i) (Separations * UIScale);
+            var (wSepActual, hSepActual) = (Vector2i)(Separations * UIScale);
             var wSep = _limitDimension == Dimension.Column ? wSepActual : hSepActual;
             var hSep = _limitDimension == Dimension.Column ? hSepActual : wSepActual;
             var minWidth = AccumSizes(minColWidth, wSep);
@@ -356,7 +356,7 @@ namespace Robust.Client.UserInterface.Controls
 
         protected override Vector2 ArrangeOverride(Vector2 finalSize)
         {
-               // to make it easier to read and visualize, we're just going to use the terms "x" and "y", width, and height,
+            // to make it easier to read and visualize, we're just going to use the terms "x" and "y", width, and height,
             // rows and cols,
             // but at the start of the method here we'll set those to what they actually are based
             // on the limited dimension, which might involve swapping them.
@@ -449,7 +449,7 @@ namespace Robust.Client.UserInterface.Controls
             }
 
             // converting here to our "pretend" scenario where columns have a limit defined
-            var (vSepActual, hSepActual) = (Vector2i) (Separations * UIScale);
+            var (vSepActual, hSepActual) = (Vector2i)(Separations * UIScale);
             var hSep = _limitDimension == Dimension.Column ? hSepActual : vSepActual;
             var vSep = _limitDimension == Dimension.Column ? vSepActual : hSepActual;
             var width = (_limitDimension == Dimension.Column ? finalSize.X : finalSize.Y) * UIScale;
@@ -468,7 +468,7 @@ namespace Robust.Client.UserInterface.Controls
                     continue;
                 }
 
-                minColWidth[i] = (int) (stretchAvailX / stretchCountX);
+                minColWidth[i] = (int)(stretchAvailX / stretchCountX);
             }
 
             for (var i = 0; i < minRowHeight.Length; i++)
@@ -478,7 +478,7 @@ namespace Robust.Client.UserInterface.Controls
                     continue;
                 }
 
-                minRowHeight[i] = (int) (stretchAvailY / stretchCountY);
+                minRowHeight[i] = (int)(stretchAvailY / stretchCountY);
             }
 
             // Actually lay them out.

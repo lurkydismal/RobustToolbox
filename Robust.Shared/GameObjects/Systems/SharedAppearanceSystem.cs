@@ -64,7 +64,7 @@ public abstract class SharedAppearanceSystem : EntitySystem
             return;
 
         component.AppearanceData.Remove(key);
-        
+
         Dirty(uid, component);
         QueueUpdate(uid, component);
     }

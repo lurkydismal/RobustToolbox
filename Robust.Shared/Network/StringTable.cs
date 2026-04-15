@@ -124,7 +124,7 @@ namespace Robust.Shared.Network
 
                 if (_network.IsClient)
                 {
-                    _updateCallback?.Invoke(new [] {
+                    _updateCallback?.Invoke(new[] {
                         new MsgStringTableEntries.Entry
                         {
                             Id = StringTablePacketId,

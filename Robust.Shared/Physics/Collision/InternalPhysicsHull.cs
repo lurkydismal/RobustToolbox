@@ -105,187 +105,187 @@ internal ref struct InternalPhysicsHull
         {
             hull.Count = 0;
             DebugTools.Assert(false);
-		    // check your data
-		    return hull;
-	    }
+            // check your data
+            return hull;
+        }
 
-	    count = Math.Min(count, PhysicsConstants.MaxPolygonVertices);
+        count = Math.Min(count, PhysicsConstants.MaxPolygonVertices);
 
         Box2 aabb = new Box2(float.MaxValue, float.MaxValue, float.MinValue, float.MinValue);
 
-	    // Perform aggressive point welding. First point always remains.
-	    // Also compute the bounding box for later.
-	    Span<Vector2> ps = stackalloc Vector2[PhysicsConstants.MaxPolygonVertices];
-	    var n = 0;
-	    const float tolSqr = 16.0f * PhysicsConstants.LinearSlop * PhysicsConstants.LinearSlop;
-	    for (var i = 0; i < count; ++i)
-	    {
-		    aabb.BottomLeft = Vector2.Min(aabb.BottomLeft, points[i]);
-		    aabb.TopRight = Vector2.Max(aabb.TopRight, points[i]);
+        // Perform aggressive point welding. First point always remains.
+        // Also compute the bounding box for later.
+        Span<Vector2> ps = stackalloc Vector2[PhysicsConstants.MaxPolygonVertices];
+        var n = 0;
+        const float tolSqr = 16.0f * PhysicsConstants.LinearSlop * PhysicsConstants.LinearSlop;
+        for (var i = 0; i < count; ++i)
+        {
+            aabb.BottomLeft = Vector2.Min(aabb.BottomLeft, points[i]);
+            aabb.TopRight = Vector2.Max(aabb.TopRight, points[i]);
 
-		    var vi = points[i];
+            var vi = points[i];
 
-		    bool unique = true;
-		    for (var j = 0; j < i; ++j)
-		    {
-			    var vj = points[j];
+            bool unique = true;
+            for (var j = 0; j < i; ++j)
+            {
+                var vj = points[j];
 
-			    float distSqr = (vj - vi).LengthSquared();
-			    if (distSqr < tolSqr)
-			    {
-				    unique = false;
-				    break;
-			    }
-		    }
+                float distSqr = (vj - vi).LengthSquared();
+                if (distSqr < tolSqr)
+                {
+                    unique = false;
+                    break;
+                }
+            }
 
-		    if (unique)
-		    {
-			    ps[n++] = vi;
-		    }
-	    }
+            if (unique)
+            {
+                ps[n++] = vi;
+            }
+        }
 
-	    if (n < 3)
-	    {
-		    // all points very close together, check your data and check your scale
-		    return hull;
-	    }
+        if (n < 3)
+        {
+            // all points very close together, check your data and check your scale
+            return hull;
+        }
 
-	    // Find an extreme point as the first point on the hull
-	    var c = aabb.Center;
-	    var i1 = 0;
+        // Find an extreme point as the first point on the hull
+        var c = aabb.Center;
+        var i1 = 0;
         float dsq1 = (ps[i1] - c).LengthSquared();
-	    for (var i = 1; i < n; ++i)
+        for (var i = 1; i < n; ++i)
         {
             float dsq = (ps[i] - c).LengthSquared();
-		    if (dsq > dsq1)
-		    {
-			    i1 = i;
-			    dsq1 = dsq;
-		    }
-	    }
+            if (dsq > dsq1)
+            {
+                i1 = i;
+                dsq1 = dsq;
+            }
+        }
 
-	    // remove p1 from working set
-	    var p1 = ps[i1];
-	    ps[i1] = ps[n - 1];
-	    n = n - 1;
+        // remove p1 from working set
+        var p1 = ps[i1];
+        ps[i1] = ps[n - 1];
+        n = n - 1;
 
-	    var i2 = 0;
+        var i2 = 0;
         float dsq2 = (ps[i2] - p1).LengthSquared();
-	    for (var i = 1; i < n; ++i)
+        for (var i = 1; i < n; ++i)
         {
             float dsq = (ps[i] - p1).LengthSquared();
-		    if (dsq > dsq2)
-		    {
-			    i2 = i;
-			    dsq2 = dsq;
-		    }
-	    }
+            if (dsq > dsq2)
+            {
+                i2 = i;
+                dsq2 = dsq;
+            }
+        }
 
-	    // remove p2 from working set
-	    var p2 = ps[i2];
-	    ps[i2] = ps[n - 1];
-	    n = n - 1;
+        // remove p2 from working set
+        var p2 = ps[i2];
+        ps[i2] = ps[n - 1];
+        n = n - 1;
 
-	    // split the points into points that are left and right of the line p1-p2.
-	    Span<Vector2> rightPoints = stackalloc Vector2[PhysicsConstants.MaxPolygonVertices - 2];
-	    var rightCount = 0;
+        // split the points into points that are left and right of the line p1-p2.
+        Span<Vector2> rightPoints = stackalloc Vector2[PhysicsConstants.MaxPolygonVertices - 2];
+        var rightCount = 0;
 
-	    Span<Vector2> leftPoints = stackalloc Vector2[PhysicsConstants.MaxPolygonVertices - 2];
-	    var leftCount = 0;
+        Span<Vector2> leftPoints = stackalloc Vector2[PhysicsConstants.MaxPolygonVertices - 2];
+        var leftCount = 0;
 
-	    var e = p2 - p1;
-	    e.Normalize();
+        var e = p2 - p1;
+        e.Normalize();
 
-	    for (var i = 0; i < n; ++i)
-	    {
-		    float d = Vector2Helpers.Cross(ps[i] - p1, e);
+        for (var i = 0; i < n; ++i)
+        {
+            float d = Vector2Helpers.Cross(ps[i] - p1, e);
 
-		    // slop used here to skip points that are very close to the line p1-p2
-		    if (d >= 2.0f * PhysicsConstants.LinearSlop)
-		    {
-			    rightPoints[rightCount++] = ps[i];
-		    }
-		    else if (d <= -2.0f * PhysicsConstants.LinearSlop)
-		    {
-			    leftPoints[leftCount++] = ps[i];
-		    }
-	    }
+            // slop used here to skip points that are very close to the line p1-p2
+            if (d >= 2.0f * PhysicsConstants.LinearSlop)
+            {
+                rightPoints[rightCount++] = ps[i];
+            }
+            else if (d <= -2.0f * PhysicsConstants.LinearSlop)
+            {
+                leftPoints[leftCount++] = ps[i];
+            }
+        }
 
-	    // compute hulls on right and left
-	    var hull1 = RecurseHull(p1, p2, rightPoints, rightCount);
-	    var hull2 = RecurseHull(p2, p1, leftPoints, leftCount);
+        // compute hulls on right and left
+        var hull1 = RecurseHull(p1, p2, rightPoints, rightCount);
+        var hull2 = RecurseHull(p2, p1, leftPoints, leftCount);
 
-	    if (hull1.Count == 0 && hull2.Count == 0)
+        if (hull1.Count == 0 && hull2.Count == 0)
         {
             hull.Count = 0;
-		    // all points collinear
-		    return hull;
-	    }
+            // all points collinear
+            return hull;
+        }
 
         hull.Points = new Vector2[PhysicsConstants.MaxPolygonVertices];
 
-	    // stitch hulls together, preserving CCW winding order
-	    hull.Points[hull.Count++] = p1;
+        // stitch hulls together, preserving CCW winding order
+        hull.Points[hull.Count++] = p1;
 
-	    for (var i = 0; i < hull1.Count; ++i)
-	    {
-		    hull.Points[hull.Count++] = hull1.Points[i];
-	    }
+        for (var i = 0; i < hull1.Count; ++i)
+        {
+            hull.Points[hull.Count++] = hull1.Points[i];
+        }
 
-	    hull.Points[hull.Count++] = p2;
+        hull.Points[hull.Count++] = p2;
 
-	    for (var i = 0; i < hull2.Count; ++i)
-	    {
-		    hull.Points[hull.Count++] = hull2.Points[i];
-	    }
+        for (var i = 0; i < hull2.Count; ++i)
+        {
+            hull.Points[hull.Count++] = hull2.Points[i];
+        }
 
-	    DebugTools.Assert(hull.Count <= PhysicsConstants.MaxPolygonVertices);
+        DebugTools.Assert(hull.Count <= PhysicsConstants.MaxPolygonVertices);
 
-	    // merge collinear
-	    bool searching = true;
-	    while (searching && hull.Count > 2)
-	    {
-		    searching = false;
+        // merge collinear
+        bool searching = true;
+        while (searching && hull.Count > 2)
+        {
+            searching = false;
 
-		    for (var i = 0; i < hull.Count; ++i)
-		    {
-			    i1 = i;
-			    i2 = (i + 1) % hull.Count;
-			    var i3 = (i + 2) % hull.Count;
+            for (var i = 0; i < hull.Count; ++i)
+            {
+                i1 = i;
+                i2 = (i + 1) % hull.Count;
+                var i3 = (i + 2) % hull.Count;
 
-			    p1 = hull.Points[i1];
-			    p2 = hull.Points[i2];
-			    var p3 = hull.Points[i3];
+                p1 = hull.Points[i1];
+                p2 = hull.Points[i2];
+                var p3 = hull.Points[i3];
 
-			    e = p3 - p1;
-			    e.Normalize();
+                e = p3 - p1;
+                e.Normalize();
 
-			    var v = p2 - p1;
-			    float distance = Vector2Helpers.Cross(p2 - p1, e);
-			    if (distance <= 2.0f * PhysicsConstants.LinearSlop)
-			    {
-				    // remove midpoint from hull
-				    for (var j = i2; j < hull.Count - 1; ++j)
-				    {
-					    hull.Points[j] = hull.Points[j + 1];
-				    }
-				    hull.Count -= 1;
+                var v = p2 - p1;
+                float distance = Vector2Helpers.Cross(p2 - p1, e);
+                if (distance <= 2.0f * PhysicsConstants.LinearSlop)
+                {
+                    // remove midpoint from hull
+                    for (var j = i2; j < hull.Count - 1; ++j)
+                    {
+                        hull.Points[j] = hull.Points[j + 1];
+                    }
+                    hull.Count -= 1;
 
-				    // continue searching for collinear points
-				    searching = true;
+                    // continue searching for collinear points
+                    searching = true;
 
-				    break;
-			    }
-		    }
-	    }
+                    break;
+                }
+            }
+        }
 
-	    if (hull.Count < 3)
-	    {
-		    // all points collinear, shouldn't be reached since this was validated above
-		    hull.Count = 0;
-	    }
+        if (hull.Count < 3)
+        {
+            // all points collinear, shouldn't be reached since this was validated above
+            hull.Count = 0;
+        }
 
-	    return hull;
+        return hull;
     }
 
     public static bool ValidateHull(InternalPhysicsHull hull)

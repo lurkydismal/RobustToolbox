@@ -107,14 +107,14 @@ namespace Robust.Client.Map
 
             var tileCount = defList.Select(x => x.Variants + x.EdgeSprites.Count).Sum() + 1;
 
-            var dimensionX = (int) Math.Ceiling(Math.Sqrt(tileCount));
-            var dimensionY = (int) Math.Ceiling((float) tileCount / dimensionX);
+            var dimensionX = (int)Math.Ceiling(Math.Sqrt(tileCount));
+            var dimensionY = (int)Math.Ceiling((float)tileCount / dimensionX);
 
             var imgWidth = dimensionX * tileSize;
             var imgHeight = dimensionY * tileSize;
             var sheet = new Image<Rgba32>(imgWidth, imgHeight);
-            var w = (float) sheet.Width;
-            var h = (float) sheet.Height;
+            var w = (float)sheet.Width;
+            var h = (float)sheet.Height;
 
             // Add in the missing tile texture sprite as tile texture 0.
             {

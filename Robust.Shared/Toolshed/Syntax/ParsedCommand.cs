@@ -184,7 +184,7 @@ public sealed class ParsedCommand
             return false;
 
         ctx.Error = new NotValidCommandError();
-        ctx.Error.Contextualize(ctx.Input, (ctx.Bundle.NameStart, ctx.Index+1));
+        ctx.Error.Contextualize(ctx.Input, (ctx.Bundle.NameStart, ctx.Index + 1));
         return false;
     }
 
@@ -258,7 +258,7 @@ public sealed class ParsedCommand
         try
         {
             return Invocable.Invoke(new CommandInvocationArguments()
-                {Bundle = Bundle, PipedArgument = pipedIn, Context = ctx});
+            { Bundle = Bundle, PipedArgument = pipedIn, Context = ctx });
         }
         catch (Exception e)
         {
@@ -301,7 +301,7 @@ public sealed class NoImplementationError(ParserContext ctx) : ConError
         if (isGeneric)
             return msg;
 
-        var isGenericEnumerable = accepted.Any(x=> x.IsGenericType
+        var isGenericEnumerable = accepted.Any(x => x.IsGenericType
                                              && x.GetGenericTypeDefinition() == typeof(IEnumerable<>)
                                              && x.GetGenericArguments()[0].IsGenericParameter);
         if (isGenericEnumerable)

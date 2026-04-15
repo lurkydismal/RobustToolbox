@@ -33,7 +33,7 @@ namespace Robust.Shared.Serialization.TypeSerializers.Implementations
             foreach (var sequenceEntry in node.Sequence)
             {
                 var componentMapping = (MappingDataNode)sequenceEntry;
-                string compType = ((ValueDataNode) componentMapping.Get("type")).Value;
+                string compType = ((ValueDataNode)componentMapping.Get("type")).Value;
                 // See if type exists to detect errors.
                 switch (factory.GetComponentAvailability(compType))
                 {
@@ -105,7 +105,7 @@ namespace Robust.Shared.Serialization.TypeSerializers.Implementations
                     list.Add(new ErrorNode(sequenceEntry, $"Expected {nameof(MappingDataNode)}"));
                     continue;
                 }
-                string compType = ((ValueDataNode) componentMapping.Get("type")).Value;
+                string compType = ((ValueDataNode)componentMapping.Get("type")).Value;
                 // See if type exists to detect errors.
                 switch (factory.GetComponentAvailability(compType))
                 {
@@ -218,9 +218,9 @@ namespace Robust.Shared.Serialization.TypeSerializers.Implementations
                 // Not found.
 
                 newCompReg.Add(parent[mapping]);
-                newCompRegDict[reg] = newCompReg.Count-1;
+                newCompRegDict[reg] = newCompReg.Count - 1;
 
-                found: ;
+            found:;
             }
 
             return newCompReg;
@@ -234,7 +234,7 @@ namespace Robust.Shared.Serialization.TypeSerializers.Implementations
                 var mapping = (MappingDataNode)node[i];
                 var type = mapping.Get<ValueDataNode>("type").Value;
                 var availability = componentFactory.GetComponentAvailability(type);
-                if(availability == ComponentAvailability.Ignore) continue;
+                if (availability == ComponentAvailability.Ignore) continue;
                 dict.Add(componentFactory.GetRegistration(type), i);
             }
 

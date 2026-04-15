@@ -124,7 +124,7 @@ namespace Robust.Shared.Utility
 
             var buf = ms.GetBuffer();
 
-            return buf.AsSpan(0, (int) ms.Length);
+            return buf.AsSpan(0, (int)ms.Length);
         }
 
         /// <summary>
@@ -134,7 +134,7 @@ namespace Robust.Shared.Utility
         {
             var buf = ms.GetBuffer();
 
-            return buf.AsMemory(0, (int) ms.Length);
+            return buf.AsMemory(0, (int)ms.Length);
         }
     }
 }

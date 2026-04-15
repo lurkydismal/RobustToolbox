@@ -296,7 +296,7 @@ namespace Robust.Shared.GameObjects
 
         public IComponent GetComponent(ComponentRegistration reg)
         {
-            return (IComponent) _typeFactory.CreateInstanceUnchecked(reg.Type);
+            return (IComponent)_typeFactory.CreateInstanceUnchecked(reg.Type);
         }
 
         public IComponent GetComponent(string componentName, bool ignoreCase = false)
@@ -496,7 +496,7 @@ namespace Robust.Shared.GameObjects
         public void RegisterClass<T>(bool overwrite = false)
             where T : IComponent, new()
         {
-            RegisterTypesInternal(new []{typeof(T)}, overwrite);
+            RegisterTypesInternal(new[] { typeof(T) }, overwrite);
         }
 
         /// <inheritdoc />

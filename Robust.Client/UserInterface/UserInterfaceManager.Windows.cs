@@ -22,7 +22,7 @@ internal partial class UserInterfaceManager
 
     public bool RemoveFirstPopup<T>() where T : Popup, new()
     {
-        if (!_popupsByType.TryGetValue(typeof(T),out var popupQueue)) return false;
+        if (!_popupsByType.TryGetValue(typeof(T), out var popupQueue)) return false;
         var oldPopup = popupQueue.Dequeue();
         if (popupQueue.Count == 0)
         {
@@ -36,8 +36,8 @@ internal partial class UserInterfaceManager
     public bool TryGetFirstPopup<T>(out T? popup) where T : Popup, new()
     {
         popup = null;
-        var success =  _popupsByType.TryGetValue(typeof(T), out var win);
-        if (win is {Count: > 0})
+        var success = _popupsByType.TryGetValue(typeof(T), out var win);
+        if (win is { Count: > 0 })
         {
             popup = (T)win.Peek();
         }
@@ -55,7 +55,7 @@ internal partial class UserInterfaceManager
 
     public bool RemoveFirstWindow<T>() where T : BaseWindow, new()
     {
-        if (!_windowsByType.TryGetValue(typeof(T),out var windowQueue)) return false;
+        if (!_windowsByType.TryGetValue(typeof(T), out var windowQueue)) return false;
         var oldWindow = windowQueue.Dequeue();
         if (windowQueue.Count == 0)
         {
@@ -91,8 +91,8 @@ internal partial class UserInterfaceManager
     public bool TryGetFirstWindow<T>(out T? window) where T : BaseWindow, new()
     {
         window = null;
-        var success =  _windowsByType.TryGetValue(typeof(T), out var win);
-        if (win is {Count: > 0})
+        var success = _windowsByType.TryGetValue(typeof(T), out var win);
+        if (win is { Count: > 0 })
         {
             window = (T)win.Peek();
         }

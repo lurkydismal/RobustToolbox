@@ -38,7 +38,7 @@ namespace Robust.Client.Graphics.Clyde
             public abstract void Shutdown();
 
             public abstract GLContextSpec[] SpecsToTry { get; }
-            public abstract bool RequireWindowGL { get;  }
+            public abstract bool RequireWindowGL { get; }
             public abstract bool HasBrokenWindowSrgb { get; }
 
             protected static GLContextSpec GetVersionSpec(RendererOpenGLVersion version)

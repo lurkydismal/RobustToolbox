@@ -272,7 +272,7 @@ namespace Robust.Client.Graphics.Clyde
             var version = GL.GetString(StringName.Version);
             // GLES2 doesn't allow you to query major/minor version. Seriously.
             var major = _openGLVersion == RendererOpenGLVersion.GLES2 ? 2 : GL.GetInteger(GetPName.MajorVersion);
-            var minor = _openGLVersion == RendererOpenGLVersion.GLES2 ? 0 :GL.GetInteger(GetPName.MinorVersion);
+            var minor = _openGLVersion == RendererOpenGLVersion.GLES2 ? 0 : GL.GetInteger(GetPName.MinorVersion);
 
             _sawmillOgl.Debug("OpenGL Vendor: {0}", vendor);
             _sawmillOgl.Debug("OpenGL Renderer: {0}", renderer);
@@ -291,7 +291,7 @@ namespace Robust.Client.Graphics.Clyde
 
             LoadVendorSettings(vendor, renderer, version);
 
-            var glVersion = new OpenGLVersion((byte) major, (byte) minor, _isGLES, _isCore);
+            var glVersion = new OpenGLVersion((byte)major, (byte)minor, _isGLES, _isCore);
 
             DebugInfo = new ClydeDebugInfo(
                 glVersion,
@@ -435,7 +435,7 @@ namespace Robust.Client.Graphics.Clyde
 
             screenBufferHandle = new GLHandle(GL.GenTexture());
             GL.BindTexture(TextureTarget.Texture2D, screenBufferHandle.Handle);
-            ApplySampleParameters(new TextureSampleParameters() { Filter = false, WrapMode = TextureWrapMode.MirroredRepeat});
+            ApplySampleParameters(new TextureSampleParameters() { Filter = false, WrapMode = TextureWrapMode.MirroredRepeat });
             // TODO: This is atrocious and broken and awful why did I merge this
             ScreenBufferTexture = GenTexture(screenBufferHandle, (1920, 1080), true, null, TexturePixelType.Rgba32);
         }
@@ -468,7 +468,7 @@ namespace Robust.Client.Graphics.Clyde
             // OpenTK seemed to have trouble marshalling the delegate so do it manually.
 
             var procName = _isGLKhrDebugESExtension ? "glDebugMessageCallbackKHR" : "glDebugMessageCallback";
-            var glDebugMessageCallback = (delegate* unmanaged[Stdcall] <nint, nint, void>) LoadGLProc(procName);
+            var glDebugMessageCallback = (delegate* unmanaged[Stdcall]<nint, nint, void>)LoadGLProc(procName);
             var funcPtr = Marshal.GetFunctionPointerForDelegate(_debugMessageCallbackInstance);
             glDebugMessageCallback(funcPtr, new IntPtr(0x3005));
         }
@@ -547,7 +547,7 @@ namespace Robust.Client.Graphics.Clyde
 
             if (_isGLKhrDebugESExtension)
             {
-                GL.Khr.ObjectLabel((ObjectIdentifier) identifier, name, label.Length, label);
+                GL.Khr.ObjectLabel((ObjectIdentifier)identifier, name, label.Length, label);
             }
             else
             {
@@ -576,7 +576,7 @@ namespace Robust.Client.Graphics.Clyde
 
             if (_isGLKhrDebugESExtension)
             {
-                GL.Khr.PushDebugGroup((DebugSource) DebugSourceExternal.DebugSourceApplication, 0, group.Length, group);
+                GL.Khr.PushDebugGroup((DebugSource)DebugSourceExternal.DebugSourceApplication, 0, group.Length, group);
             }
             else
             {

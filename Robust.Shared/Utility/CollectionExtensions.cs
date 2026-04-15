@@ -25,7 +25,7 @@ namespace Robust.Shared.Utility
 
             foreach (var value in listToClone)
             {
-                clone.Add((T) value.Clone());
+                clone.Add((T)value.Clone());
             }
 
             return clone;
@@ -103,7 +103,7 @@ namespace Robust.Shared.Utility
             }
 
             var t = list[list.Count - 1];
-            list.RemoveAt(list.Count-1);
+            list.RemoveAt(list.Count - 1);
             return t;
         }
 
@@ -119,12 +119,12 @@ namespace Robust.Shared.Utility
         public static TSource? FirstOrNull<TSource>(
             this IEnumerable<TSource> source,
             Func<TSource, bool> predicate)
-        where TSource: struct
+        where TSource : struct
         {
             if (source == null)
-                throw new ArgumentNullException(nameof (source));
+                throw new ArgumentNullException(nameof(source));
             if (predicate == null)
-                throw new ArgumentNullException(nameof (predicate));
+                throw new ArgumentNullException(nameof(predicate));
             foreach (TSource source1 in source)
             {
                 if (predicate(source1))
@@ -150,7 +150,7 @@ namespace Robust.Shared.Utility
             where TSource : struct
         {
             if (source == null)
-                throw new ArgumentNullException(nameof (source));
+                throw new ArgumentNullException(nameof(source));
 
             using var enumerator = source.GetEnumerator();
             if (!enumerator.MoveNext())

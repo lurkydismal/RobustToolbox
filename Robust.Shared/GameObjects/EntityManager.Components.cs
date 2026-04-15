@@ -126,7 +126,7 @@ namespace Robust.Shared.GameObjects
 
             foreach (var comp in comps)
             {
-                if (comp is {LifeStage: ComponentLifeStage.Added})
+                if (comp is { LifeStage: ComponentLifeStage.Added })
                     LifeInitialize(uid, comp, _componentFactory.GetIndex(comp.GetType()));
             }
 
@@ -275,10 +275,10 @@ namespace Robust.Shared.GameObjects
                     return;
 
                 if (!Comp.Initialized)
-                    ((EntityManager) _entMan).LifeInitialize(_owner, Comp, CompType);
+                    ((EntityManager)_entMan).LifeInitialize(_owner, Comp, CompType);
 
                 if (metadata.EntityInitialized && !Comp.Running)
-                    ((EntityManager) _entMan).LifeStartup(_owner, Comp, CompType);
+                    ((EntityManager)_entMan).LifeStartup(_owner, Comp, CompType);
             }
 
             public static implicit operator T(CompInitializeHandle<T> handle)
@@ -1152,7 +1152,7 @@ namespace Robust.Shared.GameObjects
         }
 
         /// <inheritdoc/>
-        public T CopyComponent<T>(EntityUid source, EntityUid target, T sourceComponent,MetaDataComponent? meta = null) where T : IComponent
+        public T CopyComponent<T>(EntityUid source, EntityUid target, T sourceComponent, MetaDataComponent? meta = null) where T : IComponent
         {
             if (!MetaQuery.Resolve(target, ref meta))
             {
@@ -1534,8 +1534,8 @@ namespace Robust.Shared.GameObjects
                         continue;
 
                     yield return (
-                        (TComp1) t1Comp,
-                        (TComp2) t2Comp);
+                        (TComp1)t1Comp,
+                        (TComp2)t2Comp);
                 }
             }
             else
@@ -1555,8 +1555,8 @@ namespace Robust.Shared.GameObjects
                     if (meta.EntityPaused) continue;
 
                     yield return (
-                        (TComp1) t1Comp,
-                        (TComp2) t2Comp);
+                        (TComp1)t1Comp,
+                        (TComp2)t2Comp);
                 }
             }
         }
@@ -1582,9 +1582,9 @@ namespace Robust.Shared.GameObjects
                         continue;
 
                     yield return (
-                        (TComp1) t1Comp,
-                        (TComp2) t2Comp,
-                        (TComp3) t3Comp);
+                        (TComp1)t1Comp,
+                        (TComp2)t2Comp,
+                        (TComp3)t3Comp);
                 }
             }
             else
@@ -1607,9 +1607,9 @@ namespace Robust.Shared.GameObjects
                     if (meta.EntityPaused) continue;
 
                     yield return (
-                        (TComp1) t1Comp,
-                        (TComp2) t2Comp,
-                        (TComp3) t3Comp);
+                        (TComp1)t1Comp,
+                        (TComp2)t2Comp,
+                        (TComp3)t3Comp);
                 }
             }
         }
@@ -1641,10 +1641,10 @@ namespace Robust.Shared.GameObjects
                         continue;
 
                     yield return (
-                        (TComp1) t1Comp,
-                        (TComp2) t2Comp,
-                        (TComp3) t3Comp,
-                        (TComp4) t4Comp);
+                        (TComp1)t1Comp,
+                        (TComp2)t2Comp,
+                        (TComp3)t3Comp,
+                        (TComp4)t4Comp);
                 }
             }
             else
@@ -1670,10 +1670,10 @@ namespace Robust.Shared.GameObjects
                     if (meta.EntityPaused) continue;
 
                     yield return (
-                        (TComp1) t1Comp,
-                        (TComp2) t2Comp,
-                        (TComp3) t3Comp,
-                        (TComp4) t4Comp);
+                        (TComp1)t1Comp,
+                        (TComp2)t2Comp,
+                        (TComp3)t3Comp,
+                        (TComp4)t4Comp);
                 }
             }
         }
@@ -1825,7 +1825,7 @@ namespace Robust.Shared.GameObjects
         public TComp1 GetComponent(EntityUid uid)
         {
             if (_traitDict.TryGetValue(uid, out var comp) && !comp.Deleted)
-                return (TComp1) comp;
+                return (TComp1)comp;
 
             throw new KeyNotFoundException($"Entity {uid} does not have a component of type {typeof(TComp1)}");
         }
@@ -1835,7 +1835,7 @@ namespace Robust.Shared.GameObjects
         public Entity<TComp1> Get(EntityUid uid)
         {
             if (_traitDict.TryGetValue(uid, out var comp) && !comp.Deleted)
-                return new Entity<TComp1>(uid, (TComp1) comp);
+                return new Entity<TComp1>(uid, (TComp1)comp);
 
             throw new KeyNotFoundException($"Entity {uid} does not have a component of type {typeof(TComp1)}");
         }
@@ -1876,7 +1876,7 @@ namespace Robust.Shared.GameObjects
         {
             if (_traitDict.TryGetValue(uid, out var comp) && !comp.Deleted)
             {
-                component = (TComp1) comp;
+                component = (TComp1)comp;
                 return true;
             }
 
@@ -2008,7 +2008,7 @@ namespace Robust.Shared.GameObjects
         internal TComp1 GetComponentInternal(EntityUid uid)
         {
             if (_traitDict.TryGetValue(uid, out var comp))
-                return (TComp1) comp;
+                return (TComp1)comp;
 
             throw new KeyNotFoundException($"Entity {uid} does not have a component of type {typeof(TComp1)}");
         }
@@ -2038,7 +2038,7 @@ namespace Robust.Shared.GameObjects
         {
             if (_traitDict.TryGetValue(uid, out var comp))
             {
-                component = (TComp1) comp;
+                component = (TComp1)comp;
                 return true;
             }
 

@@ -56,7 +56,7 @@ public sealed partial class SpriteSystem
 
     internal Box2 CalculateLocalBounds(Layer layer)
     {
-        var textureSize = (Vector2) layer.PixelSize / EyeManager.PixelsPerMeter;
+        var textureSize = (Vector2)layer.PixelSize / EyeManager.PixelsPerMeter;
         var longestSide = MathF.Max(textureSize.X, textureSize.Y);
         var longestRotatedSide = Math.Max(longestSide, (textureSize.X + textureSize.Y) / MathF.Sqrt(2));
 

@@ -30,9 +30,9 @@ namespace Robust.Client.UserInterface.CustomControls
 
         private void UpdateAnchorOffset()
         {
-            LayoutContainer.SetAnchorBottom(MainControl, _curAnchorOffset+ScreenRatio);
+            LayoutContainer.SetAnchorBottom(MainControl, _curAnchorOffset + ScreenRatio);
             LayoutContainer.SetAnchorTop(MainControl, _curAnchorOffset);
-            LayoutContainer.SetAnchorTop(BelowConsole, _curAnchorOffset+ScreenRatio);
+            LayoutContainer.SetAnchorTop(BelowConsole, _curAnchorOffset + ScreenRatio);
         }
 
         private void CommandBarPubOnOnKeyBindDown(GUIBoundKeyEventArgs args)

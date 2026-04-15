@@ -19,7 +19,7 @@ internal sealed class VarRefTypeParser<T> : TypeParser<VarRef<T>>
             if (ctx.GenerateCompletions)
                 return false;
             ctx.Error = new ExpectedDollarydoo();
-            ctx.Error.Contextualize(ctx.Input, (start, ctx.Index+1));
+            ctx.Error.Contextualize(ctx.Input, (start, ctx.Index + 1));
             return false;
         }
 
@@ -31,7 +31,7 @@ internal sealed class VarRefTypeParser<T> : TypeParser<VarRef<T>>
             if (ctx.GenerateCompletions)
                 return false;
             ctx.Error = new ExpectedVariableName();
-            ctx.Error.Contextualize(ctx.Input, (start, ctx.Index+1));
+            ctx.Error.Contextualize(ctx.Input, (start, ctx.Index + 1));
             return false;
         }
 
@@ -63,7 +63,7 @@ public sealed class WriteableVarRefParser<T> : TypeParser<WriteableVarRef<T>>
             return false;
 
         ctx.Error = new ReadonlyVariableError(inner.VarName);
-        ctx.Error.Contextualize(ctx.Input, (start, ctx.Index+1));
+        ctx.Error.Contextualize(ctx.Input, (start, ctx.Index + 1));
         return false;
     }
 

@@ -10,153 +10,154 @@ using Robust.Shared.Profiling;
 using Robust.Shared.Utility;
 
 namespace Robust.Client.UserInterface;
+
 internal sealed partial class UserInterfaceManager
 {
     private readonly List<Control> _modalStack = new();
 
-        private void RunMeasure(Control control)
+    private void RunMeasure(Control control)
+    {
+        if (control.IsMeasureValid || !control.IsInsideTree)
+            return;
+
+        if (control.Parent != null)
         {
-            if (control.IsMeasureValid || !control.IsInsideTree)
-                return;
-
-            if (control.Parent != null)
-            {
-                RunMeasure(control.Parent);
-            }
-
-            if (control is WindowRoot root)
-            {
-                control.Measure(root.Window.RenderTarget.Size / root.UIScale);
-            }
-            else if (control.PreviousMeasure.HasValue)
-            {
-                control.Measure(control.PreviousMeasure.Value);
-            }
+            RunMeasure(control.Parent);
         }
 
-        private void RunArrange(Control control)
+        if (control is WindowRoot root)
         {
-            if (control.IsArrangeValid || !control.IsInsideTree)
-                return;
+            control.Measure(root.Window.RenderTarget.Size / root.UIScale);
+        }
+        else if (control.PreviousMeasure.HasValue)
+        {
+            control.Measure(control.PreviousMeasure.Value);
+        }
+    }
 
-            if (control.Parent != null)
-            {
-                RunArrange(control.Parent);
-            }
+    private void RunArrange(Control control)
+    {
+        if (control.IsArrangeValid || !control.IsInsideTree)
+            return;
 
-            if (control is WindowRoot root)
-            {
-                control.Arrange(UIBox2.FromDimensions(Vector2.Zero, root.Window.RenderTarget.Size / root.UIScale));
-            }
-            else if (control.PreviousArrange.HasValue)
-            {
-                control.Arrange(control.PreviousArrange.Value);
-            }
+        if (control.Parent != null)
+        {
+            RunArrange(control.Parent);
         }
 
-        public void Popup(string contents, string? title = null, bool clipboardButton = true)
+        if (control is WindowRoot root)
         {
-            var popup = new DefaultWindow
+            control.Arrange(UIBox2.FromDimensions(Vector2.Zero, root.Window.RenderTarget.Size / root.UIScale));
+        }
+        else if (control.PreviousArrange.HasValue)
+        {
+            control.Arrange(control.PreviousArrange.Value);
+        }
+    }
+
+    public void Popup(string contents, string? title = null, bool clipboardButton = true)
+    {
+        var popup = new DefaultWindow
+        {
+            Title = string.IsNullOrEmpty(title) ? Loc.GetString("popup-title") : title,
+        };
+
+        var label = new RichTextLabel { Text = $"[color=white]{FormattedMessage.EscapeText(contents)}[/color]" };
+
+        var vBox = new BoxContainer
+        {
+            Orientation = BoxContainer.LayoutOrientation.Vertical,
+        };
+
+        vBox.AddChild(label);
+
+        if (clipboardButton)
+        {
+            var copyButton = new Button
             {
-                Title = string.IsNullOrEmpty(title) ? Loc.GetString("popup-title") : title,
+                Text = Loc.GetString("popup-copy-button"),
+                HorizontalExpand = true,
             };
 
-            var label = new RichTextLabel { Text = $"[color=white]{FormattedMessage.EscapeText(contents)}[/color]" };
-
-            var vBox = new BoxContainer
+            copyButton.OnPressed += _ =>
             {
-                Orientation = BoxContainer.LayoutOrientation.Vertical,
+                _clipboard.SetText(contents);
             };
 
-            vBox.AddChild(label);
-
-            if (clipboardButton)
+            var hBox = new BoxContainer
             {
-                var copyButton = new Button
-                {
-                    Text = Loc.GetString("popup-copy-button"),
-                    HorizontalExpand = true,
-                };
+                Orientation = BoxContainer.LayoutOrientation.Horizontal,
+                HorizontalAlignment = Control.HAlignment.Right,
+            };
 
-                copyButton.OnPressed += _ =>
-                {
-                    _clipboard.SetText(contents);
-                };
-
-                var hBox = new BoxContainer
-                {
-                    Orientation = BoxContainer.LayoutOrientation.Horizontal,
-                    HorizontalAlignment = Control.HAlignment.Right,
-                };
-
-                hBox.AddChild(copyButton);
-                vBox.AddChild(hBox);
-            }
-
-            popup.Contents.AddChild(vBox);
-
-            popup.OpenCentered();
+            hBox.AddChild(copyButton);
+            vBox.AddChild(hBox);
         }
 
-        public void ControlHidden(Control control)
+        popup.Contents.AddChild(vBox);
+
+        popup.OpenCentered();
+    }
+
+    public void ControlHidden(Control control)
+    {
+        // Does the same thing but it could later be changed so..
+        ControlRemovedFromTree(control);
+    }
+
+    public void ControlRemovedFromTree(Control control)
+    {
+        if (control.Root?.StoredKeyboardFocus == control)
+            control.Root.StoredKeyboardFocus = null;
+
+        ReleaseKeyboardFocus(control);
+        RemoveModal(control);
+
+        if (control == ControlFocused)
+            ControlFocused = null;
+
+        if (control == CurrentlyHovered)
+            UpdateHovered();
+    }
+
+    public void PushModal(Control modal)
+    {
+        _modalStack.Add(modal);
+    }
+
+    public void RemoveModal(Control modal)
+    {
+        if (_modalStack.Remove(modal))
         {
-            // Does the same thing but it could later be changed so..
-            ControlRemovedFromTree(control);
+            modal.ModalRemoved();
         }
+    }
 
-        public void ControlRemovedFromTree(Control control)
+    public void Render(IRenderHandle renderHandle)
+    {
+        // Render secondary windows LAST.
+        // This makes it so that (hopefully) the GPU will be done rendering secondary windows
+        // by the times we try to blit to them at the end of Clyde's render cycle,
+        // So that the GL driver doesn't have to block on glWaitSync.
+
+        foreach (var root in _roots)
         {
-            if (control.Root?.StoredKeyboardFocus == control)
-                control.Root.StoredKeyboardFocus = null;
-
-            ReleaseKeyboardFocus(control);
-            RemoveModal(control);
-
-            if (control == ControlFocused)
-                ControlFocused = null;
-
-            if (control == CurrentlyHovered)
-                UpdateHovered();
-        }
-
-        public void PushModal(Control modal)
-        {
-            _modalStack.Add(modal);
-        }
-
-        public void RemoveModal(Control modal)
-        {
-            if (_modalStack.Remove(modal))
+            if (root.Window != _clyde.MainWindow)
             {
-                modal.ModalRemoved();
+                using var _ = _prof.Group("Window");
+                _prof.WriteValue("ID", ProfData.Int32((int)root.Window.Id));
+
+                renderHandle.RenderInRenderTarget(
+                    root.Window.RenderTarget,
+                    () => DoRender(root),
+                    root.ActualBgColor);
             }
         }
 
-        public void Render(IRenderHandle renderHandle)
+        using (_prof.Group("Main"))
         {
-            // Render secondary windows LAST.
-            // This makes it so that (hopefully) the GPU will be done rendering secondary windows
-            // by the times we try to blit to them at the end of Clyde's render cycle,
-            // So that the GL driver doesn't have to block on glWaitSync.
-
-            foreach (var root in _roots)
-            {
-                if (root.Window != _clyde.MainWindow)
-                {
-                    using var _ = _prof.Group("Window");
-                    _prof.WriteValue("ID", ProfData.Int32((int) root.Window.Id));
-
-                    renderHandle.RenderInRenderTarget(
-                        root.Window.RenderTarget,
-                        () => DoRender(root),
-                        root.ActualBgColor);
-                }
-            }
-
-            using (_prof.Group("Main"))
-            {
-                DoRender(_windowsToRoot[_clyde.MainWindow.Id]);
-            }
+            DoRender(_windowsToRoot[_clyde.MainWindow.Id]);
+        }
 
         void DoRender(WindowRoot root)
         {
@@ -179,24 +180,24 @@ internal sealed partial class UserInterfaceManager
         }
     }
 
-        public void QueueStyleUpdate(Control control)
-        {
-            _styleUpdateQueue.Enqueue(control);
-        }
+    public void QueueStyleUpdate(Control control)
+    {
+        _styleUpdateQueue.Enqueue(control);
+    }
 
-        /// <summary>
-        /// Queues a control so that it gets remeasured in the next frame update. Does not queue an arrange update.
-        /// </summary>
-        public void QueueMeasureUpdate(Control control)
-        {
-            _measureUpdateQueue.Enqueue(control);
-        }
+    /// <summary>
+    /// Queues a control so that it gets remeasured in the next frame update. Does not queue an arrange update.
+    /// </summary>
+    public void QueueMeasureUpdate(Control control)
+    {
+        _measureUpdateQueue.Enqueue(control);
+    }
 
-        /// <summary>
-        /// Queues a control so that it gets rearranged in the next frame update. Does not queue a measure update.
-        /// </summary>
-        public void QueueArrangeUpdate(Control control)
-        {
-            _arrangeUpdateQueue.Enqueue(control);
-        }
+    /// <summary>
+    /// Queues a control so that it gets rearranged in the next frame update. Does not queue a measure update.
+    /// </summary>
+    public void QueueArrangeUpdate(Control control)
+    {
+        _arrangeUpdateQueue.Enqueue(control);
+    }
 }

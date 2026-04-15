@@ -22,7 +22,7 @@ public sealed class DefaultSQLConfig : IConfig
 {
     public static readonly IConfig Instance = new DefaultSQLConfig();
 
-    private DefaultSQLConfig(){}
+    private DefaultSQLConfig() { }
 
     public IEnumerable<IExporter> GetExporters()
     {

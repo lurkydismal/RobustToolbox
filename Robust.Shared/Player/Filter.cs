@@ -205,7 +205,7 @@ namespace Robust.Shared.Player
         /// <summary>
         ///    Removes players from the filter.
         /// </summary>
-        public Filter RemovePlayers(params ICommonSession[] players) => RemovePlayers((IEnumerable<ICommonSession>) players);
+        public Filter RemovePlayers(params ICommonSession[] players) => RemovePlayers((IEnumerable<ICommonSession>)players);
 
         /// <summary>
         ///     Removes a single player from the filter, specified by the entity to which they are attached.
@@ -226,7 +226,7 @@ namespace Robust.Shared.Player
         /// <summary>
         ///     Removes players from the filter, specified by the entities to which they are attached.
         /// </summary>
-        public Filter RemovePlayersByAttachedEntity(params EntityUid[] uids) => RemovePlayersByAttachedEntity((IEnumerable<EntityUid>) uids);
+        public Filter RemovePlayersByAttachedEntity(params EntityUid[] uids) => RemovePlayersByAttachedEntity((IEnumerable<EntityUid>)uids);
 
         /// <summary>
         ///     Removes all players from the filter that match a predicate.

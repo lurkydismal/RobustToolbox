@@ -16,10 +16,10 @@ namespace Robust.Shared.Player;
 /// </summary>
 internal sealed class DummySession : ICommonSessionInternal
 {
-    public EntityUid? AttachedEntity {get; set; }
+    public EntityUid? AttachedEntity { get; set; }
     public SessionStatus Status { get; set; } = SessionStatus.Connecting;
     public NetUserId UserId => UserData.UserId;
-    public string Name  => UserData.UserName;
+    public string Name => UserData.UserName;
 
     public short Ping { get; set; }
 
@@ -94,7 +94,7 @@ internal sealed class DummyChannel(DummySession session) : INetChannel
     public int CurrentMtu { get; set; } = default;
     public long ConnectionId { get; set; } = default;
     public TimeSpan RemoteTimeOffset { get; set; } = default;
-    public TimeSpan RemoteTime  { get; set; } = default;
+    public TimeSpan RemoteTime { get; set; } = default;
     public bool IsConnected { get; set; } = true;
     public bool IsHandshakeComplete { get; set; } = true;
 

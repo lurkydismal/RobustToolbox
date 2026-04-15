@@ -98,21 +98,21 @@ namespace Robust.Client.Animations
             switch (a)
             {
                 case Vector2 vector2:
-                    return Vector2.Lerp(vector2, (Vector2) b, t);
+                    return Vector2.Lerp(vector2, (Vector2)b, t);
                 case Vector3 vector3:
-                    return Vector3.Lerp(vector3, (Vector3) b, t);
+                    return Vector3.Lerp(vector3, (Vector3)b, t);
                 case Vector4 vector4:
-                    return Vector4.Lerp(vector4, (Vector4) b, t);
+                    return Vector4.Lerp(vector4, (Vector4)b, t);
                 case float f:
-                    return MathHelper.Lerp(f, (float) b, t);
+                    return MathHelper.Lerp(f, (float)b, t);
                 case double d:
-                    return MathHelper.Lerp(d, (double) b, t);
+                    return MathHelper.Lerp(d, (double)b, t);
                 case Angle angle:
-                    return Angle.Lerp(angle, (Angle) b, t);
+                    return Angle.Lerp(angle, (Angle)b, t);
                 case Color color:
-                    return Color.InterpolateBetween(color, (Color) b, t);
+                    return Color.InterpolateBetween(color, (Color)b, t);
                 case int i:
-                    return (int) MathHelper.Lerp((double) i, (int) b, t);
+                    return (int)MathHelper.Lerp((double)i, (int)b, t);
                 default:
                     // Fall back to "previous" interpolation, treating this as a discrete value.
                     return a;
@@ -124,17 +124,17 @@ namespace Robust.Client.Animations
             switch (a)
             {
                 case Vector2 vector2:
-                    return Vector2Helpers.InterpolateCubic((Vector2) preA, vector2, (Vector2) b, (Vector2) postB, t);
+                    return Vector2Helpers.InterpolateCubic((Vector2)preA, vector2, (Vector2)b, (Vector2)postB, t);
                 case Vector3 vector3:
-                    return VectorHelpers.InterpolateCubic((Vector3) preA, vector3, (Vector3) b, (Vector3) postB, t);
+                    return VectorHelpers.InterpolateCubic((Vector3)preA, vector3, (Vector3)b, (Vector3)postB, t);
                 case Vector4 vector4:
-                    return VectorHelpers.InterpolateCubic((Vector4) preA, vector4, (Vector4) b, (Vector4) postB, t);
+                    return VectorHelpers.InterpolateCubic((Vector4)preA, vector4, (Vector4)b, (Vector4)postB, t);
                 case float f:
-                    return MathHelper.InterpolateCubic((float) preA, f, (float) b, (float) postB, t);
+                    return MathHelper.InterpolateCubic((float)preA, f, (float)b, (float)postB, t);
                 case double d:
-                    return MathHelper.InterpolateCubic((double) preA, d, (double) b, (double) postB, t);
+                    return MathHelper.InterpolateCubic((double)preA, d, (double)b, (double)postB, t);
                 case int i:
-                    return (int) MathHelper.InterpolateCubic((int) preA, (double) i, (int) b, (int) postB, t);
+                    return (int)MathHelper.InterpolateCubic((int)preA, (double)i, (int)b, (int)postB, t);
                 default:
                     // Fall back to "previous" interpolation, treating this as a discrete value.
                     return a;

@@ -49,31 +49,31 @@ namespace Robust.Client.Graphics
         public bool StencilTestEnabled
         {
             get => _stencil.Enabled;
-            set => Stencil = _stencil with { Enabled = value};
+            set => Stencil = _stencil with { Enabled = value };
         }
 
         public int StencilWriteMask
         {
             get => _stencil.WriteMask;
-            set => Stencil = _stencil with { WriteMask = value};
+            set => Stencil = _stencil with { WriteMask = value };
         }
 
         public int StencilReadMask
         {
             get => _stencil.ReadMask;
-            set => Stencil = _stencil with { ReadMask = value};
+            set => Stencil = _stencil with { ReadMask = value };
         }
 
         public StencilFunc StencilFunc
         {
             get => _stencil.Func;
-            set => Stencil = _stencil with { Func = value};
+            set => Stencil = _stencil with { Func = value };
         }
 
         public StencilOp StencilOp
         {
             get => _stencil.Op;
-            set => Stencil = _stencil with { Op = value};
+            set => Stencil = _stencil with { Op = value };
         }
 
         public void SetParameter(string name, float value)
@@ -251,6 +251,6 @@ namespace Robust.Client.Graphics
         [DataField("writeMask")] public int WriteMask = unchecked((int)uint.MaxValue);
         [DataField("readMask")] public int ReadMask = unchecked((int)uint.MaxValue);
         [DataField("op")] public StencilOp Op = StencilOp.Keep;
-        [DataField("func")] public StencilFunc Func  = StencilFunc.Always;
+        [DataField("func")] public StencilFunc Func = StencilFunc.Always;
     }
 }

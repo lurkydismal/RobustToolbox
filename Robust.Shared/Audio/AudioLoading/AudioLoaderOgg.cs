@@ -88,8 +88,8 @@ internal static class AudioLoaderOgg
 
         for (var i = 0; i < simdSamples; i += Vector<short>.Count)
         {
-            var lower = Vector.LoadUnsafe(in srcBase, (nuint) i);
-            var upper = Vector.LoadUnsafe(in srcBase, (nuint) (i + Vector<float>.Count));
+            var lower = Vector.LoadUnsafe(in srcBase, (nuint)i);
+            var upper = Vector.LoadUnsafe(in srcBase, (nuint)(i + Vector<float>.Count));
 
             lower *= factor;
             upper *= factor;
@@ -99,7 +99,7 @@ internal static class AudioLoaderOgg
 
             var merged = Vector.Narrow(lowerInt, upperInt);
 
-            merged.StoreUnsafe(ref dstBase, (nuint) i);
+            merged.StoreUnsafe(ref dstBase, (nuint)i);
         }
 
         for (var i = simdSamples; i < src.Length; i++)

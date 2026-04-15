@@ -60,7 +60,7 @@ internal sealed class ToolshedCommandImplementor
             : Owner.GetType().PrettyName();
 
         if (SubCommand != null)
-            LocName =  $"{LocName}-{SubCommand}";
+            LocName = $"{LocName}-{SubCommand}";
     }
 
     /// <summary>
@@ -139,7 +139,7 @@ internal sealed class ToolshedCommandImplementor
             if (ctx.PeekCommandOrBlockTerminated())
                 break;
 
-            if (ctx is {OutOfInput: true, GenerateCompletions: false})
+            if (ctx is { OutOfInput: true, GenerateCompletions: false })
                 break;
 
             if (!TryParseArgument(ctx, arg, out var parsed))
@@ -161,7 +161,7 @@ internal sealed class ToolshedCommandImplementor
         DebugTools.AssertNotNull(arg.Parser);
 
         parsed = null;
-        if (ctx.PeekCommandOrBlockTerminated() || ctx is {OutOfInput: true, GenerateCompletions: false})
+        if (ctx.PeekCommandOrBlockTerminated() || ctx is { OutOfInput: true, GenerateCompletions: false })
         {
             if (!arg.IsOptional)
             {
@@ -264,14 +264,14 @@ internal sealed class ToolshedCommandImplementor
             ctx.ConsumeWhitespace();
             var save = ctx.Save();
 
-            if (ctx is {OutOfInput: true, GenerateCompletions: false} || ctx.PeekCommandOrBlockTerminated())
+            if (ctx is { OutOfInput: true, GenerateCompletions: false } || ctx.PeekCommandOrBlockTerminated())
             {
                 ctx.Error = new ExpectedTypeArgumentError();
-                ctx.Error.Contextualize(ctx.Input, (start, ctx.Index+1));
+                ctx.Error.Contextualize(ctx.Input, (start, ctx.Index + 1));
                 return false;
             }
 
-            var parser = (BaseParser<Type>) (parserType == typeof(TypeTypeParser)
+            var parser = (BaseParser<Type>)(parserType == typeof(TypeTypeParser)
                 ? _toolshed.GetParserForType(typeof(Type))!
                 : _toolshed.GetCustomParser(parserType));
 
@@ -343,7 +343,7 @@ internal sealed class ToolshedCommandImplementor
         }
 
         var (cmd, info) = result.Value;
-        if (pipedType is {ContainsGenericParameters: true} || typeArguments != null && typeArguments.Any(x => x.ContainsGenericParameters))
+        if (pipedType is { ContainsGenericParameters: true } || typeArguments != null && typeArguments.Any(x => x.ContainsGenericParameters))
         {
             // I hate this method name
             // its not a real concrete method if the requested types are generic, is it now?
@@ -391,7 +391,7 @@ internal sealed class ToolshedCommandImplementor
             return null;
 
         var attrib = param.GetCustomAttribute<CommandArgumentAttribute>();
-        var parser = attrib?.CustomParser is not {} custom
+        var parser = attrib?.CustomParser is not { } custom
             ? _toolshed.GetArgumentParser(type)
             : _toolshed.GetArgumentParser(_toolshed.GetCustomParser(custom));
 
@@ -501,7 +501,7 @@ internal sealed class ToolshedCommandImplementor
         // I don't really understand the logic behind this
         // Actually I understand it now, but its just broken or incomplete. Yipeee
         return inputType.Intersect(parameterType);
-}
+    }
 
     /// <summary>
     ///     Attempts to fetch a callable shim for a command, aka it's implementation, using the given types.
@@ -573,7 +573,7 @@ internal sealed class ToolshedCommandImplementor
         var argValue = Expression.MakeIndex(
             Expression.Property(args, nameof(CommandInvocationArguments.Arguments)),
             typeof(Dictionary<string, object?>).FindIndexerProperty(),
-            new[] {Expression.Constant(param.Name)});
+            new[] { Expression.Constant(param.Name) });
 
         // args.Context
         var ctx = Expression.Property(args, nameof(CommandInvocationArguments.Context));
@@ -626,7 +626,7 @@ internal sealed class ToolshedCommandImplementor
             // FormattedMessage support for help strings
             // make the argument type hint colour coded, for easier parsing of help strings.
             // I.e., in "<input (IEnumerable<Int>)> make the "(IEnumerable<Int>)" part gray?
-            if (method.PipeArg is {} pipeArg)
+            if (method.PipeArg is { } pipeArg)
             {
                 var locKey = $"command-arg-sig-{LocName}-{pipeArg.Name}";
                 if (!_loc.TryGetString(locKey, out var pipeSig))

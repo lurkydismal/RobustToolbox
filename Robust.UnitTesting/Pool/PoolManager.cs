@@ -257,7 +257,7 @@ public class PoolManager<TPair> : BasePoolManager where TPair : class, ITestPair
             if (pair.State == PairState.Dead)
                 Pairs.Remove((TPair)pair);
             else if (pair.State == PairState.Ready)
-                Pairs[(TPair) pair] = false;
+                Pairs[(TPair)pair] = false;
             else
                 throw new InvalidOperationException($"Attempted to return a pair in an invalid state. Pair: {pair.Id}. State: {pair.State}.");
         }

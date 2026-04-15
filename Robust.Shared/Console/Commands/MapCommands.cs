@@ -40,7 +40,7 @@ sealed class AddMapCommand : LocalizedEntityCommands
         {
             case 1:
                 var mapId = _mapSystem.GetNextMapId();
-                return CompletionResult.FromHintOptions([ new CompletionOption($"{mapId}")], LocalizationManager.GetString("generic-mapid"));
+                return CompletionResult.FromHintOptions([new CompletionOption($"{mapId}")], LocalizationManager.GetString("generic-mapid"));
             case 2:
                 return CompletionResult.FromHint(LocalizationManager.GetString("cmd-addmap-hint-2"));
             default:

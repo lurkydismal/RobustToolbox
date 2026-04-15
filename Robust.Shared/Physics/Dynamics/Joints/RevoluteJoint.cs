@@ -111,7 +111,7 @@ public sealed partial class RevoluteJoint : Joint, IEquatable<RevoluteJoint>
     [DataField("maxMotorTorque")]
     public float MaxMotorTorque;
 
-    public RevoluteJoint() {}
+    public RevoluteJoint() { }
 
     public RevoluteJoint(EntityUid uidA, EntityUid uidB, Vector2 anchorA, Vector2 anchorB, float referenceAngle) : base(uidA, uidB)
     {
@@ -120,7 +120,7 @@ public sealed partial class RevoluteJoint : Joint, IEquatable<RevoluteJoint>
         ReferenceAngle = referenceAngle;
     }
 
-    public RevoluteJoint(EntityUid bodyAUid, EntityUid bodyBUid) : base(bodyAUid, bodyBUid) {}
+    public RevoluteJoint(EntityUid bodyAUid, EntityUid bodyBUid) : base(bodyAUid, bodyBUid) { }
 
     internal RevoluteJoint(RevoluteJointState state, IEntityManager entManager, EntityUid owner)
         : base(state, entManager, owner)
@@ -457,7 +457,7 @@ public sealed partial class RevoluteJoint : Joint, IEquatable<RevoluteJoint>
     {
         if (ReferenceEquals(null, obj)) return false;
         if (obj.GetType() != GetType()) return false;
-        return Equals((RevoluteJoint) obj);
+        return Equals((RevoluteJoint)obj);
     }
 
     public override int GetHashCode()

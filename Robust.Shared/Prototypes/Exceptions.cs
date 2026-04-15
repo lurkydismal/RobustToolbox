@@ -24,7 +24,7 @@ public class PrototypeLoadException : Exception
 [Virtual]
 public class UnknownPrototypeException : Exception
 {
-    public override string Message => $"Unknown {Kind.Name} prototype: {Prototype}" ;
+    public override string Message => $"Unknown {Kind.Name} prototype: {Prototype}";
     public readonly string Prototype;
     public readonly Type Kind;
 

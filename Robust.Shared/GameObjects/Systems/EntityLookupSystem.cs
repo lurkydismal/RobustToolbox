@@ -257,11 +257,11 @@ public sealed partial class EntityLookupSystem : EntitySystem
             }
             else if (oldBroadphase != broadphase.Comp2)
             {
-                RemoveFromEntityTree(xform.Broadphase.Value.Uid, oldBroadphase,child, xform);
+                RemoveFromEntityTree(xform.Broadphase.Value.Uid, oldBroadphase, child, xform);
             }
         }
 
-        DebugTools.Assert(xform.Broadphase is not {} x || x.Uid == broadphase.Owner && !x.CanCollide);
+        DebugTools.Assert(xform.Broadphase is not { } x || x.Uid == broadphase.Owner && !x.CanCollide);
         AddOrUpdateEntityTree(
             broadphase.Owner,
             broadphase.Comp2,

@@ -49,7 +49,7 @@ namespace Robust.Client.Graphics.Clyde
 
             public void InitializePublic()
             {
-                var extensions = Marshal.PtrToStringUTF8((nint) eglQueryString(null, EGL_EXTENSIONS));
+                var extensions = Marshal.PtrToStringUTF8((nint)eglQueryString(null, EGL_EXTENSIONS));
                 _sawmill.Debug($"EGL client extensions: {extensions}!");
             }
 
@@ -74,15 +74,15 @@ namespace Robust.Client.Graphics.Clyde
                 {
                     // Set up window surface.
                     var hWNd = Clyde._windowing!.WindowGetWin32Window(reg)!.Value;
-                    data.EglSurface = eglCreateWindowSurface(_eglDisplay, _eglConfig, (void*) hWNd, attribs);
-                    if (data.EglSurface == (void*) EGL_NO_SURFACE)
+                    data.EglSurface = eglCreateWindowSurface(_eglDisplay, _eglConfig, (void*)hWNd, attribs);
+                    if (data.EglSurface == (void*)EGL_NO_SURFACE)
                         throw new Exception("eglCreateWindowSurface failed.");
                 }
                 else if (OperatingSystem.IsLinux())
                 {
                     var window = Clyde._windowing!.WindowGetX11Id(reg)!.Value;
-                    data.EglSurface = eglCreateWindowSurface(_eglDisplay, _eglConfig, (void*) window, attribs);
-                    if (data.EglSurface == (void*) EGL_NO_SURFACE)
+                    data.EglSurface = eglCreateWindowSurface(_eglDisplay, _eglConfig, (void*)window, attribs);
+                    if (data.EglSurface == (void*)EGL_NO_SURFACE)
                         throw new Exception("eglCreateWindowSurface failed.");
                 }
                 else
@@ -111,15 +111,15 @@ namespace Robust.Client.Graphics.Clyde
                     // Setting up ANGLE without manually selecting a D3D11 device requires a windows DC.
                     mainWindow.DC = Windows.GetDC((HWND)Clyde._windowing!.WindowGetWin32Window(mainWindow.Reg)!.Value);
 
-                    _eglDisplay = eglGetPlatformDisplayEXT(EGL_PLATFORM_ANGLE_ANGLE, (void*) mainWindow.DC, null);
+                    _eglDisplay = eglGetPlatformDisplayEXT(EGL_PLATFORM_ANGLE_ANGLE, (void*)mainWindow.DC, null);
                     if (_eglDisplay == null)
                         throw new Exception("eglGetPlatformDisplayEXT failed.");
                 }
                 else if (OperatingSystem.IsLinux())
                 {
                     var xDisplay = Clyde._windowing!.WindowGetX11Display(mainWindow.Reg)!.Value;
-                    _eglDisplay = eglGetDisplay((void*) xDisplay);
-                    if (mainWindow.EglSurface == (void*) EGL_NO_SURFACE)
+                    _eglDisplay = eglGetDisplay((void*)xDisplay);
+                    if (mainWindow.EglSurface == (void*)EGL_NO_SURFACE)
                         throw new Exception("eglCreateWindowSurface failed.");
                 }
                 else
@@ -132,9 +132,9 @@ namespace Robust.Client.Graphics.Clyde
                 if (eglInitialize(_eglDisplay, &major, &minor) == EGL_FALSE)
                     throw new Exception("eglInitialize failed.");
 
-                var vendor = Marshal.PtrToStringUTF8((nint) eglQueryString(_eglDisplay, EGL_VENDOR));
-                var version = Marshal.PtrToStringUTF8((nint) eglQueryString(_eglDisplay, EGL_VERSION));
-                var extensions = Marshal.PtrToStringUTF8((nint) eglQueryString(_eglDisplay, EGL_EXTENSIONS));
+                var vendor = Marshal.PtrToStringUTF8((nint)eglQueryString(_eglDisplay, EGL_VENDOR));
+                var version = Marshal.PtrToStringUTF8((nint)eglQueryString(_eglDisplay, EGL_VERSION));
+                var extensions = Marshal.PtrToStringUTF8((nint)eglQueryString(_eglDisplay, EGL_EXTENSIONS));
 
                 _sawmill.Debug("EGL initialized!");
                 _sawmill.Debug($"EGL vendor: {vendor}!");
@@ -183,7 +183,7 @@ namespace Robust.Client.Graphics.Clyde
                 };
 
                 _eglContext = eglCreateContext(_eglDisplay, _eglConfig, null, createAttribs);
-                if (_eglContext == (void*) EGL_NO_CONTEXT)
+                if (_eglContext == (void*)EGL_NO_CONTEXT)
                     throw new Exception("eglCreateContext failed!");
 
                 _sawmill.Debug("EGL context created!");

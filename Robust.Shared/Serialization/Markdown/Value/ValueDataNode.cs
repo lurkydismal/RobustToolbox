@@ -11,7 +11,7 @@ namespace Robust.Shared.Serialization.Markdown.Value
     {
         public static ValueDataNode Null() => new((string?)null);
 
-        public ValueDataNode() : this(string.Empty) {}
+        public ValueDataNode() : this(string.Empty) { }
 
         public ValueDataNode(string? value) : base(NodeMark.Invalid, NodeMark.Invalid)
         {
@@ -43,7 +43,7 @@ namespace Robust.Shared.Serialization.Markdown.Value
         {
             if (node.IsNull)
             {
-                return new YamlScalarNode("null"){Tag = node.Tag};
+                return new YamlScalarNode("null") { Tag = node.Tag };
             }
 
             return new YamlScalarNode(node.Value)

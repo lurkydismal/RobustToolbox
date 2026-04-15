@@ -29,7 +29,7 @@ public sealed class ProtoIdSerializer<T> : ITypeSerializer<ProtoId<T>, ValueData
             return new ErrorNode(node, $"Unknown prototype kind: {typeof(T)}");
 
         if (proto.IsIgnored(kind))
-            return new ErrorNode(node,$"Attempting to validate an ignored prototype: {typeof(T)}.\nDid you forget to remove the IPrototypeManager.RegisterIgnore(\"{kind}\") call when moving a prototype to Shared?");
+            return new ErrorNode(node, $"Attempting to validate an ignored prototype: {typeof(T)}.\nDid you forget to remove the IPrototypeManager.RegisterIgnore(\"{kind}\") call when moving a prototype to Shared?");
 
         if (proto.HasMapping<T>(node.Value))
             return new ValidatedValueNode(node);

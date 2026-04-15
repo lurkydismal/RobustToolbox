@@ -7,7 +7,7 @@ namespace Robust.Client.GameObjects;
 ///     An abstract entity system inheritor for systems that deal with appearance data.
 /// </summary>
 public abstract class VisualizerSystem<T> : EntitySystem
-    where T: Component
+    where T : Component
 {
     [Dependency] protected readonly AppearanceSystem AppearanceSystem = default!;
     [Dependency] protected readonly AnimationPlayerSystem AnimationSystem = default!;
@@ -20,5 +20,5 @@ public abstract class VisualizerSystem<T> : EntitySystem
         SubscribeLocalEvent<T, AppearanceChangeEvent>(OnAppearanceChange);
     }
 
-    protected virtual void OnAppearanceChange(EntityUid uid, T component, ref AppearanceChangeEvent args) {}
+    protected virtual void OnAppearanceChange(EntityUid uid, T component, ref AppearanceChangeEvent args) { }
 }

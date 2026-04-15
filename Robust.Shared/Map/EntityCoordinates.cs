@@ -109,7 +109,7 @@ namespace Robust.Shared.Map
             IMapManager mapManager,
             SharedTransformSystem transformSystem)
         {
-            if(!IsValid(entityManager))
+            if (!IsValid(entityManager))
                 return new Vector2i();
 
             var mapSystem = entityManager.System<SharedMapSystem>();
@@ -322,7 +322,7 @@ namespace Robust.Shared.Map
         /// <exception cref="ArgumentException">Thrown when the relative entities aren't the same</exception>
         public static EntityCoordinates operator +(EntityCoordinates left, EntityCoordinates right)
         {
-            if(left.EntityId != right.EntityId)
+            if (left.EntityId != right.EntityId)
                 throw new ArgumentException("Can't sum EntityCoordinates with different relative entities.");
 
             return new EntityCoordinates(left.EntityId, left.Position + right.Position);
@@ -334,7 +334,7 @@ namespace Robust.Shared.Map
         /// <exception cref="ArgumentException">Thrown when the relative entities aren't the same</exception>
         public static EntityCoordinates operator -(EntityCoordinates left, EntityCoordinates right)
         {
-            if(left.EntityId != right.EntityId)
+            if (left.EntityId != right.EntityId)
                 throw new ArgumentException("Can't subtract EntityCoordinates with different relative entities.");
 
             return new EntityCoordinates(left.EntityId, left.Position - right.Position);
@@ -346,7 +346,7 @@ namespace Robust.Shared.Map
         /// <exception cref="ArgumentException">When the relative entities aren't the same</exception>
         public static EntityCoordinates operator *(EntityCoordinates left, EntityCoordinates right)
         {
-            if(left.EntityId != right.EntityId)
+            if (left.EntityId != right.EntityId)
                 throw new ArgumentException("Can't multiply EntityCoordinates with different relative entities.");
 
             return new EntityCoordinates(left.EntityId, left.Position * right.Position);

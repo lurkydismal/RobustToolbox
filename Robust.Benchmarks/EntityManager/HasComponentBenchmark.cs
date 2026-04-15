@@ -47,7 +47,7 @@ public partial class HasComponentBenchmark
     [Benchmark]
     public void HasComponentGeneric()
     {
-        for (var i = 2; i <= N+1; i++)
+        for (var i = 2; i <= N + 1; i++)
         {
             var uid = new EntityUid(i);
             var result = _entityManager.HasComponent<A>(uid);
@@ -58,7 +58,7 @@ public partial class HasComponentBenchmark
     [Benchmark]
     public void HasComponentCompReg()
     {
-        for (var i = 2; i <= N+1; i++)
+        for (var i = 2; i <= N + 1; i++)
         {
             var uid = new EntityUid(i);
             var result = _entityManager.HasComponent(uid, _compReg);
@@ -69,7 +69,7 @@ public partial class HasComponentBenchmark
     [Benchmark]
     public void HasComponentType()
     {
-        for (var i = 2; i <= N+1; i++)
+        for (var i = 2; i <= N + 1; i++)
         {
             var uid = new EntityUid(i);
             var result = _entityManager.HasComponent(uid, typeof(A));
@@ -80,7 +80,7 @@ public partial class HasComponentBenchmark
     [Benchmark]
     public void HasComponentGetType()
     {
-        for (var i = 2; i <= N+1; i++)
+        for (var i = 2; i <= N + 1; i++)
         {
             var uid = new EntityUid(i);
             var type = _dummyA.GetType();

@@ -216,7 +216,7 @@ public sealed partial class SpriteSystem
         if (!_query.Resolve(sprite.Owner, ref sprite.Comp))
             return -1;
 
-        var layer = new Layer {Texture = texture};
+        var layer = new Layer { Texture = texture };
         return AddLayer(sprite, layer, index);
     }
 

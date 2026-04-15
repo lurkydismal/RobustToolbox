@@ -77,7 +77,8 @@ namespace Robust.Client.UserInterface.Controls
 
             var popupVBox = new BoxContainer
             {
-                Orientation = LayoutOrientation.Vertical, Children =
+                Orientation = LayoutOrientation.Vertical,
+                Children =
                 {
                     (_filterBox = new LineEdit
                     {

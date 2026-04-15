@@ -60,7 +60,7 @@ internal record struct SlimPolygon : IPhysShape
         if (Sse.IsSupported)
         {
             var span = MemoryMarshal.Cast<Vector2, Vector128<float>>(_vertices.AsSpan);
-            span[0]  = Sse.UnpackLow(x, y);
+            span[0] = Sse.UnpackLow(x, y);
             span[1] = Sse.UnpackHigh(x, y);
         }
         else

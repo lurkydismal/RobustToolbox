@@ -73,7 +73,7 @@ internal partial class Clyde
 
         internal static Key ConvertSdl3Scancode(SC scancode)
         {
-            return KeyMap[(int) scancode];
+            return KeyMap[(int)scancode];
         }
 
         public static Button ConvertSdl3Button(int button)
@@ -90,7 +90,7 @@ internal partial class Clyde
             MouseButtonMap[SDL.SDL_BUTTON_X1] = Button.Button4;
             MouseButtonMap[SDL.SDL_BUTTON_X2] = Button.Button5;
 
-            KeyMap = new Key[(int) SC.SDL_SCANCODE_COUNT];
+            KeyMap = new Key[(int)SC.SDL_SCANCODE_COUNT];
             MapKey(SC.SDL_SCANCODE_A, Key.A);
             MapKey(SC.SDL_SCANCODE_B, Key.B);
             MapKey(SC.SDL_SCANCODE_C, Key.C);
@@ -211,7 +211,7 @@ internal partial class Clyde
             {
                 var key = KeyMap[code];
                 if (key != Key.Unknown)
-                    keyMapReverse[key] = (SC) code;
+                    keyMapReverse[key] = (SC)code;
             }
 
             KeyMapReverse = keyMapReverse.ToFrozenDictionary();

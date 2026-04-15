@@ -29,7 +29,7 @@ public sealed partial class AudioComponent : Component, IAudioSource
     /// <summary>
     /// Used for synchronising audio on client that comes into PVS range.
     /// </summary>
-    [DataField(customTypeSerializer:typeof(TimeOffsetSerializer)), AutoNetworkedField]
+    [DataField(customTypeSerializer: typeof(TimeOffsetSerializer)), AutoNetworkedField]
     public TimeSpan AudioStart;
 
     // Don't need to network these as client doesn't care.

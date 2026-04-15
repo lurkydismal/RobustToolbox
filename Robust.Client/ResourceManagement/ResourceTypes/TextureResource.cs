@@ -30,7 +30,7 @@ namespace Robust.Client.ResourceManagement
                     path);
             }
 
-            var data = new LoadStepData {Path = path};
+            var data = new LoadStepData { Path = path };
 
             LoadTextureParameters(dependencies.Resolve<IResourceManager>(), data);
             LoadPreTextureData(dependencies.Resolve<IResourceManager>(), data);
@@ -97,7 +97,7 @@ namespace Robust.Client.ResourceManagement
                         yamlData = yamlStream.Documents[0];
                     }
 
-                    return TextureLoadParameters.FromYaml((YamlMappingNode) yamlData.RootNode);
+                    return TextureLoadParameters.FromYaml((YamlMappingNode)yamlData.RootNode);
                 }
             }
 
@@ -106,7 +106,7 @@ namespace Robust.Client.ResourceManagement
 
         public override void Reload(IDependencyCollection dependencies, ResPath path, CancellationToken ct = default)
         {
-            var data = new LoadStepData {Path = path};
+            var data = new LoadStepData { Path = path };
 
             LoadTextureParameters(dependencies.Resolve<IResourceManager>(), data);
             LoadPreTextureData(dependencies.Resolve<IResourceManager>(), data);

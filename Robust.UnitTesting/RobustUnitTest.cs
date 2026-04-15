@@ -43,7 +43,7 @@ namespace Robust.UnitTesting
     public abstract partial class RobustUnitTest
     {
         protected virtual Type[]? ExtraComponents => null;
-        private static Type[] _components = new []
+        private static Type[] _components = new[]
             {
                 typeof(EyeComponent),
                 typeof(MapComponent),

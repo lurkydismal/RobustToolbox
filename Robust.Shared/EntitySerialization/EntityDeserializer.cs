@@ -347,7 +347,7 @@ public sealed class EntityDeserializer :
                     protoId = protoIdNode.Value;
             }
 
-            var entities = (SequenceDataNode) protoGroup["entities"];
+            var entities = (SequenceDataNode)protoGroup["entities"];
             _proto.TryIndex(protoId, out var proto);
 
             var protoData = Prototypes.GetOrNew(proto?.ID ?? string.Empty);
@@ -429,7 +429,7 @@ public sealed class EntityDeserializer :
                     protoId = protoIdNode.Value;
             }
 
-            var entities = (SequenceDataNode) protoGroup["entities"];
+            var entities = (SequenceDataNode)protoGroup["entities"];
             _proto.TryIndex(protoId, out var proto);
 
             var protoData = Prototypes.GetOrNew(proto?.ID ?? string.Empty);
@@ -454,7 +454,7 @@ public sealed class EntityDeserializer :
             dict = new(componentList.Count);
             foreach (var compData in componentList.Cast<MappingDataNode>())
             {
-                var value = ((ValueDataNode) compData["type"]).Value;
+                var value = ((ValueDataNode)compData["type"]).Value;
                 compData.Remove("type");
                 dict.Add(value, compData);
             }
@@ -465,7 +465,7 @@ public sealed class EntityDeserializer :
             missing = new(missingComponentList.Count);
             foreach (var missNode in missingComponentList)
             {
-                missing.Add(((ValueDataNode) missNode).Value);
+                missing.Add(((ValueDataNode)missNode).Value);
             }
         }
 
@@ -488,7 +488,7 @@ public sealed class EntityDeserializer :
         foreach (var (key, value) in tileMap.Children)
         {
             var yamlTileId = int.Parse(key, CultureInfo.InvariantCulture);
-            var tileName = ((ValueDataNode) value).Value;
+            var tileName = ((ValueDataNode)value).Value;
             if (migrations.TryGetValue(tileName, out var @new))
                 tileName = @new;
 
@@ -561,7 +561,7 @@ public sealed class EntityDeserializer :
         list.EnsureCapacity(sequence.Count);
         foreach (var node in sequence)
         {
-            var yamlId = ((ValueDataNode) node).AsInt();
+            var yamlId = ((ValueDataNode)node).AsInt();
             list.Add(yamlId);
         }
     }
@@ -575,8 +575,8 @@ public sealed class EntityDeserializer :
             try
             {
 #endif
-                CurrentReadingEntity = data;
-                LoadEntity(entity, _metaQuery.Comp(entity), data.Components, data.MissingComponents);
+            CurrentReadingEntity = data;
+            LoadEntity(entity, _metaQuery.Comp(entity), data.Components, data.MissingComponents);
 #if EXCEPTION_TOLERANCE
             }
             catch (Exception e)
@@ -662,7 +662,7 @@ public sealed class EntityDeserializer :
             if (!EntMan.TryGetComponent(uid, compReg.Idx, out var existing))
             {
                 // New component not present in the prototype.
-                var newComponent = (IComponent) _seriMan.Read(compReg.Type, data, this)!;
+                var newComponent = (IComponent)_seriMan.Read(compReg.Type, data, this)!;
 
                 // TODO ECS remove this when everything has been ECSd
                 if (newComponent is ISerializationHooks)
@@ -688,14 +688,14 @@ public sealed class EntityDeserializer :
             // Copy directly into the existing object
             // I'm scared turning over this rock will reveal a lot of bugs. So leaving that to a future PR.
             // I.e., creating "temp" here just unnecessarily slows everything down.
-            var temp = (IComponent) _seriMan.Read(compReg.Type, data, this)!;
+            var temp = (IComponent)_seriMan.Read(compReg.Type, data, this)!;
 
             _seriMan.CopyTo(temp, ref existing, this, notNullableOverride: true);
         }
 
         _components.Clear();
         CurrentComponent = null;
-        if (missingComps is {Count: > 0})
+        if (missingComps is { Count: > 0 })
             meta.LastComponentRemoved = Timing.CurTick;
     }
 

@@ -44,7 +44,7 @@ namespace Robust.Client.ViewVariables.Traits
             }
             else
             {
-                var enumerable = (IEnumerable) instance.Object;
+                var enumerable = (IEnumerable)instance.Object;
                 _enumerator = enumerable.GetEnumerator();
             }
 
@@ -60,9 +60,9 @@ namespace Robust.Client.ViewVariables.Traits
 
             {
                 // Page navigational controls.
-                _leftButton = new Button {Text = "<<", Disabled = true};
-                _pageLabel = new LineEdit {Text = "0", MinSize = new(60, 0)};
-                _rightButton = new Button {Text = ">>"};
+                _leftButton = new Button { Text = "<<", Disabled = true };
+                _pageLabel = new LineEdit { Text = "0", MinSize = new(60, 0) };
+                _rightButton = new Button { Text = ">>" };
 
                 _leftButton.OnPressed += _leftButtonPressed;
                 _pageLabel.OnTextEntered += _lineEditTextEntered;
@@ -94,7 +94,7 @@ namespace Robust.Client.ViewVariables.Traits
             }
             else
             {
-                var enumerable = (IEnumerable) Instance.Object!;
+                var enumerable = (IEnumerable)Instance.Object!;
                 _enumerator = enumerable.GetEnumerator();
             }
 
@@ -172,7 +172,7 @@ namespace Robust.Client.ViewVariables.Traits
                 var control = editor.Initialize(element, true);
                 if (_networked)
                 {
-                    var selectorChain = new object[] {new ViewVariablesEnumerableIndexSelector(i)};
+                    var selectorChain = new object[] { new ViewVariablesEnumerableIndexSelector(i) };
                     editor.WireNetworkSelector(Instance.Session!.SessionId, selectorChain);
                 }
 
@@ -202,7 +202,7 @@ namespace Robust.Client.ViewVariables.Traits
             _rightButton.Disabled = _page == HighestKnownPage && _ended;
         }
 
-        private async Task _cacheTo(int index, bool netRefresh=false)
+        private async Task _cacheTo(int index, bool netRefresh = false)
         {
             DebugTools.Assert(_networked || !netRefresh);
             if (index < _cache.Count)

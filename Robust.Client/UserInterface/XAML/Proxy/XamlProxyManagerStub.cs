@@ -5,7 +5,7 @@ namespace Robust.Client.UserInterface.XAML.Proxy;
 /// <summary>
 /// The stub implementation of <see cref="IXamlProxyManager"/>.
 /// </summary>
-public sealed class XamlProxyManagerStub: IXamlProxyManager
+public sealed class XamlProxyManagerStub : IXamlProxyManager
 {
     /// <summary>
     /// Do nothing.

@@ -34,7 +34,7 @@ internal sealed partial class ReplayPlaybackManager
 
         Replay.CurrentIndex = checkpoint.Index;
         DebugTools.Assert(Replay.ClientSideRecording
-                          || checkpoint.Tick == new GameTick(Replay.TickOffset.Value + (uint) Replay.CurrentIndex));
+                          || checkpoint.Tick == new GameTick(Replay.TickOffset.Value + (uint)Replay.CurrentIndex));
 
         foreach (var (name, value) in checkpoint.Cvars)
         {
@@ -42,7 +42,7 @@ internal sealed partial class ReplayPlaybackManager
         }
 
         _timing.TimeBase = checkpoint.TimeBase;
-        _timing.CurTick = _timing.LastRealTick = _timing.LastProcessedTick = new GameTick(Replay.TickOffset.Value + (uint) Replay.CurrentIndex);
+        _timing.CurTick = _timing.LastRealTick = _timing.LastProcessedTick = new GameTick(Replay.TickOffset.Value + (uint)Replay.CurrentIndex);
         Replay.LastApplied = checkpoint.Tick;
 
         ApplyCheckpointState(checkpoint, Replay);
@@ -59,7 +59,7 @@ internal sealed partial class ReplayPlaybackManager
         DebugTools.Assert(replay.ClientSideRecording || checkpoint.Detached.Count == 0);
 
         var nextIndex = checkpoint.Index + 1;
-        var next =  nextIndex < replay.States.Count ? replay.States[nextIndex] : null;
+        var next = nextIndex < replay.States.Count ? replay.States[nextIndex] : null;
         _gameState.PartialStateReset(checkpoint.FullState, false, false);
         _entMan.EntitySysManager.GetEntitySystem<ClientDirtySystem>().Reset();
         _entMan.EntitySysManager.GetEntitySystem<TransformSystem>().Reset();

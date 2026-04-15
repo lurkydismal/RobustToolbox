@@ -111,7 +111,7 @@ namespace Robust.Shared.Serialization.Markdown.Sequence
 
         public T Cast<T>(int index) where T : DataNode
         {
-            return (T) this[index];
+            return (T)this[index];
         }
 
         public override bool IsEmpty => _nodes.Count == 0;

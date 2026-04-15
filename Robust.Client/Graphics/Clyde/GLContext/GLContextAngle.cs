@@ -71,7 +71,7 @@ namespace Robust.Client.Graphics.Clyde
 
             public override void UpdateVSync()
             {
-                _swapInterval = (uint) (Clyde._vSync ? 1 : 0);
+                _swapInterval = (uint)(Clyde._vSync ? 1 : 0);
             }
 
             public override void WindowCreated(GLContextSpec? spec, WindowReg reg)
@@ -82,7 +82,7 @@ namespace Robust.Client.Graphics.Clyde
                 };
                 _windowData[reg.Id] = data;
 
-                var hWnd = (HWND) Clyde._windowing!.WindowGetWin32Window(reg)!.Value;
+                var hWnd = (HWND)Clyde._windowing!.WindowGetWin32Window(reg)!.Value;
 
                 // todo: exception management.
                 CreateSwapChain1(hWnd, data);
@@ -121,7 +121,7 @@ namespace Robust.Client.Graphics.Clyde
 
                 fixed (ID3D11Texture2D** texPtr = &data.Backbuffer)
                 {
-                    ThrowIfFailed("GetBuffer", data.SwapChain->GetBuffer(0, __uuidof<ID3D11Texture2D>(), (void**) texPtr));
+                    ThrowIfFailed("GetBuffer", data.SwapChain->GetBuffer(0, __uuidof<ID3D11Texture2D>(), (void**)texPtr));
                 }
 
                 var attributes = stackalloc int[]
@@ -163,7 +163,7 @@ namespace Robust.Client.Graphics.Clyde
                 fixed (IDXGISwapChain** swapPtr = &data.SwapChain)
                 {
                     ThrowIfFailed("CreateSwapChain", _factory->CreateSwapChain(
-                        (IUnknown*) _device,
+                        (IUnknown*)_device,
                         &desc,
                         swapPtr
                     ));
@@ -209,7 +209,7 @@ namespace Robust.Client.Graphics.Clyde
 
             private void TryInitializeCore()
             {
-                var extensions = Marshal.PtrToStringUTF8((nint) eglQueryString(null, EGL_EXTENSIONS));
+                var extensions = Marshal.PtrToStringUTF8((nint)eglQueryString(null, EGL_EXTENSIONS));
                 _sawmill.Debug($"EGL client extensions: {extensions}!");
 
                 CreateD3D11Device();
@@ -219,7 +219,7 @@ namespace Robust.Client.Graphics.Clyde
             private void CreateEglContext()
             {
                 _eglDevice = eglCreateDeviceANGLE(EGL_D3D11_DEVICE_ANGLE, _device, null);
-                if (_eglDevice == (void*) EGL_NO_DEVICE_EXT)
+                if (_eglDevice == (void*)EGL_NO_DEVICE_EXT)
                     throw new Exception("eglCreateDeviceANGLE failed.");
 
                 _eglDisplay = eglGetPlatformDisplayEXT(EGL_PLATFORM_DEVICE_EXT, _eglDevice, null);
@@ -231,9 +231,9 @@ namespace Robust.Client.Graphics.Clyde
                 if (eglInitialize(_eglDisplay, &major, &minor) == EGL_FALSE)
                     throw new Exception("eglInitialize failed.");
 
-                var vendor = Marshal.PtrToStringUTF8((nint) eglQueryString(_eglDisplay, EGL_VENDOR));
-                var version = Marshal.PtrToStringUTF8((nint) eglQueryString(_eglDisplay, EGL_VERSION));
-                var extensions = Marshal.PtrToStringUTF8((nint) eglQueryString(_eglDisplay, EGL_EXTENSIONS));
+                var vendor = Marshal.PtrToStringUTF8((nint)eglQueryString(_eglDisplay, EGL_VENDOR));
+                var version = Marshal.PtrToStringUTF8((nint)eglQueryString(_eglDisplay, EGL_VERSION));
+                var extensions = Marshal.PtrToStringUTF8((nint)eglQueryString(_eglDisplay, EGL_EXTENSIONS));
 
                 _sawmill.Debug("EGL initialized!");
                 _sawmill.Debug($"EGL vendor: {vendor}!");
@@ -286,7 +286,7 @@ namespace Robust.Client.Graphics.Clyde
                 };
 
                 _eglContext = eglCreateContext(_eglDisplay, _eglConfig, null, createAttribs);
-                if (_eglContext == (void*) EGL_NO_CONTEXT)
+                if (_eglContext == (void*)EGL_NO_CONTEXT)
                     throw new Exception("eglCreateContext failed!");
 
                 _sawmill.Debug("EGL context created!");
@@ -302,7 +302,7 @@ namespace Robust.Client.Graphics.Clyde
                 {
                     fixed (IDXGIFactory1** ptr = &_factory)
                     {
-                        ThrowIfFailed(nameof(CreateDXGIFactory1), CreateDXGIFactory1(__uuidof<IDXGIFactory1>(), (void**) ptr));
+                        ThrowIfFailed(nameof(CreateDXGIFactory1), CreateDXGIFactory1(__uuidof<IDXGIFactory1>(), (void**)ptr));
                     }
 
                     // Try to find the correct adapter if specified.
@@ -323,9 +323,9 @@ namespace Robust.Client.Graphics.Clyde
 #pragma warning disable CA1416
 #pragma warning disable CS0162
                     IDXGIFactory6* factory6;
-                    if (_adapter == null && _factory->QueryInterface(__uuidof<IDXGIFactory6>(), (void**) &factory6) == 0)
+                    if (_adapter == null && _factory->QueryInterface(__uuidof<IDXGIFactory6>(), (void**)&factory6) == 0)
                     {
-                        var gpuPref = (DXGI_GPU_PREFERENCE) Clyde._cfg.GetCVar(CVars.DisplayGpuPreference);
+                        var gpuPref = (DXGI_GPU_PREFERENCE)Clyde._cfg.GetCVar(CVars.DisplayGpuPreference);
                         IDXGIAdapter1* adapter;
                         for (var adapterIndex = 0u;
                              factory6->EnumAdapterByGpuPreference(
@@ -388,12 +388,12 @@ namespace Robust.Client.Graphics.Clyde
                     fixed (D3D_FEATURE_LEVEL* fl = &featureLevels[0])
                     {
                         ThrowIfFailed("D3D11CreateDevice", D3D11CreateDevice(
-                            (IDXGIAdapter*) _adapter,
+                            (IDXGIAdapter*)_adapter,
                             _adapter == null ? D3D_DRIVER_TYPE_HARDWARE : D3D_DRIVER_TYPE_UNKNOWN,
                             HMODULE.NULL,
                             0,
                             fl,
-                            (uint) featureLevels.Length,
+                            (uint)featureLevels.Length,
                             D3D11_SDK_VERSION,
                             device,
                             null,
@@ -403,11 +403,11 @@ namespace Robust.Client.Graphics.Clyde
 
                     // Get adapter from the device.
 
-                    ThrowIfFailed("QueryInterface", _device->QueryInterface(__uuidof<IDXGIDevice1>(), (void**) &dxgiDevice));
+                    ThrowIfFailed("QueryInterface", _device->QueryInterface(__uuidof<IDXGIDevice1>(), (void**)&dxgiDevice));
 
                     fixed (IDXGIAdapter1** ptrAdapter = &_adapter)
                     {
-                        ThrowIfFailed("GetParent", dxgiDevice->GetParent(__uuidof<IDXGIAdapter1>(), (void**) ptrAdapter));
+                        ThrowIfFailed("GetParent", dxgiDevice->GetParent(__uuidof<IDXGIAdapter1>(), (void**)ptrAdapter));
                     }
 
                     _deviceFl = _device->GetFeatureLevel();
@@ -469,7 +469,7 @@ namespace Robust.Client.Graphics.Clyde
 
                 ThrowIfFailed("ResizeBuffers", data.SwapChain->ResizeBuffers(
                     2,
-                    (uint) reg.FramebufferSize.X, (uint) reg.FramebufferSize.Y,
+                    (uint)reg.FramebufferSize.X, (uint)reg.FramebufferSize.Y,
                     Clyde._hasGLSrgb ? DXGI_FORMAT_R8G8B8A8_UNORM_SRGB : DXGI_FORMAT_R8G8B8A8_UNORM,
                     0));
 

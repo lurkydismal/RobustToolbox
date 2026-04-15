@@ -61,7 +61,7 @@ public sealed partial class WeldJoint : Joint, IEquatable<WeldJoint>
     /// <summary>
     /// Used for Serv3 reasons
     /// </summary>
-    public WeldJoint() {}
+    public WeldJoint() { }
 
     internal WeldJoint(EntityUid bodyA, EntityUid bodyB, Vector2 anchorA, Vector2 anchorB, float referenceAngle) : base(bodyA, bodyB)
     {
@@ -70,7 +70,7 @@ public sealed partial class WeldJoint : Joint, IEquatable<WeldJoint>
         ReferenceAngle = referenceAngle;
     }
 
-    internal WeldJoint(EntityUid bodyAUid, EntityUid bodyBUid) : base(bodyAUid, bodyBUid) {}
+    internal WeldJoint(EntityUid bodyAUid, EntityUid bodyBUid) : base(bodyAUid, bodyBUid) { }
 
     internal WeldJoint(WeldJointState state, IEntityManager entManager, EntityUid owner)
         : base(state, entManager, owner)
@@ -312,7 +312,7 @@ public sealed partial class WeldJoint : Joint, IEquatable<WeldJoint>
 
         if (Stiffness > 0.0f)
         {
-            var C1 =  cB + rB - cA - rA;
+            var C1 = cB + rB - cA - rA;
 
             positionError = C1.Length();
             angularError = 0.0f;
@@ -327,7 +327,7 @@ public sealed partial class WeldJoint : Joint, IEquatable<WeldJoint>
         }
         else
         {
-            var C1 =  cB + rB - cA - rA;
+            var C1 = cB + rB - cA - rA;
             float C2 = aB - aA - ReferenceAngle;
 
             positionError = C1.Length();
@@ -356,7 +356,7 @@ public sealed partial class WeldJoint : Joint, IEquatable<WeldJoint>
         }
 
         positions[_indexA] = cA;
-        angles[_indexA]= aA;
+        angles[_indexA] = aA;
         positions[_indexB] = cB;
         angles[_indexB] = aB;
 

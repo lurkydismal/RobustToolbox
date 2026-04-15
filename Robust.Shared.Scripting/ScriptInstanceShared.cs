@@ -55,7 +55,7 @@ namespace Robust.Shared.Scripting
             }
             else
             {
-                _hasReturnValue = (Func<Script, bool>) Delegate.CreateDelegate(typeof(Func<Script, bool>), method);
+                _hasReturnValue = (Func<Script, bool>)Delegate.CreateDelegate(typeof(Func<Script, bool>), method);
             }
 
             // Also internal and we need it.
@@ -128,7 +128,7 @@ namespace Robust.Shared.Scripting
                 // Too lazy to fix.
                 var src = code[span.TextSpan.Start..span.TextSpan.End];
                 if (!ScriptingColorScheme.ColorScheme.TryGetValue(span.ClassificationType, out var color))
-                        color = ScriptingColorScheme.ColorScheme[ScriptingColorScheme.Default];
+                    color = ScriptingColorScheme.ColorScheme[ScriptingColorScheme.Default];
 
                 msg.PushColor(color);
                 msg.AddText(src);
@@ -173,7 +173,7 @@ namespace Robust.Shared.Scripting
                     return false;
                 }
 
-                missing.Add((string) args[0]!);
+                missing.Add((string)args[0]!);
             }
 
             if (missing.Count == 0)
@@ -199,7 +199,7 @@ namespace Robust.Shared.Scripting
                     }
                 }
 
-                nextMissing: ;
+            nextMissing:;
             }
 
             return true;

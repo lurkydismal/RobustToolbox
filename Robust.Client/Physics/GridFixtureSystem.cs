@@ -132,9 +132,9 @@ namespace Robust.Client.Physics
                             // Add an offset to yIndex so we at least have some colour that isn't grey at 0,0
                             var actualIndex = chunk.Indices.X * 20 + (chunk.Indices.Y + 20) * 35 + index * 50;
 
-                            var red = (byte) (actualIndex % 255);
-                            var green = (byte) (actualIndex * 20 % 255);
-                            var blue = (byte) (actualIndex * 30 % 255);
+                            var red = (byte)(actualIndex % 255);
+                            var green = (byte)(actualIndex * 20 % 255);
+                            var blue = (byte)(actualIndex * 30 % 255);
 
                             return new Color(red, green, blue, 85);
                         }

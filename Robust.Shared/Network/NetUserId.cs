@@ -31,7 +31,8 @@ namespace Robust.Shared.Network
         }
 
         public override bool Equals(object? obj) =>
-        obj switch {
+        obj switch
+        {
             Guid id => Equals(id),
             NetUserId id => Equals(id),
             _ => false,
@@ -52,7 +53,7 @@ namespace Robust.Shared.Network
 
         void ISelfSerialize.Deserialize(string value)
         {
-            this = (NetUserId) Guid.Parse(value);
+            this = (NetUserId)Guid.Parse(value);
         }
 
         string ISelfSerialize.Serialize()

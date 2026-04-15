@@ -156,7 +156,7 @@ public static class Rope
         // Didn't find a starting leaf, must mean that startPos >= text length. Oh well?
         yield break;
 
-        startLeafFound:
+    startLeafFound:
 
         // Phase 2: start halfway through the current leaf.
         {
@@ -336,33 +336,33 @@ public static class Rope
         switch (rope)
         {
             case Branch branch:
-            {
-                if (branch.Weight > index)
                 {
-                    var (left, right) = Split(branch.Left, index);
-                    return (
-                        Rebalance(left),
-                        Rebalance(new Branch(right, branch.Right))
-                    );
-                }
+                    if (branch.Weight > index)
+                    {
+                        var (left, right) = Split(branch.Left, index);
+                        return (
+                            Rebalance(left),
+                            Rebalance(new Branch(right, branch.Right))
+                        );
+                    }
 
-                if (branch.Weight < index)
-                {
-                    var (left, right) = Split(branch.Right ?? Leaf.Empty, index - branch.Weight);
-                    return (
-                        Rebalance(new Branch(branch.Left, left)),
-                        Rebalance(right)
-                    );
-                }
+                    if (branch.Weight < index)
+                    {
+                        var (left, right) = Split(branch.Right ?? Leaf.Empty, index - branch.Weight);
+                        return (
+                            Rebalance(new Branch(branch.Left, left)),
+                            Rebalance(right)
+                        );
+                    }
 
-                return (branch.Left, branch.Right ?? Leaf.Empty);
-            }
+                    return (branch.Left, branch.Right ?? Leaf.Empty);
+                }
             case Leaf leaf:
-            {
-                var left = new Leaf(leaf.Text[..(int)index]);
-                var right = new Leaf(leaf.Text[(int)index..]);
-                return (left, right);
-            }
+                {
+                    var left = new Leaf(leaf.Text[..(int)index]);
+                    var right = new Leaf(leaf.Text[(int)index..]);
+                    return (left, right);
+                }
             default:
                 throw new ArgumentOutOfRangeException(nameof(rope));
         }

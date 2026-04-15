@@ -22,52 +22,52 @@ namespace Robust.Shared.Physics.Systems
                     return false;
                 case PhysShapeAabb aabb:
                     // TODO: When we get actual AABBs it will be a stupid ez check,
-                    var polygon = (PolygonShape) aabb;
+                    var polygon = (PolygonShape)aabb;
                     return TestPoint(polygon, xform, worldPoint);
                 case PhysShapeCircle circle:
                     var center = xform.Position + Physics.Transform.Mul(xform.Quaternion2D, circle.Position);
                     var distance = worldPoint - center;
                     return Vector2.Dot(distance, distance) <= circle.Radius * circle.Radius;
                 case PolygonShape poly:
-                {
-                    var pLocal = Physics.Transform.MulT(xform.Quaternion2D, worldPoint - xform.Position);
-
-                    for (var i = 0; i < poly.VertexCount; i++)
                     {
-                        var dot = Vector2.Dot(poly.Normals[i], pLocal - poly.Vertices[i]);
-                        if (dot > 0f) return false;
-                    }
+                        var pLocal = Physics.Transform.MulT(xform.Quaternion2D, worldPoint - xform.Position);
 
-                    return true;
-                }
+                        for (var i = 0; i < poly.VertexCount; i++)
+                        {
+                            var dot = Vector2.Dot(poly.Normals[i], pLocal - poly.Vertices[i]);
+                            if (dot > 0f) return false;
+                        }
+
+                        return true;
+                    }
                 case SlimPolygon slim:
-                {
-                    var pLocal = Physics.Transform.MulT(xform.Quaternion2D, worldPoint - xform.Position);
-                    var norms = slim._normals.AsSpan;
-                    var verts = slim._vertices.AsSpan;
-
-                    for (var i = 0; i < slim.VertexCount; i++)
                     {
-                        var dot = Vector2.Dot(norms[i], pLocal - verts[i]);
-                        if (dot > 0f) return false;
-                    }
+                        var pLocal = Physics.Transform.MulT(xform.Quaternion2D, worldPoint - xform.Position);
+                        var norms = slim._normals.AsSpan;
+                        var verts = slim._vertices.AsSpan;
 
-                    return true;
-                }
+                        for (var i = 0; i < slim.VertexCount; i++)
+                        {
+                            var dot = Vector2.Dot(norms[i], pLocal - verts[i]);
+                            if (dot > 0f) return false;
+                        }
+
+                        return true;
+                    }
                 case Polygon poly:
-                {
-                    var pLocal = Physics.Transform.MulT(xform.Quaternion2D, worldPoint - xform.Position);
-                    var norms = poly._normals.AsSpan;
-                    var verts = poly._vertices.AsSpan;
-
-                    for (var i = 0; i < poly.VertexCount; i++)
                     {
-                        var dot = Vector2.Dot(norms[i], pLocal - verts[i]);
-                        if (dot > 0f) return false;
-                    }
+                        var pLocal = Physics.Transform.MulT(xform.Quaternion2D, worldPoint - xform.Position);
+                        var norms = poly._normals.AsSpan;
+                        var verts = poly._vertices.AsSpan;
 
-                    return true;
-                }
+                        for (var i = 0; i < poly.VertexCount; i++)
+                        {
+                            var dot = Vector2.Dot(norms[i], pLocal - verts[i]);
+                            if (dot > 0f) return false;
+                        }
+
+                        return true;
+                    }
                 default:
                     throw new ArgumentOutOfRangeException($"No implemented TestPoint for {shape.GetType()}");
             }
@@ -158,25 +158,25 @@ namespace Robust.Shared.Physics.Systems
 
                     for (var i = 0; i < count; ++i)
                     {
-	                    // Triangle vertices.
-	                    var e1 = polySpan[i] - s;
-	                    var e2 = i + 1 < count ? polySpan[i+1] - s : polySpan[0] - s;
+                        // Triangle vertices.
+                        var e1 = polySpan[i] - s;
+                        var e2 = i + 1 < count ? polySpan[i + 1] - s : polySpan[0] - s;
 
-	                    float D = Vector2Helpers.Cross(e1, e2);
+                        float D = Vector2Helpers.Cross(e1, e2);
 
-	                    float triangleArea = 0.5f * D;
-	                    area += triangleArea;
+                        float triangleArea = 0.5f * D;
+                        area += triangleArea;
 
-	                    // Area weighted centroid
-	                    center += (e1 + e2) * triangleArea * k_inv3;
+                        // Area weighted centroid
+                        center += (e1 + e2) * triangleArea * k_inv3;
 
-	                    float ex1 = e1.X, ey1 = e1.Y;
-	                    float ex2 = e2.X, ey2 = e2.Y;
+                        float ex1 = e1.X, ey1 = e1.Y;
+                        float ex2 = e2.X, ey2 = e2.Y;
 
-	                    float intx2 = ex1*ex1 + ex2*ex1 + ex2*ex2;
-	                    float inty2 = ey1*ey1 + ey2*ey1 + ey2*ey2;
+                        float intx2 = ex1 * ex1 + ex2 * ex1 + ex2 * ex2;
+                        float inty2 = ey1 * ey1 + ey2 * ey1 + ey2 * ey2;
 
-	                    I += (0.25f * k_inv3 * D) * (intx2 + inty2);
+                        I += (0.25f * k_inv3 * D) * (intx2 + inty2);
                     }
 
                     // Total mass

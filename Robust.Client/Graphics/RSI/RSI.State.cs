@@ -94,12 +94,12 @@ namespace Robust.Client.Graphics
 
             public Texture GetFrame(RsiDirection rsiDirection, int frame)
             {
-                return Icons[(int) rsiDirection][frame];
+                return Icons[(int)rsiDirection][frame];
             }
 
             public Texture[] GetFrames(RsiDirection rsiDirection)
             {
-                return Icons[(int) rsiDirection];
+                return Icons[(int)rsiDirection];
             }
 
             /// <summary>

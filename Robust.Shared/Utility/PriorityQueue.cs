@@ -90,7 +90,7 @@ namespace Robust.Shared.Utility
         {
             var array = new T[Count];
             CopyTo(array, 0);
-            return ((IEnumerable <T>)array).GetEnumerator();
+            return ((IEnumerable<T>)array).GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator()
@@ -276,7 +276,8 @@ namespace Robust.Shared.Utility
             {
                 var itemIndex = i + shift;
                 var leftIndex = 2 * i + shift;
-                if (leftIndex > lastIndex) {
+                if (leftIndex > lastIndex)
+                {
                     return;      // reached last item
                 }
 

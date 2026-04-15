@@ -31,7 +31,7 @@ internal sealed class BasicHWId : IHWId
         else
             raw = GetFileHWid();
 
-        return [0, ..raw];
+        return [0, .. raw];
     }
 
     private static byte[] GetWindowsHWid(string keyName)

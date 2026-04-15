@@ -143,7 +143,7 @@ namespace Robust.Client.UserInterface.Controls
         {
 
             var data = _buttonDataList.FirstOrDefault(bd => bd.Id == idx);
-            if (data!= null)
+            if (data != null)
             {
                 data.Button.OnPressed -= ButtonOnPressed;
                 _container.RemoveChild(data.Button);

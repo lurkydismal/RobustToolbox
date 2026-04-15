@@ -258,7 +258,7 @@ namespace Robust.Shared.Maths
         [Pure]
         public static Angle ToAngle(this Direction dir)
         {
-            var ang = Segment * (int) dir;
+            var ang = Segment * (int)dir;
 
             if (ang > Math.PI) // convert 0 > 2PI to -PI > +PI
                 ang -= 2 * Math.PI;
@@ -297,7 +297,7 @@ namespace Robust.Shared.Maths
         /// <seealso cref="Vector2"/>
         public static Vector2 ToVec(this Direction dir)
         {
-            return DirectionVectors[(int) dir];
+            return DirectionVectors[(int)dir];
         }
 
         /// <summary>
@@ -309,7 +309,7 @@ namespace Robust.Shared.Maths
         /// <seealso cref="Vector2i"/>
         public static Vector2i ToIntVec(this Direction dir)
         {
-            return IntDirectionVectors[(int) dir];
+            return IntDirectionVectors[(int)dir];
         }
 
         /// <summary>

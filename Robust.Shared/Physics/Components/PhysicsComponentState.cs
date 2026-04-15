@@ -74,7 +74,7 @@ public sealed class PhysicsComponentState : IComponentState
     public Vector2 Force;
     public float Torque;
 
-    public PhysicsComponentState() {}
+    public PhysicsComponentState() { }
 
     public PhysicsComponentState(PhysicsComponentState existing)
     {

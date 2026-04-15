@@ -33,7 +33,7 @@ internal sealed class StringTypeParser : TypeParser<string>
         }
 
         var output = new StringBuilder();
-        while (ctx.GetRune() is {} r)
+        while (ctx.GetRune() is { } r)
         {
             if (r == new Rune('"'))
             {

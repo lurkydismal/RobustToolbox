@@ -116,7 +116,7 @@ namespace Robust.Shared.Maths
 
         public Vector2i Rotate(Angle angle)
         {
-            return (Vector2i) angle.RotateVec(this);
+            return (Vector2i)angle.RotateVec(this);
         }
 
         public static Vector2i operator -(Vector2i a, Vector2i b)
@@ -197,7 +197,7 @@ namespace Robust.Shared.Maths
 
         public static explicit operator Vector2i(Vector2 vector)
         {
-            return new((int) vector.X, (int) vector.Y);
+            return new((int)vector.X, (int)vector.Y);
         }
 
         public static implicit operator Vector2i((int x, int y) tuple)

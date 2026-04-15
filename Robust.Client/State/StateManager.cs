@@ -25,12 +25,12 @@ namespace Robust.Client.State
 
         public T RequestStateChange<T>() where T : State, new()
         {
-            return (T) RequestStateChange(typeof(T));
+            return (T)RequestStateChange(typeof(T));
         }
 
         public State RequestStateChange(Type type)
         {
-            if(!typeof(State).IsAssignableFrom(type))
+            if (!typeof(State).IsAssignableFrom(type))
                 throw new ArgumentException($"Needs to be derived from {typeof(State).FullName}", nameof(type));
 
             return CurrentState?.GetType() == type ? CurrentState : SwitchToState(type);

@@ -31,7 +31,7 @@ namespace Robust.Client.UserInterface.Controls
         /// This field configures automatic scaling of the sprite. This automatic scaling is done before
         /// applying the explicitly set scale <see cref="SpriteView.Scale"/>.
         /// </summary>
-        public StretchMode Stretch  { get; set; } = StretchMode.Fit;
+        public StretchMode Stretch { get; set; } = StretchMode.Fit;
 
         public enum StretchMode
         {
@@ -185,7 +185,7 @@ namespace Robust.Client.UserInterface.Controls
             if (!ResolveEntity(out _, out var sprite, out _))
                 return;
 
-            var spriteBox = sprite.CalculateRotatedBoundingBox(default,  _worldRotation ?? Angle.Zero, _eyeRotation)
+            var spriteBox = sprite.CalculateRotatedBoundingBox(default, _worldRotation ?? Angle.Zero, _eyeRotation)
                 .CalcBoundingBox();
 
             if (!SpriteOffset)
@@ -246,7 +246,7 @@ namespace Robust.Client.UserInterface.Controls
 
             var offset = SpriteOffset
                 ? Vector2.Zero
-                : - (-_eyeRotation).RotateVec(sprite.Offset * _scale) * new Vector2(1, -1) * EyeManager.PixelsPerMeter;
+                : -(-_eyeRotation).RotateVec(sprite.Offset * _scale) * new Vector2(1, -1) * EyeManager.PixelsPerMeter;
 
             var position = PixelSize / 2 + offset * stretch * UIScale;
             var scale = Scale * UIScale * stretch;

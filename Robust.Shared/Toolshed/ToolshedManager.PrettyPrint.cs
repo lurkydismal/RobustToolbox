@@ -56,7 +56,7 @@ public sealed partial class ToolshedManager
 
         if (value.GetType().IsAssignableTo(typeof(IDictionary)))
         {
-            var dict = ((IDictionary) value).GetEnumerator();
+            var dict = ((IDictionary)value).GetEnumerator();
 
             var kvList = new List<string>();
 

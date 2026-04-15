@@ -147,7 +147,7 @@ namespace Robust.Shared.Physics.Collision.Shapes
                 // Triangle vertices.
                 var p1 = vs[0] - s;
                 var p2 = vs[i] - s;
-                var p3 = i + 1 < count ? vs[i+1] - s : vs[0] - s;
+                var p3 = i + 1 < count ? vs[i + 1] - s : vs[0] - s;
 
                 var e1 = p2 - p1;
                 var e2 = p3 - p1;
@@ -243,8 +243,8 @@ namespace Robust.Shared.Physics.Collision.Shapes
 
             Vertices[0] = new Vector2(-halfWidth, -halfHeight);
             Vertices[1] = new Vector2(halfWidth, -halfHeight);
-            Vertices[2] = new Vector2(halfWidth,  halfHeight);
-            Vertices[3] = new Vector2(-halfWidth,  halfHeight);
+            Vertices[2] = new Vector2(halfWidth, halfHeight);
+            Vertices[3] = new Vector2(-halfWidth, halfHeight);
 
             Normals[0] = new Vector2(0.0f, -1.0f);
             Normals[1] = new Vector2(1.0f, 0.0f);
@@ -338,14 +338,14 @@ namespace Robust.Shared.Physics.Collision.Shapes
             // Don't use setter as we already know the winding.
             return new PolygonShape(aabb.Radius)
             {
-                Vertices = new []
+                Vertices = new[]
                 {
                     bounds.BottomLeft,
                     bounds.BottomRight,
                     bounds.TopRight,
                     bounds.TopLeft,
                 },
-                Normals = new []
+                Normals = new[]
                 {
                     new Vector2(0f, -1f),
                     new Vector2(1f, 0f),

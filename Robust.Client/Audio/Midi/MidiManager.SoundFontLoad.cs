@@ -169,7 +169,7 @@ internal sealed partial class MidiManager
 
             _openStreams.Add(id, stream);
 
-            return (IntPtr) id;
+            return (IntPtr)id;
         }
 
         private Stream OpenCore(string filename)
@@ -201,9 +201,9 @@ internal sealed partial class MidiManager
 
         public override unsafe int Read(IntPtr buf, long count, IntPtr sfHandle)
         {
-            var length = (int) count;
+            var length = (int)count;
             var span = new Span<byte>(buf.ToPointer(), length);
-            var stream = _openStreams[(int) sfHandle];
+            var stream = _openStreams[(int)sfHandle];
 
             // Fluidsynth's docs state that this method should leave the buffer unmodified if it fails. (returns -1)
             try
@@ -235,7 +235,7 @@ internal sealed partial class MidiManager
 
         public override int Seek(IntPtr sfHandle, long offset, SeekOrigin origin)
         {
-            var stream = _openStreams[(int) sfHandle];
+            var stream = _openStreams[(int)sfHandle];
 
             stream.Seek(offset, origin);
 
@@ -244,14 +244,14 @@ internal sealed partial class MidiManager
 
         public override long Tell(IntPtr sfHandle)
         {
-            var stream = _openStreams[(int) sfHandle];
+            var stream = _openStreams[(int)sfHandle];
 
-            return (long) stream.Position;
+            return (long)stream.Position;
         }
 
         public override int Close(IntPtr sfHandle)
         {
-            if (!_openStreams.Remove((int) sfHandle, out var stream))
+            if (!_openStreams.Remove((int)sfHandle, out var stream))
                 return -1;
 
             stream.Dispose();

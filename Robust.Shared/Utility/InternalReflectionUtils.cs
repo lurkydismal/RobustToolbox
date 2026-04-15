@@ -48,7 +48,7 @@ internal static class InternalReflectionUtils
         var method = new DynamicMethod(
             "AccessField",
             fieldDefinition.BackingField.FieldType,
-            new[] {obj.MakeByRefType()},
+            new[] { obj.MakeByRefType() },
             true);
 
         method.DefineParameter(1, ParameterAttributes.Out, "target");
@@ -57,7 +57,7 @@ internal static class InternalReflectionUtils
 
         generator.Emit(OpCodes.Ldarg_0);
 
-        if(!obj.IsValueType)
+        if (!obj.IsValueType)
             generator.Emit(OpCodes.Ldind_Ref);
 
         switch (fieldDefinition.BackingField)
@@ -99,7 +99,7 @@ internal static class InternalReflectionUtils
         var method = new DynamicMethod(
             "AssignField",
             typeof(void),
-            new[] {objType.MakeByRefType(), boxing ? typeof(object) : fieldType},
+            new[] { objType.MakeByRefType(), boxing ? typeof(object) : fieldType },
             true);
 
         method.DefineParameter(1, ParameterAttributes.Out, "target");
@@ -109,7 +109,7 @@ internal static class InternalReflectionUtils
 
         generator.Emit(OpCodes.Ldarg_0);
 
-        if(!objType.IsValueType)
+        if (!objType.IsValueType)
             generator.Emit(OpCodes.Ldind_Ref);
 
         generator.Emit(OpCodes.Ldarg_1);

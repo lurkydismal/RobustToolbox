@@ -275,7 +275,7 @@ public sealed class OtherClass
 }";
 
         await Verifier(code,
-            // AUTO-GENERATED DIAGNOSTICS BELOW //
+// AUTO-GENERATED DIAGNOSTICS BELOW //
 // /0/Test0.cs(35,20): error RA0002: Tried to perform a 'Read' same-type access to member 'Data' in type 'TypeNobodyCanRead', despite having no access. Type Permissions: ---------
 VerifyCS.Diagnostic().WithSpan(35, 20, 35, 24).WithArguments("a 'Read' same-type", "Data", "TypeNobodyCanRead", "having no", "Type Permissions: ---------"),
 // /0/Test0.cs(36,21): error RA0002: Tried to perform a 'Read' same-type access to member 'Data' in type 'TypeNobodyCanRead', despite having no access. Type Permissions: ---------
@@ -529,7 +529,7 @@ public sealed class OtherClass
 }";
 
         await Verifier(code,
-            // AUTO-GENERATED DIAGNOSTICS BELOW //
+// AUTO-GENERATED DIAGNOSTICS BELOW //
 // /0/Test0.cs(34,9): error RA0002: Tried to perform a 'Write' same-type access to member 'Data' in type 'TypeNobodyCanWrite', despite having no access. Type Permissions: ---------
 VerifyCS.Diagnostic().WithSpan(34, 9, 34, 13).WithArguments("a 'Write' same-type", "Data", "TypeNobodyCanWrite", "having no", "Type Permissions: ---------"),
 // /0/Test0.cs(35,9): error RA0002: Tried to perform a 'Write' same-type access to member 'Data' in type 'TypeNobodyCanWrite', despite having no access. Type Permissions: ---------
@@ -757,7 +757,7 @@ public sealed class OtherClass
 }";
 
         await Verifier(code,
-            // AUTO-GENERATED DIAGNOSTICS BELOW //
+// AUTO-GENERATED DIAGNOSTICS BELOW //
 // /0/Test0.cs(44,9): error RA0002: Tried to perform an 'Execute' same-type access to member 'MyMethod' in type 'TypeNobodyCanExecute', despite having no access. Type Permissions: ---------
 VerifyCS.Diagnostic().WithSpan(44, 9, 44, 19).WithArguments("an 'Execute' same-type", "MyMethod", "TypeNobodyCanExecute", "having no", "Type Permissions: ---------"),
 // /0/Test0.cs(45,9): error RA0002: Tried to perform an 'Execute' same-type access to member 'MyMethod' in type 'TypeNobodyCanExecute', despite having no access. Type Permissions: ---------

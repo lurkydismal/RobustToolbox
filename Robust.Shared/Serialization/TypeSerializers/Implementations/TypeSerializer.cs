@@ -14,7 +14,7 @@ namespace Robust.Shared.Serialization.TypeSerializers.Implementations
     [TypeSerializer]
     public sealed class TypeSerializer : ITypeSerializer<Type, ValueDataNode>, ITypeCopyCreator<Type>
     {
-        private static readonly Dictionary<string, Type> Shortcuts = new ()
+        private static readonly Dictionary<string, Type> Shortcuts = new()
         {
             {"bool", typeof(bool)}
         };

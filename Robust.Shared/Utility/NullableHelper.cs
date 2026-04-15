@@ -105,15 +105,15 @@ namespace Robust.Shared.Utility
 
                 if (assemblyNullableEntry == null)
                 {
-                    return new byte[]{0};
+                    return new byte[] { 0 };
                 }
 
                 if (!field.TryGetAttribute(assemblyNullableEntry.Value.AttributeType, out var nullableAttribute))
                 {
-                    return new byte[]{1};
+                    return new byte[] { 1 };
                 }
 
-                return assemblyNullableEntry.Value.NullableFlagsField.GetValue(nullableAttribute) as byte[] ?? new byte[]{1};
+                return assemblyNullableEntry.Value.NullableFlagsField.GetValue(nullableAttribute) as byte[] ?? new byte[] { 1 };
             }
         }
 
@@ -139,7 +139,7 @@ namespace Robust.Shared.Utility
                     return 1;
                 }
 
-                return (byte) (assemblyNullableEntry.Value.FlagsField.GetValue(nullableAttribute) ?? 1);
+                return (byte)(assemblyNullableEntry.Value.FlagsField.GetValue(nullableAttribute) ?? 1);
             }
         }
 

@@ -43,7 +43,7 @@ namespace Robust.Client.UserInterface
                 return property.DefaultValue;
             }
 
-            return (T) value!;
+            return (T)value!;
         }
 
         /// <summary>
@@ -60,7 +60,7 @@ namespace Robust.Client.UserInterface
         /// </exception>
         public T GetValue<T>(AttachedProperty property)
         {
-            return (T) GetValue(property)!;
+            return (T)GetValue(property)!;
         }
 
         /// <summary>
@@ -139,7 +139,7 @@ namespace Robust.Client.UserInterface
             }
             else
             {
-                oldValue = (T) oldValueBoxed!;
+                oldValue = (T)oldValueBoxed!;
             }
 
             var changed = new AttachedPropertyChangedEventArgs<T>(value, oldValue);
@@ -178,7 +178,7 @@ namespace Robust.Client.UserInterface
 
             if (typeof(T) == typeof(object))
             {
-                SetValue(property, (object?) value);
+                SetValue(property, (object?)value);
                 return;
             }
 

@@ -167,7 +167,7 @@ public sealed class CommandRun
                 return false;
 
             ctx.Error = new EndOfCommandError();
-            ctx.Error.Contextualize(ctx.Input, (ctx.Index, ctx.Index+1));
+            ctx.Error.Contextualize(ctx.Input, (ctx.Index, ctx.Index + 1));
             return false;
         }
 
@@ -252,7 +252,7 @@ public sealed class CommandRun<TIn, TOut>
         var res = InnerCommandRun.Invoke(input, ctx);
         if (res is null)
             return default;
-        return (TOut?) res;
+        return (TOut?)res;
     }
 
     internal CommandRun(CommandRun commandRun)
@@ -290,7 +290,7 @@ public sealed class CommandRun<TRes>
         var res = InnerCommandRun.Invoke(input, ctx);
         if (res is null)
             return default;
-        return (TRes?) res;
+        return (TRes?)res;
     }
 
     internal CommandRun(CommandRun commandRun)

@@ -57,7 +57,7 @@ namespace Robust.Shared.Timing
         /// <inheritdoc />
         public override int GetHashCode()
         {
-            return (int) Value;
+            return (int)Value;
         }
 
         /// <summary>

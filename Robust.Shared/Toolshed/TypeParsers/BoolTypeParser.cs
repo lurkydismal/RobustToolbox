@@ -45,7 +45,7 @@ public sealed class BoolTypeParser : TypeParser<bool>
 
     public override CompletionResult TryAutocomplete(ParserContext parserContext, CommandArgument? arg)
     {
-        return CompletionResult.FromHintOptions(new[] {"true", "false"}, GetArgHint(arg));
+        return CompletionResult.FromHintOptions(new[] { "true", "false" }, GetArgHint(arg));
     }
 }
 

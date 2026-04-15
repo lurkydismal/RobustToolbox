@@ -54,7 +54,7 @@ namespace Robust.Client.Graphics
         /// <returns>How much to advance the cursor to draw the next character.</returns>
         public abstract float DrawChar(
             DrawingHandleBase handle, Rune rune, Vector2 baseline, float scale,
-            Color color, bool fallback=true);
+            Color color, bool fallback = true);
 
         /// <summary>
         ///     Gets metrics describing the dimensions and positioning of a single glyph in the font.
@@ -70,12 +70,12 @@ namespace Robust.Client.Graphics
         ///     otherwise the metrics you asked for.
         /// </returns>
         /// <seealso cref="TryGetCharMetrics"/>
-        public abstract CharMetrics? GetCharMetrics(Rune rune, float scale, bool fallback=true);
+        public abstract CharMetrics? GetCharMetrics(Rune rune, float scale, bool fallback = true);
 
         /// <summary>
         ///     Try-pattern version of <see cref="GetCharMetrics"/>.
         /// </summary>
-        public bool TryGetCharMetrics(Rune rune, float scale, out CharMetrics metrics, bool fallback=true)
+        public bool TryGetCharMetrics(Rune rune, float scale, out CharMetrics metrics, bool fallback = true)
         {
             var maybe = GetCharMetrics(rune, scale);
             if (maybe.HasValue)
@@ -115,7 +115,7 @@ namespace Robust.Client.Graphics
         public override int GetDescent(float scale) => Handle.GetDescent(scale);
         public override int GetLineHeight(float scale) => Handle.GetLineHeight(scale);
 
-        public override float DrawChar(DrawingHandleBase handle, Rune rune, Vector2 baseline, float scale, Color color, bool fallback=true)
+        public override float DrawChar(DrawingHandleBase handle, Rune rune, Vector2 baseline, float scale, Color color, bool fallback = true)
         {
             var metrics = Handle.GetCharMetrics(rune, scale);
             if (!metrics.HasValue)
@@ -138,14 +138,14 @@ namespace Robust.Client.Graphics
             }
 
             baseline += new Vector2(metrics.Value.BearingX, -metrics.Value.BearingY);
-            if(handle is DrawingHandleWorld worldhandle)
+            if (handle is DrawingHandleWorld worldhandle)
                 worldhandle.DrawTextureRect(texture, Box2.FromDimensions(baseline, texture.Size), color);
             else
                 handle.DrawTexture(texture, baseline, color);
             return metrics.Value.Advance;
         }
 
-        public override CharMetrics? GetCharMetrics(Rune rune, float scale, bool fallback=true)
+        public override CharMetrics? GetCharMetrics(Rune rune, float scale, bool fallback = true)
         {
             var metrics = Handle.GetCharMetrics(rune, scale);
             if (metrics == null && !Rune.IsWhiteSpace(rune) && fallback)
@@ -178,7 +178,7 @@ namespace Robust.Client.Graphics
         public override int GetLineHeight(float scale) => _main.GetLineHeight(scale);
 
         // DrawChar just proxies to the stack, or invokes _main's fallback.
-        public override float DrawChar(DrawingHandleBase handle, Rune rune, Vector2 baseline, float scale, Color color, bool fallback=true)
+        public override float DrawChar(DrawingHandleBase handle, Rune rune, Vector2 baseline, float scale, Color color, bool fallback = true)
         {
             foreach (var f in Stack)
             {
@@ -193,7 +193,7 @@ namespace Robust.Client.Graphics
             return 0f;
         }
 
-        public override CharMetrics? GetCharMetrics(Rune rune, float scale, bool fallback=true)
+        public override CharMetrics? GetCharMetrics(Rune rune, float scale, bool fallback = true)
         {
             foreach (var f in Stack)
             {
@@ -216,13 +216,13 @@ namespace Robust.Client.Graphics
         public override int GetDescent(float scale) => default;
         public override int GetLineHeight(float scale) => default;
 
-        public override float DrawChar(DrawingHandleBase handle, Rune rune, Vector2 baseline, float scale, Color color, bool fallback=true)
+        public override float DrawChar(DrawingHandleBase handle, Rune rune, Vector2 baseline, float scale, Color color, bool fallback = true)
         {
             // Nada, it's a dummy after all.
             return 0;
         }
 
-        public override CharMetrics? GetCharMetrics(Rune rune, float scale, bool fallback=true)
+        public override CharMetrics? GetCharMetrics(Rune rune, float scale, bool fallback = true)
         {
             // Nada, it's a dummy after all.
             return null;
@@ -292,7 +292,7 @@ namespace Robust.Client.Graphics
         Condensed = 3,
         SemiCondensed = 4,
         Normal = 5,
-        Medium =  Normal,
+        Medium = Normal,
         SemiExpanded = 6,
         Expanded = 7,
         ExtraExpanded = 8,

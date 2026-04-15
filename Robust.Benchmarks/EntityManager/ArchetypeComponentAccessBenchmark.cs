@@ -149,7 +149,7 @@ public class ArchetypeComponentAccessBenchmark
     [Benchmark]
     public Struct1 GetSingleComponentDictionary()
     {
-        return (Struct1) _structDictionary[typeof(Struct1)][Entity];
+        return (Struct1)_structDictionary[typeof(Struct1)][Entity];
     }
 
     [Benchmark]
@@ -182,16 +182,16 @@ public class ArchetypeComponentAccessBenchmark
     public (Struct1, Struct2, Struct3, Struct4, Struct5, Struct6, Struct7, Struct8, Struct9, Struct10) GetTenComponentsDictionary()
     {
         return (
-            (Struct1) _structDictionary[typeof(Struct1)][Entity],
-            (Struct2) _structDictionary[typeof(Struct2)][Entity],
-            (Struct3) _structDictionary[typeof(Struct3)][Entity],
-            (Struct4) _structDictionary[typeof(Struct4)][Entity],
-            (Struct5) _structDictionary[typeof(Struct5)][Entity],
-            (Struct6) _structDictionary[typeof(Struct6)][Entity],
-            (Struct7) _structDictionary[typeof(Struct7)][Entity],
-            (Struct8) _structDictionary[typeof(Struct8)][Entity],
-            (Struct9) _structDictionary[typeof(Struct9)][Entity],
-            (Struct10) _structDictionary[typeof(Struct10)][Entity]
+            (Struct1)_structDictionary[typeof(Struct1)][Entity],
+            (Struct2)_structDictionary[typeof(Struct2)][Entity],
+            (Struct3)_structDictionary[typeof(Struct3)][Entity],
+            (Struct4)_structDictionary[typeof(Struct4)][Entity],
+            (Struct5)_structDictionary[typeof(Struct5)][Entity],
+            (Struct6)_structDictionary[typeof(Struct6)][Entity],
+            (Struct7)_structDictionary[typeof(Struct7)][Entity],
+            (Struct8)_structDictionary[typeof(Struct8)][Entity],
+            (Struct9)_structDictionary[typeof(Struct9)][Entity],
+            (Struct10)_structDictionary[typeof(Struct10)][Entity]
         );
     }
 
@@ -338,16 +338,16 @@ public class ArchetypeComponentAccessBenchmark
         for (var i = 0; i < N; i++)
         {
             Consumer.Consume((
-                (Class1) _classDictionary[typeof(Class1)][i],
-                (Class2) _classDictionary[typeof(Class2)][i],
-                (Class3) _classDictionary[typeof(Class3)][i],
-                (Class4) _classDictionary[typeof(Class4)][i],
-                (Class5) _classDictionary[typeof(Class5)][i],
-                (Class6) _classDictionary[typeof(Class6)][i],
-                (Class7) _classDictionary[typeof(Class7)][i],
-                (Class8) _classDictionary[typeof(Class8)][i],
-                (Class9) _classDictionary[typeof(Class9)][i],
-                (Class10) _classDictionary[typeof(Class10)][i]
+                (Class1)_classDictionary[typeof(Class1)][i],
+                (Class2)_classDictionary[typeof(Class2)][i],
+                (Class3)_classDictionary[typeof(Class3)][i],
+                (Class4)_classDictionary[typeof(Class4)][i],
+                (Class5)_classDictionary[typeof(Class5)][i],
+                (Class6)_classDictionary[typeof(Class6)][i],
+                (Class7)_classDictionary[typeof(Class7)][i],
+                (Class8)_classDictionary[typeof(Class8)][i],
+                (Class9)_classDictionary[typeof(Class9)][i],
+                (Class10)_classDictionary[typeof(Class10)][i]
             ));
         }
     }
@@ -358,16 +358,16 @@ public class ArchetypeComponentAccessBenchmark
         for (var i = 0; i < N; i++)
         {
             Consumer.Consume((
-                (Struct1) _structDictionary[typeof(Struct1)][i],
-                (Struct2) _structDictionary[typeof(Struct2)][i],
-                (Struct3) _structDictionary[typeof(Struct3)][i],
-                (Struct4) _structDictionary[typeof(Struct4)][i],
-                (Struct5) _structDictionary[typeof(Struct5)][i],
-                (Struct6) _structDictionary[typeof(Struct6)][i],
-                (Struct7) _structDictionary[typeof(Struct7)][i],
-                (Struct8) _structDictionary[typeof(Struct8)][i],
-                (Struct9) _structDictionary[typeof(Struct9)][i],
-                (Struct10) _structDictionary[typeof(Struct10)][i]
+                (Struct1)_structDictionary[typeof(Struct1)][i],
+                (Struct2)_structDictionary[typeof(Struct2)][i],
+                (Struct3)_structDictionary[typeof(Struct3)][i],
+                (Struct4)_structDictionary[typeof(Struct4)][i],
+                (Struct5)_structDictionary[typeof(Struct5)][i],
+                (Struct6)_structDictionary[typeof(Struct6)][i],
+                (Struct7)_structDictionary[typeof(Struct7)][i],
+                (Struct8)_structDictionary[typeof(Struct8)][i],
+                (Struct9)_structDictionary[typeof(Struct9)][i],
+                (Struct10)_structDictionary[typeof(Struct10)][i]
             ));
         }
     }
@@ -460,27 +460,27 @@ public class ArchetypeComponentAccessBenchmark
         }
     }
 
-    public class Class1{}
-    public class Class2{}
-    public class Class3{}
-    public class Class4{}
-    public class Class5{}
-    public class Class6{}
-    public class Class7{}
-    public class Class8{}
-    public class Class9{}
-    public class Class10{}
+    public class Class1 { }
+    public class Class2 { }
+    public class Class3 { }
+    public class Class4 { }
+    public class Class5 { }
+    public class Class6 { }
+    public class Class7 { }
+    public class Class8 { }
+    public class Class9 { }
+    public class Class10 { }
 
-    public struct Struct1{}
-    public struct Struct2{}
-    public struct Struct3{}
-    public struct Struct4{}
-    public struct Struct5{}
-    public struct Struct6{}
-    public struct Struct7{}
-    public struct Struct8{}
-    public struct Struct9{}
-    public struct Struct10{}
+    public struct Struct1 { }
+    public struct Struct2 { }
+    public struct Struct3 { }
+    public struct Struct4 { }
+    public struct Struct5 { }
+    public struct Struct6 { }
+    public struct Struct7 { }
+    public struct Struct8 { }
+    public struct Struct9 { }
+    public struct Struct10 { }
 
     public sealed class Archetype<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>
     {
@@ -564,16 +564,16 @@ public class ArchetypeComponentAccessBenchmark
 
             return val switch
             {
-                T1 => (T) (object) _t1Comps[id]!,
-                T2 => (T) (object) _t2Comps[id]!,
-                T3 => (T) (object) _t3Comps[id]!,
-                T4 => (T) (object) _t4Comps[id]!,
-                T5 => (T) (object) _t5Comps[id]!,
-                T6 => (T) (object) _t6Comps[id]!,
-                T7 => (T) (object) _t7Comps[id]!,
-                T8 => (T) (object) _t8Comps[id]!,
-                T9 => (T) (object) _t9Comps[id]!,
-                T10 => (T) (object) _t10Comps[id]!,
+                T1 => (T)(object)_t1Comps[id]!,
+                T2 => (T)(object)_t2Comps[id]!,
+                T3 => (T)(object)_t3Comps[id]!,
+                T4 => (T)(object)_t4Comps[id]!,
+                T5 => (T)(object)_t5Comps[id]!,
+                T6 => (T)(object)_t6Comps[id]!,
+                T7 => (T)(object)_t7Comps[id]!,
+                T8 => (T)(object)_t8Comps[id]!,
+                T9 => (T)(object)_t9Comps[id]!,
+                T10 => (T)(object)_t10Comps[id]!,
                 _ => throw new ArgumentException($"Unknown type: {typeof(T)}")
             };
         }
@@ -583,16 +583,16 @@ public class ArchetypeComponentAccessBenchmark
             Unsafe.SkipInit(out T val);
             return val switch
             {
-                T1 => (T) (object) _t1Comps[handle]!,
-                T2 => (T) (object) _t2Comps[handle]!,
-                T3 => (T) (object) _t3Comps[handle]!,
-                T4 => (T) (object) _t4Comps[handle]!,
-                T5 => (T) (object) _t5Comps[handle]!,
-                T6 => (T) (object) _t6Comps[handle]!,
-                T7 => (T) (object) _t7Comps[handle]!,
-                T8 => (T) (object) _t8Comps[handle]!,
-                T9 => (T) (object) _t9Comps[handle]!,
-                T10 => (T) (object) _t10Comps[handle]!,
+                T1 => (T)(object)_t1Comps[handle]!,
+                T2 => (T)(object)_t2Comps[handle]!,
+                T3 => (T)(object)_t3Comps[handle]!,
+                T4 => (T)(object)_t4Comps[handle]!,
+                T5 => (T)(object)_t5Comps[handle]!,
+                T6 => (T)(object)_t6Comps[handle]!,
+                T7 => (T)(object)_t7Comps[handle]!,
+                T8 => (T)(object)_t8Comps[handle]!,
+                T9 => (T)(object)_t9Comps[handle]!,
+                T10 => (T)(object)_t10Comps[handle]!,
                 _ => throw new ArgumentException($"Unknown type: {typeof(T)}")
             };
         }
@@ -882,7 +882,7 @@ public class ArchetypeComponentAccessBenchmark
             // Doesn't exist in the store, get a write lock and add it.
             using (SlowStoreLock.WriteGuard())
             {
-                var idx = (CompIdx) typeof(Store<>)
+                var idx = (CompIdx)typeof(Store<>)
                     .MakeGenericType(t)
                     .GetField(nameof(Store<int>.Index), BindingFlags.Static | BindingFlags.Public)!
                     .GetValue(null)!;
@@ -1064,16 +1064,16 @@ public class ArchetypeComponentAccessBenchmark
                     continue;
                 }
 
-                comp1 = (T1) current.Value;
-                comp2 = (T2) comp2Obj;
-                comp3 = (T3) comp3Obj;
-                comp4 = (T4) comp4Obj;
-                comp5 = (T5) comp5Obj;
-                comp6 = (T6) comp6Obj;
-                comp7 = (T7) comp7Obj;
-                comp8 = (T8) comp8Obj;
-                comp9 = (T9) comp9Obj;
-                comp10 = (T10) comp10Obj;
+                comp1 = (T1)current.Value;
+                comp2 = (T2)comp2Obj;
+                comp3 = (T3)comp3Obj;
+                comp4 = (T4)comp4Obj;
+                comp5 = (T5)comp5Obj;
+                comp6 = (T6)comp6Obj;
+                comp7 = (T7)comp7Obj;
+                comp8 = (T8)comp8Obj;
+                comp9 = (T9)comp9Obj;
+                comp10 = (T10)comp10Obj;
                 return true;
             }
         }

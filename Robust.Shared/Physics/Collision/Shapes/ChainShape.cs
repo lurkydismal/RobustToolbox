@@ -43,7 +43,7 @@ public sealed partial class ChainShape : IPhysShape
     /// <param name="count">How many multiply radius by count to get total edges.</param>
     public void CreateLoop(Vector2 position, float radius, bool outer = true, float count = 16f)
     {
-        int divisions = Math.Max(16,(int)(radius * count));
+        int divisions = Math.Max(16, (int)(radius * count));
         float arcLength = MathF.PI * 2 / divisions;
         Span<Vector2> vertices = stackalloc Vector2[divisions];
 
@@ -75,7 +75,7 @@ public sealed partial class ChainShape : IPhysShape
 #if DEBUG
         for (var i = 1; i < count; ++i)
         {
-            var v1 = vertices[i-1];
+            var v1 = vertices[i - 1];
             var v2 = vertices[i];
             // If the code crashes here, it means your vertices are too close together.
             DebugTools.Assert((v1 - v2).LengthSquared() > PhysicsConstants.LinearSlop * PhysicsConstants.LinearSlop);
@@ -98,7 +98,7 @@ public sealed partial class ChainShape : IPhysShape
         for (var i = 1; i < count; ++i)
         {
             // If the code crashes here, it means your vertices are too close together.
-            DebugTools.Assert((vertices[i-1] - vertices[i]).LengthSquared() > PhysicsConstants.LinearSlop * PhysicsConstants.LinearSlop);
+            DebugTools.Assert((vertices[i - 1] - vertices[i]).LengthSquared() > PhysicsConstants.LinearSlop * PhysicsConstants.LinearSlop);
         }
 #endif
 

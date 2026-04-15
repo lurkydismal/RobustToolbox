@@ -10,6 +10,7 @@ using Robust.Shared.Utility;
 #pragma warning disable CS0618
 
 namespace Robust.Shared.Map;
+
 internal partial class MapManager
 {
     // ReSharper disable once MethodOverloadWithOptionalParameter

@@ -140,7 +140,7 @@ public sealed partial class DebugBuiltinConnectionScreen : UIScreen
 
     private void OnConnectFailed(object? _, NetConnectFailArgs args)
     {
-        _userInterface.Popup(Loc.GetString("debug-builtin-connection-screen-failed-to-connect",("reason", args.Reason)));
+        _userInterface.Popup(Loc.GetString("debug-builtin-connection-screen-failed-to-connect", ("reason", args.Reason)));
         _net.ConnectFailed -= OnConnectFailed;
         SetConnectingState(false);
     }

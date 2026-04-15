@@ -36,19 +36,19 @@ internal record struct Polygon : IPhysShape
     public ShapeType ShapeType => ShapeType.Polygon;
 
     // Hopefully this one is short-lived for a few months
-    public Polygon(IPhysShape shape) : this((PolygonShape) shape)
+    public Polygon(IPhysShape shape) : this((PolygonShape)shape)
     {
 
     }
 
-    public Polygon(PhysShapeAabb aabb) : this(aabb.LocalBounds) {}
+    public Polygon(PhysShapeAabb aabb) : this(aabb.LocalBounds) { }
 
     public Polygon(PolygonShape polyShape)
     {
         Unsafe.SkipInit(out this);
         Radius = polyShape.Radius;
         Centroid = polyShape.Centroid;
-        VertexCount = (byte) polyShape.VertexCount;
+        VertexCount = (byte)polyShape.VertexCount;
 
         polyShape.Vertices.AsSpan()[..VertexCount].CopyTo(_vertices.AsSpan);
         polyShape.Normals.AsSpan()[..VertexCount].CopyTo(_normals.AsSpan);
@@ -129,7 +129,7 @@ internal record struct Polygon : IPhysShape
             return;
         }
 
-        VertexCount = (byte) vertices.Length;
+        VertexCount = (byte)vertices.Length;
         var vertSpan = _vertices.AsSpan;
 
         vertices.AsSpan().CopyTo(vertSpan);
@@ -190,7 +190,7 @@ internal record struct Polygon : IPhysShape
             // Triangle vertices.
             var p1 = vs[0] - s;
             var p2 = vs[i] - s;
-            var p3 = i + 1 < count ? vs[i+1] - s : vs[0] - s;
+            var p3 = i + 1 < count ? vs[i + 1] - s : vs[0] - s;
 
             var e1 = p2 - p1;
             var e2 = p3 - p1;

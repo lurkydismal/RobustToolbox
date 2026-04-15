@@ -114,19 +114,19 @@ public partial class Control
     private enum LayoutStyleProperties : short
     {
         // @formatter:off
-        None                = 0,
-        Margin              = 1 << 0,
-        MinWidth            = 1 << 1,
-        MinHeight           = 1 << 2,
-        SetWidth            = 1 << 3,
-        SetHeight           = 1 << 4,
-        MaxWidth            = 1 << 5,
-        MaxHeight           = 1 << 6,
-        StretchRatio        = 1 << 7,
-        HorizontalExpand    = 1 << 8,
-        VerticalExpand      = 1 << 9,
+        None = 0,
+        Margin = 1 << 0,
+        MinWidth = 1 << 1,
+        MinHeight = 1 << 2,
+        SetWidth = 1 << 3,
+        SetHeight = 1 << 4,
+        MaxWidth = 1 << 5,
+        MaxHeight = 1 << 6,
+        StretchRatio = 1 << 7,
+        HorizontalExpand = 1 << 8,
+        VerticalExpand = 1 << 9,
         HorizontalAlignment = 1 << 10,
-        VerticalAlignment   = 1 << 11,
+        VerticalAlignment = 1 << 11,
         // @formatter:on
     }
 }

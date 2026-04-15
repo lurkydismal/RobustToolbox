@@ -69,7 +69,7 @@ public sealed partial class SerializationManager
     }
 
     [Obsolete]
-    public bool TryCustomCopy<T>(T source, ref T target, SerializationHookContext hookCtx,  bool hasHooks, ISerializationContext? context = null)
+    public bool TryCustomCopy<T>(T source, ref T target, SerializationHookContext hookCtx, bool hasHooks, ISerializationContext? context = null)
     {
         if (TryGetCopierOrCreator<T>(out var copier, out var copyCreator))
         {
@@ -447,7 +447,7 @@ public sealed partial class SerializationManager
             {
                 var serializedType = typeof(SerializedType<>).MakeGenericType(type);
                 var field = serializedType.GetField("Information", BindingFlags.Static | BindingFlags.NonPublic);
-                var information = (TypeInformation) field!.GetValue(null)!;
+                var information = (TypeInformation)field!.GetValue(null)!;
                 return information.Id;
             }
         }

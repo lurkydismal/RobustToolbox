@@ -115,7 +115,7 @@ internal partial class XamlAotCompiler
                     var xamlText = new StreamReader(new MemoryStream(res.FileContents)).ReadToEnd();
                     var parsed = XDocumentXamlParser.Parse(xamlText);
 
-                    var initialRoot = (XamlAstObjectNode) parsed.Root;
+                    var initialRoot = (XamlAstObjectNode)parsed.Root;
 
                     var classDirective = initialRoot.Children.OfType<XamlAstXmlDirective>()
                         .FirstOrDefault(d => d.Namespace == XamlNamespaces.Xaml2006 && d.Name == "Class");
@@ -126,7 +126,7 @@ internal partial class XamlAotCompiler
                     }
                     else
                     {
-                        classname = res.Name.Replace(".xaml","");
+                        classname = res.Name.Replace(".xaml", "");
                     }
 
                     var classType = typeSystem.TargetAssembly.FindType(classname);

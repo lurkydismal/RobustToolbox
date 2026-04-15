@@ -350,7 +350,7 @@ public abstract partial class SharedPhysicsSystem
                 Vector2[] linearVelocities,
                 float[] angularVelocities)
             {
-                var batches = (int) Math.Ceiling((float) contactCount / VelocityConstraintsPerThread);
+                var batches = (int)Math.Ceiling((float)contactCount / VelocityConstraintsPerThread);
 
                 Parallel.For(0, batches, options, i =>
                 {
@@ -701,7 +701,7 @@ public abstract partial class SharedPhysicsSystem
                 float[] angles)
             {
                 var unsolved = 0;
-                var batches = (int) Math.Ceiling((float) contactCount / PositionConstraintsPerThread);
+                var batches = (int)Math.Ceiling((float)contactCount / PositionConstraintsPerThread);
 
                 Parallel.For(0, batches, options, i =>
                 {
@@ -826,57 +826,57 @@ public abstract partial class SharedPhysicsSystem
         switch (manifold.Type)
         {
             case ManifoldType.Circles:
-            {
-                normal = new Vector2(1.0f, 0.0f);
-                Vector2 pointA = Physics.Transform.Mul(xfA, manifold.LocalPoint);
-                Vector2 pointB = Physics.Transform.Mul(xfB, manifold.Points._00.LocalPoint);
-
-                if ((pointA - pointB).LengthSquared() > float.Epsilon * float.Epsilon)
                 {
-                    normal = pointB - pointA;
-                    normal = normal.Normalized();
-                }
+                    normal = new Vector2(1.0f, 0.0f);
+                    Vector2 pointA = Physics.Transform.Mul(xfA, manifold.LocalPoint);
+                    Vector2 pointB = Physics.Transform.Mul(xfB, manifold.Points._00.LocalPoint);
 
-                Vector2 cA = pointA + normal * radiusA;
-                Vector2 cB = pointB - normal * radiusB;
-                points[0] = (cA + cB) * 0.5f;
-            }
-            break;
+                    if ((pointA - pointB).LengthSquared() > float.Epsilon * float.Epsilon)
+                    {
+                        normal = pointB - pointA;
+                        normal = normal.Normalized();
+                    }
+
+                    Vector2 cA = pointA + normal * radiusA;
+                    Vector2 cB = pointB - normal * radiusB;
+                    points[0] = (cA + cB) * 0.5f;
+                }
+                break;
 
             case ManifoldType.FaceA:
-            {
-                normal = Physics.Transform.Mul(xfA.Quaternion2D, manifold.LocalNormal);
-                Vector2 planePoint = Physics.Transform.Mul(xfA, manifold.LocalPoint);
-                var manPoints = manifold.Points.AsSpan;
-
-                for (int i = 0; i < manifold.PointCount; ++i)
                 {
-                    Vector2 clipPoint = Physics.Transform.Mul(xfB, manPoints[i].LocalPoint);
-                    Vector2 cA = clipPoint + normal * (radiusA - Vector2.Dot(clipPoint - planePoint, normal));
-                    Vector2 cB = clipPoint - normal * radiusB;
-                    points[i] = (cA + cB) * 0.5f;
+                    normal = Physics.Transform.Mul(xfA.Quaternion2D, manifold.LocalNormal);
+                    Vector2 planePoint = Physics.Transform.Mul(xfA, manifold.LocalPoint);
+                    var manPoints = manifold.Points.AsSpan;
+
+                    for (int i = 0; i < manifold.PointCount; ++i)
+                    {
+                        Vector2 clipPoint = Physics.Transform.Mul(xfB, manPoints[i].LocalPoint);
+                        Vector2 cA = clipPoint + normal * (radiusA - Vector2.Dot(clipPoint - planePoint, normal));
+                        Vector2 cB = clipPoint - normal * radiusB;
+                        points[i] = (cA + cB) * 0.5f;
+                    }
                 }
-            }
-            break;
+                break;
 
             case ManifoldType.FaceB:
-            {
-                normal = Physics.Transform.Mul(xfB.Quaternion2D, manifold.LocalNormal);
-                Vector2 planePoint = Physics.Transform.Mul(xfB, manifold.LocalPoint);
-                var manPoints = manifold.Points.AsSpan;
-
-                for (int i = 0; i < manifold.PointCount; ++i)
                 {
-                    Vector2 clipPoint = Physics.Transform.Mul(xfA, manPoints[i].LocalPoint);
-                    Vector2 cB = clipPoint + normal * (radiusB - Vector2.Dot(clipPoint - planePoint, normal));
-                    Vector2 cA = clipPoint - normal * radiusA;
-                    points[i] = (cA + cB) * 0.5f;
-                }
+                    normal = Physics.Transform.Mul(xfB.Quaternion2D, manifold.LocalNormal);
+                    Vector2 planePoint = Physics.Transform.Mul(xfB, manifold.LocalPoint);
+                    var manPoints = manifold.Points.AsSpan;
 
-                // Ensure normal points from A to B.
-                normal = -normal;
-            }
-            break;
+                    for (int i = 0; i < manifold.PointCount; ++i)
+                    {
+                        Vector2 clipPoint = Physics.Transform.Mul(xfA, manPoints[i].LocalPoint);
+                        Vector2 cB = clipPoint + normal * (radiusB - Vector2.Dot(clipPoint - planePoint, normal));
+                        Vector2 cA = clipPoint - normal * radiusA;
+                        points[i] = (cA + cB) * 0.5f;
+                    }
+
+                    // Ensure normal points from A to B.
+                    normal = -normal;
+                }
+                break;
             default:
                 // Shouldn't happentm
                 throw new InvalidOperationException();
@@ -895,55 +895,55 @@ public abstract partial class SharedPhysicsSystem
     {
         DebugTools.Assert(pc.PointCount > 0);
 
-            switch (pc.Type)
-            {
-                case ManifoldType.Circles:
-                    {
-                        Vector2 pointA = Physics.Transform.Mul(xfA, pc.LocalPoint);
-                        Vector2 pointB = Physics.Transform.Mul(xfB, pc.LocalPoints._00);
-                        normal = pointB - pointA;
+        switch (pc.Type)
+        {
+            case ManifoldType.Circles:
+                {
+                    Vector2 pointA = Physics.Transform.Mul(xfA, pc.LocalPoint);
+                    Vector2 pointB = Physics.Transform.Mul(xfB, pc.LocalPoints._00);
+                    normal = pointB - pointA;
 
-                        //FPE: Fix to handle zero normalization
-                        if (normal != Vector2.Zero)
-                            normal = normal.Normalized();
+                    //FPE: Fix to handle zero normalization
+                    if (normal != Vector2.Zero)
+                        normal = normal.Normalized();
 
-                        point = (pointA + pointB) * 0.5f;
-                        separation = Vector2.Dot(pointB - pointA, normal) - pc.RadiusA - pc.RadiusB;
-                    }
-                    break;
+                    point = (pointA + pointB) * 0.5f;
+                    separation = Vector2.Dot(pointB - pointA, normal) - pc.RadiusA - pc.RadiusB;
+                }
+                break;
 
-                case ManifoldType.FaceA:
-                    {
-                        var pcPoints = pc.LocalPoints.AsSpan;
-                        normal = Physics.Transform.Mul(xfA.Quaternion2D, pc.LocalNormal);
-                        Vector2 planePoint = Physics.Transform.Mul(xfA, pc.LocalPoint);
+            case ManifoldType.FaceA:
+                {
+                    var pcPoints = pc.LocalPoints.AsSpan;
+                    normal = Physics.Transform.Mul(xfA.Quaternion2D, pc.LocalNormal);
+                    Vector2 planePoint = Physics.Transform.Mul(xfA, pc.LocalPoint);
 
-                        Vector2 clipPoint = Physics.Transform.Mul(xfB, pcPoints[index]);
-                        separation = Vector2.Dot(clipPoint - planePoint, normal) - pc.RadiusA - pc.RadiusB;
-                        point = clipPoint;
-                    }
-                    break;
+                    Vector2 clipPoint = Physics.Transform.Mul(xfB, pcPoints[index]);
+                    separation = Vector2.Dot(clipPoint - planePoint, normal) - pc.RadiusA - pc.RadiusB;
+                    point = clipPoint;
+                }
+                break;
 
-                case ManifoldType.FaceB:
-                    {
-                        var pcPoints = pc.LocalPoints.AsSpan;
-                        normal = Physics.Transform.Mul(xfB.Quaternion2D, pc.LocalNormal);
-                        Vector2 planePoint = Physics.Transform.Mul(xfB, pc.LocalPoint);
+            case ManifoldType.FaceB:
+                {
+                    var pcPoints = pc.LocalPoints.AsSpan;
+                    normal = Physics.Transform.Mul(xfB.Quaternion2D, pc.LocalNormal);
+                    Vector2 planePoint = Physics.Transform.Mul(xfB, pc.LocalPoint);
 
-                        Vector2 clipPoint = Physics.Transform.Mul(xfA, pcPoints[index]);
-                        separation = Vector2.Dot(clipPoint - planePoint, normal) - pc.RadiusA - pc.RadiusB;
-                        point = clipPoint;
+                    Vector2 clipPoint = Physics.Transform.Mul(xfA, pcPoints[index]);
+                    separation = Vector2.Dot(clipPoint - planePoint, normal) - pc.RadiusA - pc.RadiusB;
+                    point = clipPoint;
 
-                        // Ensure normal points from A to B
-                        normal = -normal;
-                    }
-                    break;
-                default:
-                    normal = Vector2.Zero;
-                    point = Vector2.Zero;
-                    separation = 0;
-                    break;
+                    // Ensure normal points from A to B
+                    normal = -normal;
+                }
+                break;
+            default:
+                normal = Vector2.Zero;
+                point = Vector2.Zero;
+                separation = 0;
+                break;
 
-            }
+        }
     }
 }

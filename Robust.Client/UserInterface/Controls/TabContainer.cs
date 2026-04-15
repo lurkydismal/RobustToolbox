@@ -296,10 +296,10 @@ namespace Robust.Client.UserInterface.Controls
 
             var headerSize = (int)_enclosingTabHeight;
             var panel = _getPanel();
-            var contentBox = new UIBox2i(0, headerSize, (int) (finalSize.X * UIScale), (int) (finalSize.Y * UIScale));
+            var contentBox = new UIBox2i(0, headerSize, (int)(finalSize.X * UIScale), (int)(finalSize.Y * UIScale));
             if (panel != null)
             {
-                contentBox = (UIBox2i) panel.GetContentBox(contentBox, UIScale);
+                contentBox = (UIBox2i)panel.GetContentBox(contentBox, UIScale);
             }
 
             var control = GetChild(_currentTab);

@@ -176,7 +176,7 @@ namespace Robust.Shared.Maths
 
         public static explicit operator Box2i(Box2 box)
         {
-            return new((int) box.Left, (int) box.Bottom, (int) box.Right, (int) box.Top);
+            return new((int)box.Left, (int)box.Bottom, (int)box.Right, (int)box.Top);
         }
 
         public static implicit operator Box2(Box2i box)

@@ -220,6 +220,6 @@ namespace Robust.Shared.IoC
         ///     Thrown if a dependency field on the object is not registered.
         /// </exception>
         /// <seealso cref="DependencyCollection.BuildGraph"/>
-        void InjectDependencies(object obj, bool oneOff=false);
+        void InjectDependencies(object obj, bool oneOff = false);
     }
 }

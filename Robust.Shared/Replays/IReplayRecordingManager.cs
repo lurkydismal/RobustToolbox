@@ -222,7 +222,7 @@ public interface IReplayFileWriter
     {
         var memStream = new MemoryStream();
         using var writer = new StreamWriter(memStream);
-        var yamlStream = new YamlStream {yaml};
+        var yamlStream = new YamlStream { yaml };
         yamlStream.Save(new YamlMappingFix(new Emitter(writer)), false);
         writer.Flush();
         WriteBytes(path, memStream.AsMemory(), compressionLevel);

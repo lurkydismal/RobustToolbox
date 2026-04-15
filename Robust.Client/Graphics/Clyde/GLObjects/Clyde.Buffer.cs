@@ -79,7 +79,7 @@ namespace Robust.Client.Graphics.Clyde
                 {
                     fixed (byte* ptr = byteSpan)
                     {
-                        GL.BufferSubData(Type, (IntPtr) start, byteSpan.Length, (IntPtr) ptr);
+                        GL.BufferSubData(Type, (IntPtr)start, byteSpan.Length, (IntPtr)ptr);
                     }
                 }
 
@@ -99,7 +99,7 @@ namespace Robust.Client.Graphics.Clyde
                 {
                     fixed (byte* ptr = byteSpan)
                     {
-                        GL.BufferSubData(Type, IntPtr.Zero, byteSpan.Length, (IntPtr) ptr);
+                        GL.BufferSubData(Type, IntPtr.Zero, byteSpan.Length, (IntPtr)ptr);
                     }
                 }
 
@@ -117,7 +117,7 @@ namespace Robust.Client.Graphics.Clyde
                 {
                     fixed (T* ptr = &data)
                     {
-                        GL.BufferSubData(Type, IntPtr.Zero, sizeof(T), (IntPtr) ptr);
+                        GL.BufferSubData(Type, IntPtr.Zero, sizeof(T), (IntPtr)ptr);
                     }
                 }
 
@@ -137,7 +137,7 @@ namespace Robust.Client.Graphics.Clyde
                 {
                     fixed (byte* ptr = byteSpan)
                     {
-                        GL.BufferData(Type, byteSpan.Length, (IntPtr) ptr, UsageHint);
+                        GL.BufferData(Type, byteSpan.Length, (IntPtr)ptr, UsageHint);
                     }
                 }
 
@@ -155,7 +155,7 @@ namespace Robust.Client.Graphics.Clyde
                 {
                     fixed (T* ptr = &data)
                     {
-                        GL.BufferData(Type, sizeof(T), (IntPtr) ptr, UsageHint);
+                        GL.BufferData(Type, sizeof(T), (IntPtr)ptr, UsageHint);
                     }
                 }
 

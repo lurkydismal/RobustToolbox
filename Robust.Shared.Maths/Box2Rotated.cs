@@ -31,7 +31,7 @@ namespace Robust.Shared.Maths
         public readonly Vector2 TopLeft => Origin + Rotation.RotateVec(Box.TopLeft - Origin);
         public readonly Vector2 TopRight => Origin + Rotation.RotateVec(Box.TopRight - Origin);
         public readonly Vector2 BottomLeft => Origin + Rotation.RotateVec(Box.BottomLeft - Origin);
-        public readonly Vector2 Center => Origin + Rotation.RotateVec((Box.BottomLeft + Box.TopRight)/2 - Origin);
+        public readonly Vector2 Center => Origin + Rotation.RotateVec((Box.BottomLeft + Box.TopRight) / 2 - Origin);
 
         public readonly Matrix3x2 Transform
         {
@@ -40,12 +40,12 @@ namespace Robust.Shared.Maths
             {
                 // Equivalent to  Matrix3Helpers.CreateTransform(Origin - Rotation.RotateVec(Origin), Rotation)
                 // but ~20% faster
-                var angle = (float) Rotation;
+                var angle = (float)Rotation;
                 var sin = MathF.Sin(angle);
                 var cos = MathF.Cos(angle);
                 var cos1 = 1 - cos;
                 var dx = cos1 * Origin.X + sin * Origin.Y;
-                var dy = - sin * Origin.X + cos1 * Origin.Y;
+                var dy = -sin * Origin.X + cos1 * Origin.Y;
 
                 return new Matrix3x2
                 {
@@ -114,8 +114,8 @@ namespace Robust.Shared.Maths
             var originX = Vector128.Create(Origin.X);
             var originY = Vector128.Create(Origin.Y);
 
-            var cos = Vector128.Create((float) Math.Cos(Rotation));
-            var sin = Vector128.Create((float) Math.Sin(Rotation));
+            var cos = Vector128.Create((float)Math.Cos(Rotation));
+            var sin = Vector128.Create((float)Math.Sin(Rotation));
 
             var boxX = Vector128.Shuffle(boxVec, Vector128.Create(0, 2, 2, 0)) - originX;
             var boxY = Vector128.Shuffle(boxVec, Vector128.Create(1, 1, 3, 3)) - originY;

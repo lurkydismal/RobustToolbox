@@ -80,7 +80,7 @@ internal sealed partial class ReplayPlaybackManager
             // TODO REPLAYS block audio
             // Just block audio/midi from ever starting, rather than repeatedly stopping it.
             StopAudio();
-;
+            ;
             DebugTools.Assert(Replay.LastApplied >= state.FromSequence);
             DebugTools.Assert(Replay.LastApplied + 1 <= state.ToSequence);
             Replay.LastApplied = state.ToSequence;

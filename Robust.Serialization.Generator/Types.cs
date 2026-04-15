@@ -128,7 +128,7 @@ internal static class Types
     internal static bool CanBeCopiedByValue(ISymbol member, ITypeSymbol type)
     {
         if (type.OriginalDefinition.ToDisplayString() == "System.Nullable<T>")
-            return CanBeCopiedByValue(member, ((INamedTypeSymbol) type).TypeArguments[0]);
+            return CanBeCopiedByValue(member, ((INamedTypeSymbol)type).TypeArguments[0]);
 
         if (type.TypeKind == TypeKind.Enum)
             return true;

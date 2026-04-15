@@ -1177,7 +1177,7 @@ namespace Robust.Shared.Prototypes
                 var dict = new Dictionary<string, T>();
                 foreach (var (id, instance) in Instances)
                 {
-                    dict.Add(id, (T) instance);
+                    dict.Add(id, (T)instance);
                 }
                 InstancesDirect = dict.ToFrozenDictionary();
             }

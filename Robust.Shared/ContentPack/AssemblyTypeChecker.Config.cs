@@ -97,7 +97,7 @@ namespace Robust.Shared.ContentPack
         {
             // Used for type configs where the type config doesn't exist due to a bigger-scoped All whitelisting.
             // e.g. nested types or namespace whitelist.
-            public static readonly TypeConfig DefaultAll = new TypeConfig {All = true};
+            public static readonly TypeConfig DefaultAll = new TypeConfig { All = true };
 
             public bool All;
             public InheritMode Inherit = InheritMode.Default;

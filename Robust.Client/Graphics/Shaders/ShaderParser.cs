@@ -493,7 +493,8 @@ namespace Robust.Client.Graphics
         private ShaderDataTypeFull _parseShaderType()
         {
             var precision = ShaderPrecisionQualifier.None;
-            while (true) {
+            while (true)
+            {
                 var typeToken = _takeToken();
                 if (!(typeToken is TokenWord wordType))
                 {

@@ -208,7 +208,7 @@ public sealed partial class MapLoaderSystem
             throw;
         }
 
-        if (opts.MergeMap is {} map)
+        if (opts.MergeMap is { } map)
             MapInitalizeMerged(merged, map);
 
         result = deserializer.Result;

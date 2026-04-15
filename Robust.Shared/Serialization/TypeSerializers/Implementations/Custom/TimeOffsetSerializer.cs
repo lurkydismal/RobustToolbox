@@ -29,20 +29,20 @@ public sealed class TimeOffsetSerializer : ITypeSerializer<TimeSpan, ValueDataNo
         ISerializationContext? context = null,
         ISerializationManager.InstantiationDelegate<TimeSpan>? instanceProvider = null)
     {
-        if (context is {WritingReadingPrototypes: true})
+        if (context is { WritingReadingPrototypes: true })
             return TimeSpan.Zero;
 
-        if (context is not EntityDeserializer {CurrentReadingEntity.PostInit: true} ctx)
+        if (context is not EntityDeserializer { CurrentReadingEntity.PostInit: true } ctx)
             return TimeSpan.Zero;
 
         var timing = ctx.Timing;
         var seconds = double.Parse(node.Value, CultureInfo.InvariantCulture);
         var time = TimeSpan.FromSeconds(seconds);
-        
+
         // Checks if adding time and curTime will overflow.
-        if(time > TimeSpan.MaxValue - timing.CurTime)
+        if (time > TimeSpan.MaxValue - timing.CurTime)
             return TimeSpan.MaxValue;
-        
+
         return time + timing.CurTime;
     }
 

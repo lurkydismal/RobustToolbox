@@ -8,8 +8,8 @@ namespace Robust.Shared.ViewVariables;
 
 internal abstract partial class ViewVariablesManager
 {
-    private static readonly Regex IndexerRegex = new (@"\[[^\[]+\]", RegexOptions.Compiled);
-    private static readonly Regex TypeSpecifierRegex = new (@"\{[^\{]+\}", RegexOptions.Compiled);
+    private static readonly Regex IndexerRegex = new(@"\[[^\[]+\]", RegexOptions.Compiled);
+    private static readonly Regex TypeSpecifierRegex = new(@"\{[^\{]+\}", RegexOptions.Compiled);
 
     public ViewVariablesPath? ResolvePath(string path)
     {
@@ -56,7 +56,7 @@ internal abstract partial class ViewVariablesManager
                 return path;
             }
 
-            if (path?.Get() is not {} obj)
+            if (path?.Get() is not { } obj)
                 return null;
 
             var nextSegment = segments[0];
@@ -80,11 +80,11 @@ internal abstract partial class ViewVariablesManager
 
             VVAccess? access = null;
 
-            if (specifiers.Count == 1 || ResolveTypeHandlers(path, nextSegmentClean) is not {} customPath)
+            if (specifiers.Count == 1 || ResolveTypeHandlers(path, nextSegmentClean) is not { } customPath)
             {
                 Type? declaringType = null;
 
-                if (specifiers.Count == 1 && _reflectionMan.GetType(specifiers[0].Value[1..^1]) is {} t)
+                if (specifiers.Count == 1 && _reflectionMan.GetType(specifiers[0].Value[1..^1]) is { } t)
                 {
                     declaringType = t;
                 }
@@ -135,7 +135,7 @@ internal abstract partial class ViewVariablesManager
 
     private ViewVariablesPath? ResolveIndexing(ViewVariablesPath? path, string[] arguments, VVAccess access)
     {
-        if (path?.Get() is not {} obj || arguments.Length == 0)
+        if (path?.Get() is not { } obj || arguments.Length == 0)
             return null;
 
         var type = obj.GetType();
@@ -161,15 +161,15 @@ internal abstract partial class ViewVariablesManager
 
             void Set(object? value)
             {
-                if(p != null && access == VVAccess.ReadWrite)
-                    setter?.Invoke(obj, new[] {value}.Concat(p).ToArray());
+                if (p != null && access == VVAccess.ReadWrite)
+                    setter?.Invoke(obj, new[] { value }.Concat(p).ToArray());
             }
 
             return new ViewVariablesFakePath(Get, Set, null, getter?.ReturnType ?? setter!.GetParameters()[0].ParameterType);
         }
 
         // No indexer.
-        if (type.GetIndexer() is not {} indexer)
+        if (type.GetIndexer() is not { } indexer)
             return null;
 
         var parametersInfo = indexer.GetIndexParameters();
@@ -187,14 +187,14 @@ internal abstract partial class ViewVariablesManager
 
     private ViewVariablesPath? ResolveTypeHandlers(ViewVariablesPath path, string relativePath)
     {
-        if (path.Get() is not {} obj
+        if (path.Get() is not { } obj
             || string.IsNullOrEmpty(relativePath)
             || relativePath.Contains('/'))
             return null;
 
         foreach (var handler in GetAllTypeHandlers(obj.GetType()))
         {
-            if (handler.HandlePath(path, relativePath) is {} newPath)
+            if (handler.HandlePath(path, relativePath) is { } newPath)
                 return newPath;
         }
 

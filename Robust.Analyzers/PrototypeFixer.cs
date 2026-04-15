@@ -50,7 +50,7 @@ public sealed class PrototypeFixer : CodeFixProvider
 
     private static async Task<Document> RemoveType(Document document, AttributeArgumentSyntax syntax, CancellationToken cancellation)
     {
-        var root = (CompilationUnitSyntax?) await document.GetSyntaxRootAsync(cancellation);
+        var root = (CompilationUnitSyntax?)await document.GetSyntaxRootAsync(cancellation);
 
         if (syntax.Parent is not AttributeArgumentListSyntax argListSyntax)
             return document;

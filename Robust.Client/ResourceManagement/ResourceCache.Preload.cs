@@ -54,7 +54,7 @@ namespace Robust.Client.ResourceManagement
             var texList = _manager.ContentFindFiles("/Textures/")
                 // Skip PNG files inside RSIs.
                 .Where(p => p.Extension == "png" && !p.ToString().Contains(".rsi/") && !resList.ContainsKey(p))
-                .Select(p => new TextureResource.LoadStepData {Path = p})
+                .Select(p => new TextureResource.LoadStepData { Path = p })
                 .ToArray();
 
             Parallel.ForEach(texList, data =>
@@ -149,7 +149,7 @@ namespace Robust.Client.ResourceManagement
             var rsiList = foundRsiList
                 .Concat(foundRsicList)
                 .Where(p => !resList.ContainsKey(p))
-                .Select(p => new RSIResource.LoadStepData {Path = p})
+                .Select(p => new RSIResource.LoadStepData { Path = p })
                 .ToArray();
 
             Parallel.ForEach(rsiList, data =>
@@ -270,7 +270,7 @@ namespace Robust.Client.ResourceManagement
                         Height = levelHeight - insertHeight,
                         Width = 0,
                         MaxWidth = insertWidth,
-                        RSIList = [ ]
+                        RSIList = []
                     };
 
                     levels.Add(freeLevel);
@@ -298,7 +298,7 @@ namespace Robust.Client.ResourceManagement
                     Height = insertHeight,
                     Width = insertWidth,
                     MaxWidth = maxSize,
-                    RSIList = [ rsi ]
+                    RSIList = [rsi]
                 };
                 levels.Add(newLevel);
 

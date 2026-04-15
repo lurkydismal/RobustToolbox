@@ -44,7 +44,7 @@ internal abstract partial class ViewVariablesManager : IViewVariablesManager, IP
 
     public string? ReadPathSerialized(string path)
     {
-        if (ResolvePath(path) is not {} p)
+        if (ResolvePath(path) is not { } p)
             return null;
 
         var obj = p.Get();

@@ -22,20 +22,23 @@ public sealed class DefaultStylesheet
 
         var theme = userInterfaceManager.CurrentTheme;
 
-        var scrollBarNormal = new StyleBoxFlat {
-            BackgroundColor = theme.ResolveColorOrSpecified("scrollBarDefault",Color.FromHex("#80808059")),
+        var scrollBarNormal = new StyleBoxFlat
+        {
+            BackgroundColor = theme.ResolveColorOrSpecified("scrollBarDefault", Color.FromHex("#80808059")),
             ContentMarginLeftOverride = 10,
             ContentMarginTopOverride = 10
         };
 
-        var scrollBarHovered = new StyleBoxFlat {
-            BackgroundColor = theme.ResolveColorOrSpecified("scrollBarHovered",Color.FromHex("#8C8C8C59")),
+        var scrollBarHovered = new StyleBoxFlat
+        {
+            BackgroundColor = theme.ResolveColorOrSpecified("scrollBarHovered", Color.FromHex("#8C8C8C59")),
             ContentMarginLeftOverride = 10,
             ContentMarginTopOverride = 10
         };
 
-        var scrollBarGrabbed = new StyleBoxFlat {
-            BackgroundColor = theme.ResolveColorOrSpecified("scrollBarGrabbed",Color.FromHex("#8C8C8C59")),
+        var scrollBarGrabbed = new StyleBoxFlat
+        {
+            BackgroundColor = theme.ResolveColorOrSpecified("scrollBarGrabbed", Color.FromHex("#8C8C8C59")),
             ContentMarginLeftOverride = 10,
             ContentMarginTopOverride = 10,
         };

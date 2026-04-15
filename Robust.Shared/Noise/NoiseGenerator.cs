@@ -24,7 +24,7 @@ namespace Robust.Shared.Noise
         {
             _fastNoiseInstance = new FastNoise();
             _fastNoiseInstance.SetNoiseType(FastNoise.NoiseType.SimplexFractal);
-            _fastNoiseInstance.SetFractalLacunarity((float) (Math.PI * 2 / 3));
+            _fastNoiseInstance.SetFractalLacunarity((float)(Math.PI * 2 / 3));
 
             switch (type)
             {
@@ -66,12 +66,12 @@ namespace Robust.Shared.Noise
 
         public void SetOctaves(uint octaves)
         {
-            _fastNoiseInstance.SetFractalOctaves((int) octaves);
+            _fastNoiseInstance.SetFractalOctaves((int)octaves);
         }
 
         public void SetSeed(uint seed)
         {
-            _fastNoiseInstance.SetSeed((int) seed);
+            _fastNoiseInstance.SetSeed((int)seed);
         }
 
         public float GetNoiseTiled(float x, float y)

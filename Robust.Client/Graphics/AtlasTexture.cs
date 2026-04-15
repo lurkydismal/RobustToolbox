@@ -12,7 +12,7 @@ namespace Robust.Client.Graphics
     [PublicAPI]
     public sealed class AtlasTexture : Texture
     {
-        public AtlasTexture(Texture texture, UIBox2 subRegion) : base((Vector2i) subRegion.Size)
+        public AtlasTexture(Texture texture, UIBox2 subRegion) : base((Vector2i)subRegion.Size)
         {
             DebugTools.Assert(SubRegion.Right < texture.Width);
             DebugTools.Assert(SubRegion.Bottom < texture.Height);
@@ -37,8 +37,8 @@ namespace Robust.Client.Graphics
         {
             DebugTools.Assert(x < SubRegion.Right);
             DebugTools.Assert(y < SubRegion.Top);
-            int xTranslated = x + (int) SubRegion.Left;
-            int yTranslated = y + (int) SubRegion.Top;
+            int xTranslated = x + (int)SubRegion.Left;
+            int yTranslated = y + (int)SubRegion.Top;
             return this.SourceTexture[xTranslated, yTranslated];
         }
     }

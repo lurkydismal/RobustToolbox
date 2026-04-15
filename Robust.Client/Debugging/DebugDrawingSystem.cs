@@ -133,7 +133,7 @@ public sealed class DebugDrawingSystem : EntitySystem
         {
             const float stubLength = 0.25f;
 
-            var worldHandle = (DrawingHandleWorld) args.DrawingHandle;
+            var worldHandle = (DrawingHandleWorld)args.DrawingHandle;
 
             foreach (var uid in _lookup.GetEntitiesIntersecting(args.MapId, args.WorldBounds))
             {
@@ -155,7 +155,7 @@ public sealed class DebugDrawingSystem : EntitySystem
         protected internal override void Draw(in OverlayDrawArgs args)
         {
             const float stubLength = 0.25f;
-            var worldHandle = (DrawingHandleWorld) args.DrawingHandle;
+            var worldHandle = (DrawingHandleWorld)args.DrawingHandle;
 
             foreach (var uid in _lookup.GetEntitiesIntersecting(args.MapId, args.WorldBounds))
             {
@@ -176,12 +176,12 @@ public sealed class DebugDrawingSystem : EntitySystem
         {
             const float multiplier = 0.2f;
 
-            var worldHandle = (DrawingHandleWorld) args.DrawingHandle;
+            var worldHandle = (DrawingHandleWorld)args.DrawingHandle;
 
             var physicsQuery = _entityManager.GetEntityQuery<PhysicsComponent>();
             foreach (var uid in _lookup.GetEntitiesIntersecting(args.MapId, args.WorldBounds))
             {
-                if(!physicsQuery.TryGetComponent(uid, out var physicsComp))
+                if (!physicsQuery.TryGetComponent(uid, out var physicsComp))
                     continue;
 
                 var center = _transform.GetWorldPosition(uid);
@@ -201,12 +201,12 @@ public sealed class DebugDrawingSystem : EntitySystem
         {
             const float multiplier = (float)(0.2 / (2 * System.Math.PI));
 
-            var worldHandle = (DrawingHandleWorld) args.DrawingHandle;
+            var worldHandle = (DrawingHandleWorld)args.DrawingHandle;
 
             var physicsQuery = _entityManager.GetEntityQuery<PhysicsComponent>();
             foreach (var uid in _lookup.GetEntitiesIntersecting(args.MapId, args.WorldBounds))
             {
-                if(!physicsQuery.TryGetComponent(uid, out var physicsComp))
+                if (!physicsQuery.TryGetComponent(uid, out var physicsComp))
                     continue;
 
                 var center = _transform.GetWorldPosition(uid);

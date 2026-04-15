@@ -8,7 +8,8 @@ namespace Robust.Shared.Physics
     ///     A representation of a 2D ray.
     /// </summary>
     [Serializable]
-    public readonly struct CollisionRay : IEquatable<CollisionRay> {
+    public readonly struct CollisionRay : IEquatable<CollisionRay>
+    {
 
         private readonly Ray _ray;
 

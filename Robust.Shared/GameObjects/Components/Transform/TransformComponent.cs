@@ -155,7 +155,7 @@ namespace Robust.Shared.GameObjects
             get => _localRotation;
             set
             {
-                if(_noLocalRotation)
+                if (_noLocalRotation)
                     return;
 
                 if (_localRotation.EqualsApprox(value))
@@ -214,7 +214,7 @@ namespace Robust.Shared.GameObjects
         /// <summary>
         /// The UID of the parent entity that this entity is attached to.
         /// </summary>
-        public EntityUid ParentUid  => _parent;
+        public EntityUid ParentUid => _parent;
 
         /// <summary>
         ///     Matrix for transforming points from local to world space.
@@ -339,7 +339,7 @@ namespace Robust.Shared.GameObjects
             [Obsolete("Use the system method instead")]
             set
             {
-                if(Anchored)
+                if (Anchored)
                     return;
 
                 if (_localPosition.EqualsApprox(value))

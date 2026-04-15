@@ -37,7 +37,7 @@ public sealed partial class SerializationManager
                 call = Expression.Call(
                     managerConst,
                     nameof(ValidateNode),
-                    new []{key.type, key.node},
+                    new[] { key.type, key.node },
                     serializerConst,
                     Expression.Convert(nodeParam, key.node),
                     contextParam);
@@ -92,7 +92,7 @@ public sealed partial class SerializationManager
                 call = Expression.Call(
                     managerConst,
                     nameof(ValidateDataDefinition),
-                    new []{key.type},
+                    new[] { key.type },
                     nodeParam,
                     dataDefConst,
                     contextParam);

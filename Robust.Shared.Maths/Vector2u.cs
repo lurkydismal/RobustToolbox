@@ -65,7 +65,7 @@ namespace Robust.Shared.Maths
         {
             unchecked
             {
-                return ((int) X * 397) ^ (int) Y;
+                return ((int)X * 397) ^ (int)Y;
             }
         }
 
@@ -81,12 +81,12 @@ namespace Robust.Shared.Maths
 
         public static explicit operator Vector2u(Vector2 vector)
         {
-            return new((uint) vector.X, (uint) vector.Y);
+            return new((uint)vector.X, (uint)vector.Y);
         }
 
         public static explicit operator Vector2i(Vector2u vector)
         {
-            return new((int) vector.X, (int) vector.Y);
+            return new((int)vector.X, (int)vector.Y);
         }
     }
 }

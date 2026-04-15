@@ -84,14 +84,14 @@ public sealed partial class RayCastSystem
                 output = RayCastCircle(localInput, circle);
                 break;
             case PolygonShape polyShape:
-            {
-                output = RayCastPolygon(localInput, (Polygon) polyShape);
-            }
+                {
+                    output = RayCastPolygon(localInput, (Polygon)polyShape);
+                }
                 break;
             case Polygon poly:
-            {
-                output = RayCastPolygon(localInput, poly);
-            }
+                {
+                    output = RayCastPolygon(localInput, poly);
+                }
                 break;
             default:
                 return output;
@@ -173,7 +173,7 @@ public sealed partial class RayCastSystem
 
         float fraction = t - h;
 
-        if ( fraction < 0.0f || input.MaxFraction * length < fraction )
+        if (fraction < 0.0f || input.MaxFraction * length < fraction)
         {
             // outside the range of the ray segment
             return output;
@@ -197,76 +197,76 @@ public sealed partial class RayCastSystem
             Fraction = 0f,
         };
 
-	    if (shape.Radius == 0.0f)
-	    {
-		    // Put the ray into the polygon's frame of reference.
-		    var p1 = input.Origin;
-		    var d = input.Translation;
+        if (shape.Radius == 0.0f)
+        {
+            // Put the ray into the polygon's frame of reference.
+            var p1 = input.Origin;
+            var d = input.Translation;
 
-		    float lower = 0.0f, upper = input.MaxFraction;
+            float lower = 0.0f, upper = input.MaxFraction;
 
-		    var index = -1;
+            var index = -1;
 
             var norms = shape._normals.AsSpan;
 
-		    for ( var i = 0; i < shape.VertexCount; ++i )
-		    {
-			    // p = p1 + a * d
-			    // dot(normal, p - v) = 0
-			    // dot(normal, p1 - v) + a * dot(normal, d) = 0
-			    float numerator = Vector2.Dot(norms[i], Vector2.Subtract( verts[i], p1 ) );
-			    float denominator = Vector2.Dot(norms[i], d );
+            for (var i = 0; i < shape.VertexCount; ++i)
+            {
+                // p = p1 + a * d
+                // dot(normal, p - v) = 0
+                // dot(normal, p1 - v) + a * dot(normal, d) = 0
+                float numerator = Vector2.Dot(norms[i], Vector2.Subtract(verts[i], p1));
+                float denominator = Vector2.Dot(norms[i], d);
 
-			    if ( denominator == 0.0f )
-			    {
-				    if ( numerator < 0.0f )
-				    {
-					    return output;
-				    }
-			    }
-			    else
-			    {
-				    // Note: we want this predicate without division:
-				    // lower < numerator / denominator, where denominator < 0
-				    // Since denominator < 0, we have to flip the inequality:
-				    // lower < numerator / denominator <==> denominator * lower > numerator.
-				    if ( denominator < 0.0f && numerator < lower * denominator )
-				    {
-					    // Increase lower.
-					    // The segment enters this half-space.
-					    lower = numerator / denominator;
-					    index = i;
-				    }
-				    else if ( denominator > 0.0f && numerator < upper * denominator )
-				    {
-					    // Decrease upper.
-					    // The segment exits this half-space.
-					    upper = numerator / denominator;
-				    }
-			    }
+                if (denominator == 0.0f)
+                {
+                    if (numerator < 0.0f)
+                    {
+                        return output;
+                    }
+                }
+                else
+                {
+                    // Note: we want this predicate without division:
+                    // lower < numerator / denominator, where denominator < 0
+                    // Since denominator < 0, we have to flip the inequality:
+                    // lower < numerator / denominator <==> denominator * lower > numerator.
+                    if (denominator < 0.0f && numerator < lower * denominator)
+                    {
+                        // Increase lower.
+                        // The segment enters this half-space.
+                        lower = numerator / denominator;
+                        index = i;
+                    }
+                    else if (denominator > 0.0f && numerator < upper * denominator)
+                    {
+                        // Decrease upper.
+                        // The segment exits this half-space.
+                        upper = numerator / denominator;
+                    }
+                }
 
-			    // The use of epsilon here causes the B2_ASSERT on lower to trip
-			    // in some cases. Apparently the use of epsilon was to make edge
-			    // shapes work, but now those are handled separately.
-			    // if (upper < lower - b2_epsilon)
-			    if ( upper < lower )
-			    {
-				    return output;
-			    }
-		    }
+                // The use of epsilon here causes the B2_ASSERT on lower to trip
+                // in some cases. Apparently the use of epsilon was to make edge
+                // shapes work, but now those are handled separately.
+                // if (upper < lower - b2_epsilon)
+                if (upper < lower)
+                {
+                    return output;
+                }
+            }
 
-		    DebugTools.Assert( 0.0f <= lower && lower <= input.MaxFraction );
+            DebugTools.Assert(0.0f <= lower && lower <= input.MaxFraction);
 
-		    if (index >= 0)
-		    {
-			    output.Fraction = lower;
-			    output.Normal = norms[index];
-			    output.Point = Vector2.Add(p1, lower * d);
-			    output.Hit = true;
-		    }
+            if (index >= 0)
+            {
+                output.Fraction = lower;
+                output.Normal = norms[index];
+                output.Point = Vector2.Add(p1, lower * d);
+                output.Hit = true;
+            }
 
-		    return output;
-	    }
+            return output;
+        }
 
         Span<Vector2> proxyBVerts = new Vector2[]
         {
@@ -274,7 +274,7 @@ public sealed partial class RayCastSystem
         };
 
         // TODO_ERIN this is not working for ray vs box (zero radii)
-	    var castInput = new ShapeCastPairInput
+        var castInput = new ShapeCastPairInput
         {
             ProxyA = DistanceProxy.MakeProxy(verts, shape.VertexCount, shape.Radius),
             ProxyB = DistanceProxy.MakeProxy(proxyBVerts, 1, 0.0f),
@@ -296,8 +296,8 @@ public sealed partial class RayCastSystem
         if (oneSided)
         {
             // Skip left-side collision
-            float offset = Vector2Helpers.Cross(Vector2.Subtract(input.Origin, shape.Vertex0), Vector2.Subtract( shape.Vertex1, shape.Vertex0));
-            if ( offset < 0.0f )
+            float offset = Vector2Helpers.Cross(Vector2.Subtract(input.Origin, shape.Vertex0), Vector2.Subtract(shape.Vertex1, shape.Vertex0));
+            if (offset < 0.0f)
             {
                 return output;
             }
@@ -309,7 +309,7 @@ public sealed partial class RayCastSystem
 
         var v1 = shape.Vertex0;
         var v2 = shape.Vertex1;
-        var e = Vector2.Subtract( v2, v1 );
+        var e = Vector2.Subtract(v2, v1);
 
         float length = 0f;
         var eUnit = e.GetLengthAndNormalize(ref length);
@@ -336,7 +336,7 @@ public sealed partial class RayCastSystem
         }
 
         float t = numerator / denominator;
-        if ( t < 0.0f || input.MaxFraction < t )
+        if (t < 0.0f || input.MaxFraction < t)
         {
             // out of ray range
             return output;
@@ -350,13 +350,13 @@ public sealed partial class RayCastSystem
         // s = dot(p - v1, e) / dot(e, e)
 
         float s = Vector2.Dot(Vector2.Subtract(p, v1), eUnit);
-        if ( s < 0.0f || length < s )
+        if (s < 0.0f || length < s)
         {
             // out of segment range
             return output;
         }
 
-        if ( numerator > 0.0f )
+        if (numerator > 0.0f)
         {
             normal = -normal;
         }
@@ -377,7 +377,7 @@ public sealed partial class RayCastSystem
     {
         var localInput = input;
 
-        for ( int i = 0; i < localInput.Count; ++i )
+        for (int i = 0; i < localInput.Count; ++i)
         {
             localInput.Points[i] = Physics.Transform.MulT(transform, input.Points[i]);
         }
@@ -392,7 +392,7 @@ public sealed partial class RayCastSystem
                 output = ShapeCastCircle(localInput, circle);
                 break;
             case PolygonShape pShape:
-                output = ShapeCastPolygon(localInput, (Polygon) pShape);
+                output = ShapeCastPolygon(localInput, (Polygon)pShape);
                 break;
             case Polygon poly:
                 output = ShapeCastPolygon(localInput, poly);
@@ -450,164 +450,164 @@ public sealed partial class RayCastSystem
     {
         output.Fraction = input.MaxFraction;
 
-	    var proxyA = input.ProxyA;
+        var proxyA = input.ProxyA;
         var count = input.ProxyB.Vertices.Length;
 
-	    var xfA = input.TransformA;
-	    var xfB = input.TransformB;
-	    var xf = Physics.Transform.InvMulTransforms(xfA, xfB);
+        var xfA = input.TransformA;
+        var xfB = input.TransformB;
+        var xf = Physics.Transform.InvMulTransforms(xfA, xfB);
 
-	    // Put proxyB in proxyA's frame to reduce round-off error
+        // Put proxyB in proxyA's frame to reduce round-off error
         var proxyBVerts = new Vector2[input.ProxyB.Vertices.Length];
 
-	    for ( int i = 0; i < count; ++i )
-	    {
-		    proxyBVerts[i] = Physics.Transform.Mul(xf, input.ProxyB.Vertices[i]);
-	    }
+        for (int i = 0; i < count; ++i)
+        {
+            proxyBVerts[i] = Physics.Transform.Mul(xf, input.ProxyB.Vertices[i]);
+        }
 
         var proxyB = DistanceProxy.MakeProxy(proxyBVerts, count, input.ProxyB.Radius);
 
         DebugTools.Assert(proxyB.Vertices.Length <= PhysicsConstants.MaxPolygonVertices);
-	    float radius = proxyA.Radius + proxyB.Radius;
+        float radius = proxyA.Radius + proxyB.Radius;
 
-	    var r = Quaternion2D.RotateVector(xf.Quaternion2D, input.TranslationB);
-	    float lambda = 0.0f;
-	    float maxFraction = input.MaxFraction;
+        var r = Quaternion2D.RotateVector(xf.Quaternion2D, input.TranslationB);
+        float lambda = 0.0f;
+        float maxFraction = input.MaxFraction;
 
-	    // Initial simplex
-	    Simplex simplex;
+        // Initial simplex
+        Simplex simplex;
         simplex = new()
         {
             Count = 0,
             V = new FixedArray4<SimplexVertex>()
         };
 
-	    // Get an initial point in A - B
-	    int indexA = FindSupport(proxyA, -r);
-	    var wA = proxyA.Vertices[indexA];
-	    int indexB = FindSupport(proxyB, r);
-	    var wB = proxyB.Vertices[indexB];
-	    var v = Vector2.Subtract(wA, wB);
+        // Get an initial point in A - B
+        int indexA = FindSupport(proxyA, -r);
+        var wA = proxyA.Vertices[indexA];
+        int indexB = FindSupport(proxyB, r);
+        var wB = proxyB.Vertices[indexB];
+        var v = Vector2.Subtract(wA, wB);
 
-	    // Sigma is the target distance between proxies
-	    const float linearSlop = PhysicsConstants.LinearSlop;
-	    var sigma = MathF.Max(linearSlop, radius - linearSlop);
+        // Sigma is the target distance between proxies
+        const float linearSlop = PhysicsConstants.LinearSlop;
+        var sigma = MathF.Max(linearSlop, radius - linearSlop);
 
-	    // Main iteration loop.
-	    const int k_maxIters = 20;
-	    int iter = 0;
-	    while ( iter < k_maxIters && v.Length() > sigma + 0.5f * linearSlop )
-	    {
-		    DebugTools.Assert(simplex.Count < 3);
+        // Main iteration loop.
+        const int k_maxIters = 20;
+        int iter = 0;
+        while (iter < k_maxIters && v.Length() > sigma + 0.5f * linearSlop)
+        {
+            DebugTools.Assert(simplex.Count < 3);
 
-		    output.Iterations += 1;
+            output.Iterations += 1;
 
-		    // Support in direction -v (A - B)
-		    indexA = FindSupport(proxyA, -v);
-		    wA = proxyA.Vertices[indexA];
-		    indexB = FindSupport(proxyB, v);
-		    wB = proxyB.Vertices[indexB];
-		    var p = Vector2.Subtract(wA, wB);
+            // Support in direction -v (A - B)
+            indexA = FindSupport(proxyA, -v);
+            wA = proxyA.Vertices[indexA];
+            indexB = FindSupport(proxyB, v);
+            wB = proxyB.Vertices[indexB];
+            var p = Vector2.Subtract(wA, wB);
 
-		    // -v is a normal at p, normalize to work with sigma
-		    v = v.Normalized();
+            // -v is a normal at p, normalize to work with sigma
+            v = v.Normalized();
 
-		    // Intersect ray with plane
-		    float vp = Vector2.Dot(v, p);
-		    float vr = Vector2.Dot(v, r);
-		    if ( vp - sigma > lambda * vr )
-		    {
-			    if ( vr <= 0.0f )
-			    {
-				    // miss
+            // Intersect ray with plane
+            float vp = Vector2.Dot(v, p);
+            float vr = Vector2.Dot(v, r);
+            if (vp - sigma > lambda * vr)
+            {
+                if (vr <= 0.0f)
+                {
+                    // miss
                     return;
                 }
 
-			    lambda = ( vp - sigma ) / vr;
-			    if ( lambda > maxFraction )
-			    {
-				    // too far
+                lambda = (vp - sigma) / vr;
+                if (lambda > maxFraction)
+                {
+                    // too far
                     return;
                 }
 
-			    // reset the simplex
-			    simplex.Count = 0;
-		    }
+                // reset the simplex
+                simplex.Count = 0;
+            }
 
-		    // Reverse simplex since it works with B - A.
-		    // Shift by lambda * r because we want the closest point to the current clip point.
-		    // Note that the support point p is not shifted because we want the plane equation
-		    // to be formed in unshifted space.
-		    ref var vertex = ref simplex.V.AsSpan[simplex.Count];
-		    vertex.IndexA = indexB;
-		    vertex.WA = new Vector2(wB.X + lambda * r.X, wB.Y + lambda * r.Y);
-		    vertex.IndexB = indexA;
-		    vertex.WB = wA;
-		    vertex.W = Vector2.Subtract(vertex.WB, vertex.WA);
-		    vertex.A = 1.0f;
-		    simplex.Count += 1;
+            // Reverse simplex since it works with B - A.
+            // Shift by lambda * r because we want the closest point to the current clip point.
+            // Note that the support point p is not shifted because we want the plane equation
+            // to be formed in unshifted space.
+            ref var vertex = ref simplex.V.AsSpan[simplex.Count];
+            vertex.IndexA = indexB;
+            vertex.WA = new Vector2(wB.X + lambda * r.X, wB.Y + lambda * r.Y);
+            vertex.IndexB = indexA;
+            vertex.WB = wA;
+            vertex.W = Vector2.Subtract(vertex.WB, vertex.WA);
+            vertex.A = 1.0f;
+            simplex.Count += 1;
 
-		    switch (simplex.Count)
-		    {
-			    case 1:
-				    break;
+            switch (simplex.Count)
+            {
+                case 1:
+                    break;
 
-			    case 2:
-				    Simplex.SolveSimplex2(ref simplex);
-				    break;
+                case 2:
+                    Simplex.SolveSimplex2(ref simplex);
+                    break;
 
-			    case 3:
-				    Simplex.SolveSimplex3(ref simplex);
-				    break;
+                case 3:
+                    Simplex.SolveSimplex3(ref simplex);
+                    break;
 
-			    default:
+                default:
                     throw new NotImplementedException();
-		    }
+            }
 
-		    // If we have 3 points, then the origin is in the corresponding triangle.
-		    if ( simplex.Count == 3 )
-		    {
-			    // Overlap
+            // If we have 3 points, then the origin is in the corresponding triangle.
+            if (simplex.Count == 3)
+            {
+                // Overlap
                 // Yes this means you need to manually query for overlaps.
-			    return;
-		    }
+                return;
+            }
 
-		    // Get search direction.
-		    // todo use more accurate segment perpendicular
-		    v = Simplex.ComputeSimplexClosestPoint(simplex);
+            // Get search direction.
+            // todo use more accurate segment perpendicular
+            v = Simplex.ComputeSimplexClosestPoint(simplex);
 
-		    // Iteration count is equated to the number of support point calls.
-		    ++iter;
-	    }
+            // Iteration count is equated to the number of support point calls.
+            ++iter;
+        }
 
-	    if ( iter == 0 || lambda == 0.0f )
-	    {
-		    // Initial overlap
-		    return;
-	    }
+        if (iter == 0 || lambda == 0.0f)
+        {
+            // Initial overlap
+            return;
+        }
 
-	    // Prepare output.
-	    Vector2 pointA = Vector2.Zero, pointB = Vector2.Zero;
-	    Simplex.ComputeSimplexWitnessPoints(ref pointB, ref pointA, simplex);
+        // Prepare output.
+        Vector2 pointA = Vector2.Zero, pointB = Vector2.Zero;
+        Simplex.ComputeSimplexWitnessPoints(ref pointB, ref pointA, simplex);
 
-	    var n = (-v).Normalized();
-	    var point = new Vector2(pointA.X + proxyA.Radius * n.X, pointA.Y + proxyA.Radius * n.Y);
+        var n = (-v).Normalized();
+        var point = new Vector2(pointA.X + proxyA.Radius * n.X, pointA.Y + proxyA.Radius * n.Y);
 
-	    output.Point = Physics.Transform.Mul(xfA, point);
-	    output.Normal = Quaternion2D.RotateVector(xfA.Quaternion2D, n);
-	    output.Fraction = lambda;
-	    output.Iterations = iter;
-	    output.Hit = true;
+        output.Point = Physics.Transform.Mul(xfA, point);
+        output.Normal = Quaternion2D.RotateVector(xfA.Quaternion2D, n);
+        output.Fraction = lambda;
+        output.Iterations = iter;
+        output.Hit = true;
     }
 
     private int FindSupport(DistanceProxy proxy, Vector2 direction)
     {
         int bestIndex = 0;
         float bestValue = Vector2.Dot(proxy.Vertices[0], direction);
-        for ( int i = 1; i < proxy.Vertices.Length; ++i )
+        for (int i = 1; i < proxy.Vertices.Length; ++i)
         {
             float value = Vector2.Dot(proxy.Vertices[i], direction);
-            if ( value > bestValue )
+            if (value > bestValue)
             {
                 bestIndex = i;
                 bestValue = value;
@@ -626,8 +626,8 @@ public sealed partial class RayCastSystem
 
         var pairInput = new ShapeCastPairInput
         {
-            ProxyA = DistanceProxy.MakeProxy(proxyAVerts, 1, shape.Radius ),
-            ProxyB = DistanceProxy.MakeProxy(input.Points, input.Count, input.Radius ),
+            ProxyA = DistanceProxy.MakeProxy(proxyAVerts, 1, shape.Radius),
+            ProxyB = DistanceProxy.MakeProxy(input.Points, input.Count, input.Radius),
             TransformA = Physics.Transform.Empty,
             TransformB = Physics.Transform.Empty,
             TranslationB = input.Translation,

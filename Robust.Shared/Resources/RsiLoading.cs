@@ -18,7 +18,7 @@ namespace Robust.Shared.Resources;
 /// </summary>
 internal static class RsiLoading
 {
-    private static readonly float[] OneArray = {1};
+    private static readonly float[] OneArray = { 1 };
 
     private static readonly JsonSerializerOptions SerializerOptions = new(JsonSerializerDefaults.Web);
 
@@ -213,8 +213,8 @@ internal static class RsiLoading
         var totalFrameCount = frameCounts.Sum();
 
         // Generate atlas.
-        var dimensionX = (int) MathF.Ceiling(MathF.Sqrt(totalFrameCount));
-        var dimensionY = (int) MathF.Ceiling((float) totalFrameCount / dimensionX);
+        var dimensionX = (int)MathF.Ceiling(MathF.Sqrt(totalFrameCount));
+        var dimensionY = (int)MathF.Ceiling((float)totalFrameCount / dimensionX);
 
         dimX = dimensionX;
 

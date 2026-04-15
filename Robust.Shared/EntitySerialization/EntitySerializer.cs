@@ -269,7 +269,7 @@ public sealed class EntitySerializer : ISerializationContext,
         HashSet<EntityUid> allEntities = new();
         List<(EntityUid Root, HashSet<EntityUid> Children)> entities = new();
 
-        foreach(var root in roots)
+        foreach (var root in roots)
         {
             if (!IsSerializable(root))
                 throw new Exception($"{EntMan.ToPrettyString(root)} is not serializable");
@@ -541,7 +541,7 @@ public sealed class EntitySerializer : ISerializationContext,
         {
             SerializeComponents(uid, cache, components);
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             if (Options.EntityExceptionBehaviour == EntityExceptionBehaviour.Rethrow)
             {
@@ -649,7 +649,7 @@ public sealed class EntitySerializer : ISerializationContext,
                 // This will not recursively call Except() on the values of the mapping. It will only remove
                 // key-value pairs if both the keys and values are equal.
                 compMapping = compMapping.Except(protoMapping);
-                if(compMapping == null)
+                if (compMapping == null)
                     continue;
             }
             else
@@ -1036,7 +1036,7 @@ public sealed class EntitySerializer : ISerializationContext,
                 goto case MissingEntityBehaviour.AutoInclude;
             case MissingEntityBehaviour.PartialInclude:
             case MissingEntityBehaviour.AutoInclude:
-                if (Options.LogAutoInclude is {} level)
+                if (Options.LogAutoInclude is { } level)
                     _log.Log(level, $"Auto-including entity {EntMan.ToPrettyString(value)} referenced by {EntMan.ToPrettyString(CurrentEntity)}");
                 _autoInclude.Add(value);
                 var id = GetYamlUid(value);

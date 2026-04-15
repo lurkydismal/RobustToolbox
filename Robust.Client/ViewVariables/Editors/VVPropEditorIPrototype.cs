@@ -118,7 +118,7 @@ namespace Robust.Client.ViewVariables.Editors
         {
             var vvm = IoCManager.Resolve<IClientViewVariablesManager>();
 
-            if(_selector != null)
+            if (_selector != null)
                 vvm.OpenVV(_selector);
             else if (_localValue != null)
                 vvm.OpenVV(_localValue);
@@ -129,10 +129,12 @@ namespace Robust.Client.ViewVariables.Editors
             // Remote variable, therefore we send a new PrototypeReferenceToken.
             if (_selector != null)
             {
-                if(_localValue is ViewVariablesBlobMembers.PrototypeReferenceToken token)
+                if (_localValue is ViewVariablesBlobMembers.PrototypeReferenceToken token)
                     ValueChanged(new ViewVariablesBlobMembers.PrototypeReferenceToken()
                     {
-                        Stringified = token.Variant, Variant = token.Variant, ID = text,
+                        Stringified = token.Variant,
+                        Variant = token.Variant,
+                        ID = text,
                     }, true);
 
                 return;
@@ -140,7 +142,7 @@ namespace Robust.Client.ViewVariables.Editors
 
             // Local variable, therefore the type T should be valid.
             var protoMan = IoCManager.Resolve<IPrototypeManager>();
-            if(protoMan.TryIndex(typeof(T), text, out var prototype))
+            if (protoMan.TryIndex(typeof(T), text, out var prototype))
                 ValueChanged(prototype, false);
 
             return;

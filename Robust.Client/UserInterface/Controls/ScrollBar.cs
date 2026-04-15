@@ -158,10 +158,10 @@ namespace Robust.Client.UserInterface.Controls
         private UIBox2 _getGrabberBox()
         {
             var grabberOffset = GetAsRatio() * _getOrientationSize();
-            grabberOffset = (float) Math.Round(grabberOffset);
+            grabberOffset = (float)Math.Round(grabberOffset);
 
             var grabberEnd = (Value + Page - MinValue) / (MaxValue - MinValue) * _getOrientationSize() + _getGrabberBoxMinSize();
-            grabberEnd = (float) Math.Round(grabberEnd);
+            grabberEnd = (float)Math.Round(grabberEnd);
 
             if (_orientation == OrientationMode.Horizontal)
             {

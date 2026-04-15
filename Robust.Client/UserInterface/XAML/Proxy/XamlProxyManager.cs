@@ -15,7 +15,7 @@ namespace Robust.Client.UserInterface.XAML.Proxy;
 /// <summary>
 /// The real implementation of <see cref="IXamlProxyManager"/>.
 /// </summary>
-public sealed class XamlProxyManager: IXamlProxyManager
+public sealed class XamlProxyManager : IXamlProxyManager
 {
     ISawmill _sawmill = null!;
     [Dependency] IReflectionManager _reflectionManager = null!;
@@ -120,7 +120,7 @@ public sealed class XamlProxyManager: IXamlProxyManager
         // initialize XamlJitCompiler lazily because constructing it has
         // very high CPU cost
         XamlJitCompiler xjit;
-        lock(this)
+        lock (this)
         {
             xjit = _xamlJitCompiler ??= new XamlJitCompiler();
         }

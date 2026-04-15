@@ -63,7 +63,7 @@ public static class ColorNaming
         for (var i = 0; i < HueNames.Length; i++)
         {
             var prevData = HueNames[i];
-            var nextData = i+1 < HueNames.Length ? HueNames[i+1] : HueFallback;
+            var nextData = i + 1 < HueNames.Length ? HueNames[i + 1] : HueFallback;
 
             if (prevData.Hue > hue || hue >= nextData.Hue)
                 continue;
@@ -76,7 +76,7 @@ public static class ColorNaming
             else if (prevData.Loc == OrangeString)
                 adjustedLightness = lightness - BrownLightnessThreshold + DarkLightnessThreshold;
 
-            if (hue >= (prevData.Hue + nextData.Hue)/2f && prevData.Loc != nextData.Loc)
+            if (hue >= (prevData.Hue + nextData.Hue) / 2f && prevData.Loc != nextData.Loc)
             {
                 if (localization.TryGetString($"{loc}-{nextData.Loc}", out var hueName))
                     return (hueName!, adjustedLightness);

@@ -88,7 +88,7 @@ namespace Robust.Client.UserInterface.Controls
         {
             foreach (var item in items)
             {
-                if(item.Owner != this) throw new ArgumentException("Item is owned by another ItemList!");
+                if (item.Owner != this) throw new ArgumentException("Item is owned by another ItemList!");
 
                 _itemList.Add(item);
 
@@ -101,7 +101,7 @@ namespace Robust.Client.UserInterface.Controls
 
         public void Add(Item item)
         {
-            if(item.Owner != this) throw new ArgumentException("Item is owned by another ItemList!");
+            if (item.Owner != this) throw new ArgumentException("Item is owned by another ItemList!");
 
             _itemList.Add(item);
 
@@ -117,7 +117,7 @@ namespace Robust.Client.UserInterface.Controls
 
             foreach (var text in texts)
             {
-                items.Add(new Item(this) {Text = text, Icon = icon, IconScale = iconScale, Selectable = selectable, Metadata = metadata});
+                items.Add(new Item(this) { Text = text, Icon = icon, IconScale = iconScale, Selectable = selectable, Metadata = metadata });
             }
 
             Add(items);
@@ -125,7 +125,7 @@ namespace Robust.Client.UserInterface.Controls
 
         public Item AddItem(string text, Texture? icon = null, bool selectable = true, object? metadata = null, float iconScale = 1)
         {
-            var item = new Item(this) {Text = text, Icon = icon, IconScale = iconScale, Selectable = selectable, Metadata = metadata};
+            var item = new Item(this) { Text = text, Icon = icon, IconScale = iconScale, Selectable = selectable, Metadata = metadata };
             Add(item);
             return item;
         }
@@ -169,7 +169,7 @@ namespace Robust.Client.UserInterface.Controls
 
         public bool Remove(Item item)
         {
-            var value =  _itemList.Remove(item);
+            var value = _itemList.Remove(item);
 
             item.OnSelected -= Select;
             item.OnDeselected -= Deselect;
@@ -202,7 +202,7 @@ namespace Robust.Client.UserInterface.Controls
 
         private void InternalInsert(int index, Item item)
         {
-            if(item.Owner != this) throw new ArgumentException("Item is owned by another ItemList!");
+            if (item.Owner != this) throw new ArgumentException("Item is owned by another ItemList!");
 
             _itemList.Insert(index, item);
 
@@ -235,7 +235,7 @@ namespace Robust.Client.UserInterface.Controls
         /// <param name="newItems">The list of items to update this list to</param>
         public void SetItems(List<Item> newItems)
         {
-            SetItems(newItems, (a,b) => string.Compare(a.Text, b.Text));
+            SetItems(newItems, (a, b) => string.Compare(a.Text, b.Text));
         }
 
         /// <summary>
@@ -249,7 +249,7 @@ namespace Robust.Client.UserInterface.Controls
             // in parallel to synchronize our items with those in newItems.
             int i = this.Count - 1;
             int j = newItems.Count - 1;
-            while(i >= 0 && j >= 0)
+            while (i >= 0 && j >= 0)
             {
                 var cmpResult = itemCmp(this[i], newItems[j]);
                 if (cmpResult == 0)
@@ -312,7 +312,7 @@ namespace Robust.Client.UserInterface.Controls
 
         private void Select(int idx)
         {
-            if(SelectMode != ItemListSelectMode.Multiple)
+            if (SelectMode != ItemListSelectMode.Multiple)
                 ClearSelected(idx);
             OnItemSelected?.Invoke(new ItemListSelectedEventArgs(idx, this));
         }
@@ -526,7 +526,7 @@ namespace Robust.Client.UserInterface.Controls
             var font = ActualFont;
 
             var color = ActualFontColor;
-            var offsetY = (int) (box.Height - font.GetHeight(UIScale)) / 2;
+            var offsetY = (int)(box.Height - font.GetHeight(UIScale)) / 2;
             var baseLine = new Vector2i(5, offsetY + font.GetAscent(UIScale)) + box.TopLeft;
 
             foreach (var rune in text.EnumerateRunes())
@@ -577,7 +577,7 @@ namespace Robust.Client.UserInterface.Controls
                 {
                     if (item.Selected && SelectMode != ItemListSelectMode.Button)
                     {
-                        if(SelectMode != ItemListSelectMode.Multiple)
+                        if (SelectMode != ItemListSelectMode.Multiple)
                             ClearSelected();
                         item.Selected = false;
                         return;
@@ -585,7 +585,7 @@ namespace Robust.Client.UserInterface.Controls
 
                     item.Selected = true;
                     if (SelectMode == ItemListSelectMode.Button)
-                        Timer.Spawn(ButtonDeselectDelay, () => {  item.Selected = false; } );
+                        Timer.Spawn(ButtonDeselectDelay, () => { item.Selected = false; });
                 }
                 break;
             }
@@ -638,9 +638,9 @@ namespace Robust.Client.UserInterface.Controls
 
         protected internal override void UIScaleChanged()
         {
-             RecalculateContentHeight();
+            RecalculateContentHeight();
 
-             base.UIScaleChanged();
+            base.UIScaleChanged();
         }
 
         private void _updateScrollbarVisibility()
@@ -744,7 +744,7 @@ namespace Robust.Client.UserInterface.Controls
                 {
                     if (!Selectable || _selected == value) return;
                     _selected = value;
-                    if(_selected) OnSelected?.Invoke(this);
+                    if (_selected) OnSelected?.Invoke(this);
                     else OnDeselected?.Invoke(this);
                 }
             }

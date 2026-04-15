@@ -39,8 +39,8 @@ namespace Robust.Shared.Utility
 
             if (_index is null)
             {
-                set = new HashSet<TValue> {value};
-                _index = ImmutableDictionary.CreateRange(new[] {new KeyValuePair<TKey, HashSet<TValue>>(key, set)});
+                set = new HashSet<TValue> { value };
+                _index = ImmutableDictionary.CreateRange(new[] { new KeyValuePair<TKey, HashSet<TValue>>(key, set) });
                 return true;
             }
 
@@ -49,7 +49,7 @@ namespace Robust.Shared.Utility
                 return set.Add(value);
             }
 
-            _index = _index.Add(key, new HashSet<TValue> {value});
+            _index = _index.Add(key, new HashSet<TValue> { value });
             return true;
         }
 
@@ -61,7 +61,7 @@ namespace Robust.Shared.Utility
             if (_index is null)
             {
                 set = new HashSet<TValue>(values);
-                _index = ImmutableDictionary.CreateRange(new[] {new KeyValuePair<TKey, HashSet<TValue>>(key, set)});
+                _index = ImmutableDictionary.CreateRange(new[] { new KeyValuePair<TKey, HashSet<TValue>>(key, set) });
                 return set.Count;
             }
 

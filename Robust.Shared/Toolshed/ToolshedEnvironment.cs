@@ -221,7 +221,7 @@ public sealed class ToolshedEnvironment
             t = t.GetGenericTypeDefinition();
         }
 
-        if (t is {IsGenericType: true, IsConstructedGenericType: false})
+        if (t is { IsGenericType: true, IsConstructedGenericType: false })
             t = t.GetGenericTypeDefinition();
 
         return _commandPipeValueMap.GetOrNew(t);

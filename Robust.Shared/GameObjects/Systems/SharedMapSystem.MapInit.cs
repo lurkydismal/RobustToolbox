@@ -13,7 +13,7 @@ public abstract partial class SharedMapSystem
         if (mapId == MapId.Nullspace)
             return true; // Nullspace is always initialized
 
-        if(!Maps.TryGetValue(mapId, out var uid))
+        if (!Maps.TryGetValue(mapId, out var uid))
             throw new ArgumentException($"Map {mapId} does not exist.");
 
         return IsInitialized(uid);
@@ -36,7 +36,7 @@ public abstract partial class SharedMapSystem
 
     public void InitializeMap(MapId mapId, bool unpause = true)
     {
-        if(!Maps.TryGetValue(mapId, out var uid))
+        if (!Maps.TryGetValue(mapId, out var uid))
             throw new ArgumentException($"Map {mapId} does not exist.");
 
         InitializeMap(uid, unpause);
@@ -58,12 +58,12 @@ public abstract partial class SharedMapSystem
 
     internal void RecursiveMapInit(EntityUid entity)
     {
-        var toInitialize = new List<EntityUid> {entity};
+        var toInitialize = new List<EntityUid> { entity };
         for (var i = 0; i < toInitialize.Count; i++)
         {
             var uid = toInitialize[i];
             // toInitialize might contain deleted entities.
-            if(!_metaQuery.TryComp(uid, out var meta))
+            if (!_metaQuery.TryComp(uid, out var meta))
                 continue;
 
             if (meta.EntityLifeStage == EntityLifeStage.MapInitialized)

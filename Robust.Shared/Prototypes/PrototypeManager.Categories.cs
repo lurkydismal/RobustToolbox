@@ -100,7 +100,7 @@ public abstract partial class PrototypeManager : IPrototypeManagerInternal
         {
             foreach (var dataNode in node)
             {
-                var categoryId = ((ValueDataNode) dataNode).Value;
+                var categoryId = ((ValueDataNode)dataNode).Value;
                 if (TryIndex(categoryId, out EntityCategoryPrototype? categoryInstance))
                     set.Add(categoryInstance);
                 else

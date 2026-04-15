@@ -54,7 +54,7 @@ public struct TextureSampleParameters : IEquatable<TextureSampleParameters>
             }
         }
 
-        return new TextureSampleParameters {Filter = filter, WrapMode = wrap};
+        return new TextureSampleParameters { Filter = filter, WrapMode = wrap };
     }
 
     public static readonly TextureSampleParameters Default = new()
@@ -75,7 +75,7 @@ public struct TextureSampleParameters : IEquatable<TextureSampleParameters>
 
     public override int GetHashCode()
     {
-        return HashCode.Combine(Filter, (int) WrapMode);
+        return HashCode.Combine(Filter, (int)WrapMode);
     }
 
     public static bool operator ==(TextureSampleParameters left, TextureSampleParameters right)

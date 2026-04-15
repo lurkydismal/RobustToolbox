@@ -404,7 +404,7 @@ public sealed partial class FormattedMessage : IEquatable<FormattedMessage>, IRe
 
         void IEnumerator.Reset()
         {
-            ((IEnumerator) _enumerator).Reset();
+            ((IEnumerator)_enumerator).Reset();
         }
 
         public MarkupNode Current => _enumerator.Current;

@@ -89,7 +89,7 @@ internal partial class Clyde
 
             // Get bounding boxes & world positions
             added = list.Count - index;
-            var batches = added/_spriteProcessingBatchSize;
+            var batches = added / _spriteProcessingBatchSize;
 
             // TODO also do sorting here & use a merge sort later on for y-sorting?
             if (batches > 1)
@@ -137,7 +137,7 @@ internal partial class Clyde
             data.WorldRot = rot;
             data.WorldPos = pos;
 
-            var finalRotation = (float) (data.Sprite.NoRotation
+            var finalRotation = (float)(data.Sprite.NoRotation
                 ? data.Sprite.Rotation
                 : data.Sprite.Rotation + rot + batch.ViewRotation);
 
@@ -178,7 +178,7 @@ internal partial class Clyde
 
         // This function is for sprites, which flip the y-axis via the scale, so we need to flip t & b.
         DebugTools.Assert(scale.Y < 0);
-        lbrt = Vector128.Shuffle(lbrt, Vector128.Create(0,3,2,1));
+        lbrt = Vector128.Shuffle(lbrt, Vector128.Create(0, 3, 2, 1));
 
         var offsetVec = Unsafe.As<Vector2, Vector128<float>>(ref Unsafe.AsRef(in offset)); // upper undefined
         var scaleVec = Unsafe.As<Vector2, Vector128<float>>(ref Unsafe.AsRef(in scale)); // upper undefined
@@ -213,7 +213,7 @@ internal partial class Clyde
         public Vector2 TreePos { get; init; }
         public Angle TreeRot { get; init; }
         public float Sin { get; init; }
-        public float Cos { get;  init; }
+        public float Cos { get; init; }
     }
 
     private sealed class SpriteDrawingOrderComparer : IComparer<int>

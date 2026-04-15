@@ -65,7 +65,7 @@ internal abstract partial class ViewVariablesManager
 
     private IEnumerable<string>? ListIoCPaths(string[] segments)
     {
-        if (segments.Length > 1 || IoCManager.Instance is not {} deps)
+        if (segments.Length > 1 || IoCManager.Instance is not { } deps)
             return null;
 
         if (segments.Length == 1
@@ -184,28 +184,28 @@ internal abstract partial class ViewVariablesManager
         switch (segments.Length)
         {
             case 1 or 2:
-            {
-                var kind = segments[0];
-                var prototype = segments.Length == 1 ? string.Empty : segments[1];
+                {
+                    var kind = segments[0];
+                    var prototype = segments.Length == 1 ? string.Empty : segments[1];
 
-                if(!_protoMan.HasKind(kind))
-                    goto case 0;
+                    if (!_protoMan.HasKind(kind))
+                        goto case 0;
 
-                if (_protoMan.TryIndex(_protoMan.GetKindType(kind), prototype, out _))
-                    goto case default;
+                    if (_protoMan.TryIndex(_protoMan.GetKindType(kind), prototype, out _))
+                        goto case default;
 
-                return _protoMan.EnumeratePrototypes(kind)
-                    .Select(p => $"{kind}/{p.ID}");
-            }
+                    return _protoMan.EnumeratePrototypes(kind)
+                        .Select(p => $"{kind}/{p.ID}");
+                }
             case 0:
-            {
-                return _protoMan
-                    .GetPrototypeKinds();
-            }
+                {
+                    return _protoMan
+                        .GetPrototypeKinds();
+                }
             default:
-            {
-                return null;
-            }
+                {
+                    return null;
+                }
         }
     }
 
@@ -266,12 +266,12 @@ internal abstract partial class ViewVariablesManager
         private int X = 10;
 
         // Note: DataField implies VV read-only already.
-        [ViewVariables] public Dictionary<object, object> Dict = new() {{"a", "b"}, {"c", "d"}};
+        [ViewVariables] public Dictionary<object, object> Dict = new() { { "a", "b" }, { "c", "d" } };
 
-        [ViewVariables] public List<object> List => new() {1, 2, 3, 4, 5, 6, 7, 8, 9, X, 11, 12, 13, 14, 15, this};
+        [ViewVariables] public List<object> List => new() { 1, 2, 3, 4, 5, 6, 7, 8, 9, X, 11, 12, 13, 14, 15, this };
 
 
-        [DataField("multiDimensionalArray")] public int[,] MultiDimensionalArray = new int[5, 2] {{1, 2}, {3, 4}, {5, 6}, {7, 8}, {9, 0}};
+        [DataField("multiDimensionalArray")] public int[,] MultiDimensionalArray = new int[5, 2] { { 1, 2 }, { 3, 4 }, { 5, 6 }, { 7, 8 }, { 9, 0 } };
 
 
         [DataField("vector")]

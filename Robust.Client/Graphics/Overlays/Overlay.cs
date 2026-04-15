@@ -56,14 +56,16 @@ namespace Robust.Client.Graphics
 
         protected internal virtual void FrameUpdate(FrameEventArgs args) { }
 
-        public void Dispose() {
+        public void Dispose()
+        {
             if (Disposed)
                 return;
             else
                 DisposeBehavior();
         }
 
-        protected virtual void DisposeBehavior(){
+        protected virtual void DisposeBehavior()
+        {
             Disposed = true;
         }
 

@@ -119,7 +119,7 @@ namespace Robust.Shared.Input.Binding
             // tiny amount of bindings
 
             List<TopologicalSort.GraphNode<TypedCommandBind>> allNodes = new();
-            Dictionary<Type,List<TopologicalSort.GraphNode<TypedCommandBind>>> typeToNode = new();
+            Dictionary<Type, List<TopologicalSort.GraphNode<TypedCommandBind>>> typeToNode = new();
             // build the dict for quick lookup on type
             foreach (var binding in bindingsForFunction)
             {

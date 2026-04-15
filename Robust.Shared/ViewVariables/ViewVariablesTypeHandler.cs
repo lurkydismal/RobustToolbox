@@ -49,10 +49,10 @@ public sealed class ViewVariablesTypeHandler<T> : ViewVariablesTypeHandler
     public ViewVariablesTypeHandler<T> AddHandler(HandleTypePath<T> handle, ListTypeCustomPaths<T> list)
     {
         ViewVariablesPath? HandleWrapper(ViewVariablesPath path, string relativePath)
-            => path.Get() is not {} obj ? null : handle((T)obj, relativePath);
+            => path.Get() is not { } obj ? null : handle((T)obj, relativePath);
 
         IEnumerable<string> ListWrapper(ViewVariablesPath path)
-            => path.Get() is not {} obj ? Enumerable.Empty<string>() : list((T)obj);
+            => path.Get() is not { } obj ? Enumerable.Empty<string>() : list((T)obj);
 
         _handlers.Add(new TypeHandlerData(HandleWrapper, ListWrapper, handle, list));
         return this;
@@ -66,7 +66,7 @@ public sealed class ViewVariablesTypeHandler<T> : ViewVariablesTypeHandler
             => handle((T?)path.Get(), relativePath);
 
         IEnumerable<string> ListWrapper(ViewVariablesPath path)
-            => list((T?) path.Get());
+            => list((T?)path.Get());
 
         _handlers.Add(new TypeHandlerData(HandleWrapper, ListWrapper, handle, list));
         return this;
@@ -158,7 +158,7 @@ public sealed class ViewVariablesTypeHandler<T> : ViewVariablesTypeHandler
         ViewVariablesPath? Wrapper(T? t)
             => t != null ? handler(t) : null;
 
-        return AddPathNullable(path, (PathHandlerNullable<T>) Wrapper);
+        return AddPathNullable(path, (PathHandlerNullable<T>)Wrapper);
     }
 
     /// <inheritdoc cref="AddPath(string,PathHandler)"/>
@@ -167,7 +167,7 @@ public sealed class ViewVariablesTypeHandler<T> : ViewVariablesTypeHandler
     public ViewVariablesTypeHandler<T> AddPathNullable(string path, PathHandlerNullable<T> handler)
     {
         ViewVariablesPath? Wrapper(ViewVariablesPath p)
-            => handler((T?) p.Get());
+            => handler((T?)p.Get());
 
         return AddPath(path, Wrapper);
     }
@@ -178,10 +178,10 @@ public sealed class ViewVariablesTypeHandler<T> : ViewVariablesTypeHandler
     {
         ViewVariablesPath? Wrapper(ViewVariablesPath p)
         {
-            if (p is not ViewVariablesComponentPath pc || pc.Get() is not {} obj)
+            if (p is not ViewVariablesComponentPath pc || pc.Get() is not { } obj)
                 return null;
 
-            return handler(pc.Owner, (T) obj);
+            return handler(pc.Owner, (T)obj);
         }
 
         return AddPath(path, Wrapper);
@@ -194,10 +194,10 @@ public sealed class ViewVariablesTypeHandler<T> : ViewVariablesTypeHandler
         // Gee, these wrappers are getting more and more complicated...
         ViewVariablesPath? Wrapper(ViewVariablesPath p)
         {
-            if (p is not ViewVariablesComponentPath pc || pc.Get() is not {} obj)
+            if (p is not ViewVariablesComponentPath pc || pc.Get() is not { } obj)
                 return null;
 
-            var comp = (T) obj;
+            var comp = (T)obj;
 
             var newPath = ViewVariablesPath.FromGetter(() => getter(pc.Owner, comp), typeof(TValue));
 
@@ -208,7 +208,7 @@ public sealed class ViewVariablesTypeHandler<T> : ViewVariablesTypeHandler
                     // In case it explodes with a NRE or something!
                     try
                     {
-                        setter(pc.Owner, (TValue) value!, comp);
+                        setter(pc.Owner, (TValue)value!, comp);
                     }
                     catch (NullReferenceException e)
                     {
@@ -248,7 +248,7 @@ public sealed class ViewVariablesTypeHandler<T> : ViewVariablesTypeHandler
         // Dynamic handlers take precedence. Iterated by order of registration.
         foreach (var data in _handlers)
         {
-            if (data.Handle(path, relativePath) is {} dynPath)
+            if (data.Handle(path, relativePath) is { } dynPath)
                 return dynPath;
         }
 
@@ -270,7 +270,7 @@ public sealed class ViewVariablesTypeHandler<T> : ViewVariablesTypeHandler
 
         foreach (var (p, handler) in _paths)
         {
-            if (handler(path) is {})
+            if (handler(path) is { })
                 yield return p;
         }
     }

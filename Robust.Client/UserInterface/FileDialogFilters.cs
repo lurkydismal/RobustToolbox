@@ -9,7 +9,7 @@ namespace Robust.Client.UserInterface
             Groups = groups;
         }
 
-        public FileDialogFilters(params Group[] groups) : this((IReadOnlyList<Group>) groups)
+        public FileDialogFilters(params Group[] groups) : this((IReadOnlyList<Group>)groups)
         {
         }
 
@@ -22,7 +22,7 @@ namespace Robust.Client.UserInterface
                 Extensions = extensions;
             }
 
-            public Group(params string[] extensions) : this((IReadOnlyList<string>) extensions)
+            public Group(params string[] extensions) : this((IReadOnlyList<string>)extensions)
             {
             }
 

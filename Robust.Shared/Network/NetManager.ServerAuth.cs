@@ -143,7 +143,7 @@ namespace Robust.Shared.Network
                     var url = $"{authServer}api/session/hasJoined?hash={authHash}&userId={msgEncResponse.UserId}";
                     var joinedRespJson = await _http.Client.GetFromJsonAsync<HasJoinedResponse>(url);
 
-                    if (joinedRespJson is not {IsValid: true})
+                    if (joinedRespJson is not { IsValid: true })
                     {
                         connection.Disconnect("Failed to validate login");
                         return;
@@ -160,7 +160,7 @@ namespace Robust.Shared.Network
                         ..joinedRespJson.ConnectionData!.Hwids
                             .Select(h => ImmutableArray.Create(Convert.FromBase64String(h)))
                     ];
-                    ImmutableArray<byte> legacyHwid = [..msgEncResponse.LegacyHwid];
+                    ImmutableArray<byte> legacyHwid = [.. msgEncResponse.LegacyHwid];
                     if (!wantHwid)
                     {
                         // If the client somehow sends a HWID even if we didn't ask for one, ignore it.
@@ -335,7 +335,7 @@ namespace Robust.Shared.Network
                 return (assigned.Value, LoginType.GuestAssigned);
             }
 
-            unassigned:
+        unassigned:
             // Just generate a random new GUID.
             var uid = new NetUserId(Guid.NewGuid());
             return (uid, LoginType.Guest);

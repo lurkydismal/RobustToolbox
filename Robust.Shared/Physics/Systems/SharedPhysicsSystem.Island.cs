@@ -916,7 +916,7 @@ public abstract partial class SharedPhysicsSystem
                 float[] solvedAngles)
             {
                 const int FinaliseBodies = 32;
-                var batches = (int)MathF.Ceiling((float) bodyCount / FinaliseBodies);
+                var batches = (int)MathF.Ceiling((float)bodyCount / FinaliseBodies);
 
                 Parallel.For(0, batches, options, i =>
                 {
@@ -1045,7 +1045,7 @@ public abstract partial class SharedPhysicsSystem
                 continue;
 
             var (_, parentRot, parentInvMatrix) = _transform.GetWorldPositionRotationInvMatrix(transform);
-            var worldRot = (float) (parentRot + xform._localRotation);
+            var worldRot = (float)(parentRot + xform._localRotation);
 
             var angle = angles[i];
 

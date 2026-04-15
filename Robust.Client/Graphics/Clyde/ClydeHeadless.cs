@@ -47,7 +47,7 @@ namespace Robust.Client.Graphics.Clyde
             SixLabors.ImageSharp.Configuration.Default.PreferContiguousImageBuffers = true;
 
             var mainRt = new DummyRenderWindow(this);
-            var window = new DummyWindow(mainRt) {Id = new WindowId(1)};
+            var window = new DummyWindow(mainRt) { Id = new WindowId(1) };
 
             _windows.Add(window);
             MainWindow = window;
@@ -283,7 +283,7 @@ namespace Robust.Client.Graphics.Clyde
             // Nada.
         }
 
-        public ClydeHandle LoadShader(ParsedShader shader, string? name = null, Dictionary<string,string>? defines = null)
+        public ClydeHandle LoadShader(ParsedShader shader, string? name = null, Dictionary<string, string>? defines = null)
         {
             return default;
         }

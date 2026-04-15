@@ -216,7 +216,7 @@ public sealed partial class MapLoaderSystem
 
     private void MergeMaps(EntityDeserializer deserializer, MapLoadOptions opts, HashSet<EntityUid> merged)
     {
-        if (opts.MergeMap is not {} targetId)
+        if (opts.MergeMap is not { } targetId)
             return;
 
         if (!_mapSystem.TryGetMap(targetId, out var targetUid))

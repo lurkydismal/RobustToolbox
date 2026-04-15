@@ -82,7 +82,7 @@ namespace Robust.Shared.Utility
         /// </summary>
         public bool ContainsAll(params string[] flags)
         {
-            return ContainsAll((IEnumerable<string>) flags);
+            return ContainsAll((IEnumerable<string>)flags);
         }
 
         /// <summary>
@@ -106,7 +106,7 @@ namespace Robust.Shared.Utility
         /// </summary>
         public bool ContainsAny(params string[] flags)
         {
-            return ContainsAny((IEnumerable<string>) flags);
+            return ContainsAny((IEnumerable<string>)flags);
         }
 
         /// <summary>

@@ -21,7 +21,7 @@ public static class Matrix3Helpers
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static bool EqualsApprox(this Matrix3x2 a, Matrix3x2 b, double tolerance)
     {
-        return a.EqualsApprox(b, (float) tolerance);
+        return a.EqualsApprox(b, (float)tolerance);
     }
 
     [Obsolete("Use TransformBox")]
@@ -93,8 +93,8 @@ public static class Matrix3Helpers
     public static Matrix3x2 CreateTransform(float posX, float posY, double angle)
     {
         // returns a matrix that is equivalent to returning CreateRotation(angle) * CreateTranslation(posX, posY)
-        var sin = (float) Math.Sin(angle);
-        var cos = (float) Math.Cos(angle);
+        var sin = (float)Math.Sin(angle);
+        var cos = (float)Math.Cos(angle);
         return new Matrix3x2
         {
             M11 = cos,
@@ -111,8 +111,8 @@ public static class Matrix3Helpers
     {
         // returns a matrix that is equivalent to returning CreateScale(scale) * CreateRotation(angle) * CreateTranslation(posX, posY)
 
-        var sin = (float) Math.Sin(angle);
-        var cos = (float) Math.Cos(angle);
+        var sin = (float)Math.Sin(angle);
+        var cos = (float)Math.Cos(angle);
 
         return new Matrix3x2
         {
@@ -134,7 +134,7 @@ public static class Matrix3Helpers
             -Math.PI / 2 => new Matrix3x2(0f, -1f, 1, 0, position.X, position.Y),
             Math.PI / 2 => new Matrix3x2(0f, 1f, -1f, 0f, position.X, position.Y),
             Math.PI => new Matrix3x2(-1f, 0f, 0f, -1f, position.X, position.Y),
-            _ => CreateTransform(position.X, position.Y, (float) angle.Theta)
+            _ => CreateTransform(position.X, position.Y, (float)angle.Theta)
         };
     }
 
@@ -150,14 +150,14 @@ public static class Matrix3Helpers
     {
         // returns a matrix that is equivalent to returning CreateTranslation(-posX, -posY) * CreateRotation(-angle) * CreateScale(1/scaleX, 1/scaleY)
 
-        var sin = (float) Math.Sin(angle);
-        var cos = (float) Math.Cos(angle);
+        var sin = (float)Math.Sin(angle);
+        var cos = (float)Math.Cos(angle);
 
         return new Matrix3x2
         {
             M11 = cos / scaleX,
             M21 = sin / scaleX,
-            M31 = - (posX * cos + posY * sin) / scaleX,
+            M31 = -(posX * cos + posY * sin) / scaleX,
             M12 = -sin / scaleY,
             M22 = cos / scaleY,
             M32 = (posX * sin - posY * cos) / scaleY,
@@ -179,7 +179,8 @@ public static class Matrix3Helpers
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Matrix3x2 CreateTranslation(float x, float y)
     {
-        return new Matrix3x2 {
+        return new Matrix3x2
+        {
             M11 = 1,
             M12 = 0,
             M21 = 0,
@@ -197,9 +198,10 @@ public static class Matrix3Helpers
 
     public static Matrix3x2 CreateRotation(double angle)
     {
-        var cos = (float) Math.Cos(angle);
-        var sin = (float) Math.Sin(angle);
-        return new Matrix3x2 {
+        var cos = (float)Math.Cos(angle);
+        var sin = (float)Math.Sin(angle);
+        return new Matrix3x2
+        {
             M11 = cos,
             M12 = sin,
             M21 = -sin,
@@ -212,7 +214,8 @@ public static class Matrix3Helpers
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Matrix3x2 CreateScale(float x, float y)
     {
-        return new Matrix3x2 {
+        return new Matrix3x2
+        {
             M11 = x,
             M12 = 0,
             M21 = 0,

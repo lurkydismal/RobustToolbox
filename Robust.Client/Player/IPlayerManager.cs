@@ -49,5 +49,5 @@ public interface IPlayerManager : ISharedPlayerManager
     void SetLocalSession(ICommonSession session);
 
     [Obsolete("Use LocalSession instead")]
-    LocalPlayer? LocalPlayer { get;}
+    LocalPlayer? LocalPlayer { get; }
 }

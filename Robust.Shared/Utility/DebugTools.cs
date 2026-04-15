@@ -71,7 +71,7 @@ namespace Robust.Shared.Utility
         /// </summary>
         [Conditional("DEBUG")]
         public static void AssertEqual<T>(T? objA, T? objB)
-            where T: IEquatable<T>
+            where T : IEquatable<T>
         {
             if (objA == null && objB == null)
                 return;
@@ -86,7 +86,7 @@ namespace Robust.Shared.Utility
         /// </summary>
         [Conditional("DEBUG")]
         public static void AssertEqual<T>(T? objA, T? objB, string message)
-            where T: IEquatable<T>
+            where T : IEquatable<T>
         {
             if (objA == null && objB == null)
                 return;
@@ -133,7 +133,7 @@ namespace Robust.Shared.Utility
         /// </summary>
         [Conditional("DEBUG")]
         public static void AssertNotEqual<T>(T? objA, T? objB)
-            where T: IEquatable<T>
+            where T : IEquatable<T>
         {
             if (objA == null && objB == null)
                 throw new DebugAssertException("Expected: not null");
@@ -150,7 +150,7 @@ namespace Robust.Shared.Utility
         /// </summary>
         [Conditional("DEBUG")]
         public static void AssertNotEqual<T>(T? objA, T? objB, string message)
-            where T: IEquatable<T>
+            where T : IEquatable<T>
         {
             if (objA == null && objB == null)
                 throw new DebugAssertException($"{message}\nExpected: not null");
@@ -231,7 +231,7 @@ namespace Robust.Shared.Utility
         {
             if (arg == null)
             {
-                throw new DebugAssertException(message?? "value cannot be null");
+                throw new DebugAssertException(message ?? "value cannot be null");
             }
         }
 

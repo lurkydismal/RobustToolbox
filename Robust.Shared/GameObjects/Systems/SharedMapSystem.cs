@@ -70,7 +70,7 @@ namespace Robust.Shared.GameObjects
             DebugTools.Assert(chunkSize <= 8);
             DebugTools.Assert((index.X + index.Y * chunkSize) < 64);
 
-            return (ulong) 1 << (index.X + index.Y * chunkSize);
+            return (ulong)1 << (index.X + index.Y * chunkSize);
         }
 
         /// <returns>True if the specified bitflag is set for this index.</returns>

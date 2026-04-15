@@ -19,9 +19,9 @@ public abstract class ViewVariablesBaseCommand : LocalizedCommands
 
         var path = args[0];
 
-        if(_netMan.IsClient)
+        if (_netMan.IsClient)
         {
-            if(path.StartsWith("/c"))
+            if (path.StartsWith("/c"))
                 return CompletionResult.FromOptions(
                     _vvm.ListPath(path[2..], new())
                         .Select(p => new CompletionOption($"/c{p}", null, CompletionOptionFlags.PartialCompletion)));

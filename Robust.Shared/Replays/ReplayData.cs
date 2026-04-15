@@ -68,7 +68,7 @@ public sealed class ReplayData
 
     public GameTick LastApplied { get; internal set; }
 
-    public GameTick CurTick => new GameTick((uint) CurrentIndex + TickOffset.Value);
+    public GameTick CurTick => new GameTick((uint)CurrentIndex + TickOffset.Value);
     public GameState CurState => States[CurrentIndex];
     public GameState? NextState => CurrentIndex + 1 < States.Count ? States[CurrentIndex + 1] : null;
     public ReplayMessage CurMessages => Messages[CurrentIndex];

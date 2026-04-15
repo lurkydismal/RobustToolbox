@@ -171,7 +171,7 @@ namespace Robust.Shared.GameObjects
             get => MetaData?.EntityName ?? string.Empty;
             set
             {
-                if (MetaData is {} metaData)
+                if (MetaData is { } metaData)
                     IoCManager.Resolve<IEntityManager>().System<MetaDataSystem>().SetEntityName(this, value, metaData);
             }
         }

@@ -86,7 +86,7 @@ public sealed class FontTag : IMarkupTagHandler
         }
 
         if (node.Attributes.TryGetValue("size", out var sizeParameter))
-            size = (int) (sizeParameter.LongValue ?? size);
+            size = (int)(sizeParameter.LongValue ?? size);
 
         return size;
     }

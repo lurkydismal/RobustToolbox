@@ -87,7 +87,7 @@ namespace Robust.Client.Graphics.Clyde
             }
         }
 
-        public ClydeHandle LoadShader(ParsedShader shader, string? name = null, Dictionary<string,string>? defines = null)
+        public ClydeHandle LoadShader(ParsedShader shader, string? name = null, Dictionary<string, string>? defines = null)
         {
             var (vertBody, fragBody) = GetShaderCode(shader);
 
@@ -167,7 +167,7 @@ namespace Robust.Client.Graphics.Clyde
             var defaultLoadedShader = _resourceCache
                 .GetResource<ShaderSourceResource>("/Shaders/Internal/default-sprite.swsl");
 
-            _defaultShader = (ClydeShaderInstance) InstanceShader(defaultLoadedShader);
+            _defaultShader = (ClydeShaderInstance)InstanceShader(defaultLoadedShader);
 
             _queuedShaderInstance = _defaultShader;
         }
@@ -182,7 +182,7 @@ namespace Robust.Client.Graphics.Clyde
         }
 
         private GLShaderProgram _compileProgram(string vertexSource, string fragmentSource,
-            (string, uint)[] attribLocations, string? name = null, bool includeLib=true, Dictionary<string,string>? defines=null)
+            (string, uint)[] attribLocations, string? name = null, bool includeLib = true, Dictionary<string, string>? defines = null)
         {
             GLShader? vertexShader = null;
             GLShader? fragmentShader = null;

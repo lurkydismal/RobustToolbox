@@ -156,7 +156,7 @@ namespace Robust.Client.Graphics.Clyde
         /// </summary>
         private void _updateUniformConstants(in Vector2i screenSize)
         {
-            var constants = new UniformConstants(Vector2.One / screenSize, (float) _gameTiming.RealTime.TotalSeconds);
+            var constants = new UniformConstants(Vector2.One / screenSize, (float)_gameTiming.RealTime.TotalSeconds);
             UniformConstantsUBO.Reallocate(constants);
         }
 
@@ -625,7 +625,7 @@ namespace Robust.Client.Graphics.Clyde
             BatchVertexData[vIdx + 2] = new Vertex2D(tr, texCoords.TopRight, new Vector2(1, 1), modulate);
             BatchVertexData[vIdx + 3] = new Vertex2D(tl, texCoords.TopLeft, new Vector2(0, 1), modulate);
             BatchVertexIndex += 4;
-            QuadBatchIndexWrite(BatchIndexData, ref BatchIndexIndex, (ushort) vIdx);
+            QuadBatchIndexWrite(BatchIndexData, ref BatchIndexIndex, (ushort)vIdx);
 
             _debugStats.LastClydeDrawCalls += 1;
         }
@@ -648,7 +648,7 @@ namespace Robust.Client.Graphics.Clyde
                 var index = indices[i];
                 if (index != PrimitiveRestartIndex) // Don't offset primitive restart.
                 {
-                    index = (ushort) (index + BatchVertexIndex);
+                    index = (ushort)(index + BatchVertexIndex);
                 }
 
                 BatchIndexData[o] = index;
@@ -953,24 +953,24 @@ namespace Robust.Client.Graphics.Clyde
         private void SetBlendFunc(ShaderBlendMode blend)
         {
             switch (blend)
-                {
-                    case ShaderBlendMode.Add:
-                        GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.DstAlpha);
-                        break;
-                    case ShaderBlendMode.Subtract:
-                        GL.BlendFuncSeparate(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.DstAlpha, BlendingFactorSrc.Zero, BlendingFactorDest.DstAlpha);
-                        GL.BlendEquation(BlendEquationMode.FuncReverseSubtract);
-                        break;
-                    case ShaderBlendMode.Multiply:
-                        GL.BlendFunc(BlendingFactor.DstColor, BlendingFactor.OneMinusSrcAlpha);
-                        break;
-                    case ShaderBlendMode.None:
-                        GL.BlendFunc(BlendingFactor.One, BlendingFactor.Zero);
-                        break;
-                    case ShaderBlendMode.Normal:
-                        GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
-                        break;
-                }
+            {
+                case ShaderBlendMode.Add:
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.DstAlpha);
+                    break;
+                case ShaderBlendMode.Subtract:
+                    GL.BlendFuncSeparate(BlendingFactorSrc.SrcAlpha, BlendingFactorDest.DstAlpha, BlendingFactorSrc.Zero, BlendingFactorDest.DstAlpha);
+                    GL.BlendEquation(BlendEquationMode.FuncReverseSubtract);
+                    break;
+                case ShaderBlendMode.Multiply:
+                    GL.BlendFunc(BlendingFactor.DstColor, BlendingFactor.OneMinusSrcAlpha);
+                    break;
+                case ShaderBlendMode.None:
+                    GL.BlendFunc(BlendingFactor.One, BlendingFactor.Zero);
+                    break;
+                case ShaderBlendMode.Normal:
+                    GL.BlendFunc(BlendingFactor.SrcAlpha, BlendingFactor.OneMinusSrcAlpha);
+                    break;
+            }
         }
 
         private void ResetBlendFunc()

@@ -64,7 +64,7 @@ namespace Robust.Shared.Utility
             {
                 if (_filled)
                 {
-                    ((IEnumerator) _enumerator).Reset();
+                    ((IEnumerator)_enumerator).Reset();
                 }
             }
 

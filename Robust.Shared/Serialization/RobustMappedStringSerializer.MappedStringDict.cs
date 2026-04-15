@@ -107,7 +107,7 @@ namespace Robust.Shared.Serialization
                 for (var i = 0; i < count; ++i)
                 {
                     Primitives.ReadPrimitive(hasherStream, out uint lu);
-                    var l = (int) lu;
+                    var l = (int)lu;
                     var span = buf.AsSpan(0, l);
                     hasherStream.ReadExact(span);
 
@@ -132,7 +132,7 @@ namespace Robust.Shared.Serialization
                 using var zs = new ZStdCompressStream(stream, ownStream: false);
                 using var hasherStream = Blake2BHasherStream.CreateWriter(zs, ReadOnlySpan<byte>.Empty, 32);
 
-                Primitives.WritePrimitive(hasherStream, (uint) strings.Length);
+                Primitives.WritePrimitive(hasherStream, (uint)strings.Length);
 
                 foreach (var str in strings)
                 {
@@ -143,7 +143,7 @@ namespace Robust.Shared.Serialization
 
                     var l = Encoding.UTF8.GetBytes(str, buf);
 
-                    Primitives.WritePrimitive(hasherStream, (uint) l);
+                    Primitives.WritePrimitive(hasherStream, (uint)l);
                     hasherStream.Write(buf[..l]);
                 }
 
@@ -431,7 +431,7 @@ namespace Robust.Shared.Serialization
                             "A string mapping outside of the mapped string table was encountered.");
                     }
 #endif
-                    Primitives.WritePrimitive(stream, (uint) mapping + FirstMappedIndexStart);
+                    Primitives.WritePrimitive(stream, (uint)mapping + FirstMappedIndexStart);
                     StringsHitMetric.Inc();
                     //Logger.DebugS("szr", $"Encoded mapped string: {value}");
                     return;
@@ -463,7 +463,7 @@ namespace Robust.Shared.Serialization
                     return;
                 }
 
-                value = _mappedStrings![(int) mapIndex - FirstMappedIndexStart];
+                value = _mappedStrings![(int)mapIndex - FirstMappedIndexStart];
                 //Logger.DebugS("szr", $"Decoded mapped string: {value}");
             }
         }

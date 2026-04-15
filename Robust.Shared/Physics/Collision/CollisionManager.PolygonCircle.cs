@@ -21,115 +21,115 @@ internal sealed partial class CollisionManager
     {
         manifold.PointCount = 0;
 
-	    // Compute circle position in the frame of the polygon.
-	    var c = Transform.Mul(xfB, circleB.Position);
-	    var cLocal = Transform.MulT(xfA, c);
+        // Compute circle position in the frame of the polygon.
+        var c = Transform.Mul(xfB, circleB.Position);
+        var cLocal = Transform.MulT(xfA, c);
 
-	    // Find the min separating edge.
-	    int normalIndex = 0;
-	    float separation = float.MinValue;
-	    float radius = polygonA.Radius + circleB.Radius;
-	    int vertexCount = polygonA.VertexCount;
-	    var vertices = polygonA.Vertices;
-	    var normals = polygonA.Normals;
+        // Find the min separating edge.
+        int normalIndex = 0;
+        float separation = float.MinValue;
+        float radius = polygonA.Radius + circleB.Radius;
+        int vertexCount = polygonA.VertexCount;
+        var vertices = polygonA.Vertices;
+        var normals = polygonA.Normals;
 
-	    for (int i = 0; i < vertexCount; ++i)
-	    {
-		    float s = Vector2.Dot(normals[i], cLocal - vertices[i]);
+        for (int i = 0; i < vertexCount; ++i)
+        {
+            float s = Vector2.Dot(normals[i], cLocal - vertices[i]);
 
-		    if (s > radius)
-		    {
-			    // Early out.
-			    return;
-		    }
+            if (s > radius)
+            {
+                // Early out.
+                return;
+            }
 
-		    if (s > separation)
-		    {
-			    separation = s;
-			    normalIndex = i;
-		    }
-	    }
+            if (s > separation)
+            {
+                separation = s;
+                normalIndex = i;
+            }
+        }
 
-	    // Vertices that subtend the incident face.
-	    int vertIndex1 = normalIndex;
-	    int vertIndex2 = vertIndex1 + 1 < vertexCount ? vertIndex1 + 1 : 0;
-	    Vector2 v1 = vertices[vertIndex1];
-	    Vector2 v2 = vertices[vertIndex2];
+        // Vertices that subtend the incident face.
+        int vertIndex1 = normalIndex;
+        int vertIndex2 = vertIndex1 + 1 < vertexCount ? vertIndex1 + 1 : 0;
+        Vector2 v1 = vertices[vertIndex1];
+        Vector2 v2 = vertices[vertIndex2];
 
-	    // If the center is inside the polygon ...
-	    if (separation < float.Epsilon)
-	    {
-		    manifold.PointCount = 1;
-		    manifold.Type = ManifoldType.FaceA;
-		    manifold.LocalNormal = normals[normalIndex];
-		    manifold.LocalPoint = (v1 + v2) * 0.5f;
+        // If the center is inside the polygon ...
+        if (separation < float.Epsilon)
+        {
+            manifold.PointCount = 1;
+            manifold.Type = ManifoldType.FaceA;
+            manifold.LocalNormal = normals[normalIndex];
+            manifold.LocalPoint = (v1 + v2) * 0.5f;
 
             ref var p0 = ref manifold.Points._00;
 
-		    p0.LocalPoint = circleB.Position;
-		    p0.Id.Key = 0;
-		    return;
-	    }
+            p0.LocalPoint = circleB.Position;
+            p0.Id.Key = 0;
+            return;
+        }
 
-	    // Compute barycentric coordinates
-	    float u1 = Vector2.Dot(cLocal - v1, v2 - v1);
-	    float u2 = Vector2.Dot(cLocal - v2, v1 - v2);
-	    if (u1 <= 0.0f)
+        // Compute barycentric coordinates
+        float u1 = Vector2.Dot(cLocal - v1, v2 - v1);
+        float u2 = Vector2.Dot(cLocal - v2, v1 - v2);
+        if (u1 <= 0.0f)
         {
             var sergal = (cLocal - v1);
 
-		    if (sergal.LengthSquared() > radius * radius)
-		    {
-			    return;
-		    }
+            if (sergal.LengthSquared() > radius * radius)
+            {
+                return;
+            }
 
-		    manifold.PointCount = 1;
-		    manifold.Type = ManifoldType.FaceA;
-		    manifold.LocalNormal = (cLocal - v1).Normalized();
+            manifold.PointCount = 1;
+            manifold.Type = ManifoldType.FaceA;
+            manifold.LocalNormal = (cLocal - v1).Normalized();
             manifold.LocalPoint = v1;
 
             ref var p0 = ref manifold.Points._00;
 
-		    p0.LocalPoint = circleB.Position;
-		    p0.Id.Key = 0;
-	    }
-	    else if (u2 <= 0.0f)
+            p0.LocalPoint = circleB.Position;
+            p0.Id.Key = 0;
+        }
+        else if (u2 <= 0.0f)
         {
             var sergal = (cLocal - v2);
 
-		    if (sergal.LengthSquared() > radius * radius)
-		    {
-			    return;
-		    }
+            if (sergal.LengthSquared() > radius * radius)
+            {
+                return;
+            }
 
-		    manifold.PointCount = 1;
-		    manifold.Type = ManifoldType.FaceA;
-		    manifold.LocalNormal = (cLocal - v2).Normalized();
+            manifold.PointCount = 1;
+            manifold.Type = ManifoldType.FaceA;
+            manifold.LocalNormal = (cLocal - v2).Normalized();
             manifold.LocalPoint = v2;
 
             ref var p0 = ref manifold.Points._00;
 
-		    p0.LocalPoint = circleB.Position;
-		    p0.Id.Key = 0;
-	    }
-	    else
-	    {
-		    Vector2 faceCenter = (v1 + v2) * 0.5f;
-		    float s = Vector2.Dot(cLocal - faceCenter, normals[vertIndex1]);
-		    if (s > radius)
-		    {
-			    return;
-		    }
+            p0.LocalPoint = circleB.Position;
+            p0.Id.Key = 0;
+        }
+        else
+        {
+            Vector2 faceCenter = (v1 + v2) * 0.5f;
+            float s = Vector2.Dot(cLocal - faceCenter, normals[vertIndex1]);
+            if (s > radius)
+            {
+                return;
+            }
 
-		    manifold.PointCount = 1;
-		    manifold.Type = ManifoldType.FaceA;
-		    manifold.LocalNormal = normals[vertIndex1];
-		    manifold.LocalPoint = faceCenter;
+            manifold.PointCount = 1;
+            manifold.Type = ManifoldType.FaceA;
+            manifold.LocalNormal = normals[vertIndex1];
+            manifold.LocalPoint = faceCenter;
 
             ref var p0 = ref manifold.Points._00;
 
-		    p0.LocalPoint = circleB.Position;
+            p0.LocalPoint = circleB.Position;
             p0.Id.Key = 0;
-	    }
+        }
     }
 }

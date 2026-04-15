@@ -20,10 +20,10 @@ public abstract class VfsCommand : ToolshedCommand
     /// </summary>
     public const string UserVfsLocVariableName = "user_vfs_loc";
 
-    protected ResPath CurrentPath(IInvocationContext ctx) => ((ResPath?) ctx.ReadVar(UserVfsLocVariableName)) ?? ResPath.Root;
+    protected ResPath CurrentPath(IInvocationContext ctx) => ((ResPath?)ctx.ReadVar(UserVfsLocVariableName)) ?? ResPath.Root;
 
     protected void SetPath(IInvocationContext ctx, ResPath path)
     {
-        ctx.WriteVar(UserVfsLocVariableName, (ResPath?) path.Clean());
+        ctx.WriteVar(UserVfsLocVariableName, (ResPath?)path.Clean());
     }
 }

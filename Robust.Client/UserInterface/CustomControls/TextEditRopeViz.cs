@@ -92,41 +92,41 @@ internal sealed class TextEditRopeViz : OSWindow
             switch (node)
             {
                 case Rope.Branch branch:
-                {
-                    var depthOffset = 20 + (totalDepth - depth) * 4;
-                    var leftWidth = DrawNode(branch.Left, offset + new Vector2(0, depthOffset), depth + 1, out var leftPos);
-                    var rightWidth = 0f;
-                    Vector2? rightPos = null;
-                    if (branch.Right is { } right)
                     {
-                        rightWidth = DrawNode(right, offset + new Vector2(leftWidth, depthOffset), depth + 1, out var rightPosOut);
-                        rightPos = rightPosOut;
+                        var depthOffset = 20 + (totalDepth - depth) * 4;
+                        var leftWidth = DrawNode(branch.Left, offset + new Vector2(0, depthOffset), depth + 1, out var leftPos);
+                        var rightWidth = 0f;
+                        Vector2? rightPos = null;
+                        if (branch.Right is { } right)
+                        {
+                            rightWidth = DrawNode(right, offset + new Vector2(leftWidth, depthOffset), depth + 1, out var rightPosOut);
+                            rightPos = rightPosOut;
+                        }
+
+                        nodePos = offset + new Vector2(leftWidth, 0);
+                        handle.DrawLine(nodePos, leftPos, Color.DarkGray);
+
+                        if (rightPos is { } rp)
+                        {
+                            handle.DrawLine(nodePos, rp, Color.DarkGray);
+                        }
+                        else
+                        {
+                            handle.DrawLine(nodePos, nodePos + new Vector2(10, 10), Color.Red);
+                        }
+
+                        handle.DrawRect(new UIBox2(nodePos - new Vector2(1, 1), nodePos + new Vector2(2, 2)), Color.White);
+
+                        return leftWidth + rightWidth;
                     }
-
-                    nodePos = offset + new Vector2(leftWidth, 0);
-                    handle.DrawLine(nodePos, leftPos, Color.DarkGray);
-
-                    if (rightPos is { } rp)
-                    {
-                        handle.DrawLine(nodePos, rp, Color.DarkGray);
-                    }
-                    else
-                    {
-                        handle.DrawLine(nodePos, nodePos + new Vector2(10, 10), Color.Red);
-                    }
-
-                    handle.DrawRect(new UIBox2(nodePos - new Vector2(1, 1), nodePos + new Vector2(2, 2)), Color.White);
-
-                    return leftWidth + rightWidth;
-                }
                 case Rope.Leaf leaf:
-                {
-                    var colorIdx = leaf.Text.Length;
-                    var color = colorIdx < LeafColors.Length ? LeafColors[colorIdx] : LeafColors[^1];
-                    handle.DrawRect(new UIBox2(offset - new Vector2(2, 2), offset + new Vector2(3, 3)), color);
-                    nodePos = offset;
-                    return 6;
-                }
+                    {
+                        var colorIdx = leaf.Text.Length;
+                        var color = colorIdx < LeafColors.Length ? LeafColors[colorIdx] : LeafColors[^1];
+                        handle.DrawRect(new UIBox2(offset - new Vector2(2, 2), offset + new Vector2(3, 3)), color);
+                        nodePos = offset;
+                        return 6;
+                    }
                 default:
                     throw new ArgumentOutOfRangeException(nameof(node));
             }

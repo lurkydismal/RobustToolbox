@@ -26,34 +26,34 @@ internal sealed class ViewVariableControlFactory : IViewVariableControlFactory
 
     public ViewVariableControlFactory()
     {
-        RegisterForType<sbyte>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.SByte));
-        RegisterForType<byte>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Byte));
-        RegisterForType<ushort>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.UShort));
-        RegisterForType<short>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Short));
-        RegisterForType<uint>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.UInt));
-        RegisterForType<int>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Int));
-        RegisterForType<ulong>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.ULong));
-        RegisterForType<long>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Long));
-        RegisterForType<float>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Float));
-        RegisterForType<float>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Float));
-        RegisterForType<double>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Double));
-        RegisterForType<decimal>(_ =>  new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Decimal));
-        RegisterForType<string>(_ =>  new VVPropEditorString());
-        RegisterForType<EntProtoId?>(_ =>  new VVPropEditorNullableEntProtoId());
-        RegisterForType<EntProtoId>(_ =>  new VVPropEditorEntProtoId());
-        RegisterForType<Vector2>(_ =>  new VVPropEditorVector2(intVec: false));
-        RegisterForType<Vector2i>(_ =>  new VVPropEditorVector2(intVec: true));
-        RegisterForType<bool>(_ =>  new VVPropEditorBoolean());
-        RegisterForType<Angle>(_ =>  new VVPropEditorAngle());
-        RegisterForType<Box2>(_ =>  new VVPropEditorUIBox2(VVPropEditorUIBox2.BoxType.Box2));
-        RegisterForType<Box2i>(_ =>  new VVPropEditorUIBox2(VVPropEditorUIBox2.BoxType.Box2i));
-        RegisterForType<UIBox2>(_ =>  new VVPropEditorUIBox2(VVPropEditorUIBox2.BoxType.UIBox2));
-        RegisterForType<UIBox2i>(_ =>  new VVPropEditorUIBox2(VVPropEditorUIBox2.BoxType.UIBox2i));
-        RegisterForType<EntityCoordinates>(_ =>  new VVPropEditorEntityCoordinates());
-        RegisterForType<EntityUid>(_ =>  new VVPropEditorEntityUid());
-        RegisterForType<NetEntity>(_ =>  new VVPropEditorNetEntity());
-        RegisterForType<Color>(_ =>  new VVPropEditorColor());
-        RegisterForType<TimeSpan>(_ =>  new VVPropEditorTimeSpan());
+        RegisterForType<sbyte>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.SByte));
+        RegisterForType<byte>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Byte));
+        RegisterForType<ushort>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.UShort));
+        RegisterForType<short>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Short));
+        RegisterForType<uint>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.UInt));
+        RegisterForType<int>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Int));
+        RegisterForType<ulong>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.ULong));
+        RegisterForType<long>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Long));
+        RegisterForType<float>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Float));
+        RegisterForType<float>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Float));
+        RegisterForType<double>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Double));
+        RegisterForType<decimal>(_ => new VVPropEditorNumeric(VVPropEditorNumeric.NumberType.Decimal));
+        RegisterForType<string>(_ => new VVPropEditorString());
+        RegisterForType<EntProtoId?>(_ => new VVPropEditorNullableEntProtoId());
+        RegisterForType<EntProtoId>(_ => new VVPropEditorEntProtoId());
+        RegisterForType<Vector2>(_ => new VVPropEditorVector2(intVec: false));
+        RegisterForType<Vector2i>(_ => new VVPropEditorVector2(intVec: true));
+        RegisterForType<bool>(_ => new VVPropEditorBoolean());
+        RegisterForType<Angle>(_ => new VVPropEditorAngle());
+        RegisterForType<Box2>(_ => new VVPropEditorUIBox2(VVPropEditorUIBox2.BoxType.Box2));
+        RegisterForType<Box2i>(_ => new VVPropEditorUIBox2(VVPropEditorUIBox2.BoxType.Box2i));
+        RegisterForType<UIBox2>(_ => new VVPropEditorUIBox2(VVPropEditorUIBox2.BoxType.UIBox2));
+        RegisterForType<UIBox2i>(_ => new VVPropEditorUIBox2(VVPropEditorUIBox2.BoxType.UIBox2i));
+        RegisterForType<EntityCoordinates>(_ => new VVPropEditorEntityCoordinates());
+        RegisterForType<EntityUid>(_ => new VVPropEditorEntityUid());
+        RegisterForType<NetEntity>(_ => new VVPropEditorNetEntity());
+        RegisterForType<Color>(_ => new VVPropEditorColor());
+        RegisterForType<TimeSpan>(_ => new VVPropEditorTimeSpan());
 
         RegisterWithCondition(
             type => type != typeof(ViewVariablesBlobMembers.ServerValueTypeToken),

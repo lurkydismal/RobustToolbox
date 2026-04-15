@@ -25,7 +25,8 @@ namespace Robust.Analyzers
             SyntaxKind.OverrideKeyword
         };
 
-        [SuppressMessage("ReSharper", "RS2008")] private static readonly DiagnosticDescriptor Rule = new(
+        [SuppressMessage("ReSharper", "RS2008")]
+        private static readonly DiagnosticDescriptor Rule = new(
             Diagnostics.IdExplicitInterface,
             "No explicit interface specified",
             "No explicit interface specified",

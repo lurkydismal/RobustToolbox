@@ -15,7 +15,7 @@ public static class Vector2Helpers
     /// </summary>
     public static readonly Vector2 Half = new(0.5f, 0.5f);
 
-	[Pure]
+    [Pure]
     public static bool IsValid(this Vector2 v)
     {
         if (float.IsNaN(v.X) || float.IsNaN(v.Y))
@@ -37,7 +37,7 @@ public static class Vector2Helpers
     {
         return new Vector2(a.X + s * b.X, a.Y + s * b.Y);
     }
-    
+
     public static Vector2 GetLengthAndNormalize(this Vector2 v, ref float length)
     {
         length = v.Length();
@@ -317,13 +317,13 @@ public static class Vector2Helpers
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2i Floored(this Vector2 vec)
     {
-        return new Vector2i((int) MathF.Floor(vec.X), (int) MathF.Floor(vec.Y));
+        return new Vector2i((int)MathF.Floor(vec.X), (int)MathF.Floor(vec.Y));
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2i Ceiled(this Vector2 vec)
     {
-        return new Vector2i((int) MathF.Ceiling(vec.X), (int) MathF.Ceiling(vec.Y));
+        return new Vector2i((int)MathF.Ceiling(vec.X), (int)MathF.Ceiling(vec.Y));
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]

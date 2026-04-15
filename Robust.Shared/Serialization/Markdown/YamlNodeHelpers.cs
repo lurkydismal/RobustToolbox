@@ -21,7 +21,7 @@ namespace Robust.Shared.Serialization.Markdown
 
         public static T ToDataNodeCast<T>(this YamlNode node) where T : DataNode
         {
-            return (T) node.ToDataNode();
+            return (T)node.ToDataNode();
         }
 
         public static YamlNode ToYamlNode(this DataNode node)

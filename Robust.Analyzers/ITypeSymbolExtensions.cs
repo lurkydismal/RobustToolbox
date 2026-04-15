@@ -2,7 +2,7 @@ using Microsoft.CodeAnalysis;
 
 namespace Robust.Analyzers;
 
-public static  class ITypeSymbolExtensions
+public static class ITypeSymbolExtensions
 {
     public static IEnumerable<ITypeSymbol> GetBaseTypesAndThis(this ITypeSymbol type)
     {

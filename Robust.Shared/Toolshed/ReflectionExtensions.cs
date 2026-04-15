@@ -58,7 +58,7 @@ internal static class ReflectionExtensions
             }
         }
 
-        var newArgs = (Type[]) args.Clone();
+        var newArgs = (Type[])args.Clone();
 
         foreach (var type in toolshed.AllSteppedTypes(args[variant], false))
         {
@@ -281,13 +281,13 @@ internal static class ReflectionExtensions
             foreach (var (leftTy, rightTy) in left.GenericTypeArguments.Zip(right.GenericTypeArguments))
             {
                 if (leftTy.IntersectWithGeneric(rightTy, toolshed, false) is var outType && outType is not null)
-                    res = [ .. res ?? [], .. outType ];
+                    res = [.. res ?? [], .. outType];
             }
 
             return res;
         }
 
-        next:
+    next:
         if (recursiveDescent)
         {
             foreach (var leftSubTy in toolshed.AllSteppedTypes(left))

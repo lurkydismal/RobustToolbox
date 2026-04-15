@@ -11,7 +11,7 @@ internal sealed class LsCommand : VfsCommand
     public IEnumerable<ResPath> LsHere(IInvocationContext ctx)
     {
         var curPath = CurrentPath(ctx);
-        return Resources.ContentGetDirectoryEntries(curPath).Select(x => curPath/x);
+        return Resources.ContentGetDirectoryEntries(curPath).Select(x => curPath / x);
     }
 
     [CommandImplementation("in")]
@@ -26,6 +26,6 @@ internal sealed class LsCommand : VfsCommand
         {
             curPath /= @in;
         }
-        return Resources.ContentGetDirectoryEntries(curPath).Select(x => curPath/x);
+        return Resources.ContentGetDirectoryEntries(curPath).Select(x => curPath / x);
     }
 }

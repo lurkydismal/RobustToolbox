@@ -13,7 +13,7 @@ namespace Robust.Client.Utility
 {
     internal sealed class DiscordRichPresence : IDiscordRichPresence
     {
-        private static RichPresence _defaultPresence = new() {};
+        private static RichPresence _defaultPresence = new() { };
 
         private RichPresence? _activePresence;
 

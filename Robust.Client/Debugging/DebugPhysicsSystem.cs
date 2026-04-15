@@ -466,10 +466,10 @@ namespace Robust.Client.Debugging
             switch (args.Space)
             {
                 case OverlaySpace.ScreenSpace:
-                    DrawScreen((DrawingHandleScreen) args.DrawingHandle, args);
+                    DrawScreen((DrawingHandleScreen)args.DrawingHandle, args);
                     break;
                 case OverlaySpace.WorldSpace:
-                    DrawWorld((DrawingHandleWorld) args.DrawingHandle, args);
+                    DrawWorld((DrawingHandleWorld)args.DrawingHandle, args);
                     break;
             }
         }
@@ -479,35 +479,35 @@ namespace Robust.Client.Debugging
             switch (fixture.Shape)
             {
                 case ChainShape cShape:
-                {
-                    var count = cShape.Count;
-                    var vertices = cShape.Vertices;
-
-                    var v1 = Transform.Mul(xform, vertices[0]);
-                    for (var i = 1; i < count; ++i)
                     {
-                        var v2 = Transform.Mul(xform, vertices[i]);
-                        worldHandle.DrawLine(v1, v2, color);
-                        v1 = v2;
+                        var count = cShape.Count;
+                        var vertices = cShape.Vertices;
+
+                        var v1 = Transform.Mul(xform, vertices[0]);
+                        for (var i = 1; i < count; ++i)
+                        {
+                            var v2 = Transform.Mul(xform, vertices[i]);
+                            worldHandle.DrawLine(v1, v2, color);
+                            v1 = v2;
+                        }
                     }
-                }
                     break;
                 case PhysShapeCircle circle:
                     var center = Transform.Mul(xform, circle.Position);
                     worldHandle.DrawCircle(center, circle.Radius, color);
                     break;
                 case EdgeShape edge:
-                {
-                    var v1 = Transform.Mul(xform, edge.Vertex1);
-                    var v2 = Transform.Mul(xform, edge.Vertex2);
-                    worldHandle.DrawLine(v1, v2, color);
-
-                    if (edge.OneSided)
                     {
-                        worldHandle.DrawCircle(v1, 0.1f, color);
-                        worldHandle.DrawCircle(v2, 0.1f, color);
+                        var v1 = Transform.Mul(xform, edge.Vertex1);
+                        var v2 = Transform.Mul(xform, edge.Vertex2);
+                        worldHandle.DrawLine(v1, v2, color);
+
+                        if (edge.OneSided)
+                        {
+                            worldHandle.DrawCircle(v1, 0.1f, color);
+                            worldHandle.DrawCircle(v2, 0.1f, color);
+                        }
                     }
-                }
 
                     break;
                 case PolygonShape poly:

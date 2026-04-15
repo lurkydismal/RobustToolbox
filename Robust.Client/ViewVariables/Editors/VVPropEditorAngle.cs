@@ -16,7 +16,7 @@ namespace Robust.Client.ViewVariables.Editors
                 Orientation = LayoutOrientation.Horizontal,
                 MinSize = new Vector2(200, 0)
             };
-            var angle = (Angle) value!;
+            var angle = (Angle)value!;
             var lineEdit = new LineEdit
             {
                 Text = angle.Degrees.ToString(CultureInfo.InvariantCulture),
@@ -35,7 +35,7 @@ namespace Robust.Client.ViewVariables.Editors
             }
 
             hBox.AddChild(lineEdit);
-            hBox.AddChild(new Label {Text = "deg"});
+            hBox.AddChild(new Label { Text = "deg" });
             return hBox;
         }
     }

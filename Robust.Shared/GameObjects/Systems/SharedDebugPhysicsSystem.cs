@@ -9,6 +9,6 @@ namespace Robust.Shared.GameObjects
     /// </summary>
     public abstract class SharedDebugPhysicsSystem : EntitySystem
     {
-        public virtual void HandlePreSolve(Contact contact, in Manifold oldManifold) {}
+        public virtual void HandlePreSolve(Contact contact, in Manifold oldManifold) { }
     }
 }

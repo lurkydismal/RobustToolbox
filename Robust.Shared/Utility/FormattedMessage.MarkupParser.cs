@@ -130,10 +130,10 @@ public sealed partial class FormattedMessage
     private static readonly Parser<char, List<MarkupNode>> Text =
          EscapeSequence.Or(Token(c => c != '[' && c != '\\'))
                 .AtLeastOnceString()
-                .Select(s => new List<MarkupNode>{new(s)});
+                .Select(s => new List<MarkupNode> { new(s) });
 
     //Parses a string of letters or digits beginning with a letter
-	private static readonly Parser<char, string> Identifier =
+    private static readonly Parser<char, string> Identifier =
         Parser.Map(
             (first, rest) => first + rest,
             Token(char.IsLetter),
@@ -179,7 +179,7 @@ public sealed partial class FormattedMessage
             KeyValuePair,
             KeyValuePair.Many(),
             OneOf(
-                SlashEnd.Select(_ =>  true),
+                SlashEnd.Select(_ => true),
                 End.Select(_ => false)
             )
         );
@@ -191,7 +191,7 @@ public sealed partial class FormattedMessage
         .Between(SkipWhitespaces)
         .Between(Slash, End)
         .Select(name => new MarkupNode(name, null, null, true))
-        .Select(tag => new List<MarkupNode>{tag});
+        .Select(tag => new List<MarkupNode> { tag });
 
 
     //This parses a non text node by first parsing a [ and then either an 'OpeningTag' or 'ClosingTag'
@@ -208,7 +208,7 @@ public sealed partial class FormattedMessage
     private static readonly Parser<char, List<MarkupNode>> ParseNodesSafe =
         Text
         .Or(Try(Tag)
-        .Or(Any.Select(char.ToString).Select(c => new List<MarkupNode>{new(c)}))).Many().Select(FlattenTagLists);
+        .Or(Any.Select(char.ToString).Select(c => new List<MarkupNode> { new(c) }))).Many().Select(FlattenTagLists);
 
 
     /// <summary>
@@ -219,7 +219,7 @@ public sealed partial class FormattedMessage
     /// <param name="attributesEnumerator">A list of attributes</param>
     /// <param name="selfClosing">Whether the node is self closing or node. Self closing nodes immediately </param>
     /// <returns></returns>
-    private static List<MarkupNode> CreateTag(string name, MarkupParameter parameter, IEnumerable<TagInfo> attributesEnumerator,  bool selfClosing)
+    private static List<MarkupNode> CreateTag(string name, MarkupParameter parameter, IEnumerable<TagInfo> attributesEnumerator, bool selfClosing)
     {
         var attributes = new Dictionary<string, MarkupParameter>();
 

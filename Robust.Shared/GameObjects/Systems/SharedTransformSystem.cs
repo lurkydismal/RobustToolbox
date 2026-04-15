@@ -72,7 +72,7 @@ namespace Robust.Shared.GameObjects
         {
             foreach (var change in e.Changes)
             {
-                if(change.NewTile != Tile.Empty)
+                if (change.NewTile != Tile.Empty)
                     continue;
 
                 // TODO optimize this for when multiple tiles get empties simultaneously (e.g., explosions).
@@ -220,7 +220,7 @@ namespace Robust.Shared.GameObjects
         /// </summary>
         public Vector2i GetGridOrMapTilePosition(EntityUid uid, TransformComponent? xform = null)
         {
-            if(!Resolve(uid, ref xform, false))
+            if (!Resolve(uid, ref xform, false))
                 return Vector2i.Zero;
 
             // Fast path, we're not on a grid.
@@ -237,7 +237,7 @@ namespace Robust.Shared.GameObjects
         public Vector2i GetGridTilePositionOrDefault(Entity<TransformComponent?> entity, MapGridComponent? grid = null)
         {
             var xform = entity.Comp;
-            if(!Resolve(entity.Owner, ref xform) || xform.GridUid == null)
+            if (!Resolve(entity.Owner, ref xform) || xform.GridUid == null)
                 return Vector2i.Zero;
 
             if (!Resolve(xform.GridUid.Value, ref grid))
@@ -253,7 +253,7 @@ namespace Robust.Shared.GameObjects
         {
             indices = default;
             var xform = entity.Comp;
-            if(!Resolve(entity.Owner, ref xform) || xform.GridUid == null)
+            if (!Resolve(entity.Owner, ref xform) || xform.GridUid == null)
                 return false;
 
             if (!Resolve(xform.GridUid.Value, ref grid))

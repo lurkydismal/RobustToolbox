@@ -129,10 +129,10 @@ internal sealed partial class CollisionManager : IManifoldManager
             cv.V.Y = v0.V.Y + interp * (v1.V.Y - v0.V.Y);
 
             // VertexA is hitting edgeB.
-            cv.ID.Features.IndexA = (byte) vertexIndexA;
+            cv.ID.Features.IndexA = (byte)vertexIndexA;
             cv.ID.Features.IndexB = v0.ID.Features.IndexB;
-            cv.ID.Features.TypeA = (byte) ContactFeatureType.Vertex;
-            cv.ID.Features.TypeB = (byte) ContactFeatureType.Face;
+            cv.ID.Features.TypeA = (byte)ContactFeatureType.Vertex;
+            cv.ID.Features.TypeB = (byte)ContactFeatureType.Face;
 
             ++numOut;
         }

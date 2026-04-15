@@ -99,7 +99,7 @@ public class Block<T>(CommandRun expr) : Block(expr)
         var res = Run.Invoke(null, ctx);
         if (res is null)
             return default;
-        return (T?) res;
+        return (T?)res;
     }
 }
 
@@ -124,6 +124,6 @@ public class Block<TIn, TOut>(CommandRun expr) : Block(expr)
         var res = Run.Invoke(input, ctx);
         if (res is null)
             return default;
-        return (TOut?) res;
+        return (TOut?)res;
     }
 }

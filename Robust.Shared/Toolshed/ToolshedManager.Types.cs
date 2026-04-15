@@ -49,7 +49,7 @@ public sealed partial class ToolshedManager
         if (to.IsGenericType(typeof(IEnumerable<>)))
         {
             var toInner = to.GenericTypeArguments[0];
-            var tys = new[] {toInner};
+            var tys = new[] { toInner };
             return Expression.Convert(
                 Expression.New(
                     typeof(UnitEnumerable<>).MakeGenericType(tys).GetConstructor(tys)!,

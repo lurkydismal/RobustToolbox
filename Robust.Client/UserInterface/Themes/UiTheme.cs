@@ -24,7 +24,7 @@ public sealed partial class UITheme : IPrototype
     //this is used for ease of access
     public const string DefaultPath = "/Textures/Interface";
     public const string DefaultName = "Default";
-    public static ResPath DefaultThemePath = new ($"{DefaultPath}/{DefaultName}");
+    public static ResPath DefaultThemePath = new($"{DefaultPath}/{DefaultName}");
 
     [ViewVariables]
     [IdDataField]
@@ -35,13 +35,13 @@ public sealed partial class UITheme : IPrototype
 
     [DataField("colors", readOnly: true)] // This is a prototype, why is this readonly??
     public FrozenDictionary<string, Color>? Colors;
-    public ResPath Path => _path == default ? new ResPath(DefaultPath+"/"+ID) : _path;
+    public ResPath Path => _path == default ? new ResPath(DefaultPath + "/" + ID) : _path;
 
     private void ValidateFilePath(IResourceManager manager)
     {
         var foundFolders = manager.ContentFindFiles(Path.ToRootedPath());
         if (!foundFolders.Any())
-            throw new Exception("UITheme: "+ID+" not found in resources!");
+            throw new Exception("UITheme: " + ID + " not found in resources!");
     }
 
     public Texture ResolveTexture(string texturePath)
@@ -76,10 +76,10 @@ public sealed partial class UITheme : IPrototype
         var resPath = new ResPath(texturePath);
         if (resPath.IsRelative)
         {
-            if (_cache.TryGetResource( Path / resPath, out texture))
+            if (_cache.TryGetResource(Path / resPath, out texture))
                 return true;
 
-            if (_cache.TryGetResource( DefaultThemePath / resPath, out texture))
+            if (_cache.TryGetResource(DefaultThemePath / resPath, out texture))
                 return true;
         }
 

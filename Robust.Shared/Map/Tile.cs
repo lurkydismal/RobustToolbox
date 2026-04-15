@@ -155,5 +155,5 @@ public readonly struct Tile : IEquatable<Tile>, ISpanFormattable
     }
 }
 
-public sealed class TileFlagLayer {}
+public sealed class TileFlagLayer { }
 

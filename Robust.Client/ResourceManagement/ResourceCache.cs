@@ -30,7 +30,7 @@ internal sealed partial class ResourceCache : ResourceManager, IResourceCacheInt
         var cache = GetTypeData<T>();
         if (cache.Resources.TryGetValue(path, out var cached))
         {
-            return (T) cached;
+            return (T)cached;
         }
 
         var resource = new T();
@@ -68,7 +68,7 @@ internal sealed partial class ResourceCache : ResourceManager, IResourceCacheInt
         var cache = GetTypeData<T>();
         if (cache.Resources.TryGetValue(path, out var cached))
         {
-            resource = (T) cached;
+            resource = (T)cached;
             return true;
         }
 
@@ -157,7 +157,7 @@ internal sealed partial class ResourceCache : ResourceManager, IResourceCacheInt
     {
         if (_fallbacks.TryGetValue(typeof(T), out var fallback))
         {
-            return (T) fallback;
+            return (T)fallback;
         }
 
         var res = new T();
@@ -168,12 +168,12 @@ internal sealed partial class ResourceCache : ResourceManager, IResourceCacheInt
 
         fallback = GetResource<T>(res.Fallback.Value, useFallback: false);
         _fallbacks.Add(typeof(T), fallback);
-        return (T) fallback;
+        return (T)fallback;
     }
 
     public IEnumerable<KeyValuePair<ResPath, T>> GetAllResources<T>() where T : BaseResource, new()
     {
-        return GetTypeData<T>().Resources.Select(p => new KeyValuePair<ResPath, T>(p.Key, (T) p.Value));
+        return GetTypeData<T>().Resources.Select(p => new KeyValuePair<ResPath, T>(p.Key, (T)p.Value));
     }
 
     public event Action<TextureLoadedEventArgs>? OnRawTextureLoaded;

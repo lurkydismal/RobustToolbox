@@ -42,12 +42,12 @@ public sealed class MultiRootInheritanceGraph<T> where T : notnull
                 throw new InvalidOperationException($"Self Inheritance detected for id \"{id}\"!");
 
             var parentsL1 = GetParents(parent);
-            if(parentsL1 == null) continue;
+            if (parentsL1 == null) continue;
 
             var queue = new Queue<T>(parentsL1);
             while (queue.TryDequeue(out var parentL1))
             {
-                if (EqualityComparer<T>.Default.Equals(parentL1,id))
+                if (EqualityComparer<T>.Default.Equals(parentL1, id))
                     throw new InvalidOperationException(
                         $"Circular Inheritance detected for id \"{id}\" and parent \"{parent}\"");
                 var parentsL2 = GetParents(parentL1);
@@ -103,7 +103,7 @@ public sealed class MultiRootInheritanceGraph<T> where T : notnull
                     var i = 0;
                     foreach (var childParent in childParents)
                     {
-                        if(Equals(childParent, id)) continue;
+                        if (Equals(childParent, id)) continue;
                         newParents[i++] = childParent;
                     }
 

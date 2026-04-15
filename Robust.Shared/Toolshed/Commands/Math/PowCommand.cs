@@ -9,7 +9,7 @@ namespace Robust.Shared.Toolshed.Commands.Math;
 public sealed class PowCommand : ToolshedCommand
 {
     [CommandImplementation, TakesPipedTypeAsGeneric]
-    public T Operation<T>([PipedArgument] T x,T y) where T : IPowerFunctions<T>
+    public T Operation<T>([PipedArgument] T x, T y) where T : IPowerFunctions<T>
     {
         return T.Pow(x, y);
     }

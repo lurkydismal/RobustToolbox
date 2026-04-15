@@ -58,7 +58,7 @@ public record struct NearestChunkEnumerator
             return false;
         }
 
-        indices = _chunks[_n++] ;
+        indices = _chunks[_n++];
         return true;
     }
 }

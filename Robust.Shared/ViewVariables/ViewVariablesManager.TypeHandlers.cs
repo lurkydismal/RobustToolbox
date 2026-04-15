@@ -7,7 +7,7 @@ namespace Robust.Shared.ViewVariables;
 
 internal abstract partial class ViewVariablesManager
 {
-    private readonly Dictionary<Type,  ViewVariablesTypeHandler> _typeHandlers = new();
+    private readonly Dictionary<Type, ViewVariablesTypeHandler> _typeHandlers = new();
 
     public ViewVariablesTypeHandler<T> GetTypeHandler<T>()
     {

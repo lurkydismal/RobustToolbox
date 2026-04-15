@@ -26,7 +26,7 @@ namespace Robust.Client.UserInterface.CustomControls
         public EntityPrototype? SelectedPrototype;
 
         [Obsolete("Use IPlacementManager.AllModeNames")]
-        public static string[] InitOpts =>IoCManager.Resolve<IPlacementManager>().AllModeNames;
+        public static string[] InitOpts => IoCManager.Resolve<IPlacementManager>().AllModeNames;
         public EntitySpawnWindow()
         {
             RobustXamlLoader.Load(this);

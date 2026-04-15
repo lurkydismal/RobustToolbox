@@ -114,7 +114,7 @@ public sealed partial class SpriteSystem
             return RsiDirectionType.Dir1;
 
         // Pull texture from RSI state instead.
-        if (layer.ActualRsi is not {} rsi || !rsi.TryGetState(layer.StateId, out var state))
+        if (layer.ActualRsi is not { } rsi || !rsi.TryGetState(layer.StateId, out var state))
             return RsiDirectionType.Dir1;
 
         return state.RsiDirections;

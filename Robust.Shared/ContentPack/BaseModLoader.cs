@@ -41,7 +41,7 @@ namespace Robust.Shared.ContentPack
 
             foreach (var entryPoint in entryPoints)
             {
-                var entryPointInstance = (GameShared) Activator.CreateInstance(entryPoint)!;
+                var entryPointInstance = (GameShared)Activator.CreateInstance(entryPoint)!;
                 entryPointInstance.Dependencies = _dependencies;
                 if (_testingCallbacks != null)
                 {

@@ -59,8 +59,8 @@ namespace Robust.Client.Graphics
 
         public readonly IRenderHandle RenderHandle;
 
-        public DrawingHandleScreen ScreenHandle => (DrawingHandleScreen) DrawingHandle;
-        public DrawingHandleWorld WorldHandle => (DrawingHandleWorld) DrawingHandle;
+        public DrawingHandleScreen ScreenHandle => (DrawingHandleScreen)DrawingHandle;
+        public DrawingHandleWorld WorldHandle => (DrawingHandleWorld)DrawingHandle;
 
         internal OverlayDrawArgs(
             OverlaySpace space,

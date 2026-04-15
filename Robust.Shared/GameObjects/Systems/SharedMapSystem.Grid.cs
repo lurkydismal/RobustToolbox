@@ -26,25 +26,25 @@ public abstract partial class SharedMapSystem
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2i GetChunkIndices(Vector2 tile, int chunkSize)
     {
-        return new Vector2i ((int) Math.Floor(tile.X / chunkSize), (int) Math.Floor(tile.Y / chunkSize));
+        return new Vector2i((int)Math.Floor(tile.X / chunkSize), (int)Math.Floor(tile.Y / chunkSize));
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2i GetChunkIndices(Vector2 tile, byte chunkSize)
     {
-        return new Vector2i ((int) Math.Floor(tile.X / chunkSize), (int) Math.Floor(tile.Y / chunkSize));
+        return new Vector2i((int)Math.Floor(tile.X / chunkSize), (int)Math.Floor(tile.Y / chunkSize));
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2i GetChunkIndices(Vector2i tile, int chunkSize)
     {
-        return new Vector2i ((int) Math.Floor(tile.X / (float) chunkSize), (int) Math.Floor(tile.Y / (float) chunkSize));
+        return new Vector2i((int)Math.Floor(tile.X / (float)chunkSize), (int)Math.Floor(tile.Y / (float)chunkSize));
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2i GetChunkIndices(Vector2i tile, byte chunkSize)
     {
-        return new Vector2i ((int) Math.Floor(tile.X / (float) chunkSize), (int) Math.Floor(tile.Y / (float) chunkSize));
+        return new Vector2i((int)Math.Floor(tile.X / (float)chunkSize), (int)Math.Floor(tile.Y / (float)chunkSize));
     }
 
     /// <summary>
@@ -53,8 +53,8 @@ public abstract partial class SharedMapSystem
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2i GetChunkRelative(Vector2 tile, int chunkSize)
     {
-        var x = MathHelper.Mod((int) Math.Floor(tile.X), chunkSize);
-        var y = MathHelper.Mod((int) Math.Floor(tile.Y), chunkSize);
+        var x = MathHelper.Mod((int)Math.Floor(tile.X), chunkSize);
+        var y = MathHelper.Mod((int)Math.Floor(tile.Y), chunkSize);
         return new Vector2i(x, y);
     }
 
@@ -64,8 +64,8 @@ public abstract partial class SharedMapSystem
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public static Vector2i GetChunkRelative(Vector2 tile, byte chunkSize)
     {
-        var x = MathHelper.Mod((int) Math.Floor(tile.X), chunkSize);
-        var y = MathHelper.Mod((int) Math.Floor(tile.Y), chunkSize);
+        var x = MathHelper.Mod((int)Math.Floor(tile.X), chunkSize);
+        var y = MathHelper.Mod((int)Math.Floor(tile.Y), chunkSize);
         return new Vector2i(x, y);
     }
 
@@ -211,7 +211,7 @@ public abstract partial class SharedMapSystem
 
         DebugTools.Assert(!_mapQuery.HasComponent(uid));
 
-        if (xform.ParentUid != xform.MapUid && meta.EntityLifeStage < EntityLifeStage.Terminating  && _netManager.IsServer)
+        if (xform.ParentUid != xform.MapUid && meta.EntityLifeStage < EntityLifeStage.Terminating && _netManager.IsServer)
         {
             Log.Error($"Grid {ToPrettyString(uid, meta)} is parented to {ToPrettyString(xform._parent)} which is not a map.  y'all need jesus. {Environment.StackTrace}");
             return;
@@ -243,44 +243,44 @@ public abstract partial class SharedMapSystem
         switch (args.Current)
         {
             case MapGridComponentDeltaState delta:
-            {
-                DebugTools.Assert(component.ChunkSize == delta.ChunkSize || component.Chunks.Count == 0,
-                    "Can't modify chunk size of an existing grid.");
-
-                component.ChunkSize = delta.ChunkSize;
-                if (delta.ChunkData == null)
-                    return;
-
-                foreach (var (index, chunkData) in delta.ChunkData)
                 {
-                    ApplyChunkData(uid, component, index, chunkData);
-                }
+                    DebugTools.Assert(component.ChunkSize == delta.ChunkSize || component.Chunks.Count == 0,
+                        "Can't modify chunk size of an existing grid.");
 
-                component.LastTileModifiedTick = delta.LastTileModifiedTick;
-                break;
-            }
+                    component.ChunkSize = delta.ChunkSize;
+                    if (delta.ChunkData == null)
+                        return;
+
+                    foreach (var (index, chunkData) in delta.ChunkData)
+                    {
+                        ApplyChunkData(uid, component, index, chunkData);
+                    }
+
+                    component.LastTileModifiedTick = delta.LastTileModifiedTick;
+                    break;
+                }
             case MapGridComponentState state:
-            {
-                DebugTools.Assert(component.ChunkSize == state.ChunkSize || component.Chunks.Count == 0,
-                    "Can't modify chunk size of an existing grid.");
-
-                component.LastTileModifiedTick = state.LastTileModifiedTick;
-                component.ChunkSize = state.ChunkSize;
-
-                foreach (var index in component.Chunks.Keys)
                 {
-                    if (!state.FullGridData.ContainsKey(index))
-                        ApplyChunkData(uid, component, index, ChunkDatum.Empty);
-                }
+                    DebugTools.Assert(component.ChunkSize == state.ChunkSize || component.Chunks.Count == 0,
+                        "Can't modify chunk size of an existing grid.");
 
-                foreach (var (index, data) in state.FullGridData)
-                {
-                    DebugTools.Assert(!data.IsDeleted());
-                    ApplyChunkData(uid, component, index, data);
-                }
+                    component.LastTileModifiedTick = state.LastTileModifiedTick;
+                    component.ChunkSize = state.ChunkSize;
 
-                break;
-            }
+                    foreach (var index in component.Chunks.Keys)
+                    {
+                        if (!state.FullGridData.ContainsKey(index))
+                            ApplyChunkData(uid, component, index, ChunkDatum.Empty);
+                    }
+
+                    foreach (var (index, data) in state.FullGridData)
+                    {
+                        DebugTools.Assert(!data.IsDeleted());
+                        ApplyChunkData(uid, component, index, data);
+                    }
+
+                    break;
+                }
             default:
                 return;
         }
@@ -406,7 +406,7 @@ public abstract partial class SharedMapSystem
                 if (chunk.LastTileModifiedTick < fromTick)
                     continue;
 
-                var tileBuffer = new Tile[component.ChunkSize * (uint) component.ChunkSize];
+                var tileBuffer = new Tile[component.ChunkSize * (uint)component.ChunkSize];
 
                 // Flatten the tile array.
                 // NetSerializer doesn't do multi-dimensional arrays.
@@ -1171,7 +1171,7 @@ public abstract partial class SharedMapSystem
             return;
 
         var chunkTile = chunk.GridTileToChunkTile(pos);
-        var anchored = chunk.GetSnapGrid((ushort) chunkTile.X, (ushort) chunkTile.Y);
+        var anchored = chunk.GetSnapGrid((ushort)chunkTile.X, (ushort)chunkTile.Y);
         if (anchored != null)
             list.AddRange(anchored);
     }
@@ -1316,7 +1316,7 @@ public abstract partial class SharedMapSystem
     }
 
     private bool TryChunkAndOffsetForTile(EntityUid uid, MapGridComponent grid, Vector2i pos,
-        [NotNullWhen(true)]out MapChunk? chunk, out Vector2i offset)
+        [NotNullWhen(true)] out MapChunk? chunk, out Vector2i offset)
     {
         var gridChunkIndices = GridTileToChunkIndices(uid, grid, pos);
         if (!grid.Chunks.TryGetValue(gridChunkIndices, out chunk))
@@ -1371,15 +1371,15 @@ public abstract partial class SharedMapSystem
         var position = TileIndicesFor(uid, grid, coords);
 
         for (var y = -n; y <= n; ++y)
-        for (var x = -n; x <= n; ++x)
-        {
-            var enumerator = GetAnchoredEntitiesEnumerator(uid, grid, position + new Vector2i(x, y));
-
-            while (enumerator.MoveNext(out var cell))
+            for (var x = -n; x <= n; ++x)
             {
-                yield return cell.Value;
+                var enumerator = GetAnchoredEntitiesEnumerator(uid, grid, position + new Vector2i(x, y));
+
+                while (enumerator.MoveNext(out var cell))
+                {
+                    yield return cell.Value;
+                }
             }
-        }
     }
 
     #endregion
@@ -1426,10 +1426,10 @@ public abstract partial class SharedMapSystem
     public Vector2i LocalToTile(EntityUid uid, MapGridComponent grid, EntityCoordinates coordinates)
     {
         var position = LocalToGrid(uid, grid, coordinates);
-        return new Vector2i((int) Math.Floor(position.X / grid.TileSize), (int) Math.Floor(position.Y / grid.TileSize));
+        return new Vector2i((int)Math.Floor(position.X / grid.TileSize), (int)Math.Floor(position.Y / grid.TileSize));
     }
 
-        public Vector2i CoordinatesToTile(EntityUid uid, MapGridComponent grid, MapCoordinates coords)
+    public Vector2i CoordinatesToTile(EntityUid uid, MapGridComponent grid, MapCoordinates coords)
     {
 #if DEBUG
         var mapId = _xformQuery.GetComponent(uid).MapID;
@@ -1487,8 +1487,8 @@ public abstract partial class SharedMapSystem
 
     public Vector2i GridTileToChunkIndices(MapGridComponent grid, Vector2i gridTile)
     {
-        var x = (int)Math.Floor(gridTile.X / (float) grid.ChunkSize);
-        var y = (int)Math.Floor(gridTile.Y / (float) grid.ChunkSize);
+        var x = (int)Math.Floor(gridTile.X / (float)grid.ChunkSize);
+        var y = (int)Math.Floor(gridTile.Y / (float)grid.ChunkSize);
 
         return new Vector2i(x, y);
     }

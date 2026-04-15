@@ -10,7 +10,7 @@ using Robust.Shared.Toolshed.Syntax;
 namespace Robust.Shared.Toolshed.TypeParsers.Tuples;
 
 public abstract class BaseTupleTypeParser<TParses> : TypeParser<TParses>
-    where TParses: ITuple
+    where TParses : ITuple
 {
     public abstract IEnumerable<Type> Fields { get; }
 

@@ -36,7 +36,7 @@ namespace Robust.Client.ResourceManagement
 
         public override void Load(IDependencyCollection dependencies, ResPath path)
         {
-            var loadStepData = new LoadStepData {Path = path};
+            var loadStepData = new LoadStepData { Path = path };
             var manager = dependencies.Resolve<IResourceManager>();
             LoadPreTexture(manager, loadStepData);
             LoadTexture(dependencies.Resolve<IClyde>(), loadStepData);
@@ -255,7 +255,7 @@ namespace Robust.Client.ResourceManagement
                     indices[i] = i;
                 }
 
-                return (output, new[] {indices});
+                return (output, new[] { indices });
             }
 
             // Multiply by 1000 so we have millisecond precision in our fixed point.
@@ -279,7 +279,7 @@ namespace Robust.Client.ResourceManagement
 
                 for (var i = 0; i < delayList.Length; i++)
                 {
-                    var delay = (int) (fDelayList[i] * fixedPointResolution);
+                    var delay = (int)(fDelayList[i] * fixedPointResolution);
                     delayList[i] = delay;
                     length += delay;
                 }
@@ -365,7 +365,7 @@ namespace Robust.Client.ResourceManagement
                 }
             }
 
-            done:
+        done:
 
             // Turn output data into a format suitable for returning and we're done.
             var floatDelays = new float[newDelays.Count];

@@ -11,7 +11,7 @@ public sealed class RTAnalyzerTest<TAnalyzer> : CSharpAnalyzerTest<TAnalyzer, De
 {
     protected override ParseOptions CreateParseOptions()
     {
-        var baseOptions = (CSharpParseOptions) base.CreateParseOptions();
+        var baseOptions = (CSharpParseOptions)base.CreateParseOptions();
         return baseOptions.WithPreprocessorSymbols("ROBUST_ANALYZERS_TEST");
     }
 }

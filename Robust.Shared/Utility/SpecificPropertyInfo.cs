@@ -107,7 +107,7 @@ namespace Robust.Shared.Utility
             {
                 foreach (var property in relevantProperties)
                 {
-                    if(property.DeclaringType != currentType) continue;
+                    if (property.DeclaringType != currentType) continue;
 
                     if (setBase != null && setBase == property.SetMethod?.GetBaseDefinition())
                     {

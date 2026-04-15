@@ -116,7 +116,7 @@ namespace Robust.Client.GameObjects
                 if (!component.Containers.TryGetValue(id, out var container))
                 {
                     var type = _serializer.FindSerializedType(typeof(BaseContainer), data.ContainerType);
-                    container = _dynFactory.CreateInstanceUnchecked<BaseContainer>(type!, inject:false);
+                    container = _dynFactory.CreateInstanceUnchecked<BaseContainer>(type!, inject: false);
                     container.Init(this, id, (uid, component));
                     component.Containers.Add(id, container);
                 }
@@ -241,7 +241,7 @@ namespace Robust.Client.GameObjects
 
             if (TryComp(uid, out MetaDataComponent? meta))
             {
-                DebugTools.Assert((meta.Flags & ( MetaDataFlags.Detached | MetaDataFlags.InContainer) ) == MetaDataFlags.Detached,
+                DebugTools.Assert((meta.Flags & (MetaDataFlags.Detached | MetaDataFlags.InContainer)) == MetaDataFlags.Detached,
                     $"Adding entity {ToPrettyString(uid)} to list of expected entities for container {container.ID} in {ToPrettyString(container.Owner)}, despite it already being in a container.");
             }
 #endif

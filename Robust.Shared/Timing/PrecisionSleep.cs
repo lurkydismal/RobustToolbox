@@ -141,7 +141,7 @@ internal sealed unsafe class PrecisionSleepLinuxNanosleep : PrecisionSleep
 #pragma warning disable CS0649 // Field is never assigned to, and will always have its default value
     // ReSharper disable IdentifierTypo
     // ReSharper disable InconsistentNaming
-    [DllImport("libc.so.6", SetLastError=true)]
+    [DllImport("libc.so.6", SetLastError = true)]
     private static extern int nanosleep(timespec* req, timespec* rem);
 
     private struct timespec

@@ -8,7 +8,7 @@ namespace Robust.Client.Graphics.Clyde
         {
             private readonly Clyde _clyde;
 
-            public GLShader(Clyde clyde, ShaderType type, string shaderSource, string? name=null)
+            public GLShader(Clyde clyde, ShaderType type, string shaderSource, string? name = null)
             {
                 _clyde = clyde;
                 Compile(type, shaderSource);
@@ -25,7 +25,7 @@ namespace Robust.Client.Graphics.Clyde
             {
                 ObjectHandle = (uint)GL.CreateShader(type);
                 Type = type;
-                GL.ShaderSource((int) ObjectHandle, shaderSource);
+                GL.ShaderSource((int)ObjectHandle, shaderSource);
                 _clyde.CheckGlError();
                 GL.CompileShader(ObjectHandle);
                 _clyde.CheckGlError();
@@ -34,7 +34,7 @@ namespace Robust.Client.Graphics.Clyde
                 _clyde.CheckGlError();
                 if (compiled != 1)
                 {
-                    var message = GL.GetShaderInfoLog((int) ObjectHandle);
+                    var message = GL.GetShaderInfoLog((int)ObjectHandle);
                     _clyde.CheckGlError();
                     Delete();
                     throw new ShaderCompilationException(message);

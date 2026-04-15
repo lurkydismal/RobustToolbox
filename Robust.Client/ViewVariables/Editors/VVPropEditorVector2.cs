@@ -46,13 +46,13 @@ namespace Robust.Client.ViewVariables.Editors
 
             if (_intVec)
             {
-                var vec = (Vector2i) value!;
+                var vec = (Vector2i)value!;
                 x.Text = vec.X.ToString(CultureInfo.InvariantCulture);
                 y.Text = vec.Y.ToString(CultureInfo.InvariantCulture);
             }
             else
             {
-                var vec = (Vector2) value!;
+                var vec = (Vector2)value!;
                 x.Text = vec.X.ToString(CultureInfo.InvariantCulture);
                 y.Text = vec.Y.ToString(CultureInfo.InvariantCulture);
             }

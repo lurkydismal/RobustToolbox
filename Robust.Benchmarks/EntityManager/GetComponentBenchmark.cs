@@ -29,7 +29,7 @@ public partial class GetComponentBenchmark
 
         _entityManager = _simulation.Resolve<IEntityManager>();
 
-        Comps = new A[N+2];
+        Comps = new A[N + 2];
 
         var map = _simulation.CreateMap().Uid;
         var coords = new EntityCoordinates(map, default);
@@ -44,7 +44,7 @@ public partial class GetComponentBenchmark
     [Benchmark]
     public A[] GetComponent()
     {
-        for (var i = 2; i <= N+1; i++)
+        for (var i = 2; i <= N + 1; i++)
         {
             Comps[i] = _entityManager.GetComponent<A>(new EntityUid(i));
         }

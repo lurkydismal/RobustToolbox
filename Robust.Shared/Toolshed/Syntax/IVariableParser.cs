@@ -44,7 +44,7 @@ public interface IVariableParser
             .Where(x => includeReadonly || !IsReadonlyVar(x.Item1))
             .Select(x => new CompletionOption($"${x.Item1}"));
 
-        return CompletionResult.FromHintOptions(vars,$"<Variable of type {typeof(T).PrettyName()}>");
+        return CompletionResult.FromHintOptions(vars, $"<Variable of type {typeof(T).PrettyName()}>");
     }
 
     /// <summary>

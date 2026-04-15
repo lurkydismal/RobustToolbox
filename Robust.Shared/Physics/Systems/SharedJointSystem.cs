@@ -320,7 +320,7 @@ public abstract partial class SharedJointSystem : EntitySystem
             _jointsQuery.TryComp(bodyA, out JointComponent? jointComponent) &&
             jointComponent.Joints.TryGetValue(id, out var weldJoint))
         {
-            return (WeldJoint) weldJoint;
+            return (WeldJoint)weldJoint;
         }
 
         var joint = new WeldJoint(bodyA, bodyB);
@@ -346,7 +346,7 @@ public abstract partial class SharedJointSystem : EntitySystem
         if (!Resolve(uid, ref xform))
             return Vector2.Zero;
 
-        return Physics.Transform.MulT(new Quaternion2D((float) _transform.GetWorldRotation(xform).Theta), worldVector);
+        return Physics.Transform.MulT(new Quaternion2D((float)_transform.GetWorldRotation(xform).Theta), worldVector);
     }
 
     #endregion
@@ -521,9 +521,9 @@ public abstract partial class SharedJointSystem : EntitySystem
 
         foreach (var relay in relayComp.Relayed)
         {
-            if(_jointsQuery.TryComp(relay, out var relayJointComp))
+            if (_jointsQuery.TryComp(relay, out var relayJointComp))
             {
-                if(relayJointComp.Joints.TryGetValue(id, out var relayJoint))
+                if (relayJointComp.Joints.TryGetValue(id, out var relayJoint))
                     RemoveJoint(relayJoint);
             }
         }

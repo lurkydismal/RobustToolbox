@@ -64,7 +64,7 @@ namespace Robust.Client.ViewVariables.Editors
         private static string NumberToText(object val)
         {
             // All numeric primitives implement IConvertible.
-            var convert = (IConvertible) val;
+            var convert = (IConvertible)val;
             return convert.ToString(CultureInfo.InvariantCulture);
         }
 

@@ -16,7 +16,7 @@ namespace Robust.Analyzers
             var implAttr = context.Compilation.GetTypeByMetadataName(MeansImplicitAssignmentAttribute);
             foreach (var reportedDiagnostic in context.ReportedDiagnostics)
             {
-                if(reportedDiagnostic.Id != Diagnostics.MeansImplicitAssignment.SuppressedDiagnosticId) continue;
+                if (reportedDiagnostic.Id != Diagnostics.MeansImplicitAssignment.SuppressedDiagnosticId) continue;
 
                 var node = reportedDiagnostic.Location.SourceTree?.GetRoot(context.CancellationToken).FindNode(reportedDiagnostic.Location.SourceSpan);
                 if (node == null) continue;

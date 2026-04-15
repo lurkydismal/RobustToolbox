@@ -1123,7 +1123,7 @@ namespace Robust.Client.UserInterface
 
                 public void Reset()
                 {
-                    ((IEnumerator) _enumerator).Reset();
+                    ((IEnumerator)_enumerator).Reset();
                 }
 
                 public Control Current => _enumerator.Current;

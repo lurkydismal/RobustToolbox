@@ -325,7 +325,7 @@ public sealed partial class MapLoaderSystem
     /// </remarks>
     public bool TrySerializeAllEntities([NotNullWhen(true)] out MappingDataNode? data, SerializationOptions? options = null)
     {
-        data  = null;
+        data = null;
         var opts = options ?? SerializationOptions.Default with
         {
             MissingEntityBehaviour = MissingEntityBehaviour.Error

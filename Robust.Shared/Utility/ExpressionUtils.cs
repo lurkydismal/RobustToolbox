@@ -37,7 +37,7 @@ public static class ExpressionUtils
 
     public static Expression[] WriteLineBefore(object value, Expression expression)
     {
-        return new []
+        return new[]
         {
             WriteLine(value),
             expression
@@ -46,7 +46,7 @@ public static class ExpressionUtils
 
     public static Expression[] WriteLineAfter(object value, Expression expression)
     {
-        return new []
+        return new[]
         {
             expression,
             WriteLine(value)

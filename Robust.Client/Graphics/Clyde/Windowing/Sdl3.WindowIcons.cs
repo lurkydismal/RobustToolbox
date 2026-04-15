@@ -75,7 +75,7 @@ internal partial class Clyde
                 IntPtr surface;
                 fixed (byte* ptr = copied)
                 {
-                    surface = (nint) SDL.SDL_CreateSurfaceFrom(
+                    surface = (nint)SDL.SDL_CreateSurfaceFrom(
                         img.Width,
                         img.Height,
                         SDL.SDL_PixelFormat.SDL_PIXELFORMAT_ABGR8888,
@@ -99,7 +99,7 @@ internal partial class Clyde
             if (_windowIconSurface == 0)
                 return;
 
-            SDL.SDL_SetWindowIcon(window, (nint) _windowIconSurface);
+            SDL.SDL_SetWindowIcon(window, (nint)_windowIconSurface);
         }
     }
 }
