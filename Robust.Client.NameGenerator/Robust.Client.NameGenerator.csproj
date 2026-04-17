@@ -7,6 +7,10 @@
     <Compile Include="..\Robust.Client\UserInterface\ControlPropertyAccess.cs" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis" />
+  </ItemGroup>
+
   <Import Project="../Robust.Roslyn.Shared/Robust.Roslyn.Shared.props" />
 
   <PropertyGroup>

@@ -3,8 +3,8 @@
     <SkipRobustAnalyzer>true</SkipRobustAnalyzer>
   </PropertyGroup>
 
-  <Import Project="..\MSBuild\Robust.Properties.targets"/>
-  <Import Project="..\MSBuild\Robust.Engine.props"/>
+  <Import Project="..\MSBuild\Robust.Properties.targets" />
+  <Import Project="..\MSBuild\Robust.Engine.props" />
 
   <!-- Engine source files needed to make the tests work -->
   <ItemGroup>
@@ -28,18 +28,18 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageVersion Update="NUnit" Version="3.14.0" />
+    <PackageVersion Update="NUnit" Version="4.5.1" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.Analyzer.Testing"/>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp"/>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing"/>
-    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing"/>
-    <PackageReference Include="NUnit"/>
-    <PackageReference Include="NUnit3TestAdapter"/>
-    <PackageReference Include="NUnit.Analyzers"/>
-    <PackageReference Include="Microsoft.NET.Test.Sdk"/>
+    <PackageReference Include="Microsoft.CodeAnalysis.Analyzer.Testing" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" />
+    <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" />
+    <PackageReference Include="NUnit" />
+    <PackageReference Include="NUnit3TestAdapter" />
+    <PackageReference Include="NUnit.Analyzers" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" />
 
     <!-- Needed to fix transitive dependency versions -->
     <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" />
@@ -48,7 +48,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Robust.Analyzers\Robust.Analyzers.csproj"/>
+    <ProjectReference Include="..\Robust.Analyzers\Robust.Analyzers.csproj" />
     <ProjectReference Include="..\Robust.Serialization.Generator\Robust.Serialization.Generator.csproj" Aliases="SerializationGenerator" />
   </ItemGroup>
 </Project>

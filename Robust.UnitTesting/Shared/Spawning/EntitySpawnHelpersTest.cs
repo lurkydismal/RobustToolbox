@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Numerics;
 using System.Threading.Tasks;
+using JetBrains.Annotations;
 using NUnit.Framework;
 using Robust.Shared.Containers;
 using Robust.Shared.GameObjects;
@@ -25,7 +26,7 @@ public abstract partial class EntitySpawnHelpersTest : RobustIntegrationTest
     protected SharedContainerSystem Container = default!;
 
     // Even if unused, content / downstream tests might use this class, so removal would be a breaking change?
-    protected IMapManager MapMan = default!; 
+    protected IMapManager MapMan = default!;
 
     protected EntityUid Map;
     protected MapId MapId;
@@ -54,7 +55,7 @@ public abstract partial class EntitySpawnHelpersTest : RobustIntegrationTest
         await Server.WaitPost(() =>
         {
             Map = Server.System<SharedMapSystem>().CreateMap(out MapId);
-            Parent = EntMan.SpawnEntity(null, new EntityCoordinates(Map, new(1,2)));
+            Parent = EntMan.SpawnEntity(null, new EntityCoordinates(Map, new(1, 2)));
             ChildA = EntMan.SpawnEntity(null, new EntityCoordinates(Map, default));
             ChildB = EntMan.SpawnEntity(null, new EntityCoordinates(Map, default));
             GrandChildA = EntMan.SpawnEntity(null, new EntityCoordinates(Map, default));
@@ -64,7 +65,7 @@ public abstract partial class EntitySpawnHelpersTest : RobustIntegrationTest
             Container.Insert(ChildA, Container.EnsureContainer<TestContainer>(Parent, "childA"));
             Container.Insert(ChildB, Container.EnsureContainer<TestContainer>(Parent, "childB"));
             Container.Insert(GrandChildA, Container.EnsureContainer<TestContainer>(ChildA, "grandChildA"));
-            Xforms.SetCoordinates(GrandChildB, new EntityCoordinates(ChildB, new(2,1)));
+            Xforms.SetCoordinates(GrandChildB, new EntityCoordinates(ChildB, new(2, 1)));
             Container.Insert(GreatGrandChildA, Container.EnsureContainer<TestContainer>(GrandChildA, "greatGrandChildA"));
             Container.Insert(GreatGrandChildB, Container.EnsureContainer<TestContainer>(GrandChildB, "greatGrandChildB"));
         });
@@ -100,6 +101,17 @@ public abstract partial class EntitySpawnHelpersTest : RobustIntegrationTest
 
         Assert.That(ParentPos.Position, Is.EqualTo(new Vector2(1, 2)));
         Assert.That(GrandChildBPos.Position, Is.EqualTo(new Vector2(2, 1)));
+    }
+
+    public void Shutdown()
+    {
+        Server.Dispose();
+    }
+
+    [TearDown]
+    public void TearDown()
+    {
+        Shutdown();
     }
 
     /// <summary>

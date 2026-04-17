@@ -2,4 +2,8 @@
 
   <Import Project="../Robust.Roslyn.Shared/Robust.Roslyn.Shared.props" />
 
+  <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis" />
+  </ItemGroup>
+
 </Project>

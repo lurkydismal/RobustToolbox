@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using OpenTK.Audio.OpenAL;
-using OpenTK.Audio.OpenAL.Extensions.Creative.EFX;
 using Robust.Shared.Audio.Sources;
 
 namespace Robust.Client.Audio.Sources;
@@ -37,9 +36,9 @@ internal sealed class BufferedAudioSource : BaseAudioSource, IBufferedAudioSourc
         get
         {
             _checkDisposed();
-            var state = AL.GetSourceState(SourceHandle);
+            AL.GetSource(SourceHandle, ALGetSourcei.SourceState, out int state);
             _master._checkAlError();
-            return state == ALSourceState.Playing;
+            return (ALSourceState)state == ALSourceState.Playing;
         }
         set
         {
@@ -47,7 +46,7 @@ internal sealed class BufferedAudioSource : BaseAudioSource, IBufferedAudioSourc
             {
                 _checkDisposed();
                 // IDK why this stackallocs but gonna leave it for now.
-                AL.SourcePlay(stackalloc int[] {SourceHandle});
+                AL.SourcePlay(stackalloc int[] { SourceHandle });
                 _master._checkAlError();
             }
             else
@@ -84,7 +83,7 @@ internal sealed class BufferedAudioSource : BaseAudioSource, IBufferedAudioSourc
         else
         {
             if (FilterHandle != 0)
-                EFX.DeleteFilter(FilterHandle);
+                ALC.EFX.DeleteFilter(FilterHandle);
 
             AL.DeleteSource(SourceHandle);
             AL.DeleteBuffers(BufferHandles);
@@ -123,7 +122,7 @@ internal sealed class BufferedAudioSource : BaseAudioSource, IBufferedAudioSourc
     {
         _checkDisposed();
 
-        if(_float)
+        if (_float)
             throw new InvalidOperationException("Can't write ushort numbers to buffers when buffer type is float!");
 
         if (handle >= BufferHandles.Length)
@@ -134,7 +133,7 @@ internal sealed class BufferedAudioSource : BaseAudioSource, IBufferedAudioSourc
 
         fixed (ushort* ptr = data)
         {
-            AL.BufferData(BufferHandles[handle], _mono ? ALFormat.Mono16 : ALFormat.Stereo16, (IntPtr) ptr,
+            AL.BufferData(BufferHandles[handle], _mono ? ALFormat.Mono16 : ALFormat.Stereo16, (IntPtr)ptr,
                 _mono ? data.Length / 2 * sizeof(ushort) : data.Length * sizeof(ushort), SampleRate);
         }
     }
@@ -143,7 +142,7 @@ internal sealed class BufferedAudioSource : BaseAudioSource, IBufferedAudioSourc
     {
         _checkDisposed();
 
-        if(!_float)
+        if (!_float)
             throw new InvalidOperationException("Can't write float numbers to buffers when buffer type is ushort!");
 
         if (handle >= BufferHandles.Length)
@@ -154,7 +153,7 @@ internal sealed class BufferedAudioSource : BaseAudioSource, IBufferedAudioSourc
 
         fixed (float* ptr = data)
         {
-            AL.BufferData(BufferHandles[handle], _mono ? ALFormat.MonoFloat32Ext : ALFormat.StereoFloat32Ext, (IntPtr) ptr,
+            AL.BufferData(BufferHandles[handle], _mono ? ALFormat.MonoFloat32Ext : ALFormat.StereoFloat32Ext, (IntPtr)ptr,
                 _mono ? data.Length / 2 * sizeof(float) : data.Length * sizeof(float), SampleRate);
         }
     }
@@ -175,7 +174,7 @@ internal sealed class BufferedAudioSource : BaseAudioSource, IBufferedAudioSourc
         }
 
         fixed (int* ptr = realHandles)
-            // ReSharper disable once PossibleInvalidOperationException
+        // ReSharper disable once PossibleInvalidOperationException
         {
             AL.SourceQueueBuffers(SourceHandle, handles.Length, ptr);
         }
@@ -191,7 +190,7 @@ internal sealed class BufferedAudioSource : BaseAudioSource, IBufferedAudioSourc
         if (_float)
         {
             var empty = new float[length];
-            var span = (Span<float>) empty;
+            var span = (Span<float>)empty;
 
             for (var i = 0; i < BufferHandles.Length; i++)
             {
@@ -202,7 +201,7 @@ internal sealed class BufferedAudioSource : BaseAudioSource, IBufferedAudioSourc
         else
         {
             var empty = new ushort[length];
-            var span = (Span<ushort>) empty;
+            var span = (Span<ushort>)empty;
 
             for (var i = 0; i < BufferHandles.Length; i++)
             {

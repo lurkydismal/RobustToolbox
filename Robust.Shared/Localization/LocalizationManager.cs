@@ -502,7 +502,7 @@ namespace Robust.Shared.Localization
                     contents = reader.ReadToEnd();
                 }
 
-                var parser = new LinguiniParser(contents);
+                var parser = LinguiniParser.FromFragment(contents);
                 var resource = parser.Parse();
                 return (path, resource, contents);
             });

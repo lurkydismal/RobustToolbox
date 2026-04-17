@@ -22,7 +22,7 @@ public sealed class DefaultSQLConfig : IConfig
 {
     public static readonly IConfig Instance = new DefaultSQLConfig();
 
-    private DefaultSQLConfig(){}
+    private DefaultSQLConfig() { }
 
     public IEnumerable<IExporter> GetExporters()
     {
@@ -60,4 +60,5 @@ public sealed class DefaultSQLConfig : IConfig
     public ConfigOptions Options => DefaultConfig.Instance.Options;
     public TimeSpan BuildTimeout => DefaultConfig.Instance.BuildTimeout;
     public IReadOnlyList<Conclusion> ConfigAnalysisConclusion => DefaultConfig.Instance.ConfigAnalysisConclusion;
+    public WakeLockType WakeLock => DefaultConfig.Instance.WakeLock;
 }
